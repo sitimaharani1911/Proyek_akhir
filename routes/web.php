@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
-    return view('layout.master');
+    return view('layouts.master');
 });
 
 Route::prefix('dashboard')->group(function () {

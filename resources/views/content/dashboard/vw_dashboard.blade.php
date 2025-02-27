@@ -16,7 +16,7 @@
                                         <i class="ki-outline ki-arrow-up fs-5 text-success ms-n1"></i>2.2%
                                     </span>
                                 </div>
-                                <span class="fs-6 fw-semibold text-gray-500">Total Paket</span>
+                                <span class="fs-6 fw-semibold text-gray-500">Total</span>
                             </div>
                         </div>
                     </div>
