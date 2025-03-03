@@ -18,11 +18,21 @@
                 <div class="app-sidebar-separator separator"></div>
             </div>
             <div class="menu-item">
-                <a class="menu-link" href="">
+                <a class="menu-link {{ request()->routeIs('informasi_hibah.*') ? 'active' : '' }}"
+                    href="{{ route('informasi_hibah.index') }}">
                     <span class="menu-icon">
                         <i class="ki-outline ki-abstract-26 fs-2"></i>
                     </span>
-                    <span class="menu-title">Menu</span>
+                    <span class="menu-title">Informasi Hibah</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
+                    href="{{ route('proposal.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Pengajuan Proposal</span>
                 </a>
             </div>
         </div>
