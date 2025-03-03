@@ -35,6 +35,15 @@
                     <span class="menu-title">Pengajuan Proposal</span>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
+                    href="{{ route('pelaporan.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Pelaporan</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
