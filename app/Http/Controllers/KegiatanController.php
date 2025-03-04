@@ -35,7 +35,7 @@ class KegiatanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view ('content.pelaporan.kegiatan.vw_detail_kegiatan');
     }
 
     /**
@@ -43,7 +43,7 @@ class KegiatanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view ('content.pelaporan.kegiatan.vw_edit_kegiatan');
     }
 
     /**

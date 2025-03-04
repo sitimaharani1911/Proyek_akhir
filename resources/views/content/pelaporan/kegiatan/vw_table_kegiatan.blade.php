@@ -8,6 +8,12 @@
                     Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
+                        <a href="{{route('pelaporan.index')}}" class="text-muted text-hover-primary">Pelaporan</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-muted">
                         <a href="index.html" class="text-muted text-hover-primary">Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
@@ -52,10 +58,10 @@
                                 <td>NFN</td>
                                 <td>04-03-2025</td>
                                 <td>Politeknik Caltex Riau</td>
-                                <td><a href="{{ url('informasi_hibah/show/id') }}">
+                                <td><a href="{{ url('kegiatan/show/id') }}">
                                         <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
                                     </a>
-                                    <a href="javascript:void(0)" onclick="edit('1')">
+                                    <a href="{{ url('kegiatan/edit/id') }}">
                                         <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
                                     </a>
                                     <a href="javascript:void(0)" style="color: red;">
