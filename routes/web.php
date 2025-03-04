@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiHibahController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PelaporanController;
 
@@ -34,4 +35,13 @@ Route::prefix('pelaporan')->group(function () {
     Route::get('/', [PelaporanController::class, 'index'])->name('pelaporan.index');
     Route::get('/show/{id}', [PelaporanController::class, 'show'])->name('pelaporan.show');
     Route::get('/edit/{id}', [PelaporanController::class, 'edit'])->name('pelaporan.edit');
+    Route::get('/input-dokumen', [PelaporanController::class, 'inputDocument'])->name('pelaporan.input_dokumen');
+});
+
+// Kegiatan 
+Route::prefix('kegiatan')->group(function () {
+    Route::get('/', [KegiatanController::class, 'index'])->name('kegiatan.index');
+    Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+    Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
+    Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
 });

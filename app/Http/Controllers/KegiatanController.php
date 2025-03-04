@@ -4,26 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PelaporanController extends Controller
+class KegiatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view ('content.pelaporan.vw_table_pelaporan');
+        return view ('content.pelaporan.kegiatan.vw_table_kegiatan');
     }
 
-    public function inputDocument()
-    {
-        return view ('content.pelaporan.vw_input_dokumen');
-    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view ('content.pelaporan.kegiatan.vw_tambah_kegiatan');
     }
 
     /**
