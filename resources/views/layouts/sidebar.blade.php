@@ -44,6 +44,15 @@
                     <span class="menu-title">Pelaporan</span>
                 </a>
             </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('pengajuan_dana.*') ? 'active' : '' }}"
+                    href="{{ route('pengajuan_dana.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Pengajuan Dana</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

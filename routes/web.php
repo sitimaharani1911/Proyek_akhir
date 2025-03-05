@@ -6,6 +6,7 @@ use App\Http\Controllers\InformasiHibahController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PelaporanController;
+use App\Http\Controllers\PengajuanDanaController;
 
 Route::get('/', function () {
     return view('content.auth.login');
@@ -44,4 +45,12 @@ Route::prefix('kegiatan')->group(function () {
     Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
     Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
     Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
+});
+// Pengajuan
+Route::prefix('pengajuan-dana')->group(function () {
+    Route::get('/', [PengajuanDanaController::class, 'index'])->name('pengajuan_dana.index');
+    Route::get('/show/id', [PengajuanDanaController::class, 'show'])->name('pengajuan_dana.show');
+    Route::get('/edit/id', [PengajuanDanaController::class, 'edit'])->name('pengajuan_dana.edit');
+    Route::get('/tambah-pengajuan-dana', [PengajuanDanaController::class, 'create'])->name('pengajuan_dana.tambah');
+    Route::get('/pengajuan-dana-kegaiatan', [PengajuanDanaController::class, 'dataKegiatan'])->name('pengajuan_dana.kegiatan');
 });
