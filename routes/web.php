@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiHibahController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\LaporanKeuanganController;
 use App\Http\Controllers\MonevController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PelaporanController;
@@ -64,4 +65,12 @@ Route::prefix('monev')->group(function () {
     Route::get('/monev-kegiatan', [MonevController::class, 'dataKegiatan'])->name('monev.kegiatan');
     Route::get('/review-laporan', [MonevController::class, 'reviewLaporan'])->name('monev.review');
     Route::get('/detail-dokumen', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
+});
+// Laporan Keuangan
+Route::prefix('laporan-keuangan')->group(function () {
+    Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan.index');
+    Route::get('/show/id', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
+    Route::get('/edit/id', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
+    Route::get('/kegiatan', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
+    Route::get('/review', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
 });
