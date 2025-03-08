@@ -5,10 +5,10 @@
         <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
             <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                 <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                    Pelaporan</h1>
+                    Monitoring dan Evaluasi</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="index.html" class="text-muted text-hover-primary">Pelaporan</a>
+                        <a href="{{route('monev.index')}}" class="text-muted text-hover-primary">Monev</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -24,7 +24,7 @@
         <div class="card mb-5 mb-xl-8">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">Data Pelaporan Hibah</span>
+                    <span class="card-label fw-bold fs-3 mb-1">Data Pelaksanaan Hibah</span>
                 </h3>
             </div>
             <div class="card-body py-3">
@@ -46,8 +46,8 @@
                                 <td>Hibah Aset PEDP</td>
                                 <td>CF</td>
                                 <td>NFN</td>
-                                <td class="text-primary"><a href="{{route('kegiatan.index')}}">Detail</a></td>
-                                <td class="text-primary"><a href="{{route('pelaporan.input_dokumen')}}">Input</a></td>
+                                <td class="text-primary"><a href="{{route('monev.kegiatan')}}">Detail</a></td>
+                                <td class="text-primary"><a href="{{route('monev.dokumen')}}">Detail</a></td>
                             </tr>
                         </tbody>
                     </table>
