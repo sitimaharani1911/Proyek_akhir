@@ -8,6 +8,9 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanKeuanganController;
+use App\Http\Controllers\MonevController;
+use App\Http\Controllers\PengajuanDanaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
 
@@ -50,7 +53,32 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
             Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
         });
-
+        // Pengajuan Dana
+        Route::prefix('pengajuan-dana')->group(function () {
+            Route::get('/', [PengajuanDanaController::class, 'index'])->name('pengajuan_dana.index');
+            Route::get('/show/id', [PengajuanDanaController::class, 'show'])->name('pengajuan_dana.show');
+            Route::get('/edit/id', [PengajuanDanaController::class, 'edit'])->name('pengajuan_dana.edit');
+            Route::get('/tambah-pengajuan-dana', [PengajuanDanaController::class, 'create'])->name('pengajuan_dana.tambah');
+            Route::get('/pengajuan-dana-kegaiatan', [PengajuanDanaController::class, 'dataKegiatan'])->name('pengajuan_dana.kegiatan');
+        });
+        // Monev
+        Route::prefix('monev')->group(function () {
+            Route::get('/', [MonevController::class, 'index'])->name('monev.index');
+            Route::get('/show/id', [MonevController::class, 'show'])->name('monev.show');
+            Route::get('/edit/id', [MonevController::class, 'edit'])->name('monev.edit');
+            Route::get('/tambah-pengajuan-dana', [MonevController::class, 'create'])->name('monev.tambah');
+            Route::get('/monev-kegiatan', [MonevController::class, 'dataKegiatan'])->name('monev.kegiatan');
+            Route::get('/review-laporan', [MonevController::class, 'reviewLaporan'])->name('monev.review');
+            Route::get('/detail-dokumen', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
+        });
+        // Laporan Keuangan
+        Route::prefix('laporan-keuangan')->group(function () {
+            Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan.index');
+            Route::get('/show/id', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
+            Route::get('/edit/id', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
+            Route::get('/kegiatan', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
+            Route::get('/review', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
+        });
         // User
         Route::prefix('user')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('user.index');
