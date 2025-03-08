@@ -58,15 +58,24 @@
                                     <td><span
                                             class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7">Pengajuan</span>
                                     </td>
-                                    <td><a href="{{ url('proposal/show/id') }}">
-                                            <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" onclick="edit('1')">
-                                            <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" style="color: red;">
-                                            <i class="fas fa-trash text-danger"></i>
-                                        </a>
+                                    <td>
+                                        @if (Auth::user()->role == 'Sentra')
+                                            <a href="{{ url('proposal/show/id') }}">
+                                                <i class="fa fa-info-circle text-success fs-5"
+                                                    style="margin-right: 10px;"></i>
+                                            </a>
+                                        @endif
+                                        @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
+                                            <a href="{{ url('proposal/show/id') }}">
+                                                <i class="fa fa-eye text-info fs-5" style="margin-right: 10px;"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" onclick="edit('1')">
+                                                <i class="fa fa-edit text-success fs-5" style="margin-right: 10px;"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" style="color: red;">
+                                                <i class="fas fa-trash text-danger fs-5"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>

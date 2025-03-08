@@ -14,6 +14,7 @@
     <meta property="og:title" content="Metronic - The World's #1 Selling Bootstrap Admin Template by KeenThemes" />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Metronic by Keenthemes" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="shortcut icon" href="{{ asset('themes/media/logos/favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -98,9 +99,13 @@
             </div>
         </div>
     </div>
+    <script>
+        var hostUrl = "assets/";
+    </script>
     <script src="{{ asset('themes/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('themes/js/scripts.bundle.js') }}"></script>
     <script src="{{ asset('themes/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    {{-- <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
@@ -110,14 +115,16 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script> --}}
-    {{-- <script src="{{ asset('themes/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+    <script src="{{ asset('themes/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('themes/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('themes/js/custom/widgets.js') }}"></script>
     <script src="{{ asset('themes/js/custom/apps/chat/chat.js') }}"></script>
     <script src="{{ asset('themes/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-    <script src="{{ asset('themes/js/custom/utilities/modals/users-search.js') }}"></script> --}}
+    <script src="{{ asset('themes/js/custom/utilities/modals/users-search.js') }}"></script>
+    <script src="{{ asset('themes/js/custom/utilities/modals/create-campaign.js') }}"></script>
     @yield('js')
+</body>
 </body>
 
 </html>

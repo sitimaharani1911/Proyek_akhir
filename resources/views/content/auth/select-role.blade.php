@@ -73,8 +73,7 @@
                 <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                         <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
-                            <form class="form w-100" novalidate="novalidate" action="{{ route('postlogin') }}"
-                                method="POST">
+                            <form method="POST" action="{{ route('set.role') }}">
                                 @csrf
                                 <div class="text-center mb-11">
                                     <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
@@ -90,18 +89,18 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                <div class="fv-row mb-8">
-                                    <input type="text" placeholder="Username" name="username" autocomplete="off"
-                                        class="form-control" />
-                                </div>
-                                <div class="fv-row mb-8">
-                                    <input type="password" placeholder="Password" name="password" autocomplete="off"
-                                        class="form-control bg-transparent" id="password-input" />
-                                </div>
-                                <div class="d-grid mb-10">
-                                    <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
-                                        <span class="indicator-label">Masuk</span>
-                                    </button>
+                                <div class="fv-row">
+                                    @foreach ($roles as $role)
+                                        <form method="POST" action="{{ route('set.role') }}" class="w-75">
+                                            @csrf
+                                            <input type="hidden" name="role" value="{{ $role->role }}">
+                                            <div class="fv-row mb-3">
+                                                <button type="submit" class="btn btn-primary" style="width:350px">
+                                                    {{ ucfirst($role->role) }}
+                                                </button><br>
+                                            </div>
+                                        </form>
+                                    @endforeach
                                 </div>
                             </form>
                         </div>
@@ -110,24 +109,6 @@
             </div>
         </div>
     </div>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script>
-        var hostUrl = "themes/";
-
-        function togglePasswordVisibility() {
-            const passwordInput = document.getElementById('password-input');
-            const passwordIcon = document.getElementById('password-icon');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                passwordIcon.classList.remove('fa-eye');
-                passwordIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                passwordIcon.classList.remove('fa-eye-slash');
-                passwordIcon.classList.add('fa-eye');
-            }
-        }
-    </script>
     <script src="{{ asset('themes/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('themes/js/scripts.bundle.js') }}"></script>
     <script src="{{ asset('themes/js/custom/authentication/sign-in/general.js') }}"></script>
