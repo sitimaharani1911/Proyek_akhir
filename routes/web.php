@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformasiHibahController;
 use App\Http\Controllers\KegiatanController;
-use App\Http\Controllers\LaporanKeuanganController;
-use App\Http\Controllers\MonevController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\UserController;
@@ -13,7 +11,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
 
-use App\Http\Controllers\PengajuanDanaController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 
@@ -46,10 +43,36 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/input-dokumen', [PelaporanController::class, 'inputDocument'])->name('pelaporan.input_dokumen');
         });
 
-// Kegiatan
-Route::prefix('kegiatan')->group(function () {
-    Route::get('/', [KegiatanController::class, 'index'])->name('kegiatan.index');
-    Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
-    Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
-    Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
-});
+        // Kegiatan
+        Route::prefix('kegiatan')->group(function () {
+            Route::get('/', [KegiatanController::class, 'index'])->name('kegiatan.index');
+            Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+            Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
+            Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
+        });
+
+        // User
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('user.index');
+            Route::post('/store', [UserController::class, 'store'])->name('user.store');
+            Route::post('/store_role', [UserController::class, 'store_role'])->name('user.store_role');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+            Route::get('/get_role/{id}', [UserController::class, 'get_role'])->name('user.get_role');
+            Route::post('/update', [UserController::class, 'update'])->name('user.update');
+            Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+            Route::post('/data', [UserController::class, 'data'])->name('user-list');
+        });
+
+        // Progres Proposal
+        Route::prefix('progres_proposal')->group(function () {
+            Route::get('/', [ProgresProposalController::class, 'index'])->name('progres_proposal.index');
+        });
+
+        // Logout
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    }
+);
+Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/select-role', [RoleController::class, 'selectRole'])->name('select.role');
+Route::post('/set-role', [RoleController::class, 'setRole'])->name('set.role');
