@@ -18,28 +18,28 @@
                 <div class="app-sidebar-separator separator"></div>
             </div>
             @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('informasi_hibah.*') ? 'active' : '' }}"
-                        href="{{ route('informasi_hibah.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Informasi Hibah</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
-                        href="{{ route('proposal.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
-                            <span class="menu-title">Pengajuan Proposal</span>
-                        @else
-                            <span class="menu-title">Review Proposal</span>
-                        @endif
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('informasi_hibah.*') ? 'active' : '' }}"
+                    href="{{ route('informasi_hibah.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Informasi Hibah</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
+                    href="{{ route('proposal.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
+                    <span class="menu-title">Pengajuan Proposal</span>
+                    @else
+                    <span class="menu-title">Review Proposal</span>
+                    @endif
+                </a>
+            </div>
             @endif
             <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('progres_proposal.*') ? 'active' : '' }}"
@@ -51,40 +51,14 @@
                 </a>
             </div>
             @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
-                        href="{{ route('pelaporan.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Pelaporan</span>
-                    </a>
-                </div>
-            @endif
-            <div class="menu-item mb-2 mt-4">
-                <div class="menu-heading text-uppercase fs-7 fw-bold">Pengaturan</div>
-                <div class="app-sidebar-separator separator"></div>
-            </div>
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('user.index') ? 'show' : '' }}">
-                <span class="menu-link">
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
+                    href="{{ route('pelaporan.index') }}">
                     <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-35 fs-2"></i>
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
                     </span>
-                    <span class="menu-title">Pengaturan User</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion">
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->routeIs('user.index') ? 'active' : '' }}"
-                            href="{{ route('user.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">User</span>
-                        </a>
-                    </div>
-                </div>
+                    <span class="menu-title">Pelaporan</span>
+                </a>
             </div>
             <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('pengajuan_dana.*') ? 'active' : '' }}"
@@ -112,6 +86,32 @@
                     </span>
                     <span class="menu-title">Laporan Keuangan</span>
                 </a>
+            </div>
+            @endif
+            <div class="menu-item mb-2 mt-4">
+                <div class="menu-heading text-uppercase fs-7 fw-bold">Pengaturan</div>
+                <div class="app-sidebar-separator separator"></div>
+            </div>
+            <div data-kt-menu-trigger="click"
+                class="menu-item menu-accordion {{ request()->routeIs('user.index') ? 'show' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-35 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Pengaturan User</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->routeIs('user.index') ? 'active' : '' }}"
+                            href="{{ route('user.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">User</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
