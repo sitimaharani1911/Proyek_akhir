@@ -5,7 +5,7 @@
             <div class="row g-5 gx-xl-10">
                 <div class="page-heading">
                 </div>
-                <div class="col-xxl-6 mb-md-5 mb-xl-10">
+                <div class="col-xxl-12 mb-md-5 mb-xl-10">
                     <div class="row g-5 g-xl-10">
                         <div class="col-md-6 col-xl-6 mb-xxl-10">
                             <div class="card overflow-hidden h-md-50 mb-5 mb-xl-10">

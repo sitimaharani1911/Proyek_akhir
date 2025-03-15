@@ -84,7 +84,7 @@
                                     <label class="col-lg-2 fw-bold fs-6 text-gray-800"></label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800"></label>
                                     <div class="col-lg-6">
-                                        <a href="#" onclick="save()" class="btn btn-primary ">
+                                        <a href="#" onclick="save()" class="btn btn-primary btn-sm">
                                             Simpan
                                         </a>
                                     </div>

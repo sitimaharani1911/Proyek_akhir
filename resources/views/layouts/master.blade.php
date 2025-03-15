@@ -59,7 +59,7 @@
                             id="kt_app_sidebar_mobile_toggle">
                             <i class="ki-outline ki-abstract-14 fs-2"></i>
                         </div>
-                        <a href="index.html">
+                        <a href="">
                             <img alt="Logo" src="{{ asset('themes/media/logos/demo38-small.svg') }}"
                                 class="h-30px" />
                         </a>
@@ -75,11 +75,9 @@
                     data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
                     <div class="app-sidebar-header d-flex flex-stack d-none d-lg-flex pt-8 pb-2"
                         id="kt_app_sidebar_header">
-                        <a href="index.html" class="app-sidebar-logo">
-                            <img alt="Logo" src="{{ asset('themes/media/logos/demo38.svg') }}"
+                        <a href="" class="app-sidebar-logo">
+                            <img alt="Logo" src="{{ asset('themes/media/logos/keenthemes.svg') }}"
                                 class="h-25px d-none d-sm-inline app-sidebar-logo-default theme-light-show" />
-                            <img alt="Logo" src="{{ asset('themes/media/logos/demo38-dark.svg') }}"
-                                class="h-20px h-lg-25px theme-dark-show" />
                         </a>
                         <div id="kt_app_sidebar_toggle"
                             class="app-sidebar-toggle btn btn-sm btn-icon bg-light btn-color-gray-700 btn-active-color-primary d-none d-lg-flex rotate"
