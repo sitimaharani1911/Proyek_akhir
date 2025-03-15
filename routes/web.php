@@ -37,6 +37,7 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [ProposalController::class, 'index'])->name('proposal.index');
             Route::get('/show/{id}', [ProposalController::class, 'show'])->name('proposal.show');
             Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('proposal.edit');
+            Route::get('/apply/{id}', [ProposalController::class, 'apply'])->name('proposal.apply');
         });
 
         // Pelaporan

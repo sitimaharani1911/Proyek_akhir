@@ -11,7 +11,9 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        return view('content.proposal.vw_table_proposal');
+        $status = 'no-apply';
+        $id = '0';
+        return view('content.proposal.vw_table_proposal', compact('status', 'id'));
     }
 
     /**
@@ -36,6 +38,12 @@ class ProposalController extends Controller
     public function show(string $id)
     {
         return view('content.proposal.vw_detail_proposal');
+    }
+
+    public function apply(string $id)
+    {
+        $status = 'apply';
+        return view('content.proposal.vw_table_proposal', compact('status', 'id'));
     }
 
     /**

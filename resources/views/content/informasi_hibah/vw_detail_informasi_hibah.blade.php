@@ -72,6 +72,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-lg-4 col-xl-3">
+                                <a href="{{ url('proposal/apply/1') }}"
+                                    class="btn btn-sm btn-primary align-self-center">Apply</a>
+                            </div>
                         </div>
                     </div>
                 </div>

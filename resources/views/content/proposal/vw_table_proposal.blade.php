@@ -39,10 +39,10 @@
                                 <tr class="fw-bold fs-6 text-gray-800 px-7">
                                     <th>No</th>
                                     <th>Judul Proposal</th>
+                                    <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
                                     <th>Ketua Hibah</th>
                                     <th>Abstrak</th>
-                                    <th>File Proposal</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -51,10 +51,10 @@
                                 <tr>
                                     <td>1</td>
                                     <td>Lorem</td>
+                                    <td>Lorem</td>
                                     <td>CF</td>
                                     <td>Lorem</td>
                                     <td>Lorem</td>
-                                    <td>Lampiran</td>
                                     <td><span
                                             class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7">Pengajuan</span>
                                     </td>
@@ -104,10 +104,13 @@
                             <input type="text" class="form-control" placeholder="Judul" name="judul" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Skema Hibah</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Skema Hibah" name="skema_hibah" />
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2"><span
+                                    class="required">Hibah</span></label>
+                            <select name="informasi_hibah_id" class="form-control" required>
+                                <option value="">Pilih Hibah</option>
+                                <option value="1">Lorem</option>
+                                <option value="2">CF</option>
+                            </select>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -141,8 +144,19 @@
 @endsection
 @section('js')
     <script type="text/javascript">
+        $(document).ready(function() {
+            let status = "{{ $status }}";
+            let id = {{ $id }};
+            if (status == 'apply') {
+                $('[name="informasi_hibah_id"]').val(id).change();
+                $('#m_modal_6_title').html("Tambah Pengajuan Proposal");
+                $('#m_modal_6').modal('show');
+            }
+        });
+
         function resetForm() {
             $('#formAdd')[0].reset();
+            $('[name="informasi_hibah_id"] :selected').removeAttr('selected');
         }
 
         function add_ajax() {
@@ -169,6 +183,7 @@
                         $('[name="skema_hibah"]').val('CF');
                         $('[name="ketua_hibah"]').val('Lorem');
                         $('[name="abstrak"]').val('Lorem');
+                        $('[name="informasi_hibah_id"]').val('1').change();
                         $('#m_modal_6').modal('show');
                     } else {
                         Swal.fire("Oops", "Gagal mengambil data!", "error");
