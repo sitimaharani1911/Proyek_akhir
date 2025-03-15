@@ -30,23 +30,26 @@
             <div class="card-body py-3">
                 <form class="form" action="" method="POST" id="formAdd" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="">
-                    <div class="d-flex mb-8 fv-row">
+                    <div class="d-flex flex-column mb-6 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                             <span class="required">Verifikasi Kelayakan</span>
                         </label>
                         <input type="file" class="form-control" name="verifikasi_kelayakan" />
+                        <span class="text-danger mt-2">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
-                    <div class="d-flex mb-8 fv-row">
+                    <div class="d-flex flex-column mb-6 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                             <span class="required">Kerangka Acuan Kerja</span>
                         </label>
                         <input type="file" class="form-control" name="kerangka_acuan_kerja" />
+                        <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
-                    <div class="d-flex mb-8 fv-row">
+                    <div class="d-flex flex-column mb-6 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                             <span class="required">SK Tim Hibah</span>
                         </label>
                         <input type="file" class="form-control" name="sk_tim_hibah" />
+                        <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="text-end">
                         <a href="#" onclick="save()" class="btn btn-primary ">
