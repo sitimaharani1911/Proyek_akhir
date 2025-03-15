@@ -18,75 +18,84 @@
                 <div class="app-sidebar-separator separator"></div>
             </div>
             @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('informasi_hibah.*') ? 'active' : '' }}"
-                    href="{{ route('informasi_hibah.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    <span class="menu-title">Informasi Hibah</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
-                    href="{{ route('proposal.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
-                    <span class="menu-title">Pengajuan Proposal</span>
-                    @else
-                    <span class="menu-title">Review Proposal</span>
-                    @endif
-                </a>
-            </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('informasi_hibah.*') ? 'active' : '' }}"
+                        href="{{ route('informasi_hibah.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Informasi Hibah</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
+                        href="{{ route('proposal.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
+                            <span class="menu-title">Pengajuan Proposal</span>
+                        @else
+                            <span class="menu-title">Review Proposal</span>
+                        @endif
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('progres_proposal.*') ? 'active' : '' }}"
+                        href="{{ route('progres_proposal.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Progres Proposal</span>
+                    </a>
+                </div>
             @endif
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('progres_proposal.*') ? 'active' : '' }}"
-                    href="{{ route('progres_proposal.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    <span class="menu-title">Progres Proposal</span>
-                </a>
-            </div>
             @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
-                    href="{{ route('pelaporan.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    <span class="menu-title">Pelaporan</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('pengajuan_dana.*') ? 'active' : '' }}"
-                    href="{{ route('pengajuan_dana.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    <span class="menu-title">Pengajuan Dana</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('monev.*') ? 'active' : '' }}"
-                    href="{{ route('monev.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    <span class="menu-title">Monev</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('laporan-keuangan.*') ? 'active' : '' }}"
-                    href="{{ route('laporan-keuangan.index') }}">
-                    <span class="menu-icon">
-                        <i class="ki-outline ki-abstract-26 fs-2"></i>
-                    </span>
-                    <span class="menu-title">Laporan Keuangan</span>
-                </a>
-            </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('rab.*') ? 'active' : '' }}"
+                        href="{{ route('rab.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">RAB</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
+                        href="{{ route('pelaporan.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Pelaporan</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('pengajuan_dana.*') ? 'active' : '' }}"
+                        href="{{ route('pengajuan_dana.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Pengajuan Dana</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('monev.*') ? 'active' : '' }}"
+                        href="{{ route('monev.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Monev</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('laporan-keuangan.*') ? 'active' : '' }}"
+                        href="{{ route('laporan-keuangan.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Laporan Keuangan</span>
+                    </a>
+                </div>
             @endif
             <div class="menu-item mb-2 mt-4">
                 <div class="menu-heading text-uppercase fs-7 fw-bold">Pengaturan</div>

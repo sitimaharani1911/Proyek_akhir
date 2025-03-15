@@ -13,6 +13,7 @@ use App\Http\Controllers\MonevController;
 use App\Http\Controllers\PengajuanDanaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
+use App\Http\Controllers\RabController;
 
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -94,6 +95,13 @@ Route::middleware(['custom-auth'])->group(
         // Progres Proposal
         Route::prefix('progres_proposal')->group(function () {
             Route::get('/', [ProgresProposalController::class, 'index'])->name('progres_proposal.index');
+        });
+
+        // RAB
+        Route::prefix('rab')->group(function () {
+            Route::get('/', [RabController::class, 'index'])->name('rab.index');
+            Route::get('/show/{id}', [RabController::class, 'show'])->name('rab.show');
+            Route::get('/edit/{id}', [RabController::class, 'edit'])->name('rab.edit');
         });
 
         // Logout

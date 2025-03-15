@@ -5,10 +5,10 @@
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                        Informasi Hibah</h1>
+                        RAB</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a href="index.html" class="text-muted text-hover-primary">Informasi Hibah</a>
+                            <a href="index.html" class="text-muted text-hover-primary">RAB</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -29,7 +29,7 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Data Informasi Hibah</span>
+                        <span class="card-label fw-bold fs-3 mb-1">Data RAB</span>
                     </h3>
                 </div>
                 <div class="card-body py-3">
@@ -39,11 +39,10 @@
                                 <tr class="fw-bold fs-6 text-gray-800 px-7">
                                     <th>No</th>
                                     <th>Nama</th>
+                                    <th>Judul</th>
                                     <th>Skema Hibah</th>
-                                    <th>Mitra</th>
-                                    <th>Prodi</th>
-                                    <th>Kriteria</th>
-                                    <th>Periode Pengajuan</th>
+                                    <th>Abstrak</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -53,10 +52,9 @@
                                     <td>Lorem</td>
                                     <td>CF</td>
                                     <td>Lorem</td>
-                                    <td>Sistem Informasi</td>
+                                    <td>CF</td>
                                     <td>Lorem</td>
-                                    <td>28/02/2025</td>
-                                    <td><a href="{{ url('informasi_hibah/show/id') }}">
+                                    <td><a href="{{ url('rab/show/id') }}">
                                             <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
                                         </a>
                                         <a href="javascript:void(0)" onclick="edit('1')">
@@ -87,51 +85,19 @@
                     <form class="form" action="" method="POST" id="formAdd" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="">
                         <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Nama</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Nama" name="nama" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Skema Hibah</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Skema Hibah" name="skema_hibah" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Mitra</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Mitra" name="mitra" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2"><span class="required">Program
-                                    Studi</span></label>
-                            <select name="program_studi" class="form-control" required>
-                                <option value="">Pilih Program Studi</option>
-                                <option value="1">Sistem Informasi</option>
-                                <option value="2">Teknik Informatika</option>
-                                <option value="3">Teknik Komputer</option>
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2"><span
+                                    class="required">Proposal</span></label>
+                            <select name="proposal_id" class="form-control" required>
+                                <option value="">Pilih Proposal</option>
+                                <option value="1">Lorem</option>
+                                <option value="2">CF</option>
                             </select>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Kriteria</span>
+                                <span class="required">File RAB</span>
                             </label>
-                            <textarea name="kriteria" placeholder="Kriteria" autocomplete="off" class="form-control"></textarea>
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Periode Pengajuan</span>
-                            </label>
-                            <input type="date" class="form-control" placeholder="Periode Pengajuan"
-                                name="periode_pengajuan" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">File Pendukung</span>
-                            </label>
-                            <input type="file" class="form-control" name="file" />
+                            <input type="file" class="form-control" name="file_rab" />
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
@@ -149,35 +115,30 @@
     <script type="text/javascript">
         function resetForm() {
             $('#formAdd')[0].reset();
-            $('[name="program_studi"] :selected').removeAttr('selected');
+            $('[name="proposal_id"] :selected').removeAttr('selected');
         }
 
         function add_ajax() {
             method = 'add';
             resetForm();
-            $('#m_modal_6_title').html("Tambah Hibah");
+            $('#m_modal_6_title').html("Tambah RAB");
             $('#m_modal_6').modal('show');
         }
 
         function edit(id) {
             method = 'edit';
             resetForm();
-            $('#m_modal_6_title').html("Edit Hibah");
+            $('#m_modal_6_title').html("Edit RAB");
 
             $.ajax({
-                url: "{{ url('informasi_hibah/edit') }}/" + id,
+                url: "{{ url('rab/edit') }}/" + id,
                 type: "GET",
                 dataType: "JSON",
                 success: function(data) {
                     if (data.data) {
                         $('#formAdd')[0].reset();
                         $('[name="id"]').val('1');
-                        $('[name="nama"]').val('Lorem');
-                        $('[name="skema_hibah"]').val('CF');
-                        $('[name="mitra"]').val('Lorem');
-                        $('[name="program_studi"]').val('1').change();
-                        $('[name="kriteria"]').val('Lorem');
-                        $('[name="periode_pengajuan"]').val('2025-02-21');
+                        $('[name="proposal_id"]').val('1').change();
                         $('#m_modal_6').modal('show');
                     } else {
                         Swal.fire("Oops", "Gagal mengambil data!", "error");
