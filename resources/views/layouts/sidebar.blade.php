@@ -88,6 +88,15 @@
                     </a>
                 </div>
                 <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('piu.*') ? 'active' : '' }}"
+                        href="{{ route('piu.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Verifikasi Monev</span>
+                    </a>
+                </div>
+                <div class="menu-item">
                     <a class="menu-link {{ request()->routeIs('laporan-keuangan.*') ? 'active' : '' }}"
                         href="{{ route('laporan-keuangan.index') }}">
                         <span class="menu-icon">
