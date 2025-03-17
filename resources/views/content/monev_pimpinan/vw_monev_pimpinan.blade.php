@@ -8,19 +8,19 @@
                     Verifikasi Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('piu.index')}}" class="text-muted text-hover-primary">Verif Monev</a>
+                        <a href="{{route('pimpinan.kegiatan')}}" class="text-muted text-hover-primary">Verifikasi Monev</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('piu.kegiatan')}}" class="text-muted text-hover-primary">Kegiatan</a>
+                        <a href="{{route('pimpinan.kegiatan')}}" class="text-muted text-hover-primary">Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('piu.review')}}" class="text-muted text-hover-primary">Review</a>
+                        <a href="{{route('pimpinan.review')}}" class="text-muted text-hover-primary">Review</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -39,7 +39,7 @@
                     <div class="card-title m-0">
                         <h3 class="fw-bold m-0">Detail Kegiatan Pelaksanaan Hibah</h3>
                     </div>
-                    <a href="{{ route('piu.kegiatan') }}"
+                    <a href="{{ route('pimpinan.index') }}"
                         class="btn btn-sm btn-primary align-self-center">Kembali</a>
                 </div>
                 <div class="card-body p-9">

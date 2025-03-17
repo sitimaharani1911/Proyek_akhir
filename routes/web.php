@@ -73,11 +73,17 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/review-laporan', [MonevController::class, 'reviewLaporan'])->name('monev.review');
             Route::get('/detail-dokumen', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
         });
-          // Verifikasi Monev Ketua PIU
+        // Verifikasi Monev Ketua PIU
         Route::prefix('piu')->group(function () {
             Route::get('/', [MonevController::class, 'monevPiu'])->name('piu.index');
             Route::get('/kegiatan', [MonevController::class, 'monevPiuKegiatan'])->name('piu.kegiatan');
             Route::get('/verifikasi', [MonevController::class, 'monevPiuReview'])->name('piu.review');
+        });
+        // Verifikasi Monev Pimpinan
+        Route::prefix('pimpinan')->group(function () {
+            Route::get('/', [MonevController::class, 'monevPimpinan'])->name('pimpinan.index');
+            Route::get('/kegiatan', [MonevController::class, 'monevPimpinanKegiatan'])->name('pimpinan.kegiatan');
+            Route::get('/verifikasi', [MonevController::class, 'monevPimpinanReview'])->name('pimpinan.review');
         });
         // Laporan Keuangan
         Route::prefix('laporan-keuangan')->group(function () {

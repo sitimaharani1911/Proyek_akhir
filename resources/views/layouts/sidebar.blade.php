@@ -93,7 +93,16 @@
                         <span class="menu-icon">
                             <i class="ki-outline ki-abstract-26 fs-2"></i>
                         </span>
-                        <span class="menu-title">Verifikasi Monev</span>
+                        <span class="menu-title">Verifikasi Monev PIU</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('pimpinan.*') ? 'active' : '' }}"
+                        href="{{ route('pimpinan.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Verifikasi Monev Pimpinan</span>
                     </a>
                 </div>
                 <div class="menu-item">
