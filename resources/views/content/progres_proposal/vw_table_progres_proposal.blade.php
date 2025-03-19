@@ -52,14 +52,20 @@
                                             class="badge badge-light-success flex-shrink-0 align-self-center py-3 px-4 fs-7">Diterima</span>
                                     </td>
                                     <td>
-                                        <div class="col-7">
-                                            <select name="progres" class="form-select form-select-solid"
-                                                data-control="select2" data-hide-search="true" data-placeholder="Status">
-                                                <option></option>
-                                                <option value="1">Pertinjauan</option>
-                                                <option value="2">Pelaksanaan</option>
-                                            </select>
-                                        </div>
+                                        @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
+                                            <div class="col-12">
+                                                <select name="progres" class="form-select form-select-solid"
+                                                    data-control="select2" data-hide-search="true"
+                                                    data-placeholder="Status">
+                                                    <option></option>
+                                                    <option value="1">Pertinjauan</option>
+                                                    <option value="2">Pelaksanaan</option>
+                                                </select>
+                                            </div>
+                                        @else
+                                            <span
+                                                class="badge badge-light-success flex-shrink-0 align-self-center py-3 px-4 fs-7">Pengajuan</span>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>

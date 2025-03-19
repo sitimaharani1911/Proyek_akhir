@@ -11,7 +11,10 @@ class InformasiHibahController extends Controller
      */
     public function index()
     {
-        return view('content.informasi_hibah.vw_table_informasi_hibah');
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
+        return view('content.informasi_hibah.vw_table_informasi_hibah', compact('years'));
     }
 
     /**

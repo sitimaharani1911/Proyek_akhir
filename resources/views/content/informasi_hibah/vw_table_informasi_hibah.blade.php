@@ -16,11 +16,6 @@
                         <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
-                        <i class="ki-outline ki-plus fs-2"></i> Tambah
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -33,6 +28,25 @@
                     </h3>
                 </div>
                 <div class="card-body py-3">
+                    <div class="d-flex flex-stack mb-5">
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <select name="program_studi" class="form-control" required>
+                                <option value="">Pilih Tahun</option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
+                            <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="tooltip"
+                                    onclick="add_ajax()">
+                                    <i class="ki-duotone ki-plus fs-2"></i>
+                                    Tambah
+                                </button>
+                            </div>
+                        @endif
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
                             <thead>
@@ -57,14 +71,16 @@
                                     <td>Lorem</td>
                                     <td>28/02/2025</td>
                                     <td><a href="{{ url('informasi_hibah/show/id') }}">
-                                            <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
+                                            <i class="fa fa-info-circle text-success fs-5" style="margin-right: 10px;"></i>
                                         </a>
-                                        <a href="javascript:void(0)" onclick="edit('1')">
-                                            <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" style="color: red;">
-                                            <i class="fas fa-trash text-danger"></i>
-                                        </a>
+                                        @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
+                                            <a href="javascript:void(0)" onclick="edit('1')">
+                                                <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" style="color: red;">
+                                                <i class="fas fa-trash text-danger"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>

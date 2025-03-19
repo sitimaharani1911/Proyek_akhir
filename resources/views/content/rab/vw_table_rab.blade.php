@@ -16,11 +16,13 @@
                         <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
-                        <i class="ki-outline ki-plus fs-2"></i> Tambah
-                    </button>
-                </div>
+                @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
+                    <div class="d-flex align-items-center gap-2 gap-lg-3">
+                        <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
+                            <i class="ki-outline ki-plus fs-2"></i> Tambah
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -55,14 +57,16 @@
                                     <td>CF</td>
                                     <td>Lorem</td>
                                     <td><a href="{{ url('rab/show/id') }}">
-                                            <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
+                                            <i class="fa fa-info-circle text-success fs-5" style="margin-right: 10px;"></i>
                                         </a>
-                                        <a href="javascript:void(0)" onclick="edit('1')">
-                                            <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" style="color: red;">
-                                            <i class="fas fa-trash text-danger"></i>
-                                        </a>
+                                        @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
+                                            <a href="javascript:void(0)" onclick="edit('1')">
+                                                <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" style="color: red;">
+                                                <i class="fas fa-trash text-danger"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>

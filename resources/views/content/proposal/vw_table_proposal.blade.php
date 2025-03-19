@@ -16,11 +16,13 @@
                         <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
-                        <i class="ki-outline ki-plus fs-2"></i> Tambah
-                    </button>
-                </div>
+                @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
+                    <div class="d-flex align-items-center gap-2 gap-lg-3">
+                        <button type="button" class="btn btn-primary er fs-6 px-4 py-2" onclick="add_ajax()">
+                            <i class="ki-outline ki-plus fs-2"></i> Tambah
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -59,12 +61,9 @@
                                             class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7">Pengajuan</span>
                                     </td>
                                     <td>
-                                        @if (Auth::user()->role == 'Sentra')
-                                            <a href="{{ url('proposal/show/id') }}">
-                                                <i class="fa fa-info-circle text-success fs-5"
-                                                    style="margin-right: 10px;"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ url('proposal/show/id') }}">
+                                            <i class="fa fa-info-circle text-success fs-5" style="margin-right: 10px;"></i>
+                                        </a>
                                         @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
                                             <a href="{{ url('proposal/show/id') }}">
                                                 <i class="fa fa-eye text-info fs-5" style="margin-right: 10px;"></i>

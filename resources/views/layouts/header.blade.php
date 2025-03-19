@@ -13,7 +13,7 @@
         </div>
         <div class="menu menu-sub menu-sub-dropdown menu-column w-250px w-lg-325px" data-kt-menu="true">
             <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10"
-                style="background-image:url('themes/media/misc/menu-header-bg.jpg')">
+                style="background-image:url('{{ asset('themes/media/misc/menu-header-bg.jpg') }}')">
                 <h3 class="text-white fw-semibold mb-3">Switch Account</h3>
                 <span class="badge bg-primary text-inverse-primary py-2 px-3">{{ session('selected_role') }}</span>
             </div>

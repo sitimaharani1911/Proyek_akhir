@@ -59,7 +59,7 @@
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="apps/file-manager/files.html"
+                                        <a href=""
                                             class="text-gray-800 text-hover-primary d-flex flex-column">
                                             <div class="symbol symbol-60px mb-5">
                                                 <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
@@ -72,10 +72,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <a href="{{ url('proposal/apply/1') }}"
-                                    class="btn btn-sm btn-primary align-self-center">Apply</a>
-                            </div>
+                            @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <a href="{{ url('proposal/apply/1') }}"
+                                        class="btn btn-sm btn-primary align-self-center">Apply</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

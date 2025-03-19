@@ -34,20 +34,6 @@
                             </div>
                         </div>
                         <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Catatan</label>
-                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                            <div class="col-lg-9">
-                                <span class="fw-semibold">Sistem Inforasi</span>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nilai</label>
-                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                            <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Status</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
@@ -56,11 +42,19 @@
                             </div>
                         </div>
                         <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan PIU</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
                                 <span
                                     class="badge badge-light-success flex-shrink-0 align-self-center py-3 px-4 fs-7 fw-semibold">Diterima</span>
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
+                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                            <div class="col-lg-9">
+                                <span
+                                    class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7 fw-semibold">Pending</span>
                             </div>
                         </div>
                         @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
@@ -105,13 +99,44 @@
                                     <span class="fw-semibold">-</span>
                                 </div>
                             </div>
+                            @if (Auth::user()->role == 'PIU' || Auth::user()->role == 'superadmin')
+                                <div class="row mb-7">
+                                    <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan PIU</label>
+                                    <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                                    <div class="col-lg-9">
+                                        <div class="col-3">
+                                            <select name="progres" class="form-select form-select-solid"
+                                                data-control="select2" data-hide-search="true" data-placeholder="Status">
+                                                <option></option>
+                                                <option value="1" selected>Diterima</option>
+                                                <option value="2">Ditolak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            @if (Auth::user()->role == 'Direktur' || Auth::user()->role == 'superadmin')
+                                <div class="row mb-7">
+                                    <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
+                                    <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                                    <div class="col-lg-9">
+                                        <div class="col-3">
+                                            <select name="progres" class="form-select form-select-solid"
+                                                data-control="select2" data-hide-search="true" data-placeholder="Status">
+                                                <option></option>
+                                                <option value="1">Diterima</option>
+                                                <option value="2">Ditolak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                         <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="apps/file-manager/files.html"
-                                            class="text-gray-800 text-hover-primary d-flex flex-column">
+                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
                                             <div class="symbol symbol-60px mb-5">
                                                 <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
                                                     class="theme-light-show" alt="" />
@@ -126,8 +151,7 @@
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="apps/file-manager/files.html"
-                                            class="text-gray-800 text-hover-primary d-flex flex-column">
+                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
                                             <div class="symbol symbol-60px mb-5">
                                                 <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
                                                     class="theme-light-show" alt="" />
@@ -142,8 +166,7 @@
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="apps/file-manager/files.html"
-                                            class="text-gray-800 text-hover-primary d-flex flex-column">
+                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
                                             <div class="symbol symbol-60px mb-5">
                                                 <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
                                                     class="theme-light-show" alt="" />
@@ -158,8 +181,7 @@
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="apps/file-manager/files.html"
-                                            class="text-gray-800 text-hover-primary d-flex flex-column">
+                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
                                             <div class="symbol symbol-60px mb-5">
                                                 <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
                                                     class="theme-light-show" alt="" />
@@ -167,6 +189,21 @@
                                                     class="theme-dark-show" alt="" />
                                             </div>
                                             <div class="fs-5 fw-bold mb-2">Surat Tugas</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 col-xl-3">
+                                <div class="card h-100">
+                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
+                                            <div class="symbol symbol-60px mb-5">
+                                                <img src="{{ asset('themes/media/svg/files/blank-image.svg') }}"
+                                                    class="theme-light-show" alt="" />
+                                                <img src="{{ asset('themes/media/svg/files/blank-image-dark.svg') }}"
+                                                    class="theme-dark-show" alt="" />
+                                            </div>
+                                            <div class="fs-5 fw-bold mb-2">Bukti SS</div>
                                         </a>
                                     </div>
                                 </div>
