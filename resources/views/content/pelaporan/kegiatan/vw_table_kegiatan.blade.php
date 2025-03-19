@@ -48,6 +48,7 @@
                                 <th>Ketua Pelaksana</th>
                                 <th>Tanggal</th>
                                 <th>Tempat</th>
+                                <th>Hasil Monev</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -58,6 +59,7 @@
                                 <td>NFN</td>
                                 <td>04-03-2025</td>
                                 <td>Politeknik Caltex Riau</td>
+                                <td><a href="{{route('kegiatan.hasilMonev')}}" class="text-primary">Cek Hasil</a></td>
                                 <td><a href="{{ url('kegiatan/show/id') }}">
                                         <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
                                     </a>
