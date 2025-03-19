@@ -71,4 +71,30 @@ class MonevController extends Controller
     {
         //
     }
+    // KETUA PIU
+    public function monevPiu()
+    {
+        return view ('content.monev_piu.vw_table_monev');
+    }
+    public function monevPiuKegiatan()
+    {
+        return view ('content.monev_piu.vw_table_monev_kegiatan');
+    }
+    public function monevPiuReview()
+    {
+        return view ('content.monev_piu.vw_monev_ketua_piu');
+    }
+    // PIMPINAN
+    public function monevPimpinan()
+    {
+        return view ('content.monev_pimpinan.vw_table_monev');
+    }
+    public function monevPimpinanKegiatan()
+    {
+        return view ('content.monev_pimpinan.vw_table_monev_kegiatan');
+    }
+    public function monevPimpinanReview()
+    {
+        return view ('content.monev_pimpinan.vw_monev_pimpinan');
+    }
 }

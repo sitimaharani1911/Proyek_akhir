@@ -5,27 +5,22 @@
         <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
             <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                 <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                    Kegiatan</h1>
+                    Verifikasi Monitoring dan Evaluasi Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('pelaporan.index')}}" class="text-muted text-hover-primary">Pelaporan</a>
+                        <a href="{{route('pimpinan.index')}}" class="text-muted text-hover-primary">Verifikasi Monev</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="index.html" class="text-muted text-hover-primary">Kegiatan</a>
+                        <a href="{{route('pimpinan.kegiatan')}}" class="text-muted text-hover-primary">Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">List</li>
                 </ul>
-            </div>
-            <div class="d-flex align-items-center gap-2 gap-lg-3">
-                <a href="{{route('kegiatan.tambah')}}" type="button" class="btn btn-primary er fs-6 px-4 py-2">
-                    <i class="ki-outline ki-plus fs-2"></i> Tambah
-                </a>
             </div>
         </div>
     </div>
@@ -44,11 +39,10 @@
                         <thead>
                             <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                 <th>No</th>
-                                <th>Judul proposal</th>
+                                <th>Nama Hibah</th>
                                 <th>Ketua Pelaksana</th>
                                 <th>Tanggal</th>
                                 <th>Tempat</th>
-                                <th>Hasil Monev</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -59,15 +53,9 @@
                                 <td>NFN</td>
                                 <td>04-03-2025</td>
                                 <td>Politeknik Caltex Riau</td>
-                                <td><a href="{{route('kegiatan.hasilMonev')}}" class="text-primary">Cek Hasil</a></td>
-                                <td><a href="{{ url('kegiatan/show/id') }}">
-                                        <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
-                                    </a>
-                                    <a href="{{ url('kegiatan/edit/id') }}">
+                                <td>
+                                    <a href="{{route('pimpinan.review')}}">
                                         <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" style="color: red;">
-                                        <i class="fas fa-trash text-danger"></i>
                                     </a>
                                 </td>
                             </tr>

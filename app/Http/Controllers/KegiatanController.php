@@ -21,7 +21,10 @@ class KegiatanController extends Controller
     {
         return view ('content.pelaporan.kegiatan.vw_tambah_kegiatan');
     }
-
+    public function hasilMonev()
+    {
+        return view ('content.pelaporan.kegiatan.vw_hasil_monev');
+    }
     /**
      * Store a newly created resource in storage.
      */

@@ -80,14 +80,18 @@
                             <label class="form-label fw-semibold">Jumlah Peserta <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" placeholder="Jumlah Peserta" name="jumlah_peserta" />
                         </div>
-                        
-                    </div>
-                    <!-- Section Kanan -->
-                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Absensi Peserta <span class="text-danger">*</span></label>
+                            <input type="file" class="form-control" name="absensi_peserta" />
+                        </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Surat Kerja <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="surat_kerja" />
                         </div>
+
+                    </div>
+                    <!-- Section Kanan -->
+                    <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Surat Tugas <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="surat_tugas" />
@@ -117,12 +121,23 @@
                             <input type="text" class="form-control" placeholder="Catatan" name="catatan" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Status" name="status" />
+                            <label class="form-label fw-semibold">Nilai <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" placeholder="Nilai" name="nilai" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Auditor <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Auditor" name="auditor" />
+                            <label class="form-label fw-semibold">Persentase Capaian <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" placeholder="Persentase Capaian" name="persentase_capaian" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
+                            <select class="form-control" name="status">
+                                <option value="open">Open</option>
+                                <option value="close">Close</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tim Monev <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Tim Monev" name="tim_monev" />
                         </div>
                     </div>
 
