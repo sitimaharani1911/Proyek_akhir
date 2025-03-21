@@ -43,27 +43,27 @@
                 <form class="row g-3" action="" method="POST" id="formAdd" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="">
                     <div class="col-12">
-                        <label class="form-label fw-semibold">Dana Mitra <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Dana Mitra" name="dana_mitra" />
-                    </div>
-
-                    <div class="col-12">
-                        <label class="form-label fw-semibold">Dana Pemberi <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Dana Pemberi" name="dana_pemberi" />
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label fw-semibold">Dana Pendamping <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Dana Pendamping" name="dana_pendamping" />
-                    </div>
-
-                    <div class="col-12">
-                        <label class="form-label fw-semibold">No Rekening <span class="text-danger">*</span></label>
-                        <input type="Number" class="form-control" placeholder="No Rekening" name="no_rekening" />
+                        <label class="form-label fw-semibold">Tanggal <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" placeholder="Tanggal" name="tanggal" />
                     </div>
 
                     <div class="col-12">
                         <label class="form-label fw-semibold">Keterangan <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Keterangan" name="keterangan" />
+                        <textarea class="form-control" name="keterangan" rows="4"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Tujuan Pengajuan <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Tujuan Pengajuan" name="tujuan_pengajuan" />
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Nominal <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" placeholder="Nominal" name="nominal" />
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Laporan Pengajuan Dana <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="laporan_pengajuan_dana" />
                     </div>
                     <div class="col-12 text-end mt-5">
                         <button type="button" onclick="save()" class="btn btn-primary">Simpan</button>
