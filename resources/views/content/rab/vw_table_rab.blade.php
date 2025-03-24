@@ -41,9 +41,10 @@
                                 <tr class="fw-bold fs-6 text-gray-800 px-7">
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Judul</th>
                                     <th>Skema Hibah</th>
-                                    <th>Abstrak</th>
+                                    <th>Judul Proposal</th>
+                                    <th>Keterangan</th>
+                                    <th>Tujuan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -55,6 +56,7 @@
                                     <td>CF</td>
                                     <td>Lorem</td>
                                     <td>CF</td>
+                                    <td>Lorem</td>
                                     <td>Lorem</td>
                                     <td><a href="{{ url('rab/show/id') }}">
                                             <i class="fa fa-info-circle text-success fs-5" style="margin-right: 10px;"></i>
@@ -96,6 +98,12 @@
                                 <option value="1">Lorem</option>
                                 <option value="2">CF</option>
                             </select>
+                        </div>
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Tujuan</span>
+                            </label>
+                            <input type="text" class="form-control" placeholder="Tujuan" name="tujuan" />
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -142,6 +150,7 @@
                     if (data.data) {
                         $('#formAdd')[0].reset();
                         $('[name="id"]').val('1');
+                        $('[name="tujuan"]').val('lorem');
                         $('[name="proposal_id"]').val('1').change();
                         $('#m_modal_6').modal('show');
                     } else {

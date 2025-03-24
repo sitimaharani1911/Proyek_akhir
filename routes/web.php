@@ -13,6 +13,7 @@ use App\Http\Controllers\MonevController;
 use App\Http\Controllers\PengajuanDanaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
+use App\Http\Controllers\TtdBerkasController;
 use App\Http\Controllers\RabController;
 
 
@@ -116,6 +117,12 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [RabController::class, 'index'])->name('rab.index');
             Route::get('/show/{id}', [RabController::class, 'show'])->name('rab.show');
             Route::get('/edit/{id}', [RabController::class, 'edit'])->name('rab.edit');
+        });
+
+        // Ttd Berkas
+        Route::prefix('ttd_berkas')->group(function () {
+            Route::get('/', [TtdBerkasController::class, 'index'])->name('ttd_berkas.index');
+            Route::get('/show/{id}', [TtdBerkasController::class, 'show'])->name('ttd_berkas.show');
         });
 
         // Logout

@@ -8,22 +8,14 @@
                         <div class="card-title m-0">
                             <h3 class="fw-bold m-0">Detail RAB</h3>
                         </div>
-                        <a href="{{ route('rab.index') }}"
-                            class="btn btn-sm btn-primary align-self-center">Kembali</a>
+                        <a href="{{ route('rab.index') }}" class="btn btn-sm btn-primary align-self-center">Kembali</a>
                     </div>
                     <div class="card-body p-9">
                         <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nama</label>
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nama Hibah</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
                                 <span class="fw-semibold">Lorem</span>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Judul</label>
-                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                            <div class="col-lg-9">
-                                <span class="fw-semibold">CF</span>
                             </div>
                         </div>
                         <div class="row mb-7">
@@ -34,7 +26,22 @@
                             </div>
                         </div>
                         <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Abstrak
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Judul Proposal</label>
+                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                            <div class="col-lg-9">
+                                <span class="fw-semibold">CF</span>
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Keterangan
+                            </label>
+                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                            <div class="col-lg-9">
+                                <span class="fw-semibold">Lorem</span>
+                            </div>
+                        </div>
+                        <div class="row mb-7">
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Tujuan
                             </label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">

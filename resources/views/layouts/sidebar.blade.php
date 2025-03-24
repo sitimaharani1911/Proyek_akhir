@@ -60,6 +60,17 @@
                     </a>
                 </div>
             @endif
+            @if (Auth::user()->role == 'Direktur' || Auth::user()->role == 'PIU' || Auth::user()->role == 'Kesekretariatan' || Auth::user()->role == 'superadmin')
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('ttd_berkas.*') ? 'active' : '' }}"
+                        href="{{ route('ttd_berkas.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">TTD Berkas</span>
+                    </a>
+                </div>
+            @endif
             @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
                 <div class="menu-item">
                     <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
