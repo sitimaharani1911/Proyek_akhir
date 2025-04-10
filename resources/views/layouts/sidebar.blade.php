@@ -73,7 +73,7 @@
             @endif
             @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('pelaporan.*') ? 'active' : '' }}"
+                    <a class="menu-link {{ request()->routeIs('pelaporan.*') || request()->routeIs('kegiatan.*')  ? 'active' : '' }}"
                         href="{{ route('pelaporan.index') }}">
                         <span class="menu-icon">
                             <i class="ki-outline ki-abstract-26 fs-2"></i>
@@ -124,6 +124,24 @@
                             <i class="ki-outline ki-abstract-26 fs-2"></i>
                         </span>
                         <span class="menu-title">Laporan Keuangan</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('list-kegiatan.*') ? 'active' : '' }}"
+                        href="{{ route('list-kegiatan.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">List Kegiatan</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('monev-kegiatan.*') ? 'active' : '' }}"
+                        href="{{ route('monev-kegiatan.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-outline ki-abstract-26 fs-2"></i>
+                        </span>
+                        <span class="menu-title">Monev Kegiatan</span>
                     </a>
                 </div>
             @endif

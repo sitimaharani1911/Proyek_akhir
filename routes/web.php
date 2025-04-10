@@ -9,7 +9,9 @@ use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LaporanKeuanganController;
+use App\Http\Controllers\ListKegiatanController;
 use App\Http\Controllers\MonevController;
+use App\Http\Controllers\MonevKegiatanController;
 use App\Http\Controllers\PengajuanDanaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
@@ -39,6 +41,18 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/show/{id}', [ProposalController::class, 'show'])->name('proposal.show');
             Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('proposal.edit');
             Route::get('/apply/{id}', [ProposalController::class, 'apply'])->name('proposal.apply');
+        });
+
+        // List Kegiatan
+        Route::prefix('list-kegiatan')->group(function () {
+            Route::get('/', [ListKegiatanController::class, 'index'])->name('list-kegiatan.index');
+            Route::get('/data', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
+        });
+
+        // Monev Kegiatan
+        Route::prefix('monev-kegiatan')->group(function () {
+            Route::get('/', [MonevKegiatanController::class, 'index'])->name('monev-kegiatan.index');
+            Route::get('/data', [MonevKegiatanController::class, 'listKegiatan'])->name('monev-kegiatan.data');
         });
 
         // Pelaporan
