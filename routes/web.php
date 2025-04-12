@@ -31,8 +31,12 @@ Route::middleware(['custom-auth'])->group(
         // Informasi Hibah
         Route::prefix('informasi_hibah')->group(function () {
             Route::get('/', [InformasiHibahController::class, 'index'])->name('informasi_hibah.index');
+            Route::post('/data', [InformasiHibahController::class, 'data'])->name('informasi_hibah-list');
             Route::get('/show/{id}', [InformasiHibahController::class, 'show'])->name('informasi_hibah.show');
+            Route::post('/store', [InformasiHibahController::class, 'store'])->name('informasi_hibah.store');
             Route::get('/edit/{id}', [InformasiHibahController::class, 'edit'])->name('informasi_hibah.edit');
+            Route::post('/update', [InformasiHibahController::class, 'update'])->name('informasi_hibah.update');
+            Route::delete('/{id}', [InformasiHibahController::class, 'destroy'])->name('informasi_hibah.destroy');
         });
 
         // Proposal

@@ -13,17 +13,17 @@
                     </div>
                     <div class="card-body p-9">
                         <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nama</label>
+                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nama Hibah</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->nama_hibah }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Skema Hibah</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9 fv-row">
-                                <span class="fw-semibold">CF</span>
+                                <span class="fw-semibold">{{ $data->skema_hibah }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
@@ -31,40 +31,41 @@
                             </label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->mitra }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Program Studi</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Sistem Inforasi</span>
+                                <span class="fw-semibold">{{ $data->prodi_terlibat }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Kriteria</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->kriteria }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Periode Pengajuan</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">28/02/2025 - 01/03/2025</span>
+                                <span class="fw-semibold">{{ $data->periode_pengajuan_awal }} s/d
+                                    {{ $data->periode_pengajuan_akhir }}</span>
                             </div>
                         </div>
                         <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href=""
-                                            class="text-gray-800 text-hover-primary d-flex flex-column">
+                                        <a href="{{ Storage::url($data->file_pendukung) }}"
+                                            class="text-gray-800 text-hover-primary d-flex flex-column" target="_blank">
                                             <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
+                                                <img src="{{ asset('themes/media/svg/files/upload.svg') }}"
                                                     class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
+                                                <img src="{{ asset('themes/media/svg/files/upload-dark.svg') }}"
                                                     class="theme-dark-show" alt="" />
                                             </div>
                                             <div class="fs-5 fw-bold mb-2">File Pendukung</div>
