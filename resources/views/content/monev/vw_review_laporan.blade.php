@@ -88,14 +88,14 @@
                             <label class="form-label fw-semibold">Surat Kerja <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="surat_kerja" />
                         </div>
-
-                    </div>
-                    <!-- Section Kanan -->
-                    <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Surat Tugas <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="surat_tugas" />
                         </div>
+                    </div>
+                    <!-- Section Kanan -->
+                    <div class="col-md-6">
+                        
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Laporan Kegiatan <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="laporan_kegiatan" />
@@ -134,6 +134,10 @@
                                 <option value="open">Open</option>
                                 <option value="close">Close</option>
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Laporan Akhir Monev<span class="text-danger">*</span></label>
+                            <input type="file" class="form-control" name="laporan_akhir_monev" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Tim Monev <span class="text-danger">*</span></label>

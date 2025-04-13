@@ -6,7 +6,7 @@
             <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                 <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
                     Edit Kegiatan</h1>
-                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
                         <a href="{{route('pelaporan.index')}}" class="text-muted text-hover-primary">Pelaporan</a>
                     </li>
@@ -51,6 +51,7 @@
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Surat Kerja <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="surat_kerja" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
 
                     <div class="col-md-6">
@@ -60,6 +61,7 @@
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Surat Tugas <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="surat_tugas" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Anggota Pelaksana <span class="text-danger">*</span></label>
@@ -68,18 +70,22 @@
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Laporan Kegiatan <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="laporan_kegiatan" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Pengajuan Dana <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" placeholder="Pengajuan Dana" name="pengajuan_dana" />
+                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Laporan Keuangan <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="laporan_keuangan" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Sisa Dana <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" placeholder="Sisa Dana" name="sisa_dana" />
+                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Luaran <span class="text-danger">*</span></label>
@@ -99,7 +105,8 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Dokumentasi <span class="text-danger">*</span></label>
-                        <input type="url" class="form-control" placeholder="Dokumentasi" name="dokumentasi" />
+                        <input type="url" class="form-control" placeholder="https://businessplan.com" name="dokumentasi" />
+                        <span class="text-danger">Ket: Pastikan link dapat diakses</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Jumlah Peserta <span class="text-danger">*</span></label>
@@ -108,9 +115,20 @@
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Lainnya <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="lainnya" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Absensi Peserta <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="absensi_peserta" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Bukti Pembayaran <span class="text-danger">*</span></label>
+                        <input type="url" class="form-control" placeholder="https://gdrive.com" name="bukti_pembayaran" />
+                        <span class="text-danger">Ket : Lampirkan seluruh bukti pembayaran</span>
                     </div>
                     <div class="col-12 text-end mt-5">
-                        <button type="button" onclick="save()" class="btn btn-primary">Edit</button>
+                        <button type="button" onclick="save()" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
 

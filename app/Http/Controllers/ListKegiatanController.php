@@ -23,7 +23,7 @@ class ListKegiatanController extends Controller
      */
     public function create()
     {
-        //
+        return view ('content.list_kegiatan.vw_tambah_list_kegiatan');
     }
 
     /**

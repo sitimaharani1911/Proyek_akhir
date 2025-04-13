@@ -8,13 +8,24 @@
                     List Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('list-kegiatan.index')}}" class="text-muted text-hover-primary">List Kegiatan</a>
+                        <a href="list-kegiatan.index" class="text-muted text-hover-primary">Data Hibah</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{route('list-kegiatan.data')}}" class="text-muted text-hover-primary">List Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">List</li>
                 </ul>
+            </div>
+            <div class="d-flex align-items-center gap-2 gap-lg-3">
+                <a href="{{route('list-kegiatan.tambah')}}" type="button" class="btn btn-primary er fs-6 px-4 py-2">
+                    <i class="ki-outline ki-plus fs-2"></i> Tambah
+                </a>
             </div>
         </div>
     </div>
