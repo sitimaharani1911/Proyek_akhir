@@ -28,46 +28,21 @@
                     </h3>
                 </div>
                 <div class="card-body py-3">
-                    <div class="table-responsive">
-                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                    <div class="table-responsive" style="overflow-x: auto; position: relative;">
+                        <table id="dtProgresProposal"
+                            class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
                             <thead>
                                 <tr class="fw-bold fs-6 text-gray-800 px-7">
                                     <th>No</th>
                                     <th>Judul Proposal</th>
+                                    <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
                                     <th>Ketua Hibah</th>
-                                    <th>Abstrak</th>
                                     <th>Status</th>
-                                    <th>Progres</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Lorem</td>
-                                    <td>CF</td>
-                                    <td>Lorem</td>
-                                    <td>Lorem</td>
-                                    <td><span
-                                            class="badge badge-light-success flex-shrink-0 align-self-center py-3 px-4 fs-7">Diterima</span>
-                                    </td>
-                                    <td>
-                                        @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
-                                            <div class="col-12">
-                                                <select name="progres" class="form-select form-select-solid"
-                                                    data-control="select2" data-hide-search="true"
-                                                    data-placeholder="Status">
-                                                    <option></option>
-                                                    <option value="1">Pertinjauan</option>
-                                                    <option value="2">Pelaksanaan</option>
-                                                </select>
-                                            </div>
-                                        @else
-                                            <span
-                                                class="badge badge-light-success flex-shrink-0 align-self-center py-3 px-4 fs-7">Pengajuan</span>
-                                        @endif
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -75,57 +50,132 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="m_modal_6" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="m_modal_6_title">Title</h2>
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-outline ki-cross fs-1"></i>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <form class="form" action="" method="POST" id="formAdd" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="">
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Judul Proposal</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Judul" name="judul" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Skema Hibah</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Skema Hibah" name="skema_hibah" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Ketua Hibah</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Ketua Hibah" name="ketua_hibah" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Abstrak</span>
-                            </label>
-                            <textarea name="abstrak" placeholder="Abstrak" autocomplete="off" class="form-control"></textarea>
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">File Proposal</span>
-                            </label>
-                            <input type="file" class="form-control" name="file" />
-                        </div>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
-                            <a href="#" onclick="save()" class="btn btn-primary ">
-                                Simpan
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+@endsection
+@section('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // CSS mengatur untuk dropdown
+            $('<style>').text(`
+                .table-responsive .dropdown-menu {
+                    position: fixed !important;
+                    z-index: 9999 !important;
+                }
+            `).appendTo('head');
+
+            $(document).on('show.bs.dropdown', '.table-responsive .dropdown', function(e) {
+                var $dropdown = $(this).find('.dropdown-menu');
+                var btnOffset = $(this).offset();
+                var tableOffset = $(this).closest('.table-responsive').offset();
+                var bodyScrollTop = $(window).scrollTop();
+
+                $dropdown.css({
+                    'top': (btnOffset.top + $(this).outerHeight() - bodyScrollTop) + 'px',
+                    'left': btnOffset.left + 'px'
+                });
+
+                e.stopPropagation();
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.table-responsive .dropdown-menu.show').removeClass('show');
+                }
+            });
+
+            let typingTimer;
+            let doneTypingInterval = 250;
+            let dtProgresProposal = $('#dtProgresProposal').DataTable({
+                responsive: true,
+                paging: true,
+                bDestroy: true,
+                searching: true,
+                ordering: false,
+                lengthChange: true,
+                autoWidth: false,
+                aaSorting: [],
+                serverSide: true,
+                processing: true,
+                language: {
+                    lengthMenu: "Show _MENU_"
+                },
+                dom: "<'row mb-2'" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-start dt-toolbar'l>" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-end dt-toolbar'f>" +
+                    ">" +
+                    "<'table-responsive'tr>" +
+                    "<'row'" +
+                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                    ">",
+                ajax: {
+                    type: 'POST',
+                    url: "{{ route('progres_proposal-list') }}"
+                },
+                columns: [{
+                        orderable: false,
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        width: '20px',
+                        className: 'text-center'
+                    },
+                    {
+                        data: 'judul_proposal',
+                        name: 'judul_proposal',
+                    },
+                    {
+                        data: 'nama_hibah',
+                        name: 'nama_hibah',
+                    },
+                    {
+                        data: 'skema_hibah',
+                        name: 'skema_hibah',
+                    },
+                    {
+                        data: 'ketua_hibah',
+                        name: 'ketua_hibah',
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                    },
+                    {
+                        orderable: false,
+                        data: 'action',
+                        width: 80,
+                        className: 'text-center'
+                    },
+                ]
+            });
+
+            // Status Progres
+            $(document).on('click', '.btn-statusProgres', function() {
+                data = $(this).data()
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ url('verifikasi-status') }}",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        $('#dtProgresProposal').DataTable().ajax.reload(null, false);
+                        Swal.fire({
+                            text: "Status Progres Berhasil diubah",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "OK",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        })
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -75,8 +75,8 @@
                             </div>
                             @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
                                 <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <a href="{{ url('proposal/apply/1') }}"
-                                        class="btn btn-sm btn-primary align-self-center">Apply</a>
+                                    <a href="{{ url('proposal/apply/' . encrypt($data->id)) }}"
+                                        class="btn btn-sm btn-success align-self-center">Apply</a>
                                 </div>
                             @endif
                         </div>

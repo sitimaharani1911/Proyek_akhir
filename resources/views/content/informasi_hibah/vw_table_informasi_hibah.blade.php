@@ -30,7 +30,7 @@
                 <div class="card-body py-3">
                     <div class="d-flex flex-stack mb-5">
                         <div class="d-flex align-items-center position-relative my-1">
-                            <select name="tahun" class="form-control w-150px" required>
+                            <select name="tahun" id="filter_tahun" class="form-control w-150px" required>
                                 <option value="">Pilih Tahun</option>
                                 @foreach ($years as $year)
                                     <option value="{{ $year }}">{{ $year }}</option>
@@ -161,6 +161,7 @@
             });
             let typingTimer;
             let doneTypingInterval = 250;
+            var tahun = '';
 
             let dtInformasiHibah = $('#dtInformasiHibah').DataTable({
                 responsive: true,
@@ -187,7 +188,10 @@
                     ">",
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('informasi_hibah-list') }}"
+                    url: "{{ route('informasi_hibah-list') }}",
+                    data: function(d) {
+                        d.tahun = tahun;
+                    }
                 },
                 columns: [{
                         orderable: false,
@@ -226,6 +230,13 @@
                         className: 'text-center'
                     },
                 ]
+            });
+
+            //filter
+            $('#filter_tahun').change(function(e) {
+                tahun = $('#filter_tahun').val();
+                dtInformasiHibah.draw();
+                e.preventDefault();
             });
         });
 

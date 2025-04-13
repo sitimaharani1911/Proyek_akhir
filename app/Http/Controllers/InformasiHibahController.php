@@ -78,7 +78,7 @@ class InformasiHibahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $hibah_id = decrypt($id);
         $data = InformasiHibah::find($hibah_id);
@@ -174,6 +174,9 @@ class InformasiHibahController extends Controller
     {
         if ($request->ajax()) {
             $data = InformasiHibah::query();
+            if ($request->tahun) {
+                $data->where('periode_pengajuan_awal', 'like', $request->tahun . '%');
+            }
             return DataTables::of($data)
                 ->filter(function ($query) {
                     if (request()->has('search.value')) {

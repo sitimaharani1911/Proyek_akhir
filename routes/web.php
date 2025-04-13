@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
 use App\Http\Controllers\TtdBerkasController;
 use App\Http\Controllers\RabController;
+use App\Http\Controllers\VerifikasiStatus;
 
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -42,9 +43,12 @@ Route::middleware(['custom-auth'])->group(
         // Proposal
         Route::prefix('proposal')->group(function () {
             Route::get('/', [ProposalController::class, 'index'])->name('proposal.index');
+            Route::post('/data', [ProposalController::class, 'data'])->name('proposal-list');
             Route::get('/show/{id}', [ProposalController::class, 'show'])->name('proposal.show');
+            Route::post('/store', [ProposalController::class, 'store'])->name('proposal.store');
             Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('proposal.edit');
-            Route::get('/apply/{id}', [ProposalController::class, 'apply'])->name('proposal.apply');
+            Route::post('/update', [ProposalController::class, 'update'])->name('proposal.update');
+            Route::delete('/{id}', [ProposalController::class, 'destroy'])->name('proposal.destroy');
         });
 
         // List Kegiatan
@@ -128,6 +132,7 @@ Route::middleware(['custom-auth'])->group(
         // Progres Proposal
         Route::prefix('progres_proposal')->group(function () {
             Route::get('/', [ProgresProposalController::class, 'index'])->name('progres_proposal.index');
+            Route::post('/data', [ProgresProposalController::class, 'data'])->name('progres_proposal-list');
         });
 
         // RAB
@@ -145,6 +150,9 @@ Route::middleware(['custom-auth'])->group(
 
         // Logout
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+        // Verifikasi Status
+        Route::post('verifikasi-status', VerifikasiStatus::class);
     }
 );
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');

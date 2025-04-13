@@ -15,14 +15,7 @@
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Skema Hibah</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nama Pengaju</label>
-                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                            <div class="col-lg-9 fv-row">
-                                <span class="fw-semibold">CF</span>
+                                <span class="fw-semibold">{{ $data->informasi_hibah->skema_hibah }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
@@ -30,31 +23,28 @@
                             </label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->judul_proposal }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Status</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span
-                                    class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7 fw-semibold">Pengajuan</span>
+                                {!! convertStatus($data->status)['badge'] !!}
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan PIU</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span
-                                    class="badge badge-light-success flex-shrink-0 align-self-center py-3 px-4 fs-7 fw-semibold">Diterima</span>
+                                {!! convertStatus($data->persetujuan_piu)['badge'] !!}
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span
-                                    class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7 fw-semibold">Pending</span>
+                                {!! convertStatus($data->persetujuan_direktur)['badge'] !!}
                             </div>
                         </div>
                         @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
@@ -89,14 +79,14 @@
                                 <label class="col-lg-2 fw-bold fs-6 text-gray-800">Catatan</label>
                                 <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                 <div class="col-lg-9">
-                                    <span class="fw-semibold">-</span>
+                                    <span class="fw-semibold">{{ $data->catatan ?? '-' }}</span>
                                 </div>
                             </div>
                             <div class="row mb-7">
                                 <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nilai</label>
                                 <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                 <div class="col-lg-9">
-                                    <span class="fw-semibold">-</span>
+                                    <span class="fw-semibold">{{ $data->nilai ?? '-' }}</span>
                                 </div>
                             </div>
                             @if (Auth::user()->role == 'PIU' || Auth::user()->role == 'superadmin')
