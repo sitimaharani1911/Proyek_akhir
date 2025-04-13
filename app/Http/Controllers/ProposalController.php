@@ -150,6 +150,36 @@ class ProposalController extends Controller
         }
     }
 
+    public function update_nilai(Request $request)
+    {
+        $id = $request->id;
+        $data = Proposal::find($id);
+
+        if (!$data) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data Pengajuan Proposal tidak ditemukan',
+            ]);
+        }
+
+        $data->update([
+            'catatan' => $request->catatan,
+            'nilai' => $request->nilai
+        ]);
+
+        if ($data) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil Mengubah Data',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal Mengubah data',
+            ]);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -178,7 +208,7 @@ class ProposalController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $data = Proposal::query();
+            $data = Proposal::orderBy('id', 'DESC');
             return DataTables::of($data)
                 ->filter(function ($query) {
                     if (request()->has('search.value')) {

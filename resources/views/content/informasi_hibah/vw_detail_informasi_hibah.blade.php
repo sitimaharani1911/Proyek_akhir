@@ -57,22 +57,24 @@
                             </div>
                         </div>
                         <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="{{ Storage::url($data->file_pendukung) }}"
-                                            class="text-gray-800 text-hover-primary d-flex flex-column" target="_blank">
-                                            <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/upload.svg') }}"
-                                                    class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/upload-dark.svg') }}"
-                                                    class="theme-dark-show" alt="" />
-                                            </div>
-                                            <div class="fs-5 fw-bold mb-2">File Pendukung</div>
-                                        </a>
+                            @if ($data->file_pendukung)
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                            <a href="{{ Storage::url($data->file_pendukung) }}"
+                                                class="text-gray-800 text-hover-primary d-flex flex-column" target="_blank">
+                                                <div class="symbol symbol-60px mb-5">
+                                                    <img src="{{ asset('themes/media/svg/files/upload.svg') }}"
+                                                        class="theme-light-show" alt="" />
+                                                    <img src="{{ asset('themes/media/svg/files/upload-dark.svg') }}"
+                                                        class="theme-dark-show" alt="" />
+                                                </div>
+                                                <div class="fs-5 fw-bold mb-2">File Pendukung</div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                             @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
                                 <div class="col-md-6 col-lg-4 col-xl-3">
                                     <a href="{{ url('proposal/apply/' . encrypt($data->id)) }}"

@@ -173,7 +173,7 @@ class InformasiHibahController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $data = InformasiHibah::query();
+            $data = InformasiHibah::orderBy('id', 'DESC');
             if ($request->tahun) {
                 $data->where('periode_pengajuan_awal', 'like', $request->tahun . '%');
             }

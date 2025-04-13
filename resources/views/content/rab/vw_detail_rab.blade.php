@@ -15,29 +15,21 @@
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Nama Hibah</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->proposal->informasi_hibah->nama_hibah }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Skema Hibah</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9 fv-row">
-                                <span class="fw-semibold">CF</span>
+                                <span class="fw-semibold">{{ $data->proposal->informasi_hibah->skema_hibah }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Judul Proposal</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">CF</span>
-                            </div>
-                        </div>
-                        <div class="row mb-7">
-                            <label class="col-lg-2 fw-bold fs-6 text-gray-800">Keterangan
-                            </label>
-                            <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                            <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->proposal->judul_proposal }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
@@ -45,23 +37,32 @@
                             </label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">Lorem</span>
+                                <span class="fw-semibold">{{ $data->tujuan }}</span>
                             </div>
                         </div>
                         <div class="row mb-7">
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Status</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span
-                                    class="badge badge-light-warning flex-shrink-0 align-self-center py-3 px-4 fs-7 fw-semibold">Pengajuan</span>
+                                {!! convertStatus($data->proposal->status)['badge'] !!}
                             </div>
                         </div>
+                        @php
+                            $fileUrl = Storage::url($data->file_rab);
+                            $extension = pathinfo($fileUrl, PATHINFO_EXTENSION);
+                            $isPdf = strtolower($extension) === 'pdf';
+                            $isDownloadable = in_array(strtolower($extension), ['xls', 'xlsx', 'doc', 'docx']);
+                        @endphp
+
                         <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="apps/file-manager/files.html"
-                                            class="text-gray-800 text-hover-primary d-flex flex-column">
+                                        <a href="{{ $fileUrl }}"
+                                            class="text-gray-800 text-hover-primary d-flex flex-column"
+                                            @if ($isPdf) target="_blank"
+                                            @elseif($isDownloadable)
+                                            download @endif>
                                             <div class="symbol symbol-60px mb-5">
                                                 <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
                                                     class="theme-light-show" alt="" />
@@ -74,6 +75,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

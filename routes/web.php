@@ -48,6 +48,7 @@ Route::middleware(['custom-auth'])->group(
             Route::post('/store', [ProposalController::class, 'store'])->name('proposal.store');
             Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('proposal.edit');
             Route::post('/update', [ProposalController::class, 'update'])->name('proposal.update');
+            Route::post('/update_nilai', [ProposalController::class, 'update_nilai'])->name('proposal.update_nilai');
             Route::delete('/{id}', [ProposalController::class, 'destroy'])->name('proposal.destroy');
         });
 
@@ -138,8 +139,12 @@ Route::middleware(['custom-auth'])->group(
         // RAB
         Route::prefix('rab')->group(function () {
             Route::get('/', [RabController::class, 'index'])->name('rab.index');
+            Route::post('/data', [RabController::class, 'data'])->name('rab-list');
             Route::get('/show/{id}', [RabController::class, 'show'])->name('rab.show');
+            Route::post('/store', [RabController::class, 'store'])->name('rab.store');
             Route::get('/edit/{id}', [RabController::class, 'edit'])->name('rab.edit');
+            Route::post('/update', [RabController::class, 'update'])->name('rab.update');
+            Route::delete('/{id}', [RabController::class, 'destroy'])->name('rab.destroy');
         });
 
         // Ttd Berkas

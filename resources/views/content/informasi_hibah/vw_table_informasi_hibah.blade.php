@@ -134,7 +134,7 @@
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">File Pendukung</span>
+                                <span>File Pendukung</span>
                             </label>
                             <input type="file" class="form-control" name="file_pendukung" />
                         </div>
