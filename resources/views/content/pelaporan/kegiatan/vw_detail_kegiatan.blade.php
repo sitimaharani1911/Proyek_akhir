@@ -157,6 +157,13 @@
                                     <span class="fw-semibold"></span>
                                 </div>
                             </div>
+                            <div class="row mb-4">
+                                <label class="col-md-4 fw-bold fs-6 text-gray-800">Dokumentasi</label>
+                                <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
+                                <div class="col-md-7">
+                                    <span class="fw-semibold">drive.com</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

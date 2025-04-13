@@ -223,14 +223,6 @@
                             </label>
                             <textarea class="form-control" name="Catatan" rows="4"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
-                            <select class="form-control" name="status">
-                                <option value="" disabled selected>Pilih Status</option>
-                                <option value="Terima">Terima</option>
-                                <option value="Revisi">Revisi</option>
-                            </select>
-                        </div>
                         <div class="text-end">
                             <a href="#" onclick="save()" class="btn btn-primary ">
                                 Kirim

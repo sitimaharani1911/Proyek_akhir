@@ -122,6 +122,11 @@
                         <input type="file" class="form-control" name="absensi_peserta" />
                         <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Bukti Pembayaran <span class="text-danger">*</span></label>
+                        <input type="url" class="form-control" placeholder="https://gdrive.com" name="bukti_pembayaran" />
+                        <span class="text-danger">Ket : Lampirkan seluruh bukti pembayaran</span>
+                    </div>
                     <div class="col-12 text-end mt-5">
                         <button type="button" onclick="save()" class="btn btn-primary">Simpan</button>
                     </div>
@@ -131,51 +136,4 @@
         </div>
     </div>
 </div>
-@endsection
-@section('js')
-<script type="text/javascript">
-    function resetForm() {
-        $('#formAdd')[0].reset();
-        $('[name="program_studi"] :selected').removeAttr('selected');
-    }
-
-    function add_ajax() {
-        method = 'add';
-        resetForm();
-        $('#m_modal_6_title').html("Tambah Hibah");
-        $('#m_modal_6').modal('show');
-    }
-
-    function edit(id) {
-        method = 'edit';
-        resetForm();
-        $('#m_modal_6_title').html("Edit Hibah");
-
-        $.ajax({
-            url: "{{ url('informasi_hibah/edit') }}/" + id,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                if (data.data) {
-                    $('#formAdd')[0].reset();
-                    $('[name="id"]').val('1');
-                    $('[name="nama"]').val('Lorem');
-                    $('[name="skema_hibah"]').val('CF');
-                    $('[name="mitra"]').val('Lorem');
-                    $('[name="program_studi"]').val('1').change();
-                    $('[name="kriteria"]').val('Lorem');
-                    $('[name="periode_pengajuan"]').val('2025-02-21');
-                    $('#m_modal_6').modal('show');
-                } else {
-                    Swal.fire("Oops", "Gagal mengambil data!", "error");
-                }
-                mApp.unblockPage();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                mApp.unblockPage();
-                Swal.fire("Error", "Gagal mengambil data dari server!", "error");
-            }
-        });
-    }
-</script>
 @endsection
