@@ -17,7 +17,7 @@
                 <div class="menu-heading text-uppercase fs-7 fw-bold">Menu</div>
                 <div class="app-sidebar-separator separator"></div>
             </div>
-
+            @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin' || Auth::user()->role == 'Sentra' || Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'Direktur' || Auth::user()->role == 'Kesekretariatan' || Auth::user()->role == 'PIU' || Auth::user()->role == 'Keuangan')
             <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('informasi_hibah.*') ? 'active' : '' }}"
                     href="{{ route('informasi_hibah.index') }}">
@@ -27,19 +27,30 @@
                     <span class="menu-title">Informasi Hibah</span>
                 </a>
             </div>
+            @endif
+            @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
             <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
                     href="{{ route('proposal.index') }}">
                     <span class="menu-icon">
                         <i class="ki-outline ki-abstract-26 fs-2"></i>
                     </span>
-                    @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
                     <span class="menu-title">Pengajuan Proposal</span>
-                    @else
-                    <span class="menu-title">Review Proposal</span>
-                    @endif
                 </a>
             </div>
+            @endif
+            @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('proposal.*') ? 'active' : '' }}"
+                    href="{{ route('proposal.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Review Proposal</span>
+                </a>
+            </div>
+            @endif
+            @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin' || Auth::user()->role == 'Pelaksana')
             <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('progres_proposal.*') ? 'active' : '' }}"
                     href="{{ route('progres_proposal.index') }}">
@@ -49,7 +60,8 @@
                     <span class="menu-title">Progres Pengajuan</span>
                 </a>
             </div>
-            @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'PIU' || Auth::user()->role == 'superadmin')
+            @endif
+            @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'PIU' || Auth::user()->role == 'superadmin' || Auth::user()->role == 'Direktur' || Auth::user()->role == 'Keuangan')
             <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('rab.*') ? 'active' : '' }}"
                     href="{{ route('rab.index') }}">
@@ -145,6 +157,7 @@
                 </a>
             </div>
             @endif
+            @if (Auth::user()->role == 'superadmin')
             <div class="menu-item mb-2 mt-4">
                 <div class="menu-heading text-uppercase fs-7 fw-bold">Pengaturan</div>
                 <div class="app-sidebar-separator separator"></div>
@@ -170,6 +183,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
