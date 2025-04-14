@@ -34,9 +34,9 @@
                         <i class="ki-outline ki-abstract-26 fs-2"></i>
                     </span>
                     @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
-                        <span class="menu-title">Pengajuan Proposal</span>
+                    <span class="menu-title">Pengajuan Proposal</span>
                     @else
-                        <span class="menu-title">Review Proposal</span>
+                    <span class="menu-title">Review Proposal</span>
                     @endif
                 </a>
             </div>
@@ -50,100 +50,100 @@
                 </a>
             </div>
             @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'PIU' || Auth::user()->role == 'superadmin')
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('rab.*') ? 'active' : '' }}"
-                        href="{{ route('rab.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">RAB</span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('rab.*') ? 'active' : '' }}"
+                    href="{{ route('rab.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">RAB</span>
+                </a>
+            </div>
             @endif
             @if (Auth::user()->role == 'Direktur' || Auth::user()->role == 'PIU' || Auth::user()->role == 'Kesekretariatan' || Auth::user()->role == 'superadmin')
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('ttd_berkas.*') ? 'active' : '' }}"
-                        href="{{ route('ttd_berkas.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">TTD Berkas</span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('ttd_berkas.*') ? 'active' : '' }}"
+                    href="{{ route('ttd_berkas.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">TTD Berkas</span>
+                </a>
+            </div>
             @endif
             @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('pelaporan.*') || request()->routeIs('kegiatan.*')  ? 'active' : '' }}"
-                        href="{{ route('pelaporan.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Pelaporan</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('pengajuan_dana.*') ? 'active' : '' }}"
-                        href="{{ route('pengajuan_dana.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Pengajuan Dana</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('monev.*') ? 'active' : '' }}"
-                        href="{{ route('monev.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Monev</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('piu.*') ? 'active' : '' }}"
-                        href="{{ route('piu.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Verifikasi Monev PIU</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('pimpinan.*') ? 'active' : '' }}"
-                        href="{{ route('pimpinan.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Verifikasi Monev Pimpinan</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('laporan-keuangan.*') ? 'active' : '' }}"
-                        href="{{ route('laporan-keuangan.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Laporan Keuangan</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('list-kegiatan.*') ? 'active' : '' }}"
-                        href="{{ route('list-kegiatan.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">List Kegiatan</span>
-                    </a>
-                </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('monev-kegiatan.*') ? 'active' : '' }}"
-                        href="{{ route('monev-kegiatan.index') }}">
-                        <span class="menu-icon">
-                            <i class="ki-outline ki-abstract-26 fs-2"></i>
-                        </span>
-                        <span class="menu-title">Monev Kegiatan</span>
-                    </a>
-                </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('list-kegiatan.*') ? 'active' : '' }}"
+                    href="{{ route('list-kegiatan.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">List Kegiatan</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('pelaporan.*') || request()->routeIs('kegiatan.*')  ? 'active' : '' }}"
+                    href="{{ route('pelaporan.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Pelaporan</span>
+                </a>
+            </div>
+            
+            @endif
+            @if (Auth::user()->role == 'Monev' || Auth::user()->role == 'superadmin')
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('monev-kegiatan.*') ? 'active' : '' }}"
+                    href="{{ route('monev-kegiatan.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Monev Kegiatan</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('monev.*') ? 'active' : '' }}"
+                    href="{{ route('monev.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Monev</span>
+                </a>
+            </div>
+            @endif
+            @if (Auth::user()->role == 'Keuangan' || Auth::user()->role == 'superadmin')
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('laporan-keuangan.*') ? 'active' : '' }}"
+                    href="{{ route('laporan-keuangan.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Laporan Keuangan</span>
+                </a>
+            </div>
+            @endif
+            @if (Auth::user()->role == 'PIU' || Auth::user()->role == 'superadmin')
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('piu.*') ? 'active' : '' }}"
+                    href="{{ route('piu.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Verifikasi Monev PIU</span>
+                </a>
+            </div>
+            @endif
+            @if (Auth::user()->role == 'Direktur' || Auth::user()->role == 'superadmin')
+            <div class="menu-item">
+                <a class="menu-link {{ request()->routeIs('pimpinan.*') ? 'active' : '' }}"
+                    href="{{ route('pimpinan.index') }}">
+                    <span class="menu-icon">
+                        <i class="ki-outline ki-abstract-26 fs-2"></i>
+                    </span>
+                    <span class="menu-title">Verifikasi Monev Pimpinan</span>
+                </a>
+            </div>
             @endif
             <div class="menu-item mb-2 mt-4">
                 <div class="menu-heading text-uppercase fs-7 fw-bold">Pengaturan</div>
