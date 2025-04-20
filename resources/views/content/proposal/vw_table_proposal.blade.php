@@ -123,6 +123,7 @@
             let status = "{{ $status }}";
             let id = {{ $id }};
             if (status == 'apply') {
+                method = 'add';
                 $('[name="informasi_hibah_id"]').val(id).change();
                 $('#modalPengajuanProposal_title').html("Tambah Pengajuan Proposal");
                 $('#modalPengajuanProposal').modal('show');
