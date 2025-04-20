@@ -179,8 +179,8 @@ class RabController extends Controller
                 ->addColumn('judul_proposal', function ($value) {
                     return $value->proposal->judul_proposal;
                 })
-                ->addColumn('status', function ($value) {
-                    return convertStatus($value->proposal->status)['badge'];
+                ->addColumn('status_internal', function ($value) {
+                    return convertStatus($value->proposal->status_internal)['badge'];
                 })
                 ->addColumn('action', function ($value) {
                     $encryptedId = encrypt($value->id);
@@ -203,7 +203,7 @@ class RabController extends Controller
                     }
                     return $aksi;
                 })
-                ->rawColumns(['action', 'skema_hibah', 'nama_hibah', 'judul_proposal', 'status'])
+                ->rawColumns(['action', 'skema_hibah', 'nama_hibah', 'judul_proposal', 'status_internal'])
                 ->make(true);
         }
     }

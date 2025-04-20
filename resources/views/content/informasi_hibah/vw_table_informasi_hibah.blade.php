@@ -57,7 +57,6 @@
                                     <th>Nama</th>
                                     <th>Skema Hibah</th>
                                     <th>Mitra</th>
-                                    <th>Prodi</th>
                                     <th>Kriteria</th>
                                     <th>Periode Pengajuan</th>
                                     <th>Aksi</th>
@@ -94,7 +93,11 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Skema Hibah</span>
                             </label>
-                            <input type="text" class="form-control" placeholder="Skema Hibah" name="skema_hibah" />
+                            <select name="skema_hibah" class="form-control" required>
+                                <option value="">Pilih Skema</option>
+                                <option value="CF">CF</option>
+                                <option value="MF">MF</option>
+                            </select>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -105,12 +108,90 @@
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2"><span class="required">Program
                                     Studi</span></label>
-                            <select name="prodi_terlibat" class="form-control" required>
-                                <option value="">Pilih Program Studi</option>
-                                <option value="Sistem Informasi">Sistem Informasi</option>
-                                <option value="Teknik Informatika">Teknik Informatika</option>
-                                <option value="Teknik Komputer">Teknik Komputer</option>
-                            </select>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Sistem Informasi" />
+                                <label class="form-check-label">
+                                    Sistem Informasi
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknik Informatika" />
+                                <label class="form-check-label">
+                                    Teknik Informatika
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknologi Rekayasa Komputer" />
+                                <label class="form-check-label">
+                                    Teknologi Rekayasa Komputer
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Akutansi Perpajakan" />
+                                <label class="form-check-label">
+                                    Akutansi Perpajakan
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Humas dan Komunikasi Digital" />
+                                <label class="form-check-label">
+                                    Humas dan Komunikasi Digital
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Bisnis Digital" />
+                                <label class="form-check-label">
+                                    Bisnis Digital
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknik Elektronika Telekomunikasi" />
+                                <label class="form-check-label">
+                                    Teknik Elektronika Telekomunikasi
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknik Listrik" />
+                                <label class="form-check-label">
+                                    Teknik Listrik
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknik Mesin" />
+                                <label class="form-check-label">
+                                    Teknik Mesin
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknologi Rekayasa Jaringan Telekomunikasi" />
+                                <label class="form-check-label">
+                                    Teknologi Rekayasa Jaringan Telekomunikasi
+                                </label>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknologi Rekayasa Sistem Elektronika" />
+                                <label class="form-check-label">
+                                    Teknologi Rekayasa Sistem Elektronika
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="prodi_terlibat[]"
+                                    value="Teknologi Rekayasa Mekatronika" />
+                                <label class="form-check-label">
+                                    Teknologi Rekayasa Mekatronika
+                                </label>
+                            </div>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -213,10 +294,6 @@
                         name: 'mitra',
                     },
                     {
-                        data: 'prodi_terlibat',
-                        name: 'prodi_terlibat',
-                    },
-                    {
                         data: 'kriteria',
                         name: 'kriteria',
                     },
@@ -242,7 +319,8 @@
 
         function resetForm() {
             $('#formInformasiHibah')[0].reset();
-            $('[name="prodi_terlibat"] :selected').removeAttr('selected');
+            $('[name="prodi_terlibat[]"]').prop('checked', false);
+            $('[name="skema_hibah"] :selected').removeAttr('selected');
         }
 
         function add_ajax() {
@@ -313,12 +391,23 @@
                         $('#formInformasiHibah')[0].reset();
                         $('[name="id"]').val(data.data.id);
                         $('[name="nama_hibah"]').val(data.data.nama_hibah);
-                        $('[name="skema_hibah"]').val(data.data.skema_hibah);
+                        $('[name="skema_hibah"]').val(data.data.skema_hibah).change();
                         $('[name="mitra"]').val(data.data.mitra);
-                        $('[name="prodi_terlibat"]').val(data.data.prodi_terlibat).change();
                         $('[name="kriteria"]').val(data.data.kriteria);
                         $('[name="periode_pengajuan_awal"]').val(data.data.periode_pengajuan_awal);
                         $('[name="periode_pengajuan_akhir"]').val(data.data.periode_pengajuan_akhir);
+
+                        // Handle multiple checkboxes for prodi_terlibat
+                        if (data.data.prodi_terlibat) {
+                            let prodiArray = data.data.prodi_terlibat.split(', ');
+                            $('[name="prodi_terlibat[]"]').each(function() {
+                                if (prodiArray.includes($(this).val())) {
+                                    $(this).prop('checked', true);
+                                } else {
+                                    $(this).prop('checked', false);
+                                }
+                            });
+                        }
                         $('#modalInformasiHibah').modal('show');
                     } else {
                         Swal.fire("Oops", "Gagal mengambil data!", "error");

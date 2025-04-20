@@ -52,7 +52,7 @@ class InformasiHibahController extends Controller
 
         $data = InformasiHibah::create([
             'nama_hibah' => $request->nama_hibah,
-            'prodi_terlibat' => $request->prodi_terlibat,
+            'prodi_terlibat' => is_array($request->prodi_terlibat) ? implode(', ', $request->prodi_terlibat) : $request->prodi_terlibat,
             'kriteria' => $request->kriteria,
             'mitra' => $request->mitra,
             'skema_hibah' => $request->skema_hibah,
@@ -111,7 +111,7 @@ class InformasiHibahController extends Controller
 
         $data->update([
             'nama_hibah' => $request->nama_hibah,
-            'prodi_terlibat' => $request->prodi_terlibat,
+            'prodi_terlibat' => is_array($request->prodi_terlibat) ? implode(', ', $request->prodi_terlibat) : $request->prodi_terlibat,
             'kriteria' => $request->kriteria,
             'mitra' => $request->mitra,
             'skema_hibah' => $request->skema_hibah,

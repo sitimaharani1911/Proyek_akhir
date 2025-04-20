@@ -141,8 +141,8 @@
                         name: 'ketua_hibah',
                     },
                     {
-                        data: 'status',
-                        name: 'status',
+                        data: 'status_eksternal',
+                        name: 'status_eksternal',
                     },
                     {
                         orderable: false,

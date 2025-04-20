@@ -34,17 +34,17 @@ class ProgresProposalController extends Controller
                 ->addColumn('nama_hibah', function ($value) {
                     return $value->informasi_hibah->nama_hibah;
                 })
-                ->addColumn('status', function ($value) {
-                    return convertStatus($value->status)['badge'];
+                ->addColumn('status_eksternal', function ($value) {
+                    return convertStatus($value->status_eksternal)['badge'];
                 })
                 ->addColumn('action', function ($value) {
                     if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin') {
                         $aksi = '<div class="dropdown" style="position: static;">
                                     <button type="button" class="btn btn-outline-secondary dropdown-toggle waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Progres </button>
                                     <div class="dropdown-menu dropdown-menu-end" style="position: absolute; min-width: 10rem; transform: none !important;" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item btn-statusProgres" href="javascript:void(0);" data-id="' . $value->id . '" data-status="2" data-model="Proposal">Pengajuan</a>
-                                        <a class="dropdown-item btn-statusProgres" href="javascript:void(0);" data-id="' . $value->id . '" data-status="3" data-model="Proposal">Diterima</a>
-                                        <a class="dropdown-item btn-statusProgres" href="javascript:void(0);" data-id="' . $value->id . '" data-status="0" data-model="Proposal">Ditolak</a>
+                                        <a class="dropdown-item btn-statusProgres" href="javascript:void(0);" data-id="' . $value->id . '" data-status="2" data-model="Proposal" data-verifikasi="status_eksternal">Pengajuan</a>
+                                        <a class="dropdown-item btn-statusProgres" href="javascript:void(0);" data-id="' . $value->id . '" data-status="3" data-model="Proposal" data-verifikasi="status_eksternal">Diterima</a>
+                                        <a class="dropdown-item btn-statusProgres" href="javascript:void(0);" data-id="' . $value->id . '" data-status="0" data-model="Proposal" data-verifikasi="status_eksternal">Ditolak</a>
                                     </div>
                                 </div>';
                     } else {
@@ -52,7 +52,7 @@ class ProgresProposalController extends Controller
                     }
                     return $aksi;
                 })
-                ->rawColumns(['action', 'skema_hibah', 'status', 'nama_hibah'])
+                ->rawColumns(['action', 'skema_hibah', 'status_eksternal', 'nama_hibah'])
                 ->make(true);
         }
     }

@@ -45,6 +45,7 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [ProposalController::class, 'index'])->name('proposal.index');
             Route::post('/data', [ProposalController::class, 'data'])->name('proposal-list');
             Route::get('/show/{id}', [ProposalController::class, 'show'])->name('proposal.show');
+            Route::get('/apply/{id}', [ProposalController::class, 'apply'])->name('proposal.apply');
             Route::post('/store', [ProposalController::class, 'store'])->name('proposal.store');
             Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('proposal.edit');
             Route::post('/update', [ProposalController::class, 'update'])->name('proposal.update');

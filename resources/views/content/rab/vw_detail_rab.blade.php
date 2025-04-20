@@ -44,7 +44,7 @@
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Status</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                {!! convertStatus($data->proposal->status)['badge'] !!}
+                                {!! convertStatus($data->proposal->status_internal)['badge'] !!}
                             </div>
                         </div>
                         @php

@@ -14,14 +14,16 @@ class VerifikasiStatus extends Controller
         $model = new $model;
 
         $idData   = $request->id;
-        $verifikasi_oleh = $request->verifikasi;
+        $verifikasi = $request->verifikasi;
 
-        if ($verifikasi_oleh == 'PIU') {
+        if ($verifikasi == 'PIU') {
             $data['persetujuan_piu'] = $request->status;
-        } elseif ($verifikasi_oleh == 'direktur') {
+        } elseif ($verifikasi == 'direktur') {
             $data['persetujuan_direktur'] = $request->status;
+        } elseif ($verifikasi == 'status_eksternal') {
+            $data['status_eksternal'] = $request->status;
         } else {
-            $data['status'] = $request->status;
+            $data['status_internal'] = $request->status;
         }
 
         $save = $model::find($idData);

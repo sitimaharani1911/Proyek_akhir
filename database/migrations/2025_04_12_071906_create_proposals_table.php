@@ -21,7 +21,8 @@ return new class extends Migration
             $table->integer('nilai')->nullable();
             $table->integer('persetujuan_piu')->nullable();
             $table->integer('persetujuan_direktur')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status_internal')->nullable();
+            $table->integer('status_eksternal')->nullable();
             $table->integer('status_progres')->nullable();
             $table->string('file_proposal')->nullable();
             $table->string('file_pendukung')->nullable();

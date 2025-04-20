@@ -166,8 +166,8 @@
                         name: 'tujuan',
                     },
                     {
-                        data: 'status',
-                        name: 'status',
+                        data: 'status_internal',
+                        name: 'status_internal',
                     },
                     {
                         orderable: false,

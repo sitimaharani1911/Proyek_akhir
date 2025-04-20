@@ -29,10 +29,51 @@
                                     </div>
                                 </div>
                                 <div class="row mb-7">
-                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Status</label>
+                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Status Internal</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-lg-8">
-                                        {!! convertStatus($data->status)['badge'] !!}
+                                        @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
+                                            @php
+                                                switch ($data->status_internal) {
+                                                    case 1:
+                                                        $text = 'Pending';
+                                                        $class = 'btn-warning';
+                                                        break;
+                                                    case 2:
+                                                        $text = 'Pengajuan';
+                                                        $class = 'btn-primary';
+                                                        break;
+                                                    case 3:
+                                                        $text = 'Diterima';
+                                                        $class = 'btn-success';
+                                                        break;
+                                                    case 0:
+                                                    default:
+                                                        $text = 'Ditolak';
+                                                        $class = 'btn-danger';
+                                                        break;
+                                                }
+                                            @endphp
+
+                                            <button type="button"
+                                                class="btn {{ $class }} btn-sm dropdown-toggle waves-effect"
+                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{ $text }}
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
+                                                    data-id="{{ $data->id }}" data-status="2"
+                                                    data-verifikasi="status_internal" data-model="Proposal">Pengajuan</a>
+                                                <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
+                                                    data-id="{{ $data->id }}" data-status="3"
+                                                    data-verifikasi="status_internal" data-model="Proposal">Diterima</a>
+                                                <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
+                                                    data-id="{{ $data->id }}" data-status="0"
+                                                    data-verifikasi="status_internal" data-model="Proposal">Ditolak</a>
+                                            </div>
+                                        @else
+                                            {!! convertStatus($data->status_internal)['badge'] !!}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mb-7">
@@ -53,21 +94,21 @@
 
                             <!-- Right side - Form/Notes -->
                             <div class="col-lg-6 ps-7">
-                                @if (($data->nilai == null && Auth::user()->role == 'Sentra') || Auth::user()->role == 'superadmin')
+                                @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
                                     <form class="form" action="" method="POST" id="formNilaiProposal"
                                         enctype="multipart/form-data">
                                         <input type="hidden" name="id" value="{{ $data->id }}">
                                         <div class="row mb-7">
                                             <label class="col-lg-3 fw-bold fs-6 text-gray-800">Catatan</label>
                                             <div class="col-lg-9">
-                                                <textarea name="catatan" placeholder="Catatan" autocomplete="off" class="form-control bg-transparent"></textarea>
+                                                <textarea name="catatan" placeholder="Catatan" autocomplete="off" class="form-control bg-transparent">{{ $data->catatan }}</textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-7">
                                             <label class="col-lg-3 fw-bold fs-6 text-gray-800">Nilai</label>
                                             <div class="col-lg-9">
                                                 <input type="number" class="form-control" placeholder="Nilai"
-                                                    name="nilai" />
+                                                    name="nilai" value="{{ $data->nilai }}" />
                                             </div>
                                         </div>
                                         <div class="row mb-7">
@@ -99,17 +140,35 @@
                                             <label class="col-lg-3 fw-bold fs-6 text-gray-800">Persetujuan Piu</label>
                                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                             <div class="col-lg-3">
+                                                @php
+                                                    switch ($data->persetujuan_piu) {
+                                                        case 1:
+                                                            $text = 'Pending';
+                                                            $class = 'btn-warning';
+                                                            break;
+                                                        case 3:
+                                                            $text = 'Diterima';
+                                                            $class = 'btn-success';
+                                                            break;
+                                                        case 0:
+                                                        default:
+                                                            $text = 'Ditolak';
+                                                            $class = 'btn-danger';
+                                                            break;
+                                                    }
+                                                @endphp
                                                 <button type="button"
-                                                    class="btn btn-primary btn-sm dropdown-toggle waves-effect"
+                                                    class="btn {{ $class }} btn-sm dropdown-toggle waves-effect"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Verifikasi </button>
+                                                    {{ $text }}
+                                                </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                                     <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
-                                                        data-id="{{ $data->id }}" data-status="3" data-verifikasi="PIU"
-                                                        data-model="Proposal">Diterima</a>
+                                                        data-id="{{ $data->id }}" data-status="3"
+                                                        data-verifikasi="PIU" data-model="Proposal">Diterima</a>
                                                     <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
-                                                        data-id="{{ $data->id }}" data-status="0" data-verifikasi="PIU"
-                                                        data-model="Proposal">Ditolak</a>
+                                                        data-id="{{ $data->id }}" data-status="0"
+                                                        data-verifikasi="PIU" data-model="Proposal">Ditolak</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,10 +178,28 @@
                                             <label class="col-lg-3 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
                                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                             <div class="col-lg-3">
+                                                @php
+                                                    switch ($data->persetujuan_direktur) {
+                                                        case 1:
+                                                            $text = 'Pending';
+                                                            $class = 'btn-warning';
+                                                            break;
+                                                        case 3:
+                                                            $text = 'Diterima';
+                                                            $class = 'btn-success';
+                                                            break;
+                                                        case 0:
+                                                        default:
+                                                            $text = 'Ditolak';
+                                                            $class = 'btn-danger';
+                                                            break;
+                                                    }
+                                                @endphp
                                                 <button type="button"
-                                                    class="btn btn-primary btn-sm dropdown-toggle waves-effect"
+                                                    class="btn {{ $class }} btn-sm dropdown-toggle waves-effect"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Verifikasi </button>
+                                                    {{ $text }}
+                                                </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                                     <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
                                                         data-id="{{ $data->id }}" data-status="3"
@@ -138,81 +215,101 @@
                             </div>
                         </div>
                         <div class="row g-6 g-xl-9 mb-6 mb-xl-9">
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
-                                            <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
-                                                    class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
-                                                    class="theme-dark-show" alt="" />
-                                            </div>
-                                            <div class="fs-5 fw-bold mb-2">File Proposal</div>
-                                        </a>
+                            @if ($data->file_proposal)
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                            <a href="{{ Storage::url($data->file_proposal) }}"
+                                                class="text-gray-800 text-hover-primary d-flex flex-column"
+                                                target="_blank">
+                                                <div class="symbol symbol-60px mb-5">
+                                                    <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
+                                                        class="theme-light-show" alt="" />
+                                                    <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
+                                                        class="theme-dark-show" alt="" />
+                                                </div>
+                                                <div class="fs-5 fw-bold mb-2">File Proposal</div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
-                                            <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
-                                                    class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
-                                                    class="theme-dark-show" alt="" />
-                                            </div>
-                                            <div class="fs-5 fw-bold mb-2">File RAB</div>
-                                        </a>
+                            @endif
+                            @if ($data->file_rab)
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                            <a href="{{ Storage::url($data->file_rab) }}"
+                                                class="text-gray-800 text-hover-primary d-flex flex-column"
+                                                target="_blank">
+                                                <div class="symbol symbol-60px mb-5">
+                                                    <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
+                                                        class="theme-light-show" alt="" />
+                                                    <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
+                                                        class="theme-dark-show" alt="" />
+                                                </div>
+                                                <div class="fs-5 fw-bold mb-2">File RAB</div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
-                                            <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
-                                                    class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
-                                                    class="theme-dark-show" alt="" />
-                                            </div>
-                                            <div class="fs-5 fw-bold mb-2">Surat Keputusan</div>
-                                        </a>
+                            @endif
+                            @if ($data->file_sk)
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                            <a href="{{ Storage::url($data->file_sk) }}"
+                                                class="text-gray-800 text-hover-primary d-flex flex-column"
+                                                target="_blank">
+                                                <div class="symbol symbol-60px mb-5">
+                                                    <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
+                                                        class="theme-light-show" alt="" />
+                                                    <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
+                                                        class="theme-dark-show" alt="" />
+                                                </div>
+                                                <div class="fs-5 fw-bold mb-2">Surat Keputusan</div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
-                                            <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
-                                                    class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
-                                                    class="theme-dark-show" alt="" />
-                                            </div>
-                                            <div class="fs-5 fw-bold mb-2">Surat Tugas</div>
-                                        </a>
+                            @endif
+                            @if ($data->file_st)
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                            <a href="{{ Storage::url($data->file_st) }}"
+                                                class="text-gray-800 text-hover-primary d-flex flex-column"
+                                                target="_blank">
+                                                <div class="symbol symbol-60px mb-5">
+                                                    <img src="{{ asset('themes/media/svg/files/pdf.svg') }}"
+                                                        class="theme-light-show" alt="" />
+                                                    <img src="{{ asset('themes/media/svg/files/pdf-dark.svg') }}"
+                                                        class="theme-dark-show" alt="" />
+                                                </div>
+                                                <div class="fs-5 fw-bold mb-2">Surat Tugas</div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="card h-100">
-                                    <div class="card-body d-flex justify-content-center text-center flex-column p-8">
-                                        <a href="" class="text-gray-800 text-hover-primary d-flex flex-column">
-                                            <div class="symbol symbol-60px mb-5">
-                                                <img src="{{ asset('themes/media/svg/files/blank-image.svg') }}"
-                                                    class="theme-light-show" alt="" />
-                                                <img src="{{ asset('themes/media/svg/files/blank-image-dark.svg') }}"
-                                                    class="theme-dark-show" alt="" />
-                                            </div>
-                                            <div class="fs-5 fw-bold mb-2">Bukti SS</div>
-                                        </a>
+                            @endif
+                            @if ($data->bukti_ss)
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="card h-100">
+                                        <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                                            <a href="{{ Storage::url($data->file_st) }}"
+                                                class="text-gray-800 text-hover-primary d-flex flex-column"
+                                                target="_blank">
+                                                <div class="symbol symbol-60px mb-5">
+                                                    <img src="{{ asset('themes/media/svg/files/blank-image.svg') }}"
+                                                        class="theme-light-show" alt="" />
+                                                    <img src="{{ asset('themes/media/svg/files/blank-image-dark.svg') }}"
+                                                        class="theme-dark-show" alt="" />
+                                                </div>
+                                                <div class="fs-5 fw-bold mb-2">Bukti SS</div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

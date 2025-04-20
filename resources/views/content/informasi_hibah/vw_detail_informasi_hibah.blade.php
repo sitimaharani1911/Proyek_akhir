@@ -38,7 +38,11 @@
                             <label class="col-lg-2 fw-bold fs-6 text-gray-800">Program Studi</label>
                             <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                             <div class="col-lg-9">
-                                <span class="fw-semibold">{{ $data->prodi_terlibat }}</span>
+                                <ul class="list-unstyled mb-0">
+                                    @foreach (explode(', ', $data->prodi_terlibat) as $prodi)
+                                        <li class="mb-1">• {{ $prodi }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         <div class="row mb-7">

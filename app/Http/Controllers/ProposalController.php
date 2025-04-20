@@ -57,7 +57,8 @@ class ProposalController extends Controller
             'file_proposal' => $file_proposal,
             'persetujuan_piu' => 1,
             'persetujuan_direktur' => 1,
-            'status' => 1,
+            'status_internal' => 1,
+            'status_eksternal' => 1,
             'status_progres' => 1
         ]);
 
@@ -226,8 +227,8 @@ class ProposalController extends Controller
                 ->addColumn('nama_hibah', function ($value) {
                     return $value->informasi_hibah->nama_hibah;
                 })
-                ->addColumn('status', function ($value) {
-                    return convertStatus($value->status)['badge'];
+                ->addColumn('status_internal', function ($value) {
+                    return convertStatus($value->status_internal)['badge'];
                 })
                 ->addColumn('action', function ($value) {
                     $encryptedId = encrypt($value->id);
@@ -250,7 +251,7 @@ class ProposalController extends Controller
                     }
                     return $aksi;
                 })
-                ->rawColumns(['action', 'skema_hibah', 'status', 'nama_hibah'])
+                ->rawColumns(['action', 'skema_hibah', 'status_internal', 'nama_hibah'])
                 ->make(true);
         }
     }
