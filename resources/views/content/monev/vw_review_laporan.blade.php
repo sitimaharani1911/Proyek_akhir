@@ -136,8 +136,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Laporan Akhir Monev<span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="laporan_akhir_monev" />
+                            <label class="form-label fw-semibold">Laporan Monev<span class="text-danger">*</span></label>
+                            <input type="file" class="form-control" name="laporan_monev" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Tim Monev <span class="text-danger">*</span></label>

@@ -32,6 +32,20 @@
                     <input type="hidden" name="id" value="">
                     <div class="d-flex flex-column mb-6 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
+                            <span class="required">Kontrak</span>
+                        </label>
+                        <input type="file" class="form-control" name="kontrak" />
+                        <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                    </div>
+                    <div class="d-flex flex-column mb-6 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
+                            <span class="required">Berita Acara</span>
+                        </label>
+                        <input type="file" class="form-control" name="berita_acara" />
+                        <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                    </div>
+                    <div class="d-flex flex-column mb-6 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                             <span class="required">Verifikasi Kelayakan</span>
                         </label>
                         <input type="file" class="form-control" name="verifikasi_kelayakan" />

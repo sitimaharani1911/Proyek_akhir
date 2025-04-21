@@ -38,6 +38,24 @@
                     <input type="hidden" name="id" value="">
                     <div class="d-flex mb-8 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
+                            <span class="required">Kontrak</span>
+                        </label>
+                        <div class="col-md-7">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                            <span class="fw-semibold">Open </span>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-8 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
+                            <span class="required">Berita Acara</span>
+                        </label>
+                        <div class="col-md-7">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                            <span class="fw-semibold">Open </span>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-8 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                             <span class="required">Verifikasi Kelayakan</span>
                         </label>
                         <div class="col-md-7">

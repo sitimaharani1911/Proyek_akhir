@@ -197,7 +197,7 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Akhir Monev</label>
+                                <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Monev</label>
                                 <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                 <div class="col-md-7">
                                     <i class="bi bi-file-earmark-pdf"></i>
