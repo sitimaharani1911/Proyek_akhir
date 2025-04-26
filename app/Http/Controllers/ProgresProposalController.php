@@ -48,7 +48,7 @@ class ProgresProposalController extends Controller
                                     </div>
                                 </div>';
                     } else {
-                        $aksi = '';
+                        $aksi = '-';
                     }
                     return $aksi;
                 })

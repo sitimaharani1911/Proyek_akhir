@@ -87,12 +87,12 @@
             @endif
             @if (Auth::user()->role == 'Kesekretariatan' || Auth::user()->role == 'superadmin')
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('ttd_berkas.*') ? 'active' : '' }}"
-                        href="{{ route('ttd_berkas.index') }}">
+                    <a class="menu-link {{ request()->routeIs('pengesahan_berkas.*') ? 'active' : '' }}"
+                        href="{{ route('pengesahan_berkas.index') }}">
                         <span class="menu-icon">
                         <i class="bi bi-file-earmark-arrow-up fs-2"></i>
                         </span>
-                        <span class="menu-title">Upload Berkas</span>
+                        <span class="menu-title">Pengesahan Berkas</span>
                     </a>
                 </div>
             @endif

@@ -15,7 +15,7 @@ use App\Http\Controllers\MonevKegiatanController;
 use App\Http\Controllers\PengajuanDanaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
-use App\Http\Controllers\TtdBerkasController;
+use App\Http\Controllers\PengesahanBerkasController;
 use App\Http\Controllers\RabController;
 use App\Http\Controllers\VerifikasiStatus;
 
@@ -150,9 +150,11 @@ Route::middleware(['custom-auth'])->group(
         });
 
         // Ttd Berkas
-        Route::prefix('ttd_berkas')->group(function () {
-            Route::get('/', [TtdBerkasController::class, 'index'])->name('ttd_berkas.index');
-            Route::get('/show/{id}', [TtdBerkasController::class, 'show'])->name('ttd_berkas.show');
+        Route::prefix('pengesahan_berkas')->group(function () {
+            Route::get('/', [PengesahanBerkasController::class, 'index'])->name('pengesahan_berkas.index');
+            Route::get('/show/{id}', [PengesahanBerkasController::class, 'show'])->name('pengesahan_berkas.show');
+            Route::post('/data', [PengesahanBerkasController::class, 'data'])->name('pengesahan_berkas-list');
+            Route::post('/upload_berkas', [PengesahanBerkasController::class, 'upload_berkas'])->name('pengesahan_berkas.upload_berkas');
         });
 
         // Logout

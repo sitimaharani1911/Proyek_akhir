@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('bukti_ss')->nullable();
             $table->string('file_sk')->nullable();
             $table->string('file_st')->nullable();
+            $table->string('file_kontrak')->nullable();
+            $table->string('file_berita_acara')->nullable();
             $table->timestamps();
         });
     }
