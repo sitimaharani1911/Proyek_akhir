@@ -196,7 +196,7 @@ class RabController extends Controller
                                <i class="ki-outline ki-trash fs-2 text-danger"></i>
                             </a>';
 
-                    if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin') {
+                    if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin') {
                         $aksi = $detail . $edit . $hapus;
                     } else {
                         $aksi = $detail;

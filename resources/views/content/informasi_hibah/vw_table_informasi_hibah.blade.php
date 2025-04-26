@@ -95,8 +95,9 @@
                             </label>
                             <select name="skema_hibah" class="form-control" required>
                                 <option value="">Pilih Skema</option>
-                                <option value="CF">CF</option>
-                                <option value="MF">MF</option>
+                                @foreach ($skema_hibah as $value)
+                                    <option value="{{ $value->skema }}">{{ $value->skema }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">

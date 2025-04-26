@@ -28,7 +28,7 @@
                     </h3>
                 </div>
                 <div class="card-body py-3">
-                    @if (Auth::user()->role == 'Pelaksana' || Auth::user()->role == 'superadmin')
+                    @if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin')
                         <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
                             <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" onclick="add_ajax()">
                                 <i class="ki-duotone ki-plus fs-2"></i>

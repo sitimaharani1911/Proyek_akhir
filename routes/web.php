@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProgresProposalController;
 use App\Http\Controllers\PengesahanBerkasController;
 use App\Http\Controllers\RabController;
+use App\Http\Controllers\SkemaHibahController;
 use App\Http\Controllers\VerifikasiStatus;
 
 
@@ -155,6 +156,16 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/show/{id}', [PengesahanBerkasController::class, 'show'])->name('pengesahan_berkas.show');
             Route::post('/data', [PengesahanBerkasController::class, 'data'])->name('pengesahan_berkas-list');
             Route::post('/upload_berkas', [PengesahanBerkasController::class, 'upload_berkas'])->name('pengesahan_berkas.upload_berkas');
+        });
+
+        // Skema Hibah
+        Route::prefix('skema_hibah')->group(function () {
+            Route::get('/', [SkemaHibahController::class, 'index'])->name('skema_hibah.index');
+            Route::post('/data', [SkemaHibahController::class, 'data'])->name('skema_hibah-list');
+            Route::post('/store', [SkemaHibahController::class, 'store'])->name('skema_hibah.store');
+            Route::get('/edit/{id}', [SkemaHibahController::class, 'edit'])->name('skema_hibah.edit');
+            Route::post('/update', [SkemaHibahController::class, 'update'])->name('skema_hibah.update');
+            Route::delete('/{id}', [SkemaHibahController::class, 'destroy'])->name('skema_hibah.destroy');
         });
 
         // Logout

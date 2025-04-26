@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InformasiHibah;
+use App\Models\SkemaHibah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -16,10 +17,11 @@ class InformasiHibahController extends Controller
      */
     public function index()
     {
+        $skema_hibah = SkemaHibah::all();
         $currentYear = date('Y');
         $startYear = 2019;
         $years = range($currentYear, $startYear);
-        return view('content.informasi_hibah.vw_table_informasi_hibah', compact('years'));
+        return view('content.informasi_hibah.vw_table_informasi_hibah', compact('years', 'skema_hibah'));
     }
 
     /**
