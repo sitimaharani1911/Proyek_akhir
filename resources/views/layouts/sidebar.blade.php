@@ -62,6 +62,7 @@
             </div>
             @endif
             @if (Auth::user()->role == 'Sentra' ||
+            Auth::user()->role == 'Pelaksana' ||
             Auth::user()->role == 'superadmin' ||
             Auth::user()->role == 'PIU' ||
             Auth::user()->role == 'Direktur' ||
