@@ -11,7 +11,7 @@ class ListKegiatanController extends Controller
      */
     public function index()
     {
-        return view ('content.list_kegiatan.vw_table_hibah');
+        return view ('content.list_kegiatan.vw_table_proposal');
     }
     public function listKegiatan()
     {

@@ -5,7 +5,7 @@
         <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
             <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                 <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                    Tambah Kegiatan</h1>
+                    Tambah Pelaporan Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
                         <a href="{{route('pelaporan.index')}}" class="text-muted text-hover-primary">Pelaporan</a>
@@ -36,7 +36,7 @@
         <div class="card mb-5 mb-xl-8">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">Tambah Kegiatan</span>
+                    <span class="card-label fw-bold fs-3 mb-1">Tambah Pelaporan Kegiatan</span>
                 </h3>
             </div>
             <div class="card-body py-3">
