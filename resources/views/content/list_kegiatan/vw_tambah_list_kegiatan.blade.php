@@ -14,13 +14,13 @@
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('list-kegiatan.data')}}" class="text-muted text-hover-primary">List Kegiatan</a>
+                        <a href="" class="text-muted text-hover-primary">List Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('list-kegiatan.tambah')}}" class="text-muted text-hover-primary">Tambah Kegiatan</a>
+                        <a class="text-muted text-hover-primary">Tambah Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -40,8 +40,10 @@
                 </h3>
             </div>
             <div class="card-body py-3">
-                <form class="row g-3" action="" method="POST" id="formAdd" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('list-kegiatan.store', ['proposal_id' => $proposal_id]) }}" method="POST" id="formAdd" enctype="multipart/form-data">
+                    @csrf
                     <input type="hidden" name="id" value="">
+                    <input type="hidden" name="proposal_id" value="{{ $proposal_id }}">
                     <!-- SECTION KIRI -->
                     <div class="col-md-6">
                         <div class="row g-3">
@@ -89,7 +91,7 @@
                     <!-- SECTION KANAN -->
                     <div class="col-md-6">
                         <div class="row g-3">
-                            
+
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Total Penggunaan Anggaran<span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" name="total_penggunaan_anggaran" />
@@ -108,7 +110,7 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Panitia Kegiatan <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" placeholder="Input Panitia Kegiatan" name="panitia_kegiatan" />
+                                <input type="text" class="form-control" placeholder="Input Panitia Kegiatan" name="panitia_pengerjaan" />
                                 <span class="text-danger">Ket: Inisial</span>
                             </div>
                             <div class="col-12">
@@ -133,7 +135,8 @@
                     </div>
 
                     <div class="col-12 text-end mt-5">
-                        <button type="button" onclick="save()" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+
                     </div>
                 </form>
             </div>
