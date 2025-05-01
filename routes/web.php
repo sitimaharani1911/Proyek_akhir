@@ -57,8 +57,9 @@ Route::middleware(['custom-auth'])->group(
         // List Kegiatan
         Route::prefix('list-kegiatan')->group(function () {
             Route::get('/', [ListKegiatanController::class, 'index'])->name('list-kegiatan.index');
-            Route::get('/data', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
-            Route::get('/tambah', [ListKegiatanController::class, 'create'])->name('list-kegiatan.tambah');
+            Route::get('/{proposal_id}', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
+            Route::get('/{proposal_id}/tambah', [ListKegiatanController::class, 'create'])->name('list-kegiatan.tambah');
+            Route::post('/list-kegiatan/{proposal_id}/tambah', [ListKegiatanController::class, 'store'])->name('list-kegiatan.store');
         });
 
         // Monev Kegiatan

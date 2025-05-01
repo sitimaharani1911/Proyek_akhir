@@ -8,24 +8,19 @@
                     List Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="list-kegiatan.index" class="text-muted text-hover-primary">Data Hibah</a>
+                        <a href="{{ route('list-kegiatan.index') }}" class="text-muted text-hover-primary">Data Hibah</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('list-kegiatan.data')}}" class="text-muted text-hover-primary">List Kegiatan</a>
+                        <a href="{{route('list-kegiatan.data', ['proposal_id' => $proposal_id])}}" class="text-muted text-hover-primary">List Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">List</li>
                 </ul>
-            </div>
-            <div class="d-flex align-items-center gap-2 gap-lg-3">
-                <a href="{{route('list-kegiatan.tambah')}}" type="button" class="btn btn-primary er fs-6 px-4 py-2">
-                    <i class="ki-outline ki-plus fs-2"></i> Tambah
-                </a>
             </div>
         </div>
     </div>
@@ -39,55 +34,77 @@
                 </h3>
             </div>
             <div class="card-body py-3">
+                <div class="d-flex flex-stack mb-5">
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <select name="tahun" id="filter_tahun" class="form-control w-150px" required>
+                            <option value="">Pilih Tahun</option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                        <a href="{{ route('list-kegiatan.tambah', ['proposal_id' => $proposal_id]) }}" type="button" class="btn btn-primary er fs-6 px-4 py-2">
+                            <i class="ki-outline ki-plus fs-2"></i> Tambah
+                        </a>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-row-dashed table-row-gray-300 align-middle" style="table-layout: fixed; width: 100%;">
                         <thead>
                             <tr class="fw-bold fs-6 text-gray-800 text-center align-middle">
-                                <th style="width: 40px; vertical-align: middle;">No</th>
-                                <th style="width: 150px; vertical-align: middle;">Jenis Hibah</th>
-                                <th style="width: 150px; vertical-align: middle;">Program Studi</th>
-                                <th style="width: 150px; vertical-align: middle;">Jenis Aktivitas</th>
-                                <th style="width: 250px; vertical-align: middle;">Nama Kegiatan (Sesuai dengan proposal)</th>
-                                <th style="width: 100px; vertical-align: middle;">Jumlah Luaran</th>
-                                <th style="width: 120px; vertical-align: middle;">Satuan Luaran</th>
-                                <th style="width: 200px; vertical-align: middle;">Luaran Kegiatan</th>
-                                <th style="width: 180px; vertical-align: middle;">Status Pelaksanaan Kegiatan</th>
-                                <th style="width: 180px; vertical-align: middle;">Total Pengajuan Anggaran</th>
-                                <th style="width: 180px; vertical-align: middle;">Total Penggunaan Anggaran</th>
-                                <th style="width: 130px; vertical-align: middle;">Tanggal Awal</th>
-                                <th style="width: 130px; vertical-align: middle;">Tanggal Akhir</th>
-                                <th style="width: 180px; vertical-align: middle;">Rentang Pengerjaan</th>
-                                <th style="width: 200px; vertical-align: middle;">Panitia Kegiatan (Initial)</th>
-                                <th style="width: 180px; vertical-align: middle;">Rincian Jumlah Peserta</th>
-                                <th style="width: 180px; vertical-align: middle;">Tempat Pelaksanaan</th>
-                                <th style="width: 130px; vertical-align: middle;">Surat Kerja</th>
-                                <th style="width: 130px; vertical-align: middle;">Surat Tugas</th>
-                                <th style="width: 130px; vertical-align: middle;">Template Laporan</th>
+                                <th style="width: 40px;">No</th>
+                                <th style="width: 150px;">Jenis Hibah</th>
+                                <th style="width: 150px;">Program Studi</th>
+                                <th style="width: 150px;">Jenis Aktivitas</th>
+                                <th style="width: 250px;">Nama Kegiatan (Sesuai dengan proposal)</th>
+                                <th style="width: 100px;">Jumlah Luaran</th>
+                                <th style="width: 120px;">Satuan Luaran</th>
+                                <th style="width: 200px;">Luaran Kegiatan</th>
+                                <th style="width: 180px;">Status Pelaksanaan Kegiatan</th>
+                                <th style="width: 180px;">Total Pengajuan Anggaran</th>
+                                <th style="width: 180px;">Total Penggunaan Anggaran</th>
+                                <th style="width: 130px;">Tanggal Awal</th>
+                                <th style="width: 130px;">Tanggal Akhir</th>
+                                <th style="width: 180px;">Rentang Pengerjaan</th>
+                                <th style="width: 200px;">Panitia Kegiatan (Initial)</th>
+                                <th style="width: 180px;">Rincian Jumlah Peserta</th>
+                                <th style="width: 180px;">Tempat Pelaksanaan</th>
+                                <th style="width: 130px;">Surat Kerja</th>
+                                <th style="width: 130px;">Surat Tugas</th>
+                                <th style="width: 130px;">Template Laporan</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($listKegiatan as $kegiatan)
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>SI</td>
-                                <td>Workshop</td>
-                                <td>Workshop Pengembangan Desain Produk Unggulan Program Studi dengan Melibatkan Industri</td>
-                                <td>3</td>
-                                <td>Paket</td>
-                                <td>Desain Produk</td>
-                                <td>Terbit</td>
-                                <td>Rp 25.000.000</td>
-                                <td>Rp 20.000.000</td>
-                                <td>2025-01-10</td>
-                                <td>2025-02-10</td>
-                                <td>1 Bulan</td>
-                                <td>AA, BB</td>
-                                <td>30</td>
-                                <td>PCR</td>
-                                <td>SK001.pdf</td>
-                                <td>ST001.pdf</td>
-                                <td class="text-primary">Download</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $kegiatan->jenis_hibah }}</td>
+                                <td>{{ $kegiatan->program_studi }}</td>
+                                <td>{{ $kegiatan->jenis_aktivitas }}</td>
+                                <td>{{ $kegiatan->nama_kegiatan }}</td>
+                                <td>{{ $kegiatan->jumlah_luaran }}</td>
+                                <td>{{ $kegiatan->satuan_luaran }}</td>
+                                <td>{{ $kegiatan->luaran_kegiatan }}</td>
+                                <td>{{ $kegiatan->status_pelaksanaan_kegiatan }}</td>
+                                <td>Rp {{ number_format($kegiatan->total_anggaran_pengajuan, 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($kegiatan->total_anggaran_penggunaan, 0, ',', '.') }}</td>
+                                <td>{{ $kegiatan->tanggal_awal }}</td>
+                                <td>{{ $kegiatan->tanggal_akhir }}</td>
+                                <td>{{ $kegiatan->rentang_pengerjaan }} Bulan</td>
+                                <td>{{ $kegiatan->panitia_pengerjaan }}</td>
+                                <td>{{ $kegiatan->rincian_jumlah_peserta }}</td>
+                                <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
+                                <td>{{ $kegiatan->surat_kerja }}</td>
+                                <td>{{ $kegiatan->surat_tugas }}</td>
+                                <td class="text-primary">
+                                    <a href="{{ asset('storage/template_laporan/' . $kegiatan->template_laporan) }}" target="_blank">Download</a>
+                                </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3">Belum ada kegiatan untuk proposal ini.</td>
+                            </tr>
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>

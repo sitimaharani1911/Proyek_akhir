@@ -14,13 +14,13 @@
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('list-kegiatan.data')}}" class="text-muted text-hover-primary">List Kegiatan</a>
+                        <a href="" class="text-muted text-hover-primary">List Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('list-kegiatan.tambah')}}" class="text-muted text-hover-primary">Tambah Kegiatan</a>
+                        <a class="text-muted text-hover-primary">Tambah Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -40,90 +40,107 @@
                 </h3>
             </div>
             <div class="card-body py-3">
-                <form class="row g-3" action="" method="POST" id="formAdd" enctype="multipart/form-data">
+                <form class="row g-3" action="{{ route('list-kegiatan.store', ['proposal_id' => $proposal_id]) }}" method="POST" id="formAdd" enctype="multipart/form-data">
+                    @csrf
                     <input type="hidden" name="id" value="">
+                    <input type="hidden" name="proposal_id" value="{{ $proposal_id }}">
+                    <!-- SECTION KIRI -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jenis Hibah<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Jenis Hibah" name="jenis_hibah" />
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Jenis Hibah<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Jenis Hibah" name="jenis_hibah" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Program Studi<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="program_studi" placeholder="Input Program Studi" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Jenis Aktivitas<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="jenis Aktivitas" name="jenis_aktivitas" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Nama Kegiatan<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_kegiatan" placeholder="Input Nama Kegiatan" />
+                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Jumlah Luaran<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" placeholder="Input Jumlah Luaran" name="jumlah_luaran" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Satuan Luaran<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="satuan_luaran" placeholder="Input Satuan Luaran" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Luaran Kegiatan<span class="text-danger">*</span></label>
+                                <input type="string" class="form-control" placeholder="Input Luaran Kegiatan" name="luaran_kegiatan" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="status_pelaksanaan_kegiatan" placeholder="Input Status Pelaksanaan" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Total Pengajuan Anggaran<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="total_pengajuan_anggaran" />
+                                <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- SECTION KANAN -->
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Program Studi<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="program_studi" placeholder="Input Program Studi" />
+                        <div class="row g-3">
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Total Penggunaan Anggaran<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="total_penggunaan_anggaran" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tanggal Awal <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="tanggal_awal" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tanggal Akhir <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="tanggal_akhir" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Rentang Pengerjaan<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Input Rentang Pengerjaan" name="rentang_pengerjaan" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Panitia Kegiatan <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Input Panitia Kegiatan" name="panitia_pengerjaan" />
+                                <span class="text-danger">Ket: Inisial</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Rincian Jumlah Peserta <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Input Rincian Jumlah Peserta" name="rincian_jumlah_peserta" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Input Tempat Pelaksanaan" name="tempat_pelaksanaan" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Surat Kerja<span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="surat_kerja" />
+                                <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Surat Tugas<span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="surat_tugas" />
+                                <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jensi Aktivitas<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="jenis Aktivitas" name="jenis_aktivitas" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Nama Kegiata<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="nama_kegiatan" placeholder="Input Nama Kegiatan" />
-                        <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jumlah Luaran<span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="Input Jumlah Luaran" name="jumlah_luaran" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Satuan Luaran<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="satuan_luaran" placeholder="Input Satuan Luaran"/>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Luaran Kegiatan<span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="Input Luaran Kegiatan" name="luaran_kegiatan" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="status_pelaksanaan_kegiatan" placeholder="Input Status Pelaksanaan" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Total Pengajuan Anggaran<span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="total_pengajuan_anggaran" />
-                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Total Penggunaan Anggaran<span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" name="total_penggunaan_anggaran" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tanggal Awal <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" name="tanggal_awal" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tanggal Akhir <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" name="tanggal_akhir" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Rentang Pengerjaan<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Input Rentang Pengerjaan" name="rentang_pengerjaan" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Panitia Kegiatan <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Input Panitia Kegiatan" name="panitia_kegiatan" />
-                        <span class="text-danger">Ket: Inisial</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Rincian Jumlah Pesertas <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Input Rincian Jumlah Peserta" name="rincian_jumlah_peserta" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tempat Pelaksanaan<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Input Tempat Pelaksanaan" name="tempat_pelaksanaan" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Surat Kerja<span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" name="surat_kerja" />
-                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Surat Tugas<span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" name="surat_tugas" />
-                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
-                    </div>
+
                     <div class="col-12 text-end mt-5">
-                        <button type="button" onclick="save()" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>

@@ -5,8 +5,8 @@
         <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
             <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                 <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                    Tambah Kegiatan</h1>
-                    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
+                    Tambah Pelaporan Kegiatan</h1>
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
                         <a href="{{route('pelaporan.index')}}" class="text-muted text-hover-primary">Pelaporan</a>
                     </li>
@@ -36,7 +36,7 @@
         <div class="card mb-5 mb-xl-8">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">Tambah Kegiatan</span>
+                    <span class="card-label fw-bold fs-3 mb-1">Tambah Pelaporan Kegiatan</span>
                 </h3>
             </div>
             <div class="card-body py-3">
@@ -73,9 +73,8 @@
                         <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Pengajuan Dana <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="Pengajuan Dana" name="pengajuan_dana" />
-                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
+                        <label class="form-label fw-semibold">Tanggal <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" name="tanggal" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Laporan Keuangan <span class="text-danger">*</span></label>
@@ -83,25 +82,25 @@
                         <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Sisa Dana <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="Sisa Dana" name="sisa_dana" />
-                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
+                        <label class="form-label fw-semibold">Tempat <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Tempat" name="Tempat" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Luaran <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" placeholder="Luaran" name="luaran" />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tanggal <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" name="tanggal" />
+                        <label class="form-label fw-semibold">Jumlah Peserta <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" placeholder="Jumlah Peserta" name="jumlah_peserta" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Dampak <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" placeholder="Dampak" name="dampak" />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Tempat <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Tempat" name="Tempat" />
+                        <label class="form-label fw-semibold">Absensi Peserta <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="absensi_peserta" />
+                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Dokumentasi <span class="text-danger">*</span></label>
@@ -109,8 +108,9 @@
                         <span class="text-danger">Ket: Pastikan link dapat diakses</span>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jumlah Peserta <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="Jumlah Peserta" name="jumlah_peserta" />
+                        <label class="form-label fw-semibold">Pengajuan Dana <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" placeholder="Pengajuan Dana" name="pengajuan_dana" />
+                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Lainnya <span class="text-danger">*</span></label>
@@ -118,9 +118,9 @@
                         <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Absensi Peserta <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" name="absensi_peserta" />
-                        <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                        <label class="form-label fw-semibold">Sisa Dana <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" placeholder="Sisa Dana" name="sisa_dana" />
+                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Bukti Pembayaran <span class="text-danger">*</span></label>

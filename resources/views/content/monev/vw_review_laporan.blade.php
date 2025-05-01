@@ -57,20 +57,8 @@
                             <input type="text" class="form-control" placeholder="Anggota Pelaksana" name="anggota_pelaksana" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Pengajuan Dana <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" placeholder="Pengajuan Dana" name="pengajuan_dana" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Sisa Dana <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" placeholder="Sisa Dana" name="sisa_dana" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Luaran <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Luaran" name="luaran" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Dampak <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Dampak" name="dampak" />
+                            <label class="form-label fw-semibold">Tanggal <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" name="tanggal" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Tempat <span class="text-danger">*</span></label>
@@ -85,40 +73,133 @@
                             <input type="file" class="form-control" name="absensi_peserta" />
                         </div>
                         <div class="mb-3">
+                            <label class="form-label fw-semibold">Pengajuan Dana <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Pengajuan Dana" name="pengajuan_dana" readonly />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control mt-1" placeholder="Catatan Pengajuan Dana" name="catatan" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Sisa Dana <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Sisa Dana" name="sisa_dana" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label fw-semibold">Surat Kerja <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="surat_kerja" />
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="surat_kerja" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Surat Tugas <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="surat_tugas" />
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="surat_tugas" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <!-- Section Kanan -->
                     <div class="col-md-6">
-                        
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Laporan Kegiatan <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="laporan_kegiatan" />
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="laporan_kegiatan" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Laporan Keuangan <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="laporan_keuangan" />
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="laporan_keuangan" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Tanggal <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="tanggal" />
+                            <label class="form-label fw-semibold">Luaran <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Luaran" name="luaran" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Dampak <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Dampak" name="dampak" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Dokumentasi <span class="text-danger">*</span></label>
-                            <input type="url" class="form-control" placeholder="Dokumentasi" name="dokumentasi" />
+                            <div class="input-group">
+                                <input type="url" class="form-control" placeholder="Dokumentasi" name="dokumentasi" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Lainnya <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" name="lainnya" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Catatan <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Catatan" name="catatan" />
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="lainnya" />
+                                <span class="input-group-text">
+                                    <i class="bi bi-check-circle"></i>
+                                </span>
+                                <span class="input-group-text">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nilai <span class="text-danger">*</span></label>

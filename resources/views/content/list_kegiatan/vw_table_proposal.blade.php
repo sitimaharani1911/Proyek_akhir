@@ -8,7 +8,7 @@
                     Data Hibah</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="list-kegiatan.index" class="text-muted text-hover-primary">Data Hibah</a>
+                        <a href="{{ route('list-kegiatan.index') }}" class="text-muted text-hover-primary">Data Hibah</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -24,7 +24,7 @@
         <div class="card mb-5 mb-xl-8">
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold fs-3 mb-1">Data Pelaporan Hibah</span>
+                    <span class="card-label fw-bold fs-3 mb-1">Data Hibah</span>
                 </h3>
             </div>
             <div class="card-body py-3">
@@ -35,18 +35,22 @@
                                 <th>No</th>
                                 <th>Nama Hibah</th>
                                 <th>Skema Hibah</th>
-                                <th>Nama Pengaju</th>
+                                <th>Ketua Hibah</th>
                                 <th>Kegiatan</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($proposal as $proposals)
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>CF</td>
-                                <td>NFN</td>
-                                <td class="text-primary"><a href="{{route('list-kegiatan.data')}}">Detail</a></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $proposals->informasi_hibah->nama_hibah ?? '-' }}</td>
+                                <td>{{ $proposals->informasi_hibah->skema_hibah ?? '-' }}</td>
+                                <td>{{ $proposals->ketua_hibah}}</td>
+                                <td class="text-primary">
+                                    <a href="{{ route('list-kegiatan.data', ['proposal_id' => $proposals->id]) }}">Detail</a>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
