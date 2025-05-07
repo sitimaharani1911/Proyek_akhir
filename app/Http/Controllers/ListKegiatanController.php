@@ -13,7 +13,7 @@ class ListKegiatanController extends Controller
      */
     public function index()
     {
-        $proposal = Proposal::with('informasi_hibah')->where('status_progres', '3')->get();
+        $proposal = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         return view('content.list_kegiatan.vw_table_proposal', compact('proposal'));
     }
 
@@ -58,13 +58,14 @@ class ListKegiatanController extends Controller
             'panitia_pengerjaan' => 'required|string|max:255',
             'rincian_jumlah_peserta' => 'required|string|max:255',
             'tempat_pelaksanaan' => 'required|string|max:255',
-            'surat_kerja' => 'required|file|mimes:pdf|max:512',
-            'surat_tugas' => 'required|file|mimes:pdf|max:512',
+            'surat_kerja' => 'required|file|mimes:pdf|max:5120',
+            'surat_tugas' => 'required|file|mimes:pdf|max:5120',
         ]);
 
         // Simpan file jika ada
-        $surat_kerja_path = $request->file('surat_kerja')->store('surat_kerja');
-        $surat_tugas_path = $request->file('surat_tugas')->store('surat_tugas');
+        $surat_kerja_path = $request->file('surat_kerja')->store('surat_kerja', 'public');
+        $surat_tugas_path = $request->file('surat_tugas')->store('surat_tugas', 'public');
+
 
         // Simpan data ke tabel list_kegiatan
         $kegiatan = new ListKegiatan();
@@ -90,7 +91,13 @@ class ListKegiatanController extends Controller
 
         $kegiatan->save();
 
-        return redirect()->route('list-kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
+        if ($kegiatan->save()) {
+            return redirect()->route('list-kegiatan.data', ['proposal_id' => $proposal_id])
+                ->with('success', 'Kegiatan berhasil ditambahkan!');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan data!');
+        }
+        
     }
 
 

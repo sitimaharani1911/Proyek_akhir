@@ -35,6 +35,7 @@
                                 <th>No</th>
                                 <th>Nama Hibah</th>
                                 <th>Skema Hibah</th>
+                                <th>Judul Proposal</th>
                                 <th>Ketua Hibah</th>
                                 <th>Kegiatan</th>
                             </tr>
@@ -45,6 +46,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $proposals->informasi_hibah->nama_hibah ?? '-' }}</td>
                                 <td>{{ $proposals->informasi_hibah->skema_hibah ?? '-' }}</td>
+                                <td>{{ $proposals->judul_proposal}}</td>
                                 <td>{{ $proposals->ketua_hibah}}</td>
                                 <td class="text-primary">
                                     <a href="{{ route('list-kegiatan.data', ['proposal_id' => $proposals->id]) }}">Detail</a>
