@@ -188,20 +188,15 @@
 
 @endsection
 @section('js')
-    <script>
-        success: function(data) {
-            console.log(data); // Check if data is being received
-            if (data.status) {
-                Swal.fire({
-                    text: "Data Berhasil Disimpan",
-                    icon: "success",
-                    buttonsStyling: false,
-                    confirmButtonText: "OK",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
-            }
-        }
-    </script>
+<script>
+    // Notifikasi jika ada error validasi
+    @if ($errors->any())
+        Swal.fire({
+            title: 'Error!',
+            text: 'Periksa kembali form Anda.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
 @endsection

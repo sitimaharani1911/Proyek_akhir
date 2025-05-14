@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('tempat_pelaksanaan');
             $table->string('surat_kerja');
             $table->string('surat_tugas');
+            $table->string('template_laporan');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('proposal_id')->references('id')->on('proposal')->onDelete('cascade');

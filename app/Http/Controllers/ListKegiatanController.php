@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ListKegiatan;
 use App\Models\Proposal;
+use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
 
 class ListKegiatanController extends Controller
@@ -97,7 +98,6 @@ class ListKegiatanController extends Controller
         } else {
             return redirect()->back()->with('error', 'Gagal menyimpan data!');
         }
-        
     }
 
 
@@ -112,24 +112,91 @@ class ListKegiatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $kegiatan = ListKegiatan::findOrFail($id);
+        return view('content.list_kegiatan.vw_edit_list_kegiatan', compact('kegiatan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'jenis_hibah' => 'required|string|max:255',
+            'program_studi' => 'required|string|max:255',
+            'jenis_aktivitas' => 'required|string|max:255',
+            'nama_kegiatan' => 'required|string|max:255',
+            'jumlah_luaran' => 'required|numeric',
+            'satuan_luaran' => 'required|string|max:255',
+            'luaran_kegiatan' => 'required|string|max:255',
+            'status_pelaksanaan_kegiatan' => 'required|string|max:255',
+            'total_pengajuan_anggaran' => 'required|numeric',
+            'total_penggunaan_anggaran' => 'required|numeric',
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+            'rentang_pengerjaan' => 'required|string|max:255',
+            'panitia_pengerjaan' => 'required|string|max:255',
+            'rincian_jumlah_peserta' => 'required|string|max:255',
+            'tempat_pelaksanaan' => 'required|string|max:255',
+            'surat_kerja' => 'nullable|file|mimes:pdf|max:512',
+            'surat_tugas' => 'nullable|file|mimes:pdf|max:512',
+        ]);
+
+        $kegiatan = ListKegiatan::findOrFail($id);
+
+        // Simpan file jika ada upload baru
+        if ($request->hasFile('surat_kerja')) {
+            $suratKerja = $request->file('surat_kerja')->store('surat_kerja', 'public');
+            $kegiatan->surat_kerja = $suratKerja;
+        }
+
+        if ($request->hasFile('surat_tugas')) {
+            $suratTugas = $request->file('surat_tugas')->store('surat_tugas', 'public');
+            $kegiatan->surat_tugas = $suratTugas;
+        }
+
+        // Update field lainnya
+        $kegiatan->jenis_hibah = $request->jenis_hibah;
+        $kegiatan->program_studi = $request->program_studi;
+        $kegiatan->jenis_aktivitas = $request->jenis_aktivitas;
+        $kegiatan->nama_kegiatan = $request->nama_kegiatan;
+        $kegiatan->jumlah_luaran = $request->jumlah_luaran;
+        $kegiatan->satuan_luaran = $request->satuan_luaran;
+        $kegiatan->luaran_kegiatan = $request->luaran_kegiatan;
+        $kegiatan->status_pelaksanaan_kegiatan = $request->status_pelaksanaan_kegiatan;
+        $kegiatan->total_pengajuan_anggaran = $request->total_pengajuan_anggaran;
+        $kegiatan->total_penggunaan_anggaran = $request->total_penggunaan_anggaran;
+        $kegiatan->tanggal_awal = $request->tanggal_awal;
+        $kegiatan->tanggal_akhir = $request->tanggal_akhir;
+        $kegiatan->rentang_pengerjaan = $request->rentang_pengerjaan;
+        $kegiatan->panitia_pengerjaan = $request->panitia_pengerjaan;
+        $kegiatan->rincian_jumlah_peserta = $request->rincian_jumlah_peserta;
+        $kegiatan->tempat_pelaksanaan = $request->tempat_pelaksanaan;
+
+        $kegiatan->save();
+
+        return redirect()->route('list-kegiatan.data', ['proposal_id' => $kegiatan->proposal_id])
+            ->with('success', 'Data berhasil diperbarui');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function destroy($id)
     {
-        //
+        // Temukan data berdasarkan ID
+        $kegiatan = ListKegiatan::findOrFail($id);
+
+        // Hapus data kegiatan
+        $kegiatan->delete();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('list-kegiatan.data', ['proposal_id' => $kegiatan->proposal_id])
+            ->with('success', 'Data kegiatan berhasil dihapus.');
     }
 }

@@ -74,6 +74,7 @@
                                     <th style="width: 130px;">Surat Kerja</th>
                                     <th style="width: 130px;">Surat Tugas</th>
                                     <th style="width: 130px;">Template Laporan</th>
+                                    <th style="width: 130px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -111,6 +112,23 @@
                                             <a href="{{ asset('storage/template_laporan/' . $kegiatan->template_laporan) }}"
                                                 target="_blank">Download</a>
                                         </td>
+                                        <td>
+                                            <a href="{{ route('list-kegiatan.edit', ['id' => $kegiatan->id]) }}">
+                                                <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
+                                            </a>
+                                            <form action="{{ route('list-kegiatan.destroy', ['id' => $kegiatan->id]) }}"
+                                                method="POST" style="display: inline;" class="form-delete">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="delete-btn" data-id="{{ $kegiatan->id }}"
+                                                    data-nama="{{ $kegiatan->nama_kegiatan }}"
+                                                    style="border: none; background: none; color: red; cursor: pointer;">
+                                                    <i class="fas fa-trash text-danger"></i>
+                                                </button>
+                                            </form>
+
+
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -125,116 +143,44 @@
             </div>
         </div>
     </div>
-    </div>
-    <div class="modal fade" id="m_modal_6" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="m_modal_6_title">Title</h2>
-                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-outline ki-cross fs-1"></i>
-                    </div>
-                </div>
-                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                    <form class="form" action="" method="POST" id="formAdd" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="">
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Nama</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Nama" name="nama" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Skema Hibah</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Skema Hibah" name="skema_hibah" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Mitra</span>
-                            </label>
-                            <input type="text" class="form-control" placeholder="Mitra" name="mitra" />
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2"><span class="required">Program
-                                    Studi</span></label>
-                            <select name="program_studi" class="form-control" required>
-                                <option value="">Pilih Program Studi</option>
-                                <option value="1">Sistem Informasi</option>
-                                <option value="2">Teknik Informatika</option>
-                                <option value="3">Teknik Komputer</option>
-                            </select>
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Kriteria</span>
-                            </label>
-                            <textarea name="kriteria" placeholder="Kriteria" autocomplete="off" class="form-control"></textarea>
-                        </div>
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                                <span class="required">Periode Pengajuan</span>
-                            </label>
-                            <input type="date" class="form-control" placeholder="Periode Pengajuan"
-                                name="periode_pengajuan" />
-                        </div>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
-                            <a href="#" onclick="save()" class="btn btn-primary ">
-                                Simpan
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('js')
-    <script type="text/javascript">
-        function resetForm() {
-            $('#formAdd')[0].reset();
-            $('[name="program_studi"] :selected').removeAttr('selected');
-        }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
 
-        function add_ajax() {
-            method = 'add';
-            resetForm();
-            $('#m_modal_6_title').html("Tambah Hibah");
-            $('#m_modal_6').modal('show');
-        }
+                var kegiatanNama = button.getAttribute('data-nama');
+                var form = button.closest('form'); // Ambil form terdekat
 
-        function edit(id) {
-            method = 'edit';
-            resetForm();
-            $('#m_modal_6_title').html("Edit Hibah");
-
-            $.ajax({
-                url: "{{ url('informasi_hibah/edit') }}/" + id,
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    if (data.data) {
-                        $('#formAdd')[0].reset();
-                        $('[name="id"]').val('1');
-                        $('[name="nama"]').val('Lorem');
-                        $('[name="skema_hibah"]').val('CF');
-                        $('[name="mitra"]').val('Lorem');
-                        $('[name="program_studi"]').val('1').change();
-                        $('[name="kriteria"]').val('Lorem');
-                        $('[name="periode_pengajuan"]').val('2025-02-21');
-                        $('#m_modal_6').modal('show');
-                    } else {
-                        Swal.fire("Oops", "Gagal mengambil data!", "error");
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda akan menghapus kegiatan \"" + kegiatanNama + "\"!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: "<span><i class='flaticon-interface-1'></i><span>Ya, Hapus!</span></span>",
+                    confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
+                    cancelButtonText: "<span><i class='flaticon-close'></i><span>Batal Hapus</span></span>",
+                    cancelButtonClass: "btn btn-metal m-btn m-btn--pill m-btn--icon",
+                    customClass: {
+                        confirmButton: 'btn btn-danger m-btn m-btn--pill m-btn--icon',
+                        cancelButton: 'btn btn-metal m-btn m-btn--pill m-btn--icon'
                     }
-                    mApp.unblockPage();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    mApp.unblockPage();
-                    Swal.fire("Error", "Gagal mengambil data dari server!", "error");
-                }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // Submit form manual
+                    }
+                });
             });
-        }
+        });
+        @if (session('success'))
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
     </script>
 @endsection
