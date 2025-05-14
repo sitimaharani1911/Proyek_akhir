@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListKegiatan;
 use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
@@ -9,9 +10,10 @@ class KegiatanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $proposal_id)
     {
-        return view ('content.pelaporan.kegiatan.vw_table_kegiatan');
+         $listKegiatan = ListKegiatan::where('proposal_id', $proposal_id)->get();
+        return view ('content.pelaporan.kegiatan.vw_table_kegiatan', compact('listKegiatan'));
     }
 
     /**

@@ -81,7 +81,7 @@ Route::middleware(['custom-auth'])->group(
 
         // Kegiatan
         Route::prefix('kegiatan')->group(function () {
-            Route::get('/', [KegiatanController::class, 'index'])->name('kegiatan.index');
+            Route::get('/{proposal_id}', [KegiatanController::class, 'index'])->name('kegiatan.index');
             Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
             Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
             Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');

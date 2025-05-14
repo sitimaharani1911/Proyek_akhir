@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 
 class PelaporanController extends Controller
@@ -11,7 +12,9 @@ class PelaporanController extends Controller
      */
     public function index()
     {
-        return view ('content.pelaporan.vw_table_pelaporan');
+        $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
+        //dd($proposals->toArray()); untuk ngecek apakah back end sudah terpanggil atau belom
+        return view ('content.pelaporan.vw_table_pelaporan',  compact('proposals'));
     }
 
     public function inputDocument()

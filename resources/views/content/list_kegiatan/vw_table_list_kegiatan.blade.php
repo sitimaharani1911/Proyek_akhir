@@ -50,9 +50,8 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-row-dashed table-row-gray-300 align-middle"
-                            style="table-layout: fixed; width: 100%;">
-                            <thead>
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                            <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 text-center align-middle">
                                     <th style="width: 40px;">No</th>
                                     <th style="width: 150px;">Jenis Hibah</th>
@@ -63,8 +62,8 @@
                                     <th style="width: 120px;">Satuan Luaran</th>
                                     <th style="width: 200px;">Luaran Kegiatan</th>
                                     <th style="width: 180px;">Status Pelaksanaan Kegiatan</th>
-                                    <th style="width: 180px;">Total Pengajuan Anggaran</th>
-                                    <th style="width: 180px;">Total Penggunaan Anggaran</th>
+                                    <th style="width: 150px;">Total Pengajuan Anggaran</th>
+                                    <th style="width: 150px;">Total Penggunaan Anggaran</th>
                                     <th style="width: 130px;">Tanggal Awal</th>
                                     <th style="width: 130px;">Tanggal Akhir</th>
                                     <th style="width: 180px;">Rentang Pengerjaan</th>
@@ -74,12 +73,12 @@
                                     <th style="width: 130px;">Surat Kerja</th>
                                     <th style="width: 130px;">Surat Tugas</th>
                                     <th style="width: 130px;">Template Laporan</th>
-                                    <th style="width: 130px;">Aksi</th>
+                                    <th style="width: 150px;">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="border">
                                 @forelse ($listKegiatan as $kegiatan)
-                                    <tr class="text-center">
+                                    <tr class="">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kegiatan->jenis_hibah }}</td>
                                         <td>{{ $kegiatan->program_studi }}</td>
