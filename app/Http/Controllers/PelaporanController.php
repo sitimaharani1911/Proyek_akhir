@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pelaporan;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 
@@ -14,12 +15,12 @@ class PelaporanController extends Controller
     {
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         //dd($proposals->toArray()); untuk ngecek apakah back end sudah terpanggil atau belom
-        return view ('content.pelaporan.vw_table_pelaporan',  compact('proposals'));
+        return view('content.pelaporan.vw_table_pelaporan',  compact('proposals'));
     }
 
     public function inputDocument()
     {
-        return view ('content.pelaporan.vw_input_dokumen');
+        return view('content.pelaporan.vw_input_dokumen');
     }
     /**
      * Show the form for creating a new resource.
@@ -40,9 +41,11 @@ class PelaporanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $list_kegiatan_id)
     {
-        //
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        // dd($pelaporan->toArray());
+        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans'));
     }
 
     /**

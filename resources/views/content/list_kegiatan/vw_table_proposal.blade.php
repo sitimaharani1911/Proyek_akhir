@@ -48,7 +48,7 @@
                                 <td>{{ $proposals->informasi_hibah->skema_hibah ?? '-' }}</td>
                                 <td>{{ $proposals->judul_proposal}}</td>
                                 <td>{{ $proposals->ketua_hibah}}</td>
-                                <td class="text-primary">
+                                <td class="text-primary text-center">
                                     <a href="{{ route('list-kegiatan.data', ['proposal_id' => $proposals->id]) }}">Detail</a>
                                 </td>
                             </tr>

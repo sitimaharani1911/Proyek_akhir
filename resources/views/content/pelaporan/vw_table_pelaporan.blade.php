@@ -47,8 +47,9 @@
                                         <td>{{ $proposal->informasi_hibah->nama_hibah ?? '-' }}</td>
                                         <td>{{ $proposal->informasi_hibah->skema_hibah ?? '-' }}</td>
                                         <td>{{ $proposal->ketua_hibah}}</td>
-                                        <td class="text-primary"><a href="{{ route('kegiatan.index',['proposal_id' => $proposal->id]) }}">Detail</a></td>
-                                        <td class="text-primary"><a href="{{ route('pelaporan.input_dokumen') }}">Input</a>
+                                        <td class="text-primary text-center"><a href="{{ route('kegiatan.index',['proposal_id' => $proposal->id]) }}">Detail</a></td>
+                                        <td class="text-primary text-center
+                                        "><a href="{{ route('pelaporan.input_dokumen') }}">Input</a>
                                         </td>
                                     </tr>
                                 @empty
