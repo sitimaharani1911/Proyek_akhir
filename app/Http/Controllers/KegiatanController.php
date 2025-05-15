@@ -12,7 +12,9 @@ class KegiatanController extends Controller
      */
     public function index(string $proposal_id)
     {
-         $listKegiatan = ListKegiatan::where('proposal_id', $proposal_id)->get();
+          $listKegiatan = ListKegiatan::with(['proposal.informasi_hibah'])
+        ->where('proposal_id', $proposal_id)
+        ->get();
         return view ('content.pelaporan.kegiatan.vw_table_kegiatan', compact('listKegiatan'));
     }
 

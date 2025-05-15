@@ -44,24 +44,11 @@
                             <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                     <th style="width: 40px;">No</th>
-                                    <th style="width: 150px;">Jenis Hibah</th>
-                                    <th style="width: 150px;">Program Studi</th>
+                                    <th style="width: 150px;">Judul Proposal</th>
+                                    <th style="width: 150px;">Ketua Pelaksana</th>
                                     <th style="width: 150px;">Jenis Aktivitas</th>
-                                    <th style="width: 250px;">Nama Kegiatan (Sesuai dengan proposal)</th>
-                                    <th style="width: 100px;">Jumlah Luaran</th>
-                                    <th style="width: 120px;">Satuan Luaran</th>
-                                    <th style="width: 200px;">Luaran Kegiatan</th>
-                                    <th style="width: 180px;">Status Pelaksanaan Kegiatan</th>
-                                    <th style="width: 150px;">Total Pengajuan Anggaran</th>
-                                    <th style="width: 150px;">Total Penggunaan Anggaran</th>
-                                    <th style="width: 130px;">Tanggal Awal</th>
-                                    <th style="width: 130px;">Tanggal Akhir</th>
-                                    <th style="width: 180px;">Rentang Pengerjaan</th>
-                                    <th style="width: 200px;">Panitia Kegiatan (Initial)</th>
-                                    <th style="width: 180px;">Rincian Jumlah Peserta</th>
-                                    <th style="width: 180px;">Tempat Pelaksanaan</th>
-                                    <th style="width: 130px;">Surat Kerja</th>
-                                    <th style="width: 130px;">Surat Tugas</th>
+                                    <th style="width: 250px;">Tanggal</th>
+                                    <th style="width: 100px;">Tempat</th>
                                     <th>Hasil Monev</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -70,35 +57,16 @@
                                 @forelse ($listKegiatan as $kegiatan)
                                     <tr class="">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->jenis_hibah }}</td>
-                                        <td>{{ $kegiatan->program_studi }}</td>
+                                        <td>{{ $kegiatan->proposal->judul_proposal ?? '-' }}</td>
+                                        <td>{{ $kegiatan->proposal->ketua_hibah ?? '-' }}</td>
                                         <td>{{ $kegiatan->jenis_aktivitas }}</td>
-                                        <td>{{ $kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $kegiatan->jumlah_luaran }}</td>
-                                        <td>{{ $kegiatan->satuan_luaran }}</td>
-                                        <td>{{ $kegiatan->luaran_kegiatan }}</td>
-                                        <td>{{ $kegiatan->status_pelaksanaan_kegiatan }}</td>
-                                        <td>Rp {{ number_format($kegiatan->total_anggaran_pengajuan, 0, ',', '.') }}</td>
-                                        <td>Rp {{ number_format($kegiatan->total_anggaran_penggunaan, 0, ',', '.') }}</td>
-                                        <td>{{ $kegiatan->tanggal_awal }}</td>
-                                        <td>{{ $kegiatan->tanggal_akhir }}</td>
-                                        <td>{{ $kegiatan->rentang_pengerjaan }} Bulan</td>
-                                        <td>{{ $kegiatan->panitia_pengerjaan }}</td>
-                                        <td>{{ $kegiatan->rincian_jumlah_peserta }}</td>
+                                        <td>{{ $kegiatan->tanggal }}</td>
                                         <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $kegiatan->surat_kerja) }}" target="_blank">
-                                                Lihat Surat Kerja
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}" target="_blank">
-                                                Lihat Surat Tugas
-                                            </a>
-                                        </td>
                                         <td><a href="{{ route('kegiatan.hasilMonev') }}" class="text-primary">Cek Hasil</a>
                                         </td>
-                                        <td><a href="{{ url('kegiatan/show/id') }}">
+                                        <td><a href="{{ route('kegiatan.tambah') }}" class="text-primary">Buat Laporan</a>
+                                        </td>
+                                        {{-- <td><a href="{{ url('kegiatan/show/id') }}">
                                                 <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
                                             </a>
                                             <a href="{{ url('kegiatan/edit/id') }}">
@@ -107,7 +75,7 @@
                                             <a href="javascript:void(0)" style="color: red;">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @empty
                                     <tr class="text-center">

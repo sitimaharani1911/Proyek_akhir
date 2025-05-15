@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ListKegiatan extends Model
 {
     protected $table = 'list_kegiatan';
-    
+
     protected $fillable = [
         'proposal_id',
         'jenis_hibah',
@@ -29,4 +29,9 @@ class ListKegiatan extends Model
         'surat_kerja',
         'surat_tugas',
     ];
+
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class);
+    }
 }
