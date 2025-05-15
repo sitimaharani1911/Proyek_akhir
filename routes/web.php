@@ -123,8 +123,9 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan.index');
             Route::get('/show/id', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
             Route::get('/edit/id', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
-            Route::get('/kegiatan', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
-            Route::get('/review', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
+            Route::get('/kegiatan/{proposal_id}', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
+            Route::get('/review/{list_kegiatan_id}', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
+            Route::post('/review/{pelaporan_id}/store', [LaporanKeuanganController::class, 'store'])->name('laporan-keuangan.store');
         });
         // User
         Route::prefix('user')->group(function () {

@@ -37,13 +37,13 @@
                 <div class="card mb-2 mb-xl-10" id="kt_profile_details_view">
                     <div class="card-header cursor-pointer">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Detail Kegiatan Pelaksanaan Hibah</h3>
+                            <h3 class="fw-bold m-0">Detail Pelaporan Kegiatan Pelaksanaan Hibah</h3>
                         </div>
                         <a href="{{ route('informasi_hibah.index') }}"
                             class="btn btn-sm btn-primary align-self-center">Kembali</a>
                     </div>
                     @forelse ($pelaporans as $pelaporan)
-                        <div class="card-body p-9">
+                        <div class="card-body p-9 mt">
                             <div class="row">
                                 <!-- Section kiri -->
                                 <div class="col-lg-6">
