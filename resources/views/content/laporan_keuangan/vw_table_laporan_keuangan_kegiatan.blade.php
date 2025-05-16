@@ -60,11 +60,6 @@
                                                 href="{{ route('laporan-keuangan.review', ['list_kegiatan_id' => $kegiatan->id]) }}">
                                                 <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
                                             </a>
-                                            <a
-                                                href="{{ route('laporan-keuangan.show', ['list_kegiatan_id' => $kegiatan->id]) }}"
-                                                class="text-primary text-center">
-                                                <i class="bi bi-eye text-success" style="margin-right: 10px;"></i>
-                                            </a>
                                         </td>
                                     </tr>
                                 @empty

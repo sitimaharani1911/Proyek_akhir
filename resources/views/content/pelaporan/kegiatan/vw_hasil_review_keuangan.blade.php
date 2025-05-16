@@ -8,7 +8,7 @@
                         Review Laporan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Laporan</a>
+                            <a class="text-muted text-hover-primary">Pelaporan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -20,7 +20,7 @@
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Review</a>
+                            <a href="index.html" class="text-muted text-hover-primary">Review Keuangan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -86,10 +86,11 @@
                                 <label class="form-label fw-semibold">Serapan Dana</label>
                                 <p class="form-control">{{ number_format($pelaporan->serapan_dana, 2) }} %</p>
                             </div>
+                            <h3 class="mb-5">Hasil Review Dari Keuangan</h3>
 
                             <!-- Kolom Catatan -->
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Catatan <span class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">Catatan</label>
                                 @if ($review)
                                     <p class="form-control">{{ $review->catatan }}</p>
                                 @else
@@ -99,7 +100,7 @@
 
                             <!-- Kolom Status -->
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Status <span class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">Status</label>
                                 @if ($review)
                                     <p class="form-control">{{ $review->status }}</p>
                                 @else
@@ -109,7 +110,7 @@
 
                             <!-- Kolom Auditor -->
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Auditor <span class="text-danger">*</span></label>
+                                <label class="form-label fw-semibold">Auditor</label>
                                 @if ($review)
                                     <p class="form-control">{{ $review->auditor }}</p>
                                 @else

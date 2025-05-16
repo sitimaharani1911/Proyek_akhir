@@ -95,6 +95,18 @@ class KegiatanController extends Controller
         }
     }
 
+    public function reviewLaporan(string $list_kegiatan_id)
+    {
+        
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get(); 
+        foreach($pelaporans as $pelaporan){
+            $pelaporan["serapan_dana"] = (($pelaporan['pengajuan_dana'] - $pelaporan["sisa_dana"]) / $pelaporan["pengajuan_dana"] ) * 100 ;
+            // dd($pelaporan->toArray());
+        }
+        // dd($pelaporans->toArray());
+        return view('content.pelaporan.kegiatan.vw_hasil_review_keuangan', compact('pelaporans', 'list_kegiatan_id'));
+    }
+
     /**
      * Display the specified resource.
      */

@@ -87,6 +87,7 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
             Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
             Route::get('/hasil-monev', [KegiatanController::class, 'hasilMonev'])->name('kegiatan.hasilMonev');
+            Route::get('/review-keuangan/{list_kegiatan_id}', [KegiatanController::class, 'reviewLaporan'])->name('kegiatan.review_keuangan');
         });
         // Pengajuan Dana
         Route::prefix('pengajuan-dana')->group(function () {

@@ -43,6 +43,7 @@
                                     <th style="width: 150px;">Ketua Pelaksana</th>
                                     <th style="width: 200px;">Jenis Aktivitas</th>
                                     <th>Hasil Monev</th>
+                                    <th>Hasil Review Keuangan</th>
                                     <th>Detail Laporan</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -56,20 +57,12 @@
                                         <td>{{ $kegiatan->jenis_aktivitas }}</td>
                                         <td class="text-center"><a href="{{ route('kegiatan.hasilMonev') }}" class="text-primary text-center">Cek Hasil</a>
                                         </td>
+                                        <td class="text-center text-primary"><a class="text-primary" href="{{ route('kegiatan.review_keuangan', ['list_kegiatan_id' => $kegiatan->id]) }}">Cek Hasil</a>
+                                        </td>
                                         <td class="text-center"><a href="{{  route('pelaporan.show', ['list_kegiatan_id' => $kegiatan->id])  }}" class="text-primary text-center">Lihat Laporan</a>
                                         </td>
                                         <td class="text-center"><a href="{{  route('kegiatan.tambah', $kegiatan->id)  }}" class="text-primary text-center">Buat Laporan</a>
                                         </td>
-                                        {{-- <td><a href="{{ url('kegiatan/show/id') }}">
-                                                <i class="fa fa-eye text-info" style="margin-right: 10px;"></i>
-                                            </a>
-                                            <a href="{{ url('kegiatan/edit/id') }}">
-                                                <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                            </a>
-                                            <a href="javascript:void(0)" style="color: red;">
-                                                <i class="fas fa-trash text-danger"></i>
-                                            </a>
-                                        </td> --}}
                                     </tr>
                                 @empty
                                     <tr class="text-center">
