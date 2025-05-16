@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('content')
+    <style>
+        tbody.header-left tr td:nth-child(1) {
+            text-align: left;
+        }
+    </style>
     <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
@@ -47,55 +52,45 @@
                                 <!-- Section kiri -->
                                 <div class="col-lg-6">
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Nama Kegiatan</label>
+                                        <label class="col-md-3 fw-bold fs-6 text-gray-800">Nama Kegiatan</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <span class="fw-semibold">{{ $pelaporan->nama_kegiatan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Ketua Pelaksana</label>
+                                        <label class="col-md-3 fw-bold fs-6 text-gray-800">Ketua Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <span
                                                 class="fw-semibold">{{ $pelaporan->list_kegiatan->proposal->ketua_hibah }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Anggota Pelaksana</label>
+                                        <label class="col-md-3 fw-bold fs-6 text-gray-800">Anggota Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <span class="fw-semibold">{{ $pelaporan->anggota_pelaksana }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Pengajuan Dana</label>
+                                        <label class="col-md-3 fw-bold fs-6 text-gray-800">Tanggal</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->pengajuan_dana }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Sisa Dana</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->sisa_dana }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Tanggal</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <span class="fw-semibold">{{ $pelaporan->tanggal }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Tempat</label>
+                                        <label class="col-md-3 fw-bold fs-6 text-gray-800">Tempat</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <span class="fw-semibold">{{ $pelaporan->tempat }}</span>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-1"></div>
+                                <!-- Section Kanan -->
+                                <div class="col-lg-5">
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Jumlah Peserta</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
@@ -114,111 +109,146 @@
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Surat Tugas</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <i class="bi bi-file-earmark-pdf"></i>
-                                            <a href="{{ asset('storage/' . $pelaporan->surat_tugas) }}" target="_blank">
-                                                <span class="fw-semibold text-primary">Open </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Kegiatan</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <i class="bi bi-file-earmark-pdf"></i>
-                                            <a href="{{ asset('storage/' . $pelaporan->laporan_kegiatan) }}"
-                                                target="_blank">
-                                                <span class="fw-semibold text-primary">Open </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Section Kanan -->
-                                <div class="col-lg-6">
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Keuangan</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <i class="bi bi-file-earmark-pdf"></i>
-                                            <a href="{{ asset('storage/' . $pelaporan->laporan_keuangan) }}"
-                                                target="_blank">
-                                                <span class="fw-semibold text-primary">Open </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Luaran</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->luaran }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Dampak</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->dampak }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Dokumentasi</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->dokumentasi }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Lainnya</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <i class="bi bi-file-earmark-pdf"></i>
-                                            <a href="{{ asset('storage/' . $pelaporan->lainnya) }}" target="_blank">
-                                                <span class="fw-semibold text-primary">Open </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Catatan</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            <span class="fw-semibold">Ada beberapa hal yang harus di perbaiki seperti :
-                                                1. ....
-                                                2. ....
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Nilai</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">75</span>
+                                            <span class="fw-semibold">{{ $monevs->nilai }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Persentase Capaian</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">75 %</span>
+                                            <span class="fw-semibold">{{ $monevs->persentase_capaian }}%</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Status</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">Open</span>
+                                            <span class="fw-semibold">{{ $monevs->status }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Tim Monev</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">NFN, ISM, HNI</span>
+                                            <span class="fw-semibold">{{ $monevs->tim_monev }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <table class="table table-striped table-row-bordered gy-2 gs-7 border rounded mt-5">
+                                <thead class="border">
+                                    <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
+                                        <th style="width: 200px"></th>
+                                        <th style="width: 200px">Data</th>
+                                        <th style="width: 200px">Status</th>
+                                        <th style="width: 400px">Catatan</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="border header-left">
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Pengajuan Dana</td>
+                                        <td>{{ $pelaporan->pengajuan_dana }}</td>
+                                        <td>{{ $monevs->status_pengajuan_dana }}</td>
+                                        <td>{{ $monevs->catatan_pengajuan_dana ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Sisa Dana</td>
+                                        <td>{{ $pelaporan->sisa_dana }}</td>
+                                        <td>{{ $monevs->status_sisa_dana }}</td>
+                                        <td>{{ $monevs->catatan_sisa_dana ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Surat Kerja</td>
+                                        <td>
+                                            <div class="">
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                                <a href="{{ asset('storage/' . $pelaporan->surat_kerja) }}"
+                                                    target="_blank">
+                                                    <span class="fw-semibold text-primary">Open </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $monevs->status_surat_kerja }}</td>
+                                        <td>{{ $monevs->catatan_surat_kerja ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Surat Tugas</td>
+                                        <td>
+                                            <div class="">
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                                <a href="{{ asset('storage/' . $pelaporan->surat_tugas) }}"
+                                                    target="_blank">
+                                                    <span class="fw-semibold text-primary">Open </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $monevs->status_surat_tugas }}</td>
+                                        <td>{{ $monevs->catatan_surat_tugas ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Surat Laporan Kegiatan</td>
+                                        <td>
+                                            <div class="">
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                                <a href="{{ asset('storage/' . $pelaporan->laporan_kegiatan) }}"
+                                                    target="_blank">
+                                                    <span class="fw-semibold text-primary">Open </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $monevs->status_laporan_kegiatan }}</td>
+                                        <td>{{ $monevs->catatan_laporan_kegiatan ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Surat Laporan Keuangan</td>
+                                        <td>
+                                            <div class="">
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                                <a href="{{ asset('storage/' . $pelaporan->laporan_keuangan) }}"
+                                                    target="_blank">
+                                                    <span class="fw-semibold text-primary">Open </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $monevs->status_laporan_keuangan }}</td>
+                                        <td>{{ $monevs->catatan_laporan_keuangan ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Luaran</td>
+                                        <td>{{ $pelaporan->luaran }}</td>
+                                        <td>{{ $monevs->status_luaran }}</td>
+                                        <td>{{ $monevs->catatan_luaran ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Dampak</td>
+                                        <td>{{ $pelaporan->dampak }}</td>
+                                        <td>{{ $monevs->status_dampak }}</td>
+                                        <td>{{ $monevs->catatan_dampak ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Dokumentasi</td>
+                                        <td>{{ $pelaporan->dokumentasi }}</td>
+                                        <td>{{ $monevs->status_dokumentasi }}</td>
+                                        <td>{{ $monevs->catatan_dokumentasi ?? '-' }}</td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <td class="fw-bold">Lainnya</td>
+                                        <td>
+                                            <div class="">
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                                <a href="{{ asset('storage/' . $pelaporan->lainnya) }}" target="_blank">
+                                                    <span class="fw-semibold text-primary">Open </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $monevs->status_lainnya }}</td>
+                                        <td>{{ $monevs->catatan_lainnya ?? '-' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DokumenHibah;
 use App\Models\ListKegiatan;
+use App\Models\Monev;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use App\Models\ReviewKeuangan;
@@ -51,6 +52,43 @@ class MonevController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function store(Request $request, $pelaporan_id)
+    {
+        $validated = $request->validate([
+            'status_pengajuan_dana' => 'required|string|max:255',
+            'catatan_pengajuan_dana' => 'nullable|string|max:2550',
+            'status_sisa_dana' => 'required|string|max:255',
+            'catatan_sisa_dana' => 'nullable|string|max:2550',
+            'status_surat_kerja' => 'required|string|max:255',
+            'catatan_surat_kerja' => 'nullable|string|max:2550',
+            'status_surat_tugas' => 'required|string|max:255',
+            'catatan_surat_tugas' => 'nullable|string|max:2550',
+            'status_laporan_kegiatan' => 'required|string|max:255',
+            'catatan_laporan_kegiatan' => 'nullable|string|max:2550',
+            'status_laporan_keuangan' => 'required|string|max:255',
+            'catatan_laporan_keuangan' => 'nullable|string|max:2550',
+            'status_luaran' => 'required|string|max:255',
+            'catatan_luaran' => 'nullable|string|max:2550', 
+            'status_dampak' => 'required|string|max:255',
+            'catatan_dampak' => 'nullable|string|max:2550',
+            'status_dokumentasi' => 'required|string|max:255',
+            'catatan_dokumentasi' => 'nullable|string|max:2550',
+            'status_lainnya' => 'required|string|max:255',
+            'catatan_lainnya' => 'nullable|string|max:2550',
+            'nilai' => 'required|numeric',
+            'persentase_capaian' => 'required|numeric',
+            'status' => 'required|string|max:255',
+            'tim_monev' => 'required|string|max:255',
+            'laporan_monev' => 'required|file|mimes:pdf|max:5120',
+        ]);
+
+        $laporan_monev_path = $request->file('laporan_monev')->store('laporan_monev', 'public');
+        $validated['pelaporan_id'] = $pelaporan_id;
+        $validated['laporan_monev'] = $laporan_monev_path;
+        Monev::create($validated);
+        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
+
+    }
     public function storePIU(Request $request, $pelaporan_id)
     {
         $validated = $request->validate([
@@ -111,8 +149,9 @@ class MonevController extends Controller
     public function monevPiuReview(string $list_kegiatan_id)
     {
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
-        // dd($pelaporans->toArray());
-        return view('content.monev_piu.vw_monev_ketua_piu', compact('pelaporans', 'list_kegiatan_id'));
+        $monevs = Monev::with('pelaporan')->where('pelaporan_id', $pelaporans[0]['id'])->first();
+        // dd($monevs);
+        return view('content.monev_piu.vw_monev_ketua_piu', compact('pelaporans', 'list_kegiatan_id', 'monevs'));
     }
     // PIMPINAN
     public function monevPimpinan()
