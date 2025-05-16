@@ -103,7 +103,12 @@
                                 @if ($review)
                                     <p class="form-control">{{ $review->status }}</p>
                                 @else
-                                    <input type="text" class="form-control" placeholder="Status" name="status" />
+                                    <select name="status" class="form-select" required>
+                                        <option value="" disabled selected>Pilih status</option>
+                                        <option value="Diterima">Diterima</option>
+                                        <option value="Ditolak">Ditolak</option>
+                                        <option value="Direvisi">Direvisi</option>
+                                    </select>
                                 @endif
                             </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 
 class MonevController extends Controller
@@ -11,7 +12,9 @@ class MonevController extends Controller
      */
     public function index()
     {
-        return view ('content.monev.vw_table_monev');
+        $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
+        // dd($proposals->toArray());
+        return view ('content.monev.vw_table_monev', compact('proposals'));
     }
     public function dataKegiatan()
     {

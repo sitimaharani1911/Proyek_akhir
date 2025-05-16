@@ -76,7 +76,8 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [PelaporanController::class, 'index'])->name('pelaporan.index');
             Route::get('/show/{list_kegiatan_id}', [PelaporanController::class, 'show'])->name('pelaporan.show');
             Route::get('/edit/{id}', [PelaporanController::class, 'edit'])->name('pelaporan.edit');
-            Route::get('/input-dokumen', [PelaporanController::class, 'inputDocument'])->name('pelaporan.input_dokumen');
+            Route::get('/input-dokumen/{informasi_hibah_id}', [PelaporanController::class, 'inputDocument'])->name('pelaporan.input_dokumen');
+            Route::post('/input-dokumen/{informasi_hibah_id}/store', [PelaporanController::class, 'inputDocumentStore'])->name('pelaporan.input_dokumen.store');
         });
 
         // Kegiatan

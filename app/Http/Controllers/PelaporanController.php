@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DokumenHibah;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
@@ -18,9 +19,46 @@ class PelaporanController extends Controller
         return view('content.pelaporan.vw_table_pelaporan',  compact('proposals'));
     }
 
-    public function inputDocument()
+    public function inputDocument(string $informasi_hibah_id)
     {
-        return view('content.pelaporan.vw_input_dokumen');
+        $dokumenHibah = DokumenHibah::where('informasi_hibah_id', $informasi_hibah_id)->first();
+        return view('content.pelaporan.vw_input_dokumen', [
+            'informasi_hibah_id' => $informasi_hibah_id,
+            'dokumenHibah' => $dokumenHibah
+        ]);
+    }
+
+    public function inputDocumentStore(Request $request, $informasi_hibah_id)
+    {
+        $validated = $request->validate([
+            'kontrak' => 'required|file|mimes:pdf|max:5120',
+            'berita_acara' => 'required|file|mimes:pdf|max:5120',
+            'verifikasi_kelayakan' => 'required|file|mimes:pdf|max:5120',
+            'kerangka_acuan_kerja' => 'required|file|mimes:pdf|max:5120',
+            'sk_tim_hibah' => 'required|file|mimes:pdf|max:5120',
+        ]);
+
+        $kontrak_path = $request->file('kontrak')->store('kontrak', 'public');
+        $berita_acara_path = $request->file('berita_acara')->store('berita_acara', 'public');
+        $verifikasi_kelayakan_path = $request->file('verifikasi_kelayakan')->store('verifikasi_kelayakan', 'public');
+        $kerangka_acuan_kerja_path = $request->file('kerangka_acuan_kerja')->store('kerangka_acuan_kerja', 'public');
+        $sk_tim_hibah_path = $request->file('sk_tim_hibah')->store('sk_tim_hibah', 'public');
+
+        $dokument = new DokumenHibah();
+        $dokument->informasi_hibah_id = $informasi_hibah_id;
+        $dokument->kontrak = $kontrak_path;
+        $dokument->berita_acara = $berita_acara_path;
+        $dokument->verifikasi_kelayakan = $verifikasi_kelayakan_path;
+        $dokument->kerangka_acuan_kerja = $kerangka_acuan_kerja_path;
+        $dokument->sk_tim_hibah = $sk_tim_hibah_path;
+
+        $dokument->save();
+
+        if ($dokument->save()) {
+            return redirect()->back()->with('success', 'Dokumen berhasil ditambahkan!');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan data!');
+        }
     }
     /**
      * Show the form for creating a new resource.
