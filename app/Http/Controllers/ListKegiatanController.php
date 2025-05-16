@@ -39,9 +39,6 @@ class ListKegiatanController extends Controller
      */
     public function store(Request $request, $proposal_id)
     {
-        // Debug data request
-        // dd($request->all());
-        // Validasi input
         $validated = $request->validate([
             'jenis_hibah' => 'required|string|max:255',
             'program_studi' => 'required|string|max:255',
@@ -68,36 +65,15 @@ class ListKegiatanController extends Controller
         $surat_tugas_path = $request->file('surat_tugas')->store('surat_tugas', 'public');
 
 
+        $validated['surat_kerja'] = $surat_kerja_path;
+        $validated['surat_tugas'] = $surat_tugas_path;
+        $validated['proposal_id'] = $proposal_id;
+
         // Simpan data ke tabel list_kegiatan
-        $kegiatan = new ListKegiatan();
-        $kegiatan->proposal_id = $proposal_id;
-        $kegiatan->jenis_hibah = $validated['jenis_hibah'];
-        $kegiatan->program_studi = $validated['program_studi'];
-        $kegiatan->jenis_aktivitas = $validated['jenis_aktivitas'];
-        $kegiatan->nama_kegiatan = $validated['nama_kegiatan'];
-        $kegiatan->jumlah_luaran = $validated['jumlah_luaran'];
-        $kegiatan->satuan_luaran = $validated['satuan_luaran'];
-        $kegiatan->luaran_kegiatan = $validated['luaran_kegiatan'];
-        $kegiatan->status_pelaksanaan_kegiatan = $validated['status_pelaksanaan_kegiatan'];
-        $kegiatan->total_pengajuan_anggaran = $validated['total_pengajuan_anggaran'];
-        $kegiatan->total_penggunaan_anggaran = $validated['total_penggunaan_anggaran'];
-        $kegiatan->tanggal_awal = $validated['tanggal_awal'];
-        $kegiatan->tanggal_akhir = $validated['tanggal_akhir'];
-        $kegiatan->rentang_pengerjaan = $validated['rentang_pengerjaan'];
-        $kegiatan->panitia_pengerjaan = $validated['panitia_pengerjaan'];
-        $kegiatan->rincian_jumlah_peserta = $validated['rincian_jumlah_peserta'];
-        $kegiatan->tempat_pelaksanaan = $validated['tempat_pelaksanaan'];
-        $kegiatan->surat_kerja = $surat_kerja_path;
-        $kegiatan->surat_tugas = $surat_tugas_path;
+        ListKegiatan::create($validated);
 
-        $kegiatan->save();
-
-        if ($kegiatan->save()) {
-            return redirect()->route('list-kegiatan.data', ['proposal_id' => $proposal_id])
-                ->with('success', 'Kegiatan berhasil ditambahkan!');
-        } else {
-            return redirect()->back()->with('error', 'Gagal menyimpan data!');
-        }
+        return redirect()->route('list-kegiatan.data', ['proposal_id' => $proposal_id])
+            ->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
 

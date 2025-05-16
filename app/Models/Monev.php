@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Monev extends Model
 {
-    //
+    
+    protected $guarded = [];
 }

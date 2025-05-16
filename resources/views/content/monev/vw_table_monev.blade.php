@@ -47,7 +47,7 @@
                                 <td>{{ $proposal->informasi_hibah->nama_hibah }}</td>
                                 <td>{{ $proposal->informasi_hibah->skema_hibah }}</td>
                                 <td>{{ $proposal->ketua_hibah }}</td>
-                                <td class="text-primary"><a href="{{route('monev.kegiatan')}}">Detail</a></td>
+                                <td class="text-primary"><a href="{{route('monev.kegiatan', ['proposal_id' => $proposal->id])}}">Detail</a></td>
                                 <td class="text-primary"><a href="{{route('monev.dokumen', ['informasi_hibah_id' => $proposal->informasi_hibah->id]) }}">Detail</a></td>
                             </tr>
                             @empty

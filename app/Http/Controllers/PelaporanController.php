@@ -44,21 +44,16 @@ class PelaporanController extends Controller
         $kerangka_acuan_kerja_path = $request->file('kerangka_acuan_kerja')->store('kerangka_acuan_kerja', 'public');
         $sk_tim_hibah_path = $request->file('sk_tim_hibah')->store('sk_tim_hibah', 'public');
 
-        $dokument = new DokumenHibah();
-        $dokument->informasi_hibah_id = $informasi_hibah_id;
-        $dokument->kontrak = $kontrak_path;
-        $dokument->berita_acara = $berita_acara_path;
-        $dokument->verifikasi_kelayakan = $verifikasi_kelayakan_path;
-        $dokument->kerangka_acuan_kerja = $kerangka_acuan_kerja_path;
-        $dokument->sk_tim_hibah = $sk_tim_hibah_path;
+        $validated['informasi_hibah_id'] = $informasi_hibah_id;
+        $validated['kontrak'] = $kontrak_path;
+        $validated['berita_acara'] = $berita_acara_path;
+        $validated['verifikasi_kelayakan'] = $verifikasi_kelayakan_path;
+        $validated['kerangka_acuan_kerja'] = $kerangka_acuan_kerja_path;
+        $validated['sk_tim_hibah'] = $sk_tim_hibah_path;
 
-        $dokument->save();
+        DokumenHibah::create($validated);
 
-        if ($dokument->save()) {
-            return redirect()->back()->with('success', 'Dokumen berhasil ditambahkan!');
-        } else {
-            return redirect()->back()->with('error', 'Gagal menyimpan data!');
-        }
+        return redirect()->back()->with('success', 'Dokumen berhasil ditambahkan!');
     }
     /**
      * Show the form for creating a new resource.

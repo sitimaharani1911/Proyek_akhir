@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ListKegiatan extends Model
 {
     protected $table = 'list_kegiatan';
+    protected $guarded = [];
 
     protected $fillable = [
         'proposal_id',

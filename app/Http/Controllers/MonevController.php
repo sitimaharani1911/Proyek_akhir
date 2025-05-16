@@ -22,9 +22,11 @@ class MonevController extends Controller
         // dd($proposals->toArray());
         return view('content.monev.vw_table_monev', compact('proposals'));
     }
-    public function dataKegiatan()
+    public function dataKegiatan(string $proposal_id)
     {
-        return view('content.monev.vw_table_monev_kegiatan');
+        $kegiatans = ListKegiatan::with('proposal')->where('proposal_id', $proposal_id)->get();
+        // dd($kegiatans->toArray());
+        return view('content.monev.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -33,9 +35,12 @@ class MonevController extends Controller
     {
         //
     }
-    public function reviewLaporan()
+    public function reviewLaporan(string $list_kegiatan_id)
     {
-        return view('content.monev.vw_review_laporan');
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        
+        // dd($pelaporans->toArray());
+        return view('content.monev.vw_review_laporan', compact('pelaporans', 'list_kegiatan_id'));
     }
     public function detailDokumen($informasi_hibah_id)
     {
@@ -52,16 +57,10 @@ class MonevController extends Controller
             'catatan' => 'required|string|max:2550',
         ]);
 
-        $reviewPIU = new ReviewPIU();
-        $reviewPIU->pelaporan_id = $pelaporan_id;
-        $reviewPIU->catatan = $validated['catatan'];
-        
-        $reviewPIU->save();
-        if ($reviewPIU->save()) {
-            return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
-        } else {
-            return redirect()->back()->with('error', 'Gagal menyimpan data!');
-        }
+        $validated['pelaporan_id'] = $pelaporan_id;
+
+        ReviewPIU::create($validated);
+        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
 
     }
 

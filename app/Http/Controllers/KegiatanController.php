@@ -65,34 +65,17 @@ class KegiatanController extends Controller
         $laporan_keuangan_path = $request->file('laporan_keuangan')->store('laporan_keuangan', 'public');
         $lainnya_path = $request->file('lainnya')->store('lainnya', 'public');
 
-        $pelaporan = new Pelaporan();
-        $pelaporan->list_kegiatan_id = $list_kegiatan_id;
-        $pelaporan->nama_kegiatan = $validated['nama_kegiatan'];
-        $pelaporan->ketua_pelaksana = $validated['ketua_pelaksana'];
-        $pelaporan->anggota_pelaksana = $validated['anggota_pelaksana'];
-        $pelaporan->tanggal = $validated['tanggal'];
-        $pelaporan->tempat = $validated['tempat'];
-        $pelaporan->jumlah_peserta = $validated['jumlah_peserta'];
-        $pelaporan->absensi_peserta = $absensi_peserta_path;
-        $pelaporan->pengajuan_dana = $validated['pengajuan_dana'];
-        $pelaporan->sisa_dana = $validated['sisa_dana'];
-        $pelaporan->surat_kerja = $surat_kerja_path;
-        $pelaporan->surat_tugas = $surat_tugas_path;
-        $pelaporan->laporan_kegiatan = $laporan_kegiatan_path;
-        $pelaporan->laporan_keuangan = $laporan_keuangan_path;
-        $pelaporan->luaran = $validated['luaran'];
-        $pelaporan->dampak = $validated['dampak'];
-        $pelaporan->dokumentasi = $validated['dokumentasi'];
-        $pelaporan->lainnya = $lainnya_path;
-        $pelaporan->bukti_pembayaran = $validated['bukti_pembayaran'];
+        $validated['absensi_peserta'] = $absensi_peserta_path;
+        $validated['surat_kerja'] = $surat_kerja_path;
+        $validated['surat_tugas'] = $surat_tugas_path;
+        $validated['laporan_kegiatan'] = $laporan_kegiatan_path;
+        $validated['laporan_keuangan'] = $laporan_keuangan_path;
+        $validated['lainnya'] = $lainnya_path;
+        $validated['list_kegiatan_id'] = $list_kegiatan_id;
 
-        $pelaporan->save();
+        Pelaporan::create($validated);
 
-        if ($pelaporan->save()) {
-            return redirect()->back()->with('success', 'Kegiatan berhasil ditambahkan!');
-        } else {
-            return redirect()->back()->with('error', 'Gagal menyimpan data!');
-        }
+        return redirect()->back()->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     public function reviewLaporan(string $list_kegiatan_id)

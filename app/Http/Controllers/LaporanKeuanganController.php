@@ -53,21 +53,11 @@ class LaporanKeuanganController extends Controller
             'auditor' => 'required|string|max:255',
         ]);
 
-        $reviewKeuangan = new ReviewKeuangan();
-        $reviewKeuangan->pelaporan_id = $pelaporan_id;
-        $reviewKeuangan->catatan = $validated['catatan'];
-        $reviewKeuangan->status = $validated['status'];
-        $reviewKeuangan->auditor = $validated['auditor'];
-
-        $reviewKeuangan->save();
-        // dd($validated, $reviewKeuangan);
+        $validated['pelaporan_id'] = $pelaporan_id;
+        ReviewKeuangan::create($validated);
 
 
-        if ($reviewKeuangan->save()) {
-            return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
-        } else {
-            return redirect()->back()->with('error', 'Gagal menyimpan data!');
-        }
+        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
     }
 
     /**

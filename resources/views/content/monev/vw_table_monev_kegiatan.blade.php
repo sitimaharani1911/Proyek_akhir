@@ -41,24 +41,28 @@
                                 <th>No</th>
                                 <th>Nama Hibah</th>
                                 <th>Ketua Pelaksana</th>
-                                <th>Tanggal</th>
                                 <th>Tempat</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($kegiatans as $kegiatan)
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>NFN</td>
-                                <td>04-03-2025</td>
-                                <td>Politeknik Caltex Riau</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $kegiatan->proposal->informasi_hibah->nama_hibah }}</td>
+                                <td>{{ $kegiatan->proposal->ketua_hibah }}</td>
+                                <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
                                 <td>
-                                    <a href="{{route('monev.review')}}">
+                                    <a href="{{route('monev.review', ['list_kegiatan_id' => $kegiatan->id])}}">
                                         <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Tidak Ada Data Hibah</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
