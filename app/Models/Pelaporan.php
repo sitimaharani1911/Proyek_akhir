@@ -12,7 +12,11 @@ class Pelaporan extends Model
         return $this->belongsTo(ListKegiatan::class);
     }
     public function review_keuangan()
-{
-    return $this->hasOne(ReviewKeuangan::class, 'pelaporan_id');
-}
+    {
+        return $this->hasOne(ReviewKeuangan::class, 'pelaporan_id');
+    }
+    public function review_piu()
+    {
+        return $this->hasOne(ReviewPiu::class);
+    }
 }

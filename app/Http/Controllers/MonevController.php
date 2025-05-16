@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DokumenHibah;
+use App\Models\ListKegiatan;
+use App\Models\Pelaporan;
 use App\Models\Proposal;
+use App\Models\ReviewKeuangan;
+use App\Models\ReviewPIU;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 
 class MonevController extends Controller
@@ -14,11 +20,11 @@ class MonevController extends Controller
     {
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         // dd($proposals->toArray());
-        return view ('content.monev.vw_table_monev', compact('proposals'));
+        return view('content.monev.vw_table_monev', compact('proposals'));
     }
     public function dataKegiatan()
     {
-        return view ('content.monev.vw_table_monev_kegiatan');
+        return view('content.monev.vw_table_monev_kegiatan');
     }
     /**
      * Show the form for creating a new resource.
@@ -29,18 +35,34 @@ class MonevController extends Controller
     }
     public function reviewLaporan()
     {
-        return view ('content.monev.vw_review_laporan');
+        return view('content.monev.vw_review_laporan');
     }
-    public function detailDokumen()
+    public function detailDokumen($informasi_hibah_id)
     {
-        return view ('content.monev.vw_detail_dokumen');
+        $documents = DokumenHibah::with('informasi_hibah')->where('informasi_hibah_id', $informasi_hibah_id)->get();
+        // dd($documents->toArray());
+        return view('content.monev.vw_detail_dokumen', compact('documents'));
     }
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storePIU(Request $request, $pelaporan_id)
     {
-        //
+        $validated = $request->validate([
+            'catatan' => 'required|string|max:2550',
+        ]);
+
+        $reviewPIU = new ReviewPIU();
+        $reviewPIU->pelaporan_id = $pelaporan_id;
+        $reviewPIU->catatan = $validated['catatan'];
+        
+        $reviewPIU->save();
+        if ($reviewPIU->save()) {
+            return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menyimpan data!');
+        }
+
     }
 
     /**
@@ -77,27 +99,33 @@ class MonevController extends Controller
     // KETUA PIU
     public function monevPiu()
     {
-        return view ('content.monev_piu.vw_table_monev');
+        $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
+        // dd($proposals->toArray());
+        return view('content.monev_piu.vw_table_monev', compact('proposals'));
     }
-    public function monevPiuKegiatan()
+    public function monevPiuKegiatan(string $proposal_id)
     {
-        return view ('content.monev_piu.vw_table_monev_kegiatan');
+        $kegiatans = ListKegiatan::where('proposal_id', $proposal_id)->get();
+        // dd($kegiatans->toArray());
+        return view('content.monev_piu.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
     }
-    public function monevPiuReview()
+    public function monevPiuReview(string $list_kegiatan_id)
     {
-        return view ('content.monev_piu.vw_monev_ketua_piu');
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        // dd($pelaporans->toArray());
+        return view('content.monev_piu.vw_monev_ketua_piu', compact('pelaporans', 'list_kegiatan_id'));
     }
     // PIMPINAN
     public function monevPimpinan()
     {
-        return view ('content.monev_pimpinan.vw_table_monev');
+        return view('content.monev_pimpinan.vw_table_monev');
     }
     public function monevPimpinanKegiatan()
     {
-        return view ('content.monev_pimpinan.vw_table_monev_kegiatan');
+        return view('content.monev_pimpinan.vw_table_monev_kegiatan');
     }
     public function monevPimpinanReview()
     {
-        return view ('content.monev_pimpinan.vw_monev_pimpinan');
+        return view('content.monev_pimpinan.vw_monev_pimpinan');
     }
 }

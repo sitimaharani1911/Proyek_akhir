@@ -106,13 +106,14 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/tambah-pengajuan-dana', [MonevController::class, 'create'])->name('monev.tambah');
             Route::get('/monev-kegiatan', [MonevController::class, 'dataKegiatan'])->name('monev.kegiatan');
             Route::get('/review-laporan', [MonevController::class, 'reviewLaporan'])->name('monev.review');
-            Route::get('/detail-dokumen', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
+            Route::get('/detail-dokumen/{informasi_hibah_id}', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
         });
         // Verifikasi Monev Ketua PIU
         Route::prefix('piu')->group(function () {
             Route::get('/', [MonevController::class, 'monevPiu'])->name('piu.index');
-            Route::get('/kegiatan', [MonevController::class, 'monevPiuKegiatan'])->name('piu.kegiatan');
-            Route::get('/verifikasi', [MonevController::class, 'monevPiuReview'])->name('piu.review');
+            Route::get('/kegiatan/{proposal_id}', [MonevController::class, 'monevPiuKegiatan'])->name('piu.kegiatan');
+            Route::get('/verifikasi/{list_kegiatan_id}', [MonevController::class, 'monevPiuReview'])->name('piu.review');
+            Route::post('/verifikasi/{pelaporan_id}/store', [MonevController::class, 'storePIU'])->name('piu.store');
         });
         // Verifikasi Monev Pimpinan
         Route::prefix('pimpinan')->group(function () {

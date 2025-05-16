@@ -40,13 +40,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ( $proposals as $proposal )
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>CF</td>
-                                <td>NFN</td>
-                                <td class="text-primary"><a href="{{route('piu.kegiatan')}}">Detail</a></td>
+                                <td>{{ $loop->iteration}}</td>
+                                <td>{{ $proposal->informasi_hibah->nama_hibah }}</td>
+                                <td>{{ $proposal->informasi_hibah->skema_hibah }}</td>
+                                <td>{{ $proposal->ketua_hibah }}</td>
+                                <td class="text-primary"><a href="{{route('piu.kegiatan', ['proposal_id' => $proposal->id]) }}">Detail</a></td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Tidak Ada Data Hibah</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

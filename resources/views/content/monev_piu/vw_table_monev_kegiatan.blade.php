@@ -8,13 +8,13 @@
                     Verifikasi Monitoring dan Evaluasi Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('piu.index')}}" class="text-muted text-hover-primary">Verif Monev</a>
+                        <a class="text-muted text-hover-primary">Verif Monev</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('piu.kegiatan')}}" class="text-muted text-hover-primary">Kegiatan</a>
+                        <a class="text-muted text-hover-primary">Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -47,18 +47,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($kegiatans as $kegiatan)
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>NFN</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $kegiatan->proposal->informasi_hibah->nama_hibah }}</td>
+                                <td>{{ $kegiatan->proposal->ketua_hibah }}</td>
                                 <td>04-03-2025</td>
-                                <td>Politeknik Caltex Riau</td>
+                                <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
                                 <td>
-                                    <a href="{{route('piu.review')}}">
+                                    <a href="{{ route('piu.review', ['list_kegiatan_id' => $kegiatan->id]) }}">
                                         <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Tidak Ada Data Hibah</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

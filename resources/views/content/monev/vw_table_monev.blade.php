@@ -35,87 +35,29 @@
                                 <th>No</th>
                                 <th>Nama Hibah</th>
                                 <th>Skema Hibah</th>
-                                <th>Nama Pengaju</th>
+                                <th>Ketua Hibah</th>
                                 <th>Kegiatan</th>
                                 <th>Dokumen</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ( $proposals as $proposal )
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>CF</td>
-                                <td>NFN</td>
+                                <td>{{ $loop->iteration}}</td>
+                                <td>{{ $proposal->informasi_hibah->nama_hibah }}</td>
+                                <td>{{ $proposal->informasi_hibah->skema_hibah }}</td>
+                                <td>{{ $proposal->ketua_hibah }}</td>
                                 <td class="text-primary"><a href="{{route('monev.kegiatan')}}">Detail</a></td>
-                                <td class="text-primary"><a href="{{route('monev.dokumen')}}">Detail</a></td>
+                                <td class="text-primary"><a href="{{route('monev.dokumen', ['informasi_hibah_id' => $proposal->informasi_hibah->id]) }}">Detail</a></td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td>Tidak Ada Data Hibah</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="m_modal_6" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="m_modal_6_title">Title</h2>
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <i class="ki-outline ki-cross fs-1"></i>
-                </div>
-            </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form class="form" action="" method="POST" id="formAdd" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="">
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span class="required">Nama</span>
-                        </label>
-                        <input type="text" class="form-control" placeholder="Nama" name="nama" />
-                    </div>
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span class="required">Skema Hibah</span>
-                        </label>
-                        <input type="text" class="form-control" placeholder="Skema Hibah" name="skema_hibah" />
-                    </div>
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span class="required">Mitra</span>
-                        </label>
-                        <input type="text" class="form-control" placeholder="Mitra" name="mitra" />
-                    </div>
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2"><span class="required">Program
-                                Studi</span></label>
-                        <select name="program_studi" class="form-control" required>
-                            <option value="">Pilih Program Studi</option>
-                            <option value="1">Sistem Informasi</option>
-                            <option value="2">Teknik Informatika</option>
-                            <option value="3">Teknik Komputer</option>
-                        </select>
-                    </div>
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span class="required">Kriteria</span>
-                        </label>
-                        <textarea name="kriteria" placeholder="Kriteria" autocomplete="off" class="form-control"></textarea>
-                    </div>
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span class="required">Periode Pengajuan</span>
-                        </label>
-                        <input type="date" class="form-control" placeholder="Periode Pengajuan"
-                            name="periode_pengajuan" />
-                    </div>
-                    <div class="text-center">
-                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
-                        <a href="#" onclick="save()" class="btn btn-primary ">
-                            Simpan
-                        </a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
