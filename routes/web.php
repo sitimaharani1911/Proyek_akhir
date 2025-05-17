@@ -72,6 +72,7 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/', [MonevKegiatanController::class, 'index'])->name('monev-kegiatan.index');
             Route::get('/data/{proposal_id}', [MonevKegiatanController::class, 'listKegiatan'])->name('monev-kegiatan.data');
             Route::post('/data', [MonevKegiatanController::class, 'dataProposal'])->name('monev-kegiatan.data-proposal');
+            Route::post('/data/kegiatan', [MonevKegiatanController::class, 'dataKegiatan'])->name('monev-kegiatan.data-kegiatan');
             Route::get('/list-kegiatan/{id}/unggah-template', [MonevKegiatanController::class, 'unggahTemplate'])->name('template-laporan.upload');
             Route::post('/list-kegiatan/{id}/unggah-template', [MonevKegiatanController::class, 'simpanTemplate'])->name('template-laporan.store');
 

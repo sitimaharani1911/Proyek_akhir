@@ -27,10 +27,19 @@
                     <h3 class="card-title align-items-start flex-column">
                         <span class="card-label fw-bold fs-3 mb-1">Daftar Kegiatan</span>
                     </h3>
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <select name="tahun" id="filter_tahun" class="form-control w-150px" required>
+                            <option value="">Pilih Tahun</option>
+                            @foreach ($years as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="card-body py-3">
                     <div class="table-responsive">
-                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                        <input type="hidden" id="proposal_id" value="{{ $encryptedId }}">
+                        <table id="dtKegiatan" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
                             <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 text-center align-middle">
                                     <th style="width: 40px;">No</th>
@@ -42,106 +51,10 @@
                                     <th style="width: 120px;">Satuan Luaran</th>
                                     <th style="width: 200px;">Luaran Kegiatan</th>
                                     <th style="width: 180px;">Status Pelaksanaan Kegiatan</th>
-                                    <th style="width: 150px;">Total Pengajuan Anggaran</th>
-                                    <th style="width: 150px;">Total Penggunaan Anggaran</th>
-                                    <th style="width: 130px;">Tanggal Awal</th>
-                                    <th style="width: 130px;">Tanggal Akhir</th>
-                                    <th style="width: 180px;">Rentang Pengerjaan</th>
-                                    <th style="width: 200px;">Panitia Kegiatan (Initial)</th>
-                                    <th style="width: 180px;">Rincian Jumlah Peserta</th>
-                                    <th style="width: 180px;">Tempat Pelaksanaan</th>
-                                    <th style="width: 130px;">Surat Kerja</th>
-                                    <th style="width: 130px;">Surat Tugas</th>
                                     <th style="width: 130px;">Template Laporan</th>
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                @forelse ($kegiatans as $kegiatan)
-                                    <tr class="">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->jenis_hibah }}</td>
-                                        <td>{{ $kegiatan->program_studi }}</td>
-                                        <td>{{ $kegiatan->jenis_aktivitas }}</td>
-                                        <td>{{ $kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $kegiatan->jumlah_luaran }}</td>
-                                        <td>{{ $kegiatan->satuan_luaran }}</td>
-                                        <td>{{ $kegiatan->luaran_kegiatan }}</td>
-                                        <td>{{ $kegiatan->status_pelaksanaan_kegiatan }}</td>
-                                        <td>Rp {{ number_format($kegiatan->total_anggaran_pengajuan, 0, ',', '.') }}</td>
-                                        <td>Rp {{ number_format($kegiatan->total_anggaran_penggunaan, 0, ',', '.') }}</td>
-                                        <td>{{ $kegiatan->tanggal_awal }}</td>
-                                        <td>{{ $kegiatan->tanggal_akhir }}</td>
-                                        <td>{{ $kegiatan->rentang_pengerjaan }} Bulan</td>
-                                        <td>{{ $kegiatan->panitia_pengerjaan }}</td>
-                                        <td>{{ $kegiatan->rincian_jumlah_peserta }}</td>
-                                        <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $kegiatan->surat_kerja) }}" target="_blank">
-                                                Lihat Surat Kerja
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}" target="_blank">
-                                                Lihat Surat Tugas
-                                            </a>
-                                        </td>
-
-                                        <td class="text-primary">
-                                            <!-- Tombol untuk memicu modal -->
-                                            <button type="button" class="btn btn-sm btn-light-primary"
-                                                data-bs-toggle="modal" data-bs-target="#unggahModal{{ $kegiatan->id }}">
-                                                Input
-                                            </button>
-
-                                            <!-- Modal Upload -->
-                                            <div class="modal fade" id="unggahModal{{ $kegiatan->id }}" tabindex="-1"
-                                                aria-labelledby="unggahModalLabel{{ $kegiatan->id }}" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <form action="{{ route('template-laporan.store', $kegiatan->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title"
-                                                                    id="unggahModalLabel{{ $kegiatan->id }}">Unggah
-                                                                    Template Laporan</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="template_laporan" class="form-label">File
-                                                                        Template</label>
-                                                                    <input type="file" name="template_laporan"
-                                                                        class="form-control" required
-                                                                        accept=".pdf,.doc,.docx">
-                                                                </div>
-                                                                @if ($kegiatan->template_laporan)
-                                                                    <p class="mt-2">Saat ini:
-                                                                        <a href="{{ asset('storage/' . $kegiatan->template_laporan) }}"
-                                                                            target="_blank">Lihat Template</a>
-
-                                                                    </p>
-                                                                @endif
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Unggah</button>
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Batal</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="3">Belum ada kegiatan untuk proposal ini.</td>
-                                    </tr>
-                                @endforelse
-
                             </tbody>
                         </table>
                     </div>
@@ -149,6 +62,40 @@
             </div>
         </div>
     </div>
+    @foreach ($kegiatans as $kegiatan)
+        <div class="modal fade" id="unggahModal{{ $kegiatan->id }}" tabindex="-1"
+            aria-labelledby="unggahModalLabel{{ $kegiatan->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="{{ route('template-laporan.store', $kegiatan->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="unggahModalLabel{{ $kegiatan->id }}">Unggah Template Laporan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="template_laporan" class="form-label">File Template</label>
+                                <input type="file" name="template_laporan" class="form-control" required
+                                    accept=".pdf,.doc,.docx">
+                            </div>
+                            @if ($kegiatan->template_laporan)
+                                <p class="mt-2">Saat ini:
+                                    <a href="{{ asset('storage/' . $kegiatan->template_laporan) }}" target="_blank">Lihat
+                                        Template</a>
+                                </p>
+                            @endif
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Unggah</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
 @endsection
 @section('js')
     <script>
@@ -170,5 +117,166 @@
                 confirmButtonText: 'OK'
             });
         @endif
+    </script>
+    <script type="text/javascript">
+        var method = '';
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let typingTimer;
+            let doneTypingInterval = 250;
+            var tahun = '';
+
+            let dtKegiatan = $('#dtKegiatan').DataTable({
+                responsive: true,
+                paging: true,
+                bDestroy: true,
+                searching: true,
+                ordering: false,
+                lengthChange: true,
+                autoWidth: false,
+                aaSorting: [],
+                serverSide: true,
+                processing: true,
+                language: {
+                    lengthMenu: "Show _MENU_"
+                },
+                dom: "<'row mb-2'" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-start dt-toolbar'l>" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-end dt-toolbar'f>" +
+                    ">" +
+                    "<'table-responsive'tr>" +
+                    "<'row'" +
+                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                    ">",
+                ajax: {
+                    type: 'POST',
+                    url: "{{ route('monev-kegiatan.data-kegiatan') }}",
+                    data: function(d) {
+                        d.tahun = tahun; // sudah ada
+                        d.proposal_id = $('#proposal_id').val(); // ⬅️ kirim id
+                    }
+                },
+
+                columns: [{
+                        orderable: false,
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        width: '20px',
+                    },
+                    {
+                        data: 'jenis_hibah',
+                        name: 'jenis_hibah',
+
+                    },
+                    {
+                        data: 'program_studi',
+                        name: 'program_studi',
+
+                    },
+                    {
+                        data: 'jenis_aktivitas',
+                        name: 'jenis_aktivitas',
+
+                    },
+                    {
+                        data: 'nama_kegiatan',
+                        name: 'nama_kegiatan',
+
+                    },
+                    {
+                        data: 'jumlah_luaran',
+                        name: 'jumlah_luaran',
+
+                    },
+                    {
+                        data: 'satuan_luaran',
+                        name: 'satuan_luaran',
+
+                    },
+                    {
+                        data: 'luaran_kegiatan',
+                        name: 'luaran_kegiatan',
+
+                    },
+                    {
+                        data: 'status_pelaksanaan_kegiatan',
+                        name: 'status_pelaksanaan_kegiatan',
+
+                    },
+                    {
+                        orderable: false,
+                        data: 'template_laporan',
+                        className: 'text-center'
+                    }
+                ]
+            });
+            //filter
+            $('#filter_tahun').change(function(e) {
+                tahun = $('#filter_tahun').val();
+                dtKegiatan.draw();
+                e.preventDefault();
+            });
+        });
+        @if (session('success'))
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        function hapus(id) {
+            Swal.fire({
+                title: "Apakah anda yakin?",
+                text: "Anda yakin ingin hapus data ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "<span><i class='flaticon-interface-1'></i><span>Ya, Hapus!</span></span>",
+                confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
+                cancelButtonText: "<span><i class='flaticon-close'></i><span>Batal Hapus</span></span>",
+                cancelButtonClass: "btn btn-metal m-btn m-btn--pill m-btn--icon",
+                customClass: {
+                    confirmButton: 'btn btn-danger m-btn m-btn--pill m-btn--icon',
+                    cancelButton: 'btn btn-metal m-btn m-btn--pill m-btn--icon'
+                }
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('list-kegiatan/destroy') }}/" + id,
+                        type: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: "JSON",
+                        success: function(data) {
+                            if (data.status === true) {
+                                $('#dtKegiatan').DataTable().ajax.reload(null, false);
+                                resetForm()
+                                Swal.fire({
+                                    text: "Data Berhasil Dihapus",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "OK",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                })
+                            } else {
+                                Swal.fire("Oops", "Data gagal dihapus!", "error");
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            Swal.fire("Oops", "Data gagal dihapus!", "error");
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection

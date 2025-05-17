@@ -26,9 +26,13 @@ class MonevKegiatanController extends Controller
     {
         // decrypt proposal_id
         $proposal_id = decrypt($proposal_id);
+        $encryptedId    = encrypt($proposal_id);
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $kegiatans = ListKegiatan::with('proposal')->where('proposal_id', $proposal_id)->get();
         // dd($kegiatans->toArray());
-        return view('content.monev_kegiatan.vw_table_list_kegiatan', compact('kegiatans', 'proposal_id'));
+        return view('content.monev_kegiatan.vw_table_list_kegiatan', compact('kegiatans', 'proposal_id', 'encryptedId', 'years'));
     }
     /**
      * Show the form for creating a new resource.
@@ -151,6 +155,36 @@ class MonevKegiatanController extends Controller
                     return $detail;
                 })
                 ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah'])
+                ->make(true);
+        }
+    }
+
+    public function dataKegiatan(Request $request)
+    {
+        if ($request->ajax()) {
+            $proposal_id = decrypt($request->proposal_id);
+            // dd($proposal_id);
+            $data = ListKegiatan::where('proposal_id', $proposal_id)->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('nama_kegiatan', 'like', "%{$search}%")
+                                ->orWhere('jenis_hibah', 'like', "%{$search}%")
+                                ->orWhere('program_studi', 'like', "%{$search}%")
+                                ->orWhere('jenis_aktivitas', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('template_laporan', function ($row) {
+                    return '<button type="button" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#unggahModal' . $row->id . '">Input</button>';
+                })
+                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan'])
                 ->make(true);
         }
     }
