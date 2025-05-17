@@ -6,6 +6,7 @@ use App\Models\ListKegiatan;
 use App\Models\Pelaporan;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class KegiatanController extends Controller
 {
@@ -14,10 +15,16 @@ class KegiatanController extends Controller
      */
     public function index(string $proposal_id)
     {
+        // decypt proposal_id
+        $proposal_id = decrypt($proposal_id);
+        $encryptedId    = encrypt($proposal_id);
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $listKegiatan = ListKegiatan::with(['proposal.informasi_hibah'])
             ->where('proposal_id', $proposal_id)
             ->get();
-        return view('content.pelaporan.kegiatan.vw_table_kegiatan', compact('listKegiatan'));
+        return view('content.pelaporan.kegiatan.vw_table_kegiatan', compact('listKegiatan', 'proposal_id', 'encryptedId', 'years'));
     }
 
     /**
@@ -30,7 +37,7 @@ class KegiatanController extends Controller
     }
     public function hasilMonev(string $list_kegiatan_id)
     {
-        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get(); 
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         return view('content.pelaporan.kegiatan.vw_hasil_monev', compact('pelaporans'));
     }
     /**
@@ -82,10 +89,10 @@ class KegiatanController extends Controller
 
     public function reviewLaporan(string $list_kegiatan_id)
     {
-        
-        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get(); 
-        foreach($pelaporans as $pelaporan){
-            $pelaporan["serapan_dana"] = (($pelaporan['pengajuan_dana'] - $pelaporan["sisa_dana"]) / $pelaporan["pengajuan_dana"] ) * 100 ;
+
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        foreach ($pelaporans as $pelaporan) {
+            $pelaporan["serapan_dana"] = (($pelaporan['pengajuan_dana'] - $pelaporan["sisa_dana"]) / $pelaporan["pengajuan_dana"]) * 100;
             // dd($pelaporan->toArray());
         }
         // dd($pelaporans->toArray());
@@ -123,5 +130,54 @@ class KegiatanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function dataKegiatan(Request $request)
+    {
+        if ($request->ajax()) {
+            $proposal_id = decrypt($request->proposal_id);
+            // dd($proposal_id);
+            $data = ListKegiatan::with(['proposal.informasi_hibah'])->where('proposal_id', $proposal_id)->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('nama_kegiatan', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('nama_kegiatan', function ($value) {
+                    return $value->proposal->judul_proposal;
+                })
+                // add kolom ketua hibah
+                ->addColumn('ketua_hibah', function ($value) {
+                    return $value->proposal->ketua_hibah;
+                })
+                // hasil review keuangan
+                ->addColumn('hasil_review_keuangan', function ($value) {
+                    return '<a href="' . url("kegiatan/review-keuangan/{$value->id}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                })
+                // hasil monev
+                ->addColumn('hasil_monev', function ($value) {
+                    return '<a href="' . url("pelaporan/show/{$value->id}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                })
+                // buat laporan
+                ->addColumn('buat_laporan', function ($value) {
+                    return '<a href="' . url("kegiatan/buat-laporan/{$value->id}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                })
+                ->rawColumns(['hasil_review_keuangan', 'hasil_monev', 'buat_laporan', 'ketua_hibah', 'nama_kegiatan'])
+                ->make(true);
+        }
     }
 }

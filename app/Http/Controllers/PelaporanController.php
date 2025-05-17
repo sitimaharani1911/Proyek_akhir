@@ -6,6 +6,7 @@ use App\Models\DokumenHibah;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PelaporanController extends Controller
 {
@@ -14,13 +15,18 @@ class PelaporanController extends Controller
      */
     public function index()
     {
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         //dd($proposals->toArray()); untuk ngecek apakah back end sudah terpanggil atau belom
-        return view('content.pelaporan.vw_table_pelaporan',  compact('proposals'));
+        return view('content.pelaporan.vw_table_pelaporan',  compact('proposals', 'years'));
     }
 
     public function inputDocument(string $informasi_hibah_id)
     {
+        // decrypt informasi_hibah_id
+        $informasi_hibah_id = decrypt($informasi_hibah_id);
         $dokumenHibah = DokumenHibah::where('informasi_hibah_id', $informasi_hibah_id)->first();
         return view('content.pelaporan.vw_input_dokumen', [
             'informasi_hibah_id' => $informasi_hibah_id,
@@ -103,5 +109,52 @@ class PelaporanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('judul_proposal', 'like', "%{$search}%")
+                                ->orWhere('ketua_hibah', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('skema_hibah', function ($value) {
+                    return $value->informasi_hibah->skema_hibah;
+                })
+                ->addColumn('nama_hibah', function ($value) {
+                    return $value->informasi_hibah->nama_hibah;
+                })
+                ->addColumn('kegiatan', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("kegiatan/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
+                ->addColumn('dokumen', function ($value) {
+                    $encryptedId = encrypt($value->informasi_hibah->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("pelaporan/input-dokumen/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="bi bi-file-earmark-plus fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
+                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah', 'dokumen'])
+                ->make(true);
+        }
     }
 }

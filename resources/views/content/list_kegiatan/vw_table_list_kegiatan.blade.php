@@ -188,47 +188,46 @@
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         width: '20px',
-                        className: 'text-center'
                     },
                     {
                         data: 'jenis_hibah',
                         name: 'jenis_hibah',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'program_studi',
                         name: 'program_studi',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'jenis_aktivitas',
                         name: 'jenis_aktivitas',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'nama_kegiatan',
                         name: 'nama_kegiatan',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'jumlah_luaran',
                         name: 'jumlah_luaran',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'satuan_luaran',
                         name: 'satuan_luaran',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'luaran_kegiatan',
                         name: 'luaran_kegiatan',
-                        className: 'text-center'
+                        
                     },
                     {
                         data: 'status_pelaksanaan_kegiatan',
                         name: 'status_pelaksanaan_kegiatan',
-                        className: 'text-center'
+                        
                     },
                     {
                         orderable: false,
@@ -240,7 +239,7 @@
             //filter
             $('#filter_tahun').change(function(e) {
                 tahun = $('#filter_tahun').val();
-                dtKegiatan.reload();
+                dtKegiatan.draw();
                 e.preventDefault();
             });
         });
