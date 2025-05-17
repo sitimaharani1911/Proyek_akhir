@@ -6,6 +6,8 @@ use App\Models\ListKegiatan;
 use App\Models\Proposal;
 use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class ListKegiatanController extends Controller
 {
@@ -14,15 +16,25 @@ class ListKegiatanController extends Controller
      */
     public function index()
     {
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $proposal = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
-        return view('content.list_kegiatan.vw_table_proposal', compact('proposal'));
+        return view('content.list_kegiatan.vw_table_proposal', compact('proposal', 'years'));
     }
 
     public function listKegiatan(string $proposal_id)
     {
+
+        // Decrypt the proposal_id
+        $proposal_id = decrypt($proposal_id);
+        $encryptedId    = encrypt($proposal_id);
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $listKegiatan = ListKegiatan::where('proposal_id', $proposal_id)->get();
         // dd($listKegiatan->toArray());
-        return view('content.list_kegiatan.vw_table_list_kegiatan', compact(['listKegiatan', 'proposal_id']));
+        return view('content.list_kegiatan.vw_table_list_kegiatan', compact(['listKegiatan', 'proposal_id', 'years', 'encryptedId']));
     }
 
     /**
@@ -72,7 +84,7 @@ class ListKegiatanController extends Controller
         // Simpan data ke tabel list_kegiatan
         ListKegiatan::create($validated);
 
-        return redirect()->route('list-kegiatan.data', ['proposal_id' => $proposal_id])
+        return redirect()->route('list-kegiatan.data', ['proposal_id' =>  encrypt($proposal_id)])
             ->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
@@ -90,6 +102,8 @@ class ListKegiatanController extends Controller
      */
     public function edit($id)
     {
+        // Decrypt the ID
+        $id = decrypt($id);
         $kegiatan = ListKegiatan::findOrFail($id);
         return view('content.list_kegiatan.vw_edit_list_kegiatan', compact('kegiatan'));
     }
@@ -153,7 +167,7 @@ class ListKegiatanController extends Controller
 
         $kegiatan->save();
 
-        return redirect()->route('list-kegiatan.data', ['proposal_id' => $kegiatan->proposal_id])
+        return redirect()->route('list-kegiatan.data', ['proposal_id' => encrypt($kegiatan->proposal_id)])
             ->with('success', 'Data berhasil diperbarui');
     }
 
@@ -172,7 +186,102 @@ class ListKegiatanController extends Controller
         $kegiatan->delete();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('list-kegiatan.data', ['proposal_id' => $kegiatan->proposal_id])
-            ->with('success', 'Data kegiatan berhasil dihapus.');
+        return response()->json([
+            'status' => true,
+            'message' => 'Data Berhasil dihapus',
+        ]);
+    }
+
+    public function data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('judul_proposal', 'like', "%{$search}%")
+                                ->orWhere('ketua_hibah', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('skema_hibah', function ($value) {
+                    return $value->informasi_hibah->skema_hibah;
+                })
+                ->addColumn('nama_hibah', function ($value) {
+                    return $value->informasi_hibah->nama_hibah;
+                })
+                ->addColumn('kegiatan', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("list-kegiatan/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
+                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah'])
+                ->make(true);
+        }
+    }
+
+    public function dataKegiatan(Request $request)
+    {
+        if ($request->ajax()) {
+            $proposal_id = decrypt($request->proposal_id);
+            // dd($proposal_id);
+            $data = ListKegiatan::where('proposal_id', $proposal_id)->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('nama_kegiatan', 'like', "%{$search}%")
+                                ->orWhere('jenis_hibah', 'like', "%{$search}%")
+                                ->orWhere('program_studi', 'like', "%{$search}%")
+                                ->orWhere('jenis_aktivitas', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    $detail  = '<a href="' . url("informasi_hibah/show/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                    $edit = '<a href="' . url("list-kegiatan/{$encryptedId}/edit") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-pencil fs-2 text-info"></i>
+                            </a>';
+                    $hapus = '<a href="javascript:void(0)" onclick="hapus(\'' . $value->id . '\')"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                               <i class="ki-outline ki-trash fs-2 text-danger"></i>
+                            </a>';
+
+                    $aksi = $detail . $edit . $hapus;
+                    return $aksi;
+                })
+                ->addColumn('surat_kerja', function ($value) {
+                    return '<a href="' . asset('storage/' . $value->surat_kerja) . '" target="_blank">Lihat</a>';
+                })
+                ->addColumn('surat_tugas', function ($value) {
+                    return '<a href="' . asset('storage/' . $value->surat_tugas) . '" target="_blank">Lihat</a>';
+                })
+                ->addColumn('template_laporan', function ($value) {
+                    return '<a href="' . url("template_laporan/{$value->id}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                })
+                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan'])
+                ->make(true);
+        }
     }
 }

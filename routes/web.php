@@ -57,12 +57,14 @@ Route::middleware(['custom-auth'])->group(
         // List Kegiatan
         Route::prefix('list-kegiatan')->group(function () {
             Route::get('/', [ListKegiatanController::class, 'index'])->name('list-kegiatan.index');
+            Route::post('/data', [ListKegiatanController::class, 'data'])->name('list-kegiatan.data-proposal');
+            Route::post('/data-kegiatan', [ListKegiatanController::class, 'dataKegiatan'])->name('list-kegiatan.data-kegiatan');
             Route::get('/{proposal_id}', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
             Route::get('/{proposal_id}/tambah', [ListKegiatanController::class, 'create'])->name('list-kegiatan.tambah');
             Route::post('/list-kegiatan/{proposal_id}/tambah', [ListKegiatanController::class, 'store'])->name('list-kegiatan.store');
             Route::get('/{id}/edit', [ListKegiatanController::class, 'edit'])->name('list-kegiatan.edit');
             Route::put('/{id}/update', [ListKegiatanController::class, 'update'])->name('list-kegiatan.update');
-            Route::delete('/{id}/destroy', [ListKegiatanController::class, 'destroy'])->name('list-kegiatan.destroy');
+            Route::delete('/destroy/{id}', [ListKegiatanController::class, 'destroy'])->name('list-kegiatan.destroy');
         });
 
         // Monev Kegiatan
