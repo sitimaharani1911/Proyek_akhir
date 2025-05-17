@@ -26,10 +26,19 @@
                     <h3 class="card-title align-items-start flex-column">
                         <span class="card-label fw-bold fs-3 mb-1">Laporan Keuangan</span>
                     </h3>
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <select name="tahun" id="filter_tahun" class="form-control w-150px" required>
+                            <option value="">Pilih Tahun</option>
+                            @foreach ($years as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="card-body py-3">
                     <div class="table-responsive">
-                        <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                        <table id="dtPengajuanProposal"
+                            class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
                             <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                     <th>No</th>
@@ -40,19 +49,21 @@
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                @forelse ($proposals as $proposal)
+                                {{-- @forelse ($proposals as $proposal)
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $proposal->informasi_hibah->nama_hibah}}</td>
-                                        <td>{{ $proposal->informasi_hibah->skema_hibah}}</td>
-                                        <td>{{ $proposal->ketua_hibah}}</td>
-                                        <td class="text-primary"><a href="{{ route('laporan-keuangan.kegiatan', ['proposal_id' => $proposal->id]) }}">Detail</a></td>
+                                        <td>{{ $proposal->informasi_hibah->nama_hibah }}</td>
+                                        <td>{{ $proposal->informasi_hibah->skema_hibah }}</td>
+                                        <td>{{ $proposal->ketua_hibah }}</td>
+                                        <td class="text-primary"><a
+                                                href="{{ route('laporan-keuangan.kegiatan', ['proposal_id' => $proposal->id]) }}">Detail</a>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="3">Belum ada kegiatan untuk proposal ini.</td>
                                     </tr>
-                                @endforelse
+                                @endforelse --}}
                             </tbody>
                         </table>
                     </div>
@@ -60,4 +71,82 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script type="text/javascript">
+        var method = '';
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let typingTimer;
+            let doneTypingInterval = 250;
+            var tahun = '';
+
+            let dtPengajuanProposal = $('#dtPengajuanProposal').DataTable({
+                responsive: true,
+                paging: true,
+                bDestroy: true,
+                searching: true,
+                ordering: false,
+                lengthChange: true,
+                autoWidth: false,
+                aaSorting: [],
+                serverSide: true,
+                processing: true,
+                language: {
+                    lengthMenu: "Show _MENU_"
+                },
+                dom: "<'row mb-2'" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-start dt-toolbar'l>" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-end dt-toolbar'f>" +
+                    ">" +
+                    "<'table-responsive'tr>" +
+                    "<'row'" +
+                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                    ">",
+                ajax: {
+                    type: 'POST',
+                    url: "{{ route('laporan-keuangan.data-proposal') }}",
+                    data: function(d) {
+                        d.tahun = tahun;
+                    }
+                },
+                columns: [{
+                        orderable: false,
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        width: '20px',
+                        className: 'text-center'
+                    },
+                    {
+                        data: 'nama_hibah',
+                        name: 'nama_hibah',
+                    },
+                    {
+                        data: 'skema_hibah',
+                        name: 'skema_hibah',
+                    },
+                    {
+                        data: 'ketua_hibah',
+                        name: 'ketua_hibah',
+                    },
+                    {
+                        orderable: false,
+                        data: 'kegiatan',
+                        className: 'text-center'
+                    },
+                ]
+            });
+            //filter
+            $('#filter_tahun').change(function(e) {
+                tahun = $('#filter_tahun').val();
+                dtPengajuanProposal.draw();
+                e.preventDefault();
+            });
+        });
+    </script>
 @endsection

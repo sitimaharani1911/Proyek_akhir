@@ -137,8 +137,8 @@ Route::middleware(['custom-auth'])->group(
         // Laporan Keuangan
         Route::prefix('laporan-keuangan')->group(function () {
             Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan.index');
-            Route::get('/show/id', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
-            Route::get('/edit/id', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
+            Route::post('/data', [LaporanKeuanganController::class, 'data'])->name('laporan-keuangan.data-proposal');
+            Route::post('/data/kegiatan', [LaporanKeuanganController::class, 'dataListKegiatan'])->name('laporan-keuangan.data-kegiatan');
             Route::get('/kegiatan/{proposal_id}', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
             Route::get('/review/{list_kegiatan_id}', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
             Route::post('/review/{pelaporan_id}/store', [LaporanKeuanganController::class, 'store'])->name('laporan-keuangan.store');

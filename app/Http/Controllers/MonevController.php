@@ -249,7 +249,7 @@ class MonevController extends Controller
         }
     }
 
-     public function dataListKegiatan(Request $request)
+    public function dataListKegiatan(Request $request)
     {
         if ($request->ajax()) {
             $proposal_id = decrypt($request->proposal_id);
@@ -284,10 +284,9 @@ class MonevController extends Controller
                                 <i class="bi bi-pencil-square fs-2 text-primary"></i></a>';
                     return $detail;
                 })
-                
+
                 ->rawColumns(['ketua_hibah', 'nama_kegiatan', 'aksi'])
                 ->make(true);
         }
     }
-    
 }
