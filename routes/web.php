@@ -88,7 +88,7 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/{proposal_id}', [KegiatanController::class, 'index'])->name('kegiatan.index');
             Route::get('/buat-laporan/{list_kegiatan_id}', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
             Route::post('/buat-laporan/{list_kegiatan_id}/create', [KegiatanController::class, 'store'])->name('kegiatan.store');
-            Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+            Route::get('/show//{list_kegiatan_id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
             Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
             Route::get('/hasil-monev', [KegiatanController::class, 'hasilMonev'])->name('kegiatan.hasilMonev');
             Route::get('/review-keuangan/{list_kegiatan_id}', [KegiatanController::class, 'reviewLaporan'])->name('kegiatan.review_keuangan');

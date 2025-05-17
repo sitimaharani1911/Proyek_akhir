@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ListKegiatan;
 use App\Models\Pelaporan;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
@@ -27,9 +28,10 @@ class KegiatanController extends Controller
         $kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
         return view('content.pelaporan.kegiatan.vw_tambah_kegiatan', compact('kegiatan', 'list_kegiatan_id'));
     }
-    public function hasilMonev()
+    public function hasilMonev(string $list_kegiatan_id)
     {
-        return view('content.pelaporan.kegiatan.vw_hasil_monev');
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get(); 
+        return view('content.pelaporan.kegiatan.vw_hasil_monev', compact('pelaporans'));
     }
     /**
      * Store a newly created resource in storage.
@@ -93,8 +95,9 @@ class KegiatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $list_kegiatan_id)
     {
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         return view('content.pelaporan.kegiatan.vw_detail_kegiatan');
     }
 
