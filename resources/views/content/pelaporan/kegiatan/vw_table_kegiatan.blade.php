@@ -53,7 +53,7 @@
                                     <th style="width: 200px;">Jenis Aktivitas</th>
                                     <th>Hasil Review Keuangan</th>
                                     <th>Hasil Monev</th>
-                                    <th>Aksi</th>
+                                    <th>Buat Laporan</th>
                                 </tr>
                             </thead>
                             <tbody class="border">
@@ -158,16 +158,19 @@
                     {
                         data: 'hasil_review_keuangan',
                         name: 'hasil_review_keuangan',
+                        className: 'text-center',
 
                     },
                     {
                         data: 'hasil_monev',
                         name: 'hasil_monev',
+                        className: 'text-center',
 
                     },
                     {
                         data: "buat_laporan",
                         name: "buat_laporan",
+                        className: 'text-center',
                     }
                 ]
             });

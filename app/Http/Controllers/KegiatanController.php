@@ -174,7 +174,7 @@ class KegiatanController extends Controller
                 ->addColumn('buat_laporan', function ($value) {
                     return '<a href="' . url("kegiatan/buat-laporan/{$value->id}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                                <i class="bi bi-file-earmark-plus fs-2 text-primary"></i></a>';
                 })
                 ->rawColumns(['hasil_review_keuangan', 'hasil_monev', 'buat_laporan', 'ketua_hibah', 'nama_kegiatan'])
                 ->make(true);

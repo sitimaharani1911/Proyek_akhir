@@ -24,7 +24,7 @@
             <div class="card mb-5 mb-xl-8">
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold fs-3 mb-1">Data Pelaporan Hibah</span>
+                        <span class="card-label fw-bold fs-3 mb-1">Data Pelaksanaan Hibah</span>
                     </h3>
                     <div class="d-flex align-items-center position-relative my-1">
                         <select name="tahun" id="filter_tahun" class="form-control w-150px" required>

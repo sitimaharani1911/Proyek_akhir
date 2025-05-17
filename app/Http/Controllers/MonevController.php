@@ -191,19 +191,30 @@ class MonevController extends Controller
     // PIMPINAN
     public function monevPimpinan()
     {
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         //dd($proposals->toArray());
-        return view('content.monev_pimpinan.vw_table_monev', compact('proposals'));
+        return view('content.monev_pimpinan.vw_table_monev', compact('proposals', 'years'));
     }
     public function monevPimpinanKegiatan(string $proposal_id)
     {
+        // decrypt proposal_id
+        $proposal_id = decrypt($proposal_id);
+        $encryptedId    = encrypt($proposal_id);
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $kegiatans = ListKegiatan::where('proposal_id', $proposal_id)->get();
         //dd($kegiatans->toArray());
-        return view('content.monev_pimpinan.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
+        return view('content.monev_pimpinan.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id', 'encryptedId', 'years'));
     }
 
     public function monevPimpinanReview(string $list_kegiatan_id)
     {
+        // decrypt list_kegiatan_id
+        $list_kegiatan_id = decrypt($list_kegiatan_id);
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         $monevs = Monev::with('pelaporan')->where('pelaporan_id', $pelaporans[0]['id'])->first();
         return view('content.monev_pimpinan.vw_monev_pimpinan', compact('pelaporans', 'list_kegiatan_id', 'monevs'));
@@ -254,6 +265,15 @@ class MonevController extends Controller
 
                     return $detail;
                 })
+                ->addColumn('kegiatanPimpinan', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("pimpinan/kegiatan/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
 
                 // dokumen
                 ->addColumn('dokumen', function ($value) {
@@ -264,7 +284,7 @@ class MonevController extends Controller
                                 <i class="bi bi-file-earmark-pdf fs-2 text-primary"></i></a>';
                     return $detail;
                 })
-                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah', 'dokumen', 'kegiatanPIU'])
+                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah', 'dokumen', 'kegiatanPIU', 'kegiatanPimpinan'])
                 ->make(true);
         }
     }
@@ -313,8 +333,16 @@ class MonevController extends Controller
                                 <i class="bi bi-pencil-square fs-2 text-primary"></i></a>';
                     return $detail;
                 })
+                ->addColumn('aksiPimpinan', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("pimpinan/verifikasi/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="bi bi-pencil-square fs-2 text-primary"></i></a>';
+                    return $detail;
+                })
 
-                ->rawColumns(['ketua_hibah', 'nama_kegiatan', 'aksi', 'aksiPIU'])
+                ->rawColumns(['ketua_hibah', 'nama_kegiatan', 'aksi', 'aksiPIU', 'aksiPimpinan'])
                 ->make(true);
         }
     }
