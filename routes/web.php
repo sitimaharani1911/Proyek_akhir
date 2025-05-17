@@ -110,6 +110,8 @@ Route::middleware(['custom-auth'])->group(
         // Monev
         Route::prefix('monev')->group(function () {
             Route::get('/', [MonevController::class, 'index'])->name('monev.index');
+            Route::post('/data', [MonevController::class, 'data'])->name('monev.data-proposal');
+            Route::post('/list-kegiatan', [MonevController::class, 'dataListKegiatan'])->name('monev.data-kegiatan');
             Route::get('/show/id', [MonevController::class, 'show'])->name('monev.show');
             Route::get('/edit/id', [MonevController::class, 'edit'])->name('monev.edit');
             Route::get('/tambah-pengajuan-dana', [MonevController::class, 'create'])->name('monev.tambah');

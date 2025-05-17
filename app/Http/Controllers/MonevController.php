@@ -12,6 +12,7 @@ use App\Models\ReviewPimpinan;
 use App\Models\ReviewPIU;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class MonevController extends Controller
 {
@@ -20,15 +21,24 @@ class MonevController extends Controller
      */
     public function index()
     {
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         // dd($proposals->toArray());
-        return view('content.monev.vw_table_monev', compact('proposals'));
+        return view('content.monev.vw_table_monev', compact('proposals', 'years'));
     }
     public function dataKegiatan(string $proposal_id)
     {
+        // decrypt proposal_id
+        $proposal_id = decrypt($proposal_id);
+        $encryptedId    = encrypt($proposal_id);
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $kegiatans = ListKegiatan::with('proposal')->where('proposal_id', $proposal_id)->get();
         // dd($kegiatans->toArray());
-        return view('content.monev.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
+        return view('content.monev.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id', 'encryptedId', 'years'));
     }
     /**
      * Show the form for creating a new resource.
@@ -39,13 +49,17 @@ class MonevController extends Controller
     }
     public function reviewLaporan(string $list_kegiatan_id)
     {
+        // decrypt list_kegiatan_id
+        $list_kegiatan_id = decrypt($list_kegiatan_id);
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
-        
+
         // dd($pelaporans->toArray());
         return view('content.monev.vw_review_laporan', compact('pelaporans', 'list_kegiatan_id'));
     }
     public function detailDokumen($informasi_hibah_id)
     {
+        // decrypt informasi_hibah_id
+        $informasi_hibah_id = decrypt($informasi_hibah_id);
         $documents = DokumenHibah::with('informasi_hibah')->where('informasi_hibah_id', $informasi_hibah_id)->get();
         // dd($documents->toArray());
         return view('content.monev.vw_detail_dokumen', compact('documents'));
@@ -69,7 +83,7 @@ class MonevController extends Controller
             'status_laporan_keuangan' => 'required|string|max:255',
             'catatan_laporan_keuangan' => 'nullable|string|max:2550',
             'status_luaran' => 'required|string|max:255',
-            'catatan_luaran' => 'nullable|string|max:2550', 
+            'catatan_luaran' => 'nullable|string|max:2550',
             'status_dampak' => 'required|string|max:255',
             'catatan_dampak' => 'nullable|string|max:2550',
             'status_dokumentasi' => 'required|string|max:255',
@@ -88,7 +102,6 @@ class MonevController extends Controller
         $validated['laporan_monev'] = $laporan_monev_path;
         Monev::create($validated);
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
-
     }
     public function storePIU(Request $request, $pelaporan_id)
     {
@@ -100,7 +113,6 @@ class MonevController extends Controller
 
         ReviewPIU::create($validated);
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
-
     }
     public function storePimpinan(Request $request, $pelaporan_id)
     {
@@ -112,7 +124,6 @@ class MonevController extends Controller
 
         ReviewPimpinan::create($validated);
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
-
     }
 
     /**
@@ -171,7 +182,7 @@ class MonevController extends Controller
     {
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         //dd($proposals->toArray());
-        return view('content.monev_pimpinan.vw_table_monev' , compact('proposals'));
+        return view('content.monev_pimpinan.vw_table_monev', compact('proposals'));
     }
     public function monevPimpinanKegiatan(string $proposal_id)
     {
@@ -179,11 +190,104 @@ class MonevController extends Controller
         //dd($kegiatans->toArray());
         return view('content.monev_pimpinan.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
     }
-       
+
     public function monevPimpinanReview(string $list_kegiatan_id)
     {
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         $monevs = Monev::with('pelaporan')->where('pelaporan_id', $pelaporans[0]['id'])->first();
         return view('content.monev_pimpinan.vw_monev_pimpinan', compact('pelaporans', 'list_kegiatan_id', 'monevs'));
     }
+
+
+    public function data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('judul_proposal', 'like', "%{$search}%")
+                                ->orWhere('ketua_hibah', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('nama_hibah', function ($value) {
+                    return $value->informasi_hibah->nama_hibah;
+                })
+                ->addColumn('skema_hibah', function ($value) {
+                    return $value->informasi_hibah->skema_hibah;
+                })
+
+
+                ->addColumn('kegiatan', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("monev/monev-kegiatan/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
+
+                // dokumen
+                ->addColumn('dokumen', function ($value) {
+                    $encryptedId = encrypt($value->informasi_hibah->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("monev/detail-dokumen/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="bi bi-file-earmark-pdf fs-2 text-primary"></i></a>';
+                    return $detail;
+                })
+                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah', 'dokumen'])
+                ->make(true);
+        }
+    }
+
+     public function dataListKegiatan(Request $request)
+    {
+        if ($request->ajax()) {
+            $proposal_id = decrypt($request->proposal_id);
+            // dd($proposal_id);
+            $data = ListKegiatan::with(['proposal.informasi_hibah'])->where('proposal_id', $proposal_id)->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('nama_kegiatan', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('nama_kegiatan', function ($value) {
+                    return $value->proposal->judul_proposal;
+                })
+                // add kolom ketua hibah
+                ->addColumn('ketua_hibah', function ($value) {
+                    return $value->proposal->ketua_hibah;
+                })
+                // kolom aksi
+                ->addColumn('aksi', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("monev/review-laporan/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="bi bi-pencil-square fs-2 text-primary"></i></a>';
+                    return $detail;
+                })
+                
+                ->rawColumns(['ketua_hibah', 'nama_kegiatan', 'aksi'])
+                ->make(true);
+        }
+    }
+    
 }
