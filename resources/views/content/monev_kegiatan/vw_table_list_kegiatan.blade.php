@@ -53,7 +53,6 @@
                                     <th style="width: 130px;">Surat Kerja</th>
                                     <th style="width: 130px;">Surat Tugas</th>
                                     <th style="width: 130px;">Template Laporan</th>
-                                    <th style="width: 150px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="border">

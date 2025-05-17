@@ -38,7 +38,7 @@ class MonevKegiatanController extends Controller
     public function simpanTemplate(Request $request, $id)
     {
         $request->validate([
-            'template_laporan' => 'required|mimes:pdf,doc,docx|max:2048',
+            'template_laporan' => 'required|mimes:pdf,doc,docx|max:5120', // 5MB
         ]);
 
         $kegiatan = ListKegiatan::findOrFail($id);

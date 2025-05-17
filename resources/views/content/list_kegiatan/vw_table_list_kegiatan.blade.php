@@ -108,8 +108,13 @@
                                         </td>
 
                                         <td class="text-primary">
-                                            <a href="{{ asset('storage/template_laporan/' . $kegiatan->template_laporan) }}"
-                                                target="_blank">Download</a>
+                                            <!-- Tombol untuk memicu modal -->
+                                            @if ($kegiatan->template_laporan)
+                                                <a href="{{ asset('storage/' . $kegiatan->template_laporan) }}"
+                                                    target="_blank">Download</a>
+                                            @else
+                                                <span class="text-danger">Belum ada template</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <a href="{{ route('list-kegiatan.edit', ['id' => $kegiatan->id]) }}">
@@ -142,44 +147,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        document.querySelectorAll('.delete-btn').forEach(function(button) {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                var kegiatanNama = button.getAttribute('data-nama');
-                var form = button.closest('form'); // Ambil form terdekat
-
-                Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: "Anda akan menghapus kegiatan \"" + kegiatanNama + "\"!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: "<span><i class='flaticon-interface-1'></i><span>Ya, Hapus!</span></span>",
-                    confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
-                    cancelButtonText: "<span><i class='flaticon-close'></i><span>Batal Hapus</span></span>",
-                    cancelButtonClass: "btn btn-metal m-btn m-btn--pill m-btn--icon",
-                    customClass: {
-                        confirmButton: 'btn btn-danger m-btn m-btn--pill m-btn--icon',
-                        cancelButton: 'btn btn-metal m-btn m-btn--pill m-btn--icon'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit(); // Submit form manual
-                    }
-                });
-            });
-        });
-        @if (session('success'))
-            Swal.fire({
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        @endif
-    </script>
 @endsection

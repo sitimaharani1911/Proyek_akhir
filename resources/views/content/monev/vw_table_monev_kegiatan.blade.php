@@ -35,8 +35,8 @@
             </div>
             <div class="card-body py-3">
                 <div class="table-responsive">
-                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                        <thead>
+                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                        <thead class="border">
                             <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                 <th>No</th>
                                 <th>Nama Kegiatan</th>
@@ -45,7 +45,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="border">
                             @forelse ($kegiatans as $kegiatan)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
