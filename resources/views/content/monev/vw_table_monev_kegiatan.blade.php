@@ -39,7 +39,7 @@
                         <thead>
                             <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                 <th>No</th>
-                                <th>Nama Hibah</th>
+                                <th>Nama Kegiatan</th>
                                 <th>Ketua Pelaksana</th>
                                 <th>Tempat</th>
                                 <th>Aksi</th>
@@ -49,7 +49,7 @@
                             @forelse ($kegiatans as $kegiatan)
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $kegiatan->proposal->informasi_hibah->nama_hibah }}</td>
+                                <td>{{ $kegiatan->nama_kegiatan}}</td>
                                 <td>{{ $kegiatan->proposal->ketua_hibah }}</td>
                                 <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
                                 <td>

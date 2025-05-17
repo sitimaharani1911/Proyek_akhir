@@ -68,7 +68,10 @@ Route::middleware(['custom-auth'])->group(
         // Monev Kegiatan
         Route::prefix('monev-kegiatan')->group(function () {
             Route::get('/', [MonevKegiatanController::class, 'index'])->name('monev-kegiatan.index');
-            Route::get('/data', [MonevKegiatanController::class, 'listKegiatan'])->name('monev-kegiatan.data');
+            Route::get('/data/{proposal_id}', [MonevKegiatanController::class, 'listKegiatan'])->name('monev-kegiatan.data');
+            Route::get('/list-kegiatan/{id}/unggah-template', [MonevKegiatanController::class, 'unggahTemplate'])->name('template-laporan.upload');
+            Route::post('/list-kegiatan/{id}/unggah-template', [MonevKegiatanController::class, 'simpanTemplate'])->name('template-laporan.store');
+
         });
 
         // Pelaporan
@@ -119,8 +122,9 @@ Route::middleware(['custom-auth'])->group(
         // Verifikasi Monev Pimpinan
         Route::prefix('pimpinan')->group(function () {
             Route::get('/', [MonevController::class, 'monevPimpinan'])->name('pimpinan.index');
-            Route::get('/kegiatan', [MonevController::class, 'monevPimpinanKegiatan'])->name('pimpinan.kegiatan');
-            Route::get('/verifikasi', [MonevController::class, 'monevPimpinanReview'])->name('pimpinan.review');
+            Route::get('/kegiatan/{proposal_id}', [MonevController::class, 'monevPimpinanKegiatan'])->name('pimpinan.kegiatan');
+            Route::get('/verifikasi/{list_kegiatan_id}', [MonevController::class, 'monevPimpinanReview'])->name('pimpinan.review');
+            Route::post('/verifikasi/{pelaporan_id}/store', [MonevController::class, 'storePimpinan'])->name('pimpinan.store');
         });
         // Laporan Keuangan
         Route::prefix('laporan-keuangan')->group(function () {

@@ -8,13 +8,13 @@
                     Verifikasi Monitoring dan Evaluasi Kegiatan</h1>
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('pimpinan.index')}}" class="text-muted text-hover-primary">Verifikasi Monev</a>
+                        <a class="text-muted text-hover-primary">Verifikasi Monev</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
                     </li>
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{route('pimpinan.kegiatan')}}" class="text-muted text-hover-primary">Kegiatan</a>
+                        <a class="text-muted text-hover-primary">Kegiatan</a>
                     </li>
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -35,30 +35,36 @@
             </div>
             <div class="card-body py-3">
                 <div class="table-responsive">
-                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                        <thead>
+                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                        <thead class="border">
                             <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                 <th>No</th>
-                                <th>Nama Hibah</th>
+                                <th>Nama Kegiatan</th>
                                 <th>Ketua Pelaksana</th>
                                 <th>Tanggal</th>
                                 <th>Tempat</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>NFN</td>
+                        <tbody class="border">
+                            @forelse ($kegiatans as $kegiatan)
+                            <tr class="">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $kegiatan->proposal->judul_proposal }}</td>
+                                <td>{{ $kegiatan->proposal->ketua_hibah }}</td>
                                 <td>04-03-2025</td>
-                                <td>Politeknik Caltex Riau</td>
+                                <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
                                 <td>
-                                    <a href="{{route('pimpinan.review')}}">
+                                    <a href="{{ route('pimpinan.review', ['list_kegiatan_id' => $kegiatan->id]) }}">
                                         <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
                                     </a>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Tidak Ada Data Hibah</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

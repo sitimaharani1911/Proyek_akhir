@@ -112,28 +112,44 @@
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Nilai</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $monevs->nilai }}</span>
+                                            @if ($monevs)
+                                                <span class="fw-semibold">{{ $monevs->nilai }}</span>
+                                            @else
+                                                <span class="fw-semibold">Belum dinilai</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Persentase Capaian</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $monevs->persentase_capaian }}%</span>
+                                            @if ($monevs)
+                                                <span class="fw-semibold">{{ $monevs->persentase_capaian }}</span>
+                                            @else
+                                                <span class="fw-semibold">Belum dinilai</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Status</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $monevs->status }}</span>
+                                            @if ($monevs)
+                                                <span class="fw-semibold">{{ $monevs->status }}</span>
+                                            @else
+                                                <span class="fw-semibold">Belum dinilai</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Tim Monev</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $monevs->tim_monev }}</span>
+                                            @if ($monevs)
+                                                <span class="fw-semibold">{{ $monevs->tim_monev }}</span>
+                                            @else
+                                                <span class="fw-semibold">Belum dinilai</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -151,14 +167,38 @@
                                     <tr class="text-center">
                                         <td class="fw-bold">Pengajuan Dana</td>
                                         <td>{{ $pelaporan->pengajuan_dana }}</td>
-                                        <td>{{ $monevs->status_pengajuan_dana }}</td>
-                                        <td>{{ $monevs->catatan_pengajuan_dana ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_pengajuan_dana }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_pengajuan_dana ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Sisa Dana</td>
                                         <td>{{ $pelaporan->sisa_dana }}</td>
-                                        <td>{{ $monevs->status_sisa_dana }}</td>
-                                        <td>{{ $monevs->catatan_sisa_dana ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_sisa_dana }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_sisa_dana ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Surat Kerja</td>
@@ -171,8 +211,20 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $monevs->status_surat_kerja }}</td>
-                                        <td>{{ $monevs->catatan_surat_kerja ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_surat_kerja }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_surat_kerja ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Surat Tugas</td>
@@ -185,8 +237,20 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $monevs->status_surat_tugas }}</td>
-                                        <td>{{ $monevs->catatan_surat_tugas ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_surat_tugas }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_surat_tugas ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Surat Laporan Kegiatan</td>
@@ -199,8 +263,20 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $monevs->status_laporan_kegiatan }}</td>
-                                        <td>{{ $monevs->catatan_laporan_kegiatan ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_laporan_kegiatan }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_laporan_kegiatan ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Surat Laporan Keuangan</td>
@@ -213,26 +289,74 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $monevs->status_laporan_keuangan }}</td>
-                                        <td>{{ $monevs->catatan_laporan_keuangan ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_laporan_keuangan }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_laporan_keuangan ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Luaran</td>
                                         <td>{{ $pelaporan->luaran }}</td>
-                                        <td>{{ $monevs->status_luaran }}</td>
-                                        <td>{{ $monevs->catatan_luaran ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_luaran }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_luaran ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Dampak</td>
                                         <td>{{ $pelaporan->dampak }}</td>
-                                        <td>{{ $monevs->status_dampak }}</td>
-                                        <td>{{ $monevs->catatan_dampak ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_dampak }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_dampak ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Dokumentasi</td>
                                         <td>{{ $pelaporan->dokumentasi }}</td>
-                                        <td>{{ $monevs->status_dokumentasi }}</td>
-                                        <td>{{ $monevs->catatan_dokumentasi ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_dokumentasi }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_dokumentasi ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Lainnya</td>
@@ -244,13 +368,24 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $monevs->status_lainnya }}</td>
-                                        <td>{{ $monevs->catatan_lainnya ?? '-' }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_lainnya }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_lainnya ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <div class="card mb-5 mb-xl-8">
                         <div class="card-header border-0 pt-5">

@@ -8,6 +8,7 @@ use App\Models\Monev;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use App\Models\ReviewKeuangan;
+use App\Models\ReviewPimpinan;
 use App\Models\ReviewPIU;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
@@ -101,6 +102,18 @@ class MonevController extends Controller
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
 
     }
+    public function storePimpinan(Request $request, $pelaporan_id)
+    {
+        $validated = $request->validate([
+            'catatan' => 'required|string|max:2550',
+        ]);
+
+        $validated['pelaporan_id'] = $pelaporan_id;
+
+        ReviewPimpinan::create($validated);
+        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
+
+    }
 
     /**
      * Display the specified resource.
@@ -156,14 +169,21 @@ class MonevController extends Controller
     // PIMPINAN
     public function monevPimpinan()
     {
-        return view('content.monev_pimpinan.vw_table_monev');
+        $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
+        //dd($proposals->toArray());
+        return view('content.monev_pimpinan.vw_table_monev' , compact('proposals'));
     }
-    public function monevPimpinanKegiatan()
+    public function monevPimpinanKegiatan(string $proposal_id)
     {
-        return view('content.monev_pimpinan.vw_table_monev_kegiatan');
+        $kegiatans = ListKegiatan::where('proposal_id', $proposal_id)->get();
+        //dd($kegiatans->toArray());
+        return view('content.monev_pimpinan.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
     }
-    public function monevPimpinanReview()
+       
+    public function monevPimpinanReview(string $list_kegiatan_id)
     {
-        return view('content.monev_pimpinan.vw_monev_pimpinan');
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        $monevs = Monev::with('pelaporan')->where('pelaporan_id', $pelaporans[0]['id'])->first();
+        return view('content.monev_pimpinan.vw_monev_pimpinan', compact('pelaporans', 'list_kegiatan_id', 'monevs'));
     }
 }

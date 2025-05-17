@@ -29,8 +29,8 @@
             </div>
             <div class="card-body py-3">
                 <div class="table-responsive">
-                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                        <thead>
+                    <table class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+                        <thead class="border">
                             <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                 <th>No</th>
                                 <th>Nama Hibah</th>
@@ -39,14 +39,20 @@
                                 <th>Kegiatan</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="border">
+                            @forelse ($proposals as $proposal)
                             <tr class="text-center">
-                                <td>1</td>
-                                <td>Hibah Aset PEDP</td>
-                                <td>CF</td>
-                                <td>NFN</td>
-                                <td class="text-primary"><a href="{{route('monev-kegiatan.data')}}">Detail</a></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $proposal->informasi_hibah->nama_hibah }}</td>
+                                <td>{{ $proposal->informasi_hibah->skema_hibah }}</td>
+                                <td>{{ $proposal->ketua_hibah }}</td>
+                                <td class="text-primary"><a href="{{ route('monev-kegiatan.data', ['proposal_id' => $proposal->id]) }}">Detail</a></td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Tidak ada data</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

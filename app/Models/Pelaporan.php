@@ -20,4 +20,8 @@ class Pelaporan extends Model
     {
         return $this->hasOne(ReviewPiu::class);
     }
+    public function review_pimpinan()
+    {
+        return $this->hasOne(ReviewPimpinan::class);
+    }
 }
