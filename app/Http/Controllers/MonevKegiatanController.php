@@ -6,6 +6,7 @@ use App\Models\ListKegiatan;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class MonevKegiatanController extends Controller
 {
@@ -14,12 +15,17 @@ class MonevKegiatanController extends Controller
      */
     public function index()
     {
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         // dd($proposals->toArray());
-        return view('content.monev_kegiatan.vw_table_hibah', compact('proposals'));
+        return view('content.monev_kegiatan.vw_table_hibah', compact('proposals', 'years'));
     }
     public function listKegiatan(string $proposal_id)
     {
+        // decrypt proposal_id
+        $proposal_id = decrypt($proposal_id);
         $kegiatans = ListKegiatan::with('proposal')->where('proposal_id', $proposal_id)->get();
         // dd($kegiatans->toArray());
         return view('content.monev_kegiatan.vw_table_list_kegiatan', compact('kegiatans', 'proposal_id'));
@@ -109,5 +115,43 @@ class MonevKegiatanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function dataProposal(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->orderBy('id', 'DESC');
+            if ($request->tahun) {
+                $data->where('created_at', 'like', $request->tahun . '%');
+            }
+            return DataTables::of($data)
+                ->filter(function ($query) {
+                    if (request()->has('search.value')) {
+                        $search = request('search.value');
+                        $query->where(function ($q) use ($search) {
+                            $q->where('judul_proposal', 'like', "%{$search}%")
+                                ->orWhere('ketua_hibah', 'like', "%{$search}%");
+                        });
+                    }
+                })
+                ->addIndexColumn()
+                ->addColumn('nama_hibah', function ($value) {
+                    return $value->informasi_hibah->nama_hibah;
+                })
+                ->addColumn('skema_hibah', function ($value) {
+                    return $value->informasi_hibah->skema_hibah;
+                })
+                ->addColumn('kegiatan', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("monev-kegiatan/data/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
+                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah'])
+                ->make(true);
+        }
     }
 }
