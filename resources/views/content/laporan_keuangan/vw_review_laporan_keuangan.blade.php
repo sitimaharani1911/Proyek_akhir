@@ -45,6 +45,10 @@
                         </h3>
                     </div>
                     <div class="card-body py-3">
+                        @if ($review)
+                            <div class="alert alert-success">Laporan Ini Sudah Direview</div>
+                        @endif
+
                         <form class="row"
                             action="{{ route('laporan-keuangan.store', ['pelaporan_id' => $pelaporan->id]) }}"
                             method="POST" id="formAdd" enctype="multipart/form-data">

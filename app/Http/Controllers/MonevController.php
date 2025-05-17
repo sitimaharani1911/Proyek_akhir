@@ -160,18 +160,29 @@ class MonevController extends Controller
     // KETUA PIU
     public function monevPiu()
     {
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $proposals = Proposal::with('informasi_hibah')->where('status_eksternal', '3')->get();
         // dd($proposals->toArray());
-        return view('content.monev_piu.vw_table_monev', compact('proposals'));
+        return view('content.monev_piu.vw_table_monev', compact('proposals', 'years'));
     }
     public function monevPiuKegiatan(string $proposal_id)
     {
+        // decrypt proposal_id
+        $proposal_id = decrypt($proposal_id);
+        $encryptedId    = encrypt($proposal_id);
+        $currentYear = date('Y');
+        $startYear = 2019;
+        $years = range($currentYear, $startYear);
         $kegiatans = ListKegiatan::where('proposal_id', $proposal_id)->get();
         // dd($kegiatans->toArray());
-        return view('content.monev_piu.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id'));
+        return view('content.monev_piu.vw_table_monev_kegiatan', compact('kegiatans', 'proposal_id', 'encryptedId', 'years'));
     }
     public function monevPiuReview(string $list_kegiatan_id)
     {
+        // decrypt list_kegiatan_id
+        $list_kegiatan_id = decrypt($list_kegiatan_id);
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         $monevs = Monev::with('pelaporan')->where('pelaporan_id', $pelaporans[0]['id'])->first();
         // dd($monevs);
@@ -234,6 +245,15 @@ class MonevController extends Controller
 
                     return $detail;
                 })
+                ->addColumn('kegiatanPIU', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("piu/kegiatan/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+
+                    return $detail;
+                })
 
                 // dokumen
                 ->addColumn('dokumen', function ($value) {
@@ -244,7 +264,7 @@ class MonevController extends Controller
                                 <i class="bi bi-file-earmark-pdf fs-2 text-primary"></i></a>';
                     return $detail;
                 })
-                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah', 'dokumen'])
+                ->rawColumns(['kegiatan', 'skema_hibah', 'nama_hibah', 'dokumen', 'kegiatanPIU'])
                 ->make(true);
         }
     }
@@ -285,7 +305,16 @@ class MonevController extends Controller
                     return $detail;
                 })
 
-                ->rawColumns(['ketua_hibah', 'nama_kegiatan', 'aksi'])
+                ->addColumn('aksiPIU', function ($value) {
+                    $encryptedId = encrypt($value->id);
+                    // $id = $value->id;
+                    $detail  = '<a href="' . url("piu/verifikasi/{$encryptedId}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="bi bi-pencil-square fs-2 text-primary"></i></a>';
+                    return $detail;
+                })
+
+                ->rawColumns(['ketua_hibah', 'nama_kegiatan', 'aksi', 'aksiPIU'])
                 ->make(true);
         }
     }
