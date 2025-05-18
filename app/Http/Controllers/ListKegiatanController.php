@@ -94,7 +94,10 @@ class ListKegiatanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = decrypt($id);
+        $kegiatan = ListKegiatan::with('proposal')->findOrFail($id);
+        // dd($kegiatan->toArray());
+        return view('content.list_kegiatan.vw_detail_list_kegiatan', compact('kegiatan'));
     }
 
     /**
@@ -254,7 +257,7 @@ class ListKegiatanController extends Controller
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($value) {
                     $encryptedId = encrypt($value->id);
-                    $detail  = '<a href="' . url("informasi_hibah/show/{$encryptedId}") . '"
+                    $detail  = '<a href="' . url("list-kegiatan/show/{$encryptedId}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
                     $edit = '<a href="' . url("list-kegiatan/{$encryptedId}/edit") . '"

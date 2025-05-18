@@ -58,6 +58,7 @@ Route::middleware(['custom-auth'])->group(
         Route::prefix('list-kegiatan')->group(function () {
             Route::get('/', [ListKegiatanController::class, 'index'])->name('list-kegiatan.index');
             Route::post('/data', [ListKegiatanController::class, 'data'])->name('list-kegiatan.data-proposal');
+            Route::get('/show/{id}', [ListKegiatanController::class, 'show'])->name('list-kegiatan.show');
             Route::post('/data-kegiatan', [ListKegiatanController::class, 'dataKegiatan'])->name('list-kegiatan.data-kegiatan');
             Route::get('/{proposal_id}', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
             Route::get('/{proposal_id}/tambah', [ListKegiatanController::class, 'create'])->name('list-kegiatan.tambah');
