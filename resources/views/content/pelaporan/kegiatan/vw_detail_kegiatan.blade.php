@@ -54,21 +54,23 @@
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Nama Kegiatan</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->nama_kegiatan }}</span>
+                                            <span class="fw-semibold">{{ $pelaporan->list_kegiatan->nama_kegiatan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Ketua Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->ketua_pelaksana }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->proposal->ketua_hibah }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Anggota Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->anggota_pelaksana }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->panitia_pengerjaan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -96,7 +98,8 @@
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Tempat</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->tempat }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->tempat_pelaksanaan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -215,7 +218,8 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Nama Kegiatan</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->nama_kegiatan }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->nama_kegiatan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -230,7 +234,8 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Anggota Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->anggota_pelaksana }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->panitia_pengerjaan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -244,7 +249,8 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Tempat</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->tempat }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->tempat_pelaksanaan }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -548,113 +554,149 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card mb-5 mb-xl-8">
-                        <div class="card-header border-0 pt-5">
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold fs-3 mb-1">Revisi Pelaporan</span>
-                            </h3>
+                    @if ($monevs && $monevs->status === 'open')
+                        <div class="card mb-5 mb-xl-8">
+                            <div class="card-header border-0 pt-5">
+                                <h3 class="card-title align-items-start flex-column">
+                                    <span class="card-label fw-bold fs-3 mb-1">Revisi Pelaporan</span>
+                                </h3>
+                            </div>
+                            <div class="card-body py-3">
+                                <form class="row"
+                                    action="{{ route('kegiatan.store', ['list_kegiatan_id' => $list_kegiatan_id]) }}"
+                                    method="POST" id="formAdd" enctype="multipart/form-data">
+                                    @csrf
+
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul class="mb-0">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    <input type="hidden" name="id" value="">
+                                    <input type="hidden" name="list_kegiatan_id" value="{{ $list_kegiatan_id }}">
+
+                                    {{-- Kiri --}}
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Tanggal <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" name="tanggal" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Jumlah Peserta <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Jumlah Peserta"
+                                                name="jumlah_peserta" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Absensi Peserta <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="absensi_peserta" />
+                                            <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Pengajuan Dana <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Pengajuan Dana"
+                                                name="pengajuan_dana" />
+                                            <span class="text-danger">Ket: Pastikan nominal yang diinput benar</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Sisa Dana <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Sisa Dana"
+                                                name="sisa_dana" />
+                                            <span class="text-danger">Ket: Pastikan nominal yang diinput benar</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Surat Kerja <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="surat_kerja" />
+                                            <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Surat Tugas <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="surat_tugas" />
+                                            <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+                                    </div>
+
+                                    {{-- Kanan --}}
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Laporan Kegiatan <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="laporan_kegiatan" />
+                                            <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Laporan Keuangan <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="laporan_keuangan" />
+                                            <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Luaran <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Luaran"
+                                                name="luaran" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Dampak <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" placeholder="Dampak"
+                                                name="dampak" />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Dokumentasi <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="url" class="form-control" placeholder="https://link.com"
+                                                name="dokumentasi" />
+                                            <span class="text-danger">Ket: Pastikan link dapat diakses</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Lainnya <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="lainnya" />
+                                            <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Bukti Pembayaran <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="url" class="form-control" placeholder="https://gdrive.com"
+                                                name="bukti_pembayaran" />
+                                            <span class="text-danger">Ket: Lampirkan seluruh bukti pembayaran</span>
+                                        </div>
+                                    </div>
+
+                                    {{-- Tombol Submit --}}
+                                    <div class="col-12 text-end mt-4">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
                         </div>
-                        <div class="card-body py-3">
-                            <form class="row g-3" action="" method="POST" id="formAdd"
-                                enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="">
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Nama Kegiatan <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Nama Kegiatan"
-                                        name="nama_kegiatan" />
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Surat Kerja <span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="surat_kerja" />
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Ketua Pelaksana <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Ketua Pelaksana"
-                                        name="ketua_pelaksana" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Surat Tugas <span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="surat_tugas" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Anggota Pelaksana <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Anggota Pelaksana"
-                                        name="anggota_pelaksana" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Laporan Kegiatan <span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="laporan_kegiatan" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Pengajuan Dana <span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" placeholder="Pengajuan Dana"
-                                        name="pengajuan_dana" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Laporan Keuangan <span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="laporan_keuangan" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Sisa Dana <span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" placeholder="Sisa Dana"
-                                        name="sisa_dana" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Luaran <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Luaran" name="luaran" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Tanggal <span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Dampak <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Dampak" name="dampak" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Tempat <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Tempat" name="Tempat" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Dokumentasi <span
-                                            class="text-danger">*</span></label>
-                                    <input type="url" class="form-control" placeholder="Dokumentasi"
-                                        name="dokumentasi" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Jumlah Peserta <span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" placeholder="Jumlah Peserta"
-                                        name="jumlah_peserta" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Lainnya <span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="lainnya" />
-                                </div>
-                                <div class="col-12 text-end mt-5">
-                                    <button type="button" onclick="save()" class="btn btn-primary">Edit</button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
+                    @endif
                 @empty
                     <div class="alert alert-danger">
                         <strong>Data tidak ditemukan!</strong>
@@ -663,4 +705,26 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        // Notifikasi jika ada error validasi
+        @if ($errors->any())
+            Swal.fire({
+                title: 'Error!',
+                text: 'Periksa kembali form Anda.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if (session('success'))
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 @endsection

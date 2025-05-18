@@ -56,7 +56,7 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Nama Kegiatan</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->nama_kegiatan }}</span>
+                                            <span class="fw-semibold">{{ $pelaporan->list_kegiatan->nama_kegiatan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -71,7 +71,7 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Anggota Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->anggota_pelaksana }}</span>
+                                            <span class="fw-semibold">{{ $pelaporan->list_kegiatan->panitia_pengerjaan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -85,7 +85,7 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Tempat</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->tempat }}</span>
+                                            <span class="fw-semibold">{{ $pelaporan->list_kegiatan->tempat_pelaksanaan }}</span>
                                         </div>
                                     </div>
                                 </div>

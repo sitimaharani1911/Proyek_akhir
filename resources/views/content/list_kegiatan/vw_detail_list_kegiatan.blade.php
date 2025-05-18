@@ -57,14 +57,14 @@
                                     <label class="col-md-4 fw-bold fs-6 text-gray-800">Jenis Hibah</label>
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->jenis_hibah }}</span>
+                                        <span class="fw-semibold">{{ $kegiatan->proposal->informasi_hibah->skema_hibah }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label class="col-md-4 fw-bold fs-6 text-gray-800">program_studi</label>
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->program_studi }}</span>
+                                        <span class="fw-semibold">{{ $kegiatan->proposal->informasi_hibah->prodi_terlibat }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">

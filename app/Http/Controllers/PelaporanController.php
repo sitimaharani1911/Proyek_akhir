@@ -84,7 +84,7 @@ class PelaporanController extends Controller
     {
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         // dd($pelaporan->toArray());
-        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans'));
+        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id'));
     }
 
     /**

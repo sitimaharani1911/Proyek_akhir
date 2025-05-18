@@ -52,8 +52,6 @@ class ListKegiatanController extends Controller
     public function store(Request $request, $proposal_id)
     {
         $validated = $request->validate([
-            'jenis_hibah' => 'required|string|max:255',
-            'program_studi' => 'required|string|max:255',
             'jenis_aktivitas' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
             'jumlah_luaran' => 'required|integer',
@@ -117,8 +115,6 @@ class ListKegiatanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jenis_hibah' => 'required|string|max:255',
-            'program_studi' => 'required|string|max:255',
             'jenis_aktivitas' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
             'jumlah_luaran' => 'required|numeric',
@@ -128,7 +124,7 @@ class ListKegiatanController extends Controller
             'total_pengajuan_anggaran' => 'required|numeric',
             'total_penggunaan_anggaran' => 'required|numeric',
             'tanggal_awal' => 'required|date',
-            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+            'tanggal_akhir' => 'required|date',
             'rentang_pengerjaan' => 'required|string|max:255',
             'panitia_pengerjaan' => 'required|string|max:255',
             'rincian_jumlah_peserta' => 'required|string|max:255',
@@ -151,8 +147,6 @@ class ListKegiatanController extends Controller
         }
 
         // Update field lainnya
-        $kegiatan->jenis_hibah = $request->jenis_hibah;
-        $kegiatan->program_studi = $request->program_studi;
         $kegiatan->jenis_aktivitas = $request->jenis_aktivitas;
         $kegiatan->nama_kegiatan = $request->nama_kegiatan;
         $kegiatan->jumlah_luaran = $request->jumlah_luaran;
@@ -238,7 +232,7 @@ class ListKegiatanController extends Controller
         if ($request->ajax()) {
             $proposal_id = decrypt($request->proposal_id);
             // dd($proposal_id);
-            $data = ListKegiatan::where('proposal_id', $proposal_id)->orderBy('id', 'DESC');
+            $data = ListKegiatan::with('proposal')->where('proposal_id', $proposal_id)->orderBy('id', 'DESC');
             if ($request->tahun) {
                 $data->where('created_at', 'like', $request->tahun . '%');
             }
@@ -248,13 +242,18 @@ class ListKegiatanController extends Controller
                         $search = request('search.value');
                         $query->where(function ($q) use ($search) {
                             $q->where('nama_kegiatan', 'like', "%{$search}%")
-                                ->orWhere('jenis_hibah', 'like', "%{$search}%")
-                                ->orWhere('program_studi', 'like', "%{$search}%")
                                 ->orWhere('jenis_aktivitas', 'like', "%{$search}%");
                         });
                     }
                 })
                 ->addIndexColumn()
+                ->addColumn('jenis_hibah', function ($value) {
+                    return $value->proposal->informasi_hibah->skema_hibah;
+                })
+                // kolom program studi
+                ->addColumn('program_studi', function ($value) {
+                    return $value->proposal->informasi_hibah->prodi_terlibat;
+                })
                 ->addColumn('aksi', function ($value) {
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("list-kegiatan/show/{$encryptedId}") . '"
@@ -283,7 +282,7 @@ class ListKegiatanController extends Controller
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
                 })
-                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan'])
+                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan', 'jenis_hibah', 'program_studi'])
                 ->make(true);
         }
     }

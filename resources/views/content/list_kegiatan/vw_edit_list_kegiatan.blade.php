@@ -57,41 +57,59 @@
                         <div class="col-md-6">
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Jenis Hibah<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="jenis_hibah" value="{{ old('jenis_hibah', $kegiatan->jenis_hibah) }}" />
+                                    <label class="form-label fw-semibold">Jenis Aktivitas<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="jenis_aktivitas"
+                                        value="{{ old('jenis_aktivitas', $kegiatan->jenis_aktivitas) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Program Studi<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="program_studi" value="{{ old('program_studi', $kegiatan->program_studi) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Jenis Aktivitas<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="jenis_aktivitas" value="{{ old('jenis_aktivitas', $kegiatan->jenis_aktivitas) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Nama Kegiatan<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="nama_kegiatan" value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}" />
+                                    <label class="form-label fw-semibold">Nama Kegiatan<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nama_kegiatan"
+                                        value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}" />
                                     <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Jumlah Luaran<span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="jumlah_luaran" value="{{ old('jumlah_luaran', $kegiatan->jumlah_luaran) }}" />
+                                    <label class="form-label fw-semibold">Jumlah Luaran<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="jumlah_luaran"
+                                        value="{{ old('jumlah_luaran', $kegiatan->jumlah_luaran) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Satuan Luaran<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="satuan_luaran" value="{{ old('satuan_luaran', $kegiatan->satuan_luaran) }}" />
+                                    <label class="form-label fw-semibold">Satuan Luaran<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="satuan_luaran"
+                                        value="{{ old('satuan_luaran', $kegiatan->satuan_luaran) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Luaran Kegiatan<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="luaran_kegiatan" value="{{ old('luaran_kegiatan', $kegiatan->luaran_kegiatan) }}" />
+                                    <label class="form-label fw-semibold">Luaran Kegiatan<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="luaran_kegiatan"
+                                        value="{{ old('luaran_kegiatan', $kegiatan->luaran_kegiatan) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="status_pelaksanaan_kegiatan" value="{{ old('status_pelaksanaan_kegiatan', $kegiatan->status_pelaksanaan_kegiatan) }}" />
+                                    <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="status_pelaksanaan_kegiatan"
+                                        value="{{ old('status_pelaksanaan_kegiatan', $kegiatan->status_pelaksanaan_kegiatan) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Pengajuan Anggaran<span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_pengajuan_anggaran" value="{{ old('total_pengajuan_anggaran', $kegiatan->total_pengajuan_anggaran) }}" />
+                                    <label class="form-label fw-semibold">Total Pengajuan Anggaran<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="total_pengajuan_anggaran"
+                                        value="{{ old('total_pengajuan_anggaran', $kegiatan->total_pengajuan_anggaran) }}" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Total Penggunaan Anggaran<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="total_penggunaan_anggaran"
+                                        value="{{ old('total_penggunaan_anggaran', $kegiatan->total_penggunaan_anggaran) }}" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Tanggal Awal <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" name="tanggal_awal"
+                                        value="{{ old('tanggal_awal', $kegiatan->tanggal_awal) }}" />
                                 </div>
                             </div>
                         </div>
@@ -99,46 +117,51 @@
                         <!-- SECTION KANAN -->
                         <div class="col-md-6">
                             <div class="row g-3">
+
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Penggunaan Anggaran<span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_penggunaan_anggaran" value="{{ old('total_penggunaan_anggaran', $kegiatan->total_penggunaan_anggaran) }}" />
+                                    <label class="form-label fw-semibold">Tanggal Akhir <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" name="tanggal_akhir"
+                                        value="{{ old('tanggal_akhir', $kegiatan->tanggal_akhir) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Tanggal Awal <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_awal" value="{{ old('tanggal_awal', $kegiatan->tanggal_awal) }}" />
+                                    <label class="form-label fw-semibold">Rentang Pengerjaan<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="rentang_pengerjaan"
+                                        value="{{ old('rentang_pengerjaan', $kegiatan->rentang_pengerjaan) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Tanggal Akhir <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_akhir" value="{{ old('tanggal_akhir', $kegiatan->tanggal_akhir) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Rentang Pengerjaan<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="rentang_pengerjaan" value="{{ old('rentang_pengerjaan', $kegiatan->rentang_pengerjaan) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Panitia Kegiatan <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="panitia_pengerjaan" value="{{ old('panitia_pengerjaan', $kegiatan->panitia_pengerjaan) }}" />
+                                    <label class="form-label fw-semibold">Panitia Kegiatan <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="panitia_pengerjaan"
+                                        value="{{ old('panitia_pengerjaan', $kegiatan->panitia_pengerjaan) }}" />
                                     <span class="text-danger">Ket: Inisial</span>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Rincian Jumlah Peserta <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="rincian_jumlah_peserta" value="{{ old('rincian_jumlah_peserta', $kegiatan->rincian_jumlah_peserta) }}" />
+                                    <label class="form-label fw-semibold">Rincian Jumlah Peserta <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="rincian_jumlah_peserta"
+                                        value="{{ old('rincian_jumlah_peserta', $kegiatan->rincian_jumlah_peserta) }}" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Tempat Pelaksanaan<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="tempat_pelaksanaan" value="{{ old('tempat_pelaksanaan', $kegiatan->tempat_pelaksanaan) }}" />
+                                    <label class="form-label fw-semibold">Tempat Pelaksanaan<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="tempat_pelaksanaan"
+                                        value="{{ old('tempat_pelaksanaan', $kegiatan->tempat_pelaksanaan) }}" />
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Surat Kerja</label>
-                                    @if($kegiatan->surat_kerja)
-                                        <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_kerja) }}" target="_blank">Lihat</a></p>
+                                    @if ($kegiatan->surat_kerja)
+                                        <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_kerja) }}"
+                                                target="_blank">Lihat</a></p>
                                     @endif
                                     <input type="file" class="form-control" name="surat_kerja" accept=".pdf" />
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Surat Tugas</label>
-                                    @if($kegiatan->surat_tugas)
-                                        <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}" target="_blank">Lihat</a></p>
+                                    @if ($kegiatan->surat_tugas)
+                                        <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}"
+                                                target="_blank">Lihat</a></p>
                                     @endif
                                     <input type="file" class="form-control" name="surat_tugas" accept=".pdf" />
                                 </div>
@@ -155,16 +178,15 @@
     </div>
 @endsection
 @section('js')
-<script>
-    // Notifikasi jika ada error validasi
-    @if ($errors->any())
-        Swal.fire({
-            title: 'Error!',
-            text: 'Periksa kembali form Anda.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    @endif
-</script>
+    <script>
+        // Notifikasi jika ada error validasi
+        @if ($errors->any())
+            Swal.fire({
+                title: 'Error!',
+                text: 'Periksa kembali form Anda.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 @endsection
-

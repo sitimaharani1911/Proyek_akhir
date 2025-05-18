@@ -14,11 +14,7 @@ return new class extends Migration
         Schema::create('pelaporan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('list_kegiatan_id');
-            $table->string('nama_kegiatan');
-            $table->string('ketua_pelaksana');
-            $table->string('anggota_pelaksana');
             $table->date('tanggal');
-            $table->string('tempat');
             $table->integer('jumlah_peserta');
             $table->string('absensi_peserta');
             $table->integer('pengajuan_dana');

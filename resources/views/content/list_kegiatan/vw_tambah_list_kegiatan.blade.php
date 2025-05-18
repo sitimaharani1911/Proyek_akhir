@@ -60,18 +60,6 @@
                         <div class="col-md-6">
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Jenis Hibah<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Jenis Hibah"
-                                        name="jenis_hibah" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Program Studi<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="program_studi"
-                                        placeholder="Input Program Studi" />
-                                </div>
-                                <div class="col-12">
                                     <label class="form-label fw-semibold">Jenis Aktivitas<span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="jenis Aktivitas"
@@ -114,17 +102,18 @@
                                     <input type="number" class="form-control" name="total_pengajuan_anggaran" />
                                     <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
                                 </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Total Penggunaan Anggaran<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="total_penggunaan_anggaran" />
+                                </div>
+
                             </div>
                         </div>
 
                         <!-- SECTION KANAN -->
                         <div class="col-md-6">
                             <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Penggunaan Anggaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_penggunaan_anggaran" />
-                                </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Tanggal Awal <span
                                             class="text-danger">*</span></label>
@@ -188,15 +177,15 @@
 
 @endsection
 @section('js')
-<script>
-    // Notifikasi jika ada error validasi
-    @if ($errors->any())
-        Swal.fire({
-            title: 'Error!',
-            text: 'Periksa kembali form Anda.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    @endif
-</script>
+    <script>
+        // Notifikasi jika ada error validasi
+        @if ($errors->any())
+            Swal.fire({
+                title: 'Error!',
+                text: 'Periksa kembali form Anda.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
 @endsection

@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('list_kegiatan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('proposal_id');
-            $table->string('jenis_hibah');
-            $table->string('program_studi');
             $table->string('jenis_aktivitas');
             $table->string('nama_kegiatan');
             $table->integer('jumlah_luaran');

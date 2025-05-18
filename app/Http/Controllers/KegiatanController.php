@@ -46,11 +46,7 @@ class KegiatanController extends Controller
     public function store(Request $request, $list_kegiatan_id)
     {
         $validated = $request->validate([
-            'nama_kegiatan' => 'required|string|max:255',
-            'ketua_pelaksana' => 'required|string|max:255',
-            'anggota_pelaksana' => 'required|string|max:255',
             'tanggal' => 'required|date',
-            'tempat' => 'required|string|max:255',
             'jumlah_peserta' => 'required|numeric',
             'absensi_peserta' => 'required|file|mimes:pdf|max:5120',
             'pengajuan_dana' => 'required|numeric',
@@ -151,9 +147,6 @@ class KegiatanController extends Controller
                     }
                 })
                 ->addIndexColumn()
-                ->addColumn('nama_kegiatan', function ($value) {
-                    return $value->proposal->judul_proposal;
-                })
                 // add kolom ketua hibah
                 ->addColumn('ketua_hibah', function ($value) {
                     return $value->proposal->ketua_hibah;

@@ -161,9 +161,6 @@ class LaporanKeuanganController extends Controller
                     }
                 })
                 ->addIndexColumn()
-                ->addColumn('nama_kegiatan', function ($value) {
-                    return $value->proposal->judul_proposal;
-                })
                 // add kolom ketua hibah
                 ->addColumn('ketua_hibah', function ($value) {
                     return $value->proposal->ketua_hibah;
