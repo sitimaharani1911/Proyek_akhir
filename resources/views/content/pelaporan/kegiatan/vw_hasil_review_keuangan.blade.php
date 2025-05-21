@@ -55,7 +55,7 @@
                             <!-- Informasi Pelaporan -->
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Nama Kegiatan</label>
-                                <p class="form-control">{{ $pelaporan->nama_kegiatan }}</p>
+                                <p class="form-control">{{ $pelaporan->list_kegiatan->nama_kegiatan }}</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Ketua Pelaksana</label>

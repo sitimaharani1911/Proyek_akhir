@@ -174,8 +174,6 @@ class MonevKegiatanController extends Controller
                         $search = request('search.value');
                         $query->where(function ($q) use ($search) {
                             $q->where('nama_kegiatan', 'like', "%{$search}%")
-                                ->orWhere('jenis_hibah', 'like', "%{$search}%")
-                                ->orWhere('program_studi', 'like', "%{$search}%")
                                 ->orWhere('jenis_aktivitas', 'like', "%{$search}%");
                         });
                     }
@@ -184,7 +182,13 @@ class MonevKegiatanController extends Controller
                 ->addColumn('template_laporan', function ($row) {
                     return '<button type="button" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#unggahModal' . $row->id . '">Input</button>';
                 })
-                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan'])
+                ->addColumn('jenis_hibah', function ($value) {
+                    return $value->proposal->informasi_hibah->skema_hibah;
+                })
+                ->addColumn('program_studi', function ($value) {
+                    return $value->proposal->informasi_hibah->prodi_terlibat;
+                })
+                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan', 'jenis_hibah'])
                 ->make(true);
         }
     }
