@@ -63,31 +63,48 @@ Route::middleware(['custom-auth'])->group(
         // List Kegiatan
         Route::prefix('list-kegiatan')->group(function () {
             Route::get('/', [ListKegiatanController::class, 'index'])->name('list-kegiatan.index');
-            Route::get('/data', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
-            Route::get('/tambah', [ListKegiatanController::class, 'create'])->name('list-kegiatan.tambah');
+            Route::post('/data', [ListKegiatanController::class, 'data'])->name('list-kegiatan.data-proposal');
+            Route::get('/show/{id}', [ListKegiatanController::class, 'show'])->name('list-kegiatan.show');
+            Route::post('/data-kegiatan', [ListKegiatanController::class, 'dataKegiatan'])->name('list-kegiatan.data-kegiatan');
+            Route::get('/{proposal_id}', [ListKegiatanController::class, 'listKegiatan'])->name('list-kegiatan.data');
+            Route::get('/{proposal_id}/tambah', [ListKegiatanController::class, 'create'])->name('list-kegiatan.tambah');
+            Route::post('/list-kegiatan/{proposal_id}/tambah', [ListKegiatanController::class, 'store'])->name('list-kegiatan.store');
+            Route::get('/{id}/edit', [ListKegiatanController::class, 'edit'])->name('list-kegiatan.edit');
+            Route::put('/{id}/update', [ListKegiatanController::class, 'update'])->name('list-kegiatan.update');
+            Route::delete('/destroy/{id}', [ListKegiatanController::class, 'destroy'])->name('list-kegiatan.destroy');
         });
 
         // Monev Kegiatan
         Route::prefix('monev-kegiatan')->group(function () {
             Route::get('/', [MonevKegiatanController::class, 'index'])->name('monev-kegiatan.index');
-            Route::get('/data', [MonevKegiatanController::class, 'listKegiatan'])->name('monev-kegiatan.data');
+            Route::get('/data/{proposal_id}', [MonevKegiatanController::class, 'listKegiatan'])->name('monev-kegiatan.data');
+            Route::post('/data', [MonevKegiatanController::class, 'dataProposal'])->name('monev-kegiatan.data-proposal');
+            Route::post('/data/kegiatan', [MonevKegiatanController::class, 'dataKegiatan'])->name('monev-kegiatan.data-kegiatan');
+            Route::get('/list-kegiatan/{id}/unggah-template', [MonevKegiatanController::class, 'unggahTemplate'])->name('template-laporan.upload');
+            Route::post('/list-kegiatan/{id}/unggah-template', [MonevKegiatanController::class, 'simpanTemplate'])->name('template-laporan.store');
+
         });
 
         // Pelaporan
         Route::prefix('pelaporan')->group(function () {
             Route::get('/', [PelaporanController::class, 'index'])->name('pelaporan.index');
-            Route::get('/show/{id}', [PelaporanController::class, 'show'])->name('pelaporan.show');
+            Route::post('/data', [PelaporanController::class, 'data'])->name('pelaporan.data-proposal');
+            Route::get('/show/{list_kegiatan_id}', [PelaporanController::class, 'show'])->name('pelaporan.show');
             Route::get('/edit/{id}', [PelaporanController::class, 'edit'])->name('pelaporan.edit');
-            Route::get('/input-dokumen', [PelaporanController::class, 'inputDocument'])->name('pelaporan.input_dokumen');
+            Route::get('/input-dokumen/{informasi_hibah_id}', [PelaporanController::class, 'inputDocument'])->name('pelaporan.input_dokumen');
+            Route::post('/input-dokumen/{informasi_hibah_id}/store', [PelaporanController::class, 'inputDocumentStore'])->name('pelaporan.input_dokumen.store');
         });
 
         // Kegiatan
         Route::prefix('kegiatan')->group(function () {
-            Route::get('/', [KegiatanController::class, 'index'])->name('kegiatan.index');
-            Route::get('/show/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+            Route::get('/{proposal_id}', [KegiatanController::class, 'index'])->name('kegiatan.index');
+            Route::post('/data-kegiatan', [KegiatanController::class, 'dataKegiatan'])->name('pelaporan.data-kegiatan');
+            Route::get('/buat-laporan/{list_kegiatan_id}', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
+            Route::post('/buat-laporan/{list_kegiatan_id}/create', [KegiatanController::class, 'store'])->name('kegiatan.store');
+            Route::get('/show/{list_kegiatan_id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
             Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
-            Route::get('/tambah-kegiatan', [KegiatanController::class, 'create'])->name('kegiatan.tambah');
             Route::get('/hasil-monev', [KegiatanController::class, 'hasilMonev'])->name('kegiatan.hasilMonev');
+            Route::get('/review-keuangan/{list_kegiatan_id}', [KegiatanController::class, 'reviewLaporan'])->name('kegiatan.review_keuangan');
         });
         // Pengajuan Dana
         Route::prefix('pengajuan-dana')->group(function () {
@@ -100,32 +117,38 @@ Route::middleware(['custom-auth'])->group(
         // Monev
         Route::prefix('monev')->group(function () {
             Route::get('/', [MonevController::class, 'index'])->name('monev.index');
+            Route::post('/data', [MonevController::class, 'data'])->name('monev.data-proposal');
+            Route::post('/list-kegiatan', [MonevController::class, 'dataListKegiatan'])->name('monev.data-kegiatan');
             Route::get('/show/id', [MonevController::class, 'show'])->name('monev.show');
             Route::get('/edit/id', [MonevController::class, 'edit'])->name('monev.edit');
             Route::get('/tambah-pengajuan-dana', [MonevController::class, 'create'])->name('monev.tambah');
-            Route::get('/monev-kegiatan', [MonevController::class, 'dataKegiatan'])->name('monev.kegiatan');
-            Route::get('/review-laporan', [MonevController::class, 'reviewLaporan'])->name('monev.review');
-            Route::get('/detail-dokumen', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
+            Route::get('/monev-kegiatan/{proposal_id}', [MonevController::class, 'dataKegiatan'])->name('monev.kegiatan');
+            Route::get('/review-laporan/{list_kegiatan_id}', [MonevController::class, 'reviewLaporan'])->name('monev.review');
+            Route::post('/review-laporan/{pelaporan_id}/store', [MonevController::class, 'store'])->name('monev.review.store');
+            Route::get('/detail-dokumen/{informasi_hibah_id}', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
         });
         // Verifikasi Monev Ketua PIU
         Route::prefix('piu')->group(function () {
             Route::get('/', [MonevController::class, 'monevPiu'])->name('piu.index');
-            Route::get('/kegiatan', [MonevController::class, 'monevPiuKegiatan'])->name('piu.kegiatan');
-            Route::get('/verifikasi', [MonevController::class, 'monevPiuReview'])->name('piu.review');
+            Route::get('/kegiatan/{proposal_id}', [MonevController::class, 'monevPiuKegiatan'])->name('piu.kegiatan');
+            Route::get('/verifikasi/{list_kegiatan_id}', [MonevController::class, 'monevPiuReview'])->name('piu.review');
+            Route::post('/verifikasi/{pelaporan_id}/store', [MonevController::class, 'storePIU'])->name('piu.store');
         });
         // Verifikasi Monev Pimpinan
         Route::prefix('pimpinan')->group(function () {
             Route::get('/', [MonevController::class, 'monevPimpinan'])->name('pimpinan.index');
-            Route::get('/kegiatan', [MonevController::class, 'monevPimpinanKegiatan'])->name('pimpinan.kegiatan');
-            Route::get('/verifikasi', [MonevController::class, 'monevPimpinanReview'])->name('pimpinan.review');
+            Route::get('/kegiatan/{proposal_id}', [MonevController::class, 'monevPimpinanKegiatan'])->name('pimpinan.kegiatan');
+            Route::get('/verifikasi/{list_kegiatan_id}', [MonevController::class, 'monevPimpinanReview'])->name('pimpinan.review');
+            Route::post('/verifikasi/{pelaporan_id}/store', [MonevController::class, 'storePimpinan'])->name('pimpinan.store');
         });
         // Laporan Keuangan
         Route::prefix('laporan-keuangan')->group(function () {
             Route::get('/', [LaporanKeuanganController::class, 'index'])->name('laporan-keuangan.index');
-            Route::get('/show/id', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
-            Route::get('/edit/id', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
-            Route::get('/kegiatan', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
-            Route::get('/review', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
+            Route::post('/data', [LaporanKeuanganController::class, 'data'])->name('laporan-keuangan.data-proposal');
+            Route::post('/data/kegiatan', [LaporanKeuanganController::class, 'dataListKegiatan'])->name('laporan-keuangan.data-kegiatan');
+            Route::get('/kegiatan/{proposal_id}', [LaporanKeuanganController::class, 'dataKegiatan'])->name('laporan-keuangan.kegiatan');
+            Route::get('/review/{list_kegiatan_id}', [LaporanKeuanganController::class, 'reviewLaporan'])->name('laporan-keuangan.review');
+            Route::post('/review/{pelaporan_id}/store', [LaporanKeuanganController::class, 'store'])->name('laporan-keuangan.store');
         });
         // User
         Route::prefix('user')->group(function () {

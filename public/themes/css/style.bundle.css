@@ -182,6 +182,17 @@
     --bs-form-invalid-color: #ea868f;
     --bs-form-invalid-border-color: #ea868f
 }
+/* .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  } */
+
+  @media(max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+}
+}
 
 *,
 ::after,

@@ -5,10 +5,10 @@
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                        Verifikasi Monitoring dan Evaluasi</h1>
+                        Data Hibah</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('piu.index') }}" class="text-muted text-hover-primary">Verifikasi Monev</a>
+                            <a href="{{ route('list-kegiatan.index') }}" class="text-muted text-hover-primary">Data Hibah</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -44,24 +44,24 @@
                                     <th>No</th>
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
-                                    <th>Nama Pengaju</th>
+                                    <th>Judul Proposal</th>
+                                    <th>Ketua Hibah</th>
                                     <th>Kegiatan</th>
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                {{-- @forelse ( $proposals as $proposal )
+                                {{-- @foreach ($proposal as $proposals)
                             <tr class="">
-                                <td>{{ $loop->iteration}}</td>
-                                <td>{{ $proposal->informasi_hibah->nama_hibah }}</td>
-                                <td>{{ $proposal->informasi_hibah->skema_hibah }}</td>
-                                <td>{{ $proposal->ketua_hibah }}</td>
-                                <td class="text-primary"><a href="{{route('piu.kegiatan', ['proposal_id' => $proposal->id]) }}">Detail</a></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $proposals->informasi_hibah->nama_hibah ?? '-' }}</td>
+                                <td>{{ $proposals->informasi_hibah->skema_hibah ?? '-' }}</td>
+                                <td>{{ $proposals->judul_proposal}}</td>
+                                <td>{{ $proposals->ketua_hibah}}</td>
+                                <td class="text-primary text-center">
+                                    <a href="{{ route('list-kegiatan.data', ['proposal_id' => $proposals->id]) }}">Detail</a>
+                                </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5" class="text-center">Tidak Ada Data Hibah</td>
-                            </tr>
-                            @endforelse --}}
+                            @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -108,7 +108,7 @@
                     ">",
                 ajax: {
                     type: 'POST',
-                    url: "{{ route('monev.data-proposal') }}",
+                    url: "{{ route('list-kegiatan.data-proposal') }}",
                     data: function(d) {
                         d.tahun = tahun;
                     }
@@ -129,12 +129,16 @@
                         name: 'skema_hibah',
                     },
                     {
+                        data: 'judul_proposal',
+                        name: 'judul_proposal',
+                    },
+                    {
                         data: 'ketua_hibah',
                         name: 'ketua_hibah',
                     },
                     {
                         orderable: false,
-                        data: 'kegiatanPIU',
+                        data: 'kegiatan',
                         className: 'text-center'
                     },
                 ]
