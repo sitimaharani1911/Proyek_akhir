@@ -24,6 +24,12 @@
         type="text/css" />
     <link href="{{ asset('themes/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('themes/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+    .grafik {
+        width: 100%;
+        height: 500px;
+    }
+</style>
 </head>
 
 <body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true"
@@ -110,6 +116,39 @@
     <script src="{{ asset('themes/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
     <script src="{{ asset('themes/js/custom/utilities/modals/users-search.js') }}"></script>
     <script src="{{ asset('themes/js/custom/utilities/modals/create-campaign.js') }}"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/locales/de_DE.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/germanyLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/fonts/notosans-sc.js"></script>
+    <!-- HTML - Your existing code -->
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#kt_drawer_chat_toggle').on('click', function() {
+                $.ajax({
+                    url: "{{ route('notifikasi.read') }}",
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            $('#notification-count').text(response.unreadNotificationsCount);
+                            $('#kt_drawer_chat').addClass('show');
+                        } else {
+                            alert('Gagal memperbarui status notifikasi.');
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan. Coba lagi.');
+                    }
+                });
+            });
+        });
+    </script>
     @yield('js')
 </body>
 </body>

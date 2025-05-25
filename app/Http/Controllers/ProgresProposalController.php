@@ -16,7 +16,7 @@ class ProgresProposalController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $data = Proposal::orderBy('id', 'DESC');
+            $data = Proposal::where('status_internal',3)->orderBy('id', 'DESC');
             return DataTables::of($data)
                 ->filter(function ($query) {
                     if (request()->has('search.value')) {

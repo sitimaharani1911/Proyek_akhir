@@ -245,7 +245,7 @@ class ProposalController extends Controller
                             </a>';
 
                     if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin') {
-                        $aksi = $detail . $edit . $hapus;
+                        $aksi = $value->status_internal == 3? $detail: $detail . $edit . $hapus;
                     } else {
                         $aksi = $detail;
                     }

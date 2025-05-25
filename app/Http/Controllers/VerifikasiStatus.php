@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Notifikasi;
+use App\Models\Proposal;
 
 class VerifikasiStatus extends Controller
 {
@@ -29,6 +31,16 @@ class VerifikasiStatus extends Controller
         $save = $model::find($idData);
 
         $save->update($data);
+
+        $pengajuan = ($verifikasi == 'status_eksternal') ? 'Eksternal ' : 'Internal ';
+        $proposal = Proposal::find($idData);
+        $pesan = ($request->status == 2) ? 'Proposal '. $proposal->judul_proposal.' Sedang Dalam Tahap Pengajuan '.$pengajuan : (($request->status == 3) ? 'Pengajuan '.$pengajuan.'Proposal '.$proposal->judul_proposal.' Diterima' : (($request->status == 0) ? 'Pengajuan '.$pengajuan.'Proposal '.$proposal->judul_proposal.' Ditolak' : 'Status tidak dikenal'));
+
+        $data = Notifikasi::create([
+            'proposal_id' => $idData,
+            'pesan' => $pesan,
+            'status' => 1,
+        ]);
 
         return response()->json([
             'status'      => true,

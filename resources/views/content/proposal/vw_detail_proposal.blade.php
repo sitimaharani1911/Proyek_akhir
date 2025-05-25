@@ -15,23 +15,23 @@
                             <!-- Left side - Details -->
                             <div class="col-lg-6 border-end pe-7">
                                 <div class="row mb-7">
-                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Skema Hibah</label>
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Skema Hibah</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         <span class="fw-semibold">{{ $data->informasi_hibah->skema_hibah }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-7">
-                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Judul Proposal</label>
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Judul Proposal</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         <span class="fw-semibold">{{ $data->judul_proposal }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-7">
-                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Status Internal</label>
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Status Internal</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
                                             @php
                                                 switch ($data->status_internal) {
@@ -77,16 +77,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-7">
-                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Persetujuan Piu</label>
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Persetujuan Piu</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         {!! convertStatus($data->persetujuan_piu)['badge'] !!}
                                     </div>
                                 </div>
                                 <div class="row mb-7">
-                                    <label class="col-lg-3 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Persetujuan Direktur</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         {!! convertStatus($data->persetujuan_direktur)['badge'] !!}
                                     </div>
                                 </div>

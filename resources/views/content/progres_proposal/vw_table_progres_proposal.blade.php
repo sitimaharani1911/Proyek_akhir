@@ -172,7 +172,9 @@
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
-                        })
+                        }).then(function() {
+                            location.reload();
+                        });
                     }
                 });
             });

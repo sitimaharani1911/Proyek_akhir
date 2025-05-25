@@ -12726,7 +12726,7 @@ fieldset:disabled .btn {
 
 .bg-success {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important
+    background-color: #11db58
 }
 
 .bg-info {
@@ -56946,7 +56946,7 @@ label.rating-label:hover~.rating-label>i {
 
 .bg-success {
     --bs-bg-rgb-color: var(--bs-success-rgb);
-    background-color: var(--bs-success) !important
+    background-color: #11db58
 }
 
 .bg-success-active {

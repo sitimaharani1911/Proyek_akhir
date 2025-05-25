@@ -18,6 +18,7 @@ use App\Http\Controllers\ProgresProposalController;
 use App\Http\Controllers\PengesahanBerkasController;
 use App\Http\Controllers\RabController;
 use App\Http\Controllers\SkemaHibahController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\VerifikasiStatus;
 
 
@@ -28,6 +29,11 @@ Route::middleware(['custom-auth'])->group(
         // Dashboard
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+        });
+
+        // Informasi Hibah
+        Route::prefix('notifikasi')->group(function () {
+            Route::post('/read', [NotifikasiController::class, 'notifRead'])->name('notifikasi.read');
         });
 
         // Informasi Hibah
