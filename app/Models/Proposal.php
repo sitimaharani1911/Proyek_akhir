@@ -13,4 +13,9 @@ class Proposal extends Model
     {
         return $this->belongsTo(InformasiHibah::class, 'informasi_hibah_id', 'id');
     }
+    public function listKegiatan()
+{
+    return $this->hasMany(ListKegiatan::class);
+}
+
 }

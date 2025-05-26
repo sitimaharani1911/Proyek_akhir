@@ -35,4 +35,9 @@ class ListKegiatan extends Model
     {
         return $this->belongsTo(Proposal::class);
     }
+    // ListKegiatan.php
+    public function pelaporan()
+    {
+        return $this->hasMany(Pelaporan::class);
+    }
 }

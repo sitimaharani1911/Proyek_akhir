@@ -24,8 +24,9 @@ class Pelaporan extends Model
     {
         return $this->hasOne(ReviewPimpinan::class);
     }
+    // In Pelaporan model
     public function monev()
     {
-        return $this->hasOne(Monev::class, 'pelaporan_id');
+        return $this->hasOne(Monev::class);
     }
 }

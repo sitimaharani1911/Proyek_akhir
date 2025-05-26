@@ -1,11 +1,19 @@
 @extends('layouts.master')
 @section('content')
+    <style>
+        .apexcharts-bar-series path[fill="#6751f5"] {
+            transform: scaleY(15);
+            /* paksa tampil biar bisa dilihat */
+            transform-origin: bottom;
+        }
+    </style>
+
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{route('proposal.index')}}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-basket text-white fs-2x ms-n1"></i>
@@ -18,7 +26,7 @@
                 </div>
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{route('proposal.index')}}" class="card bg-warning hoverable card-xl-stretch mb-5 mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-warning hoverable card-xl-stretch mb-5 mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-chart-simple-3 text-white fs-2x ms-n1"></i>
@@ -31,7 +39,7 @@
                 </div>
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{route('informasi_hibah.index')}}" class="card bg-info hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('informasi_hibah.index') }}" class="card bg-info hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-cheque text-white fs-2x ms-n1"></i>
@@ -46,11 +54,13 @@
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-6">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{route('proposal.index')}}" class="card bg-success hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-success hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-chart-simple text-white fs-2x ms-n1"></i>
-                            <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_diterima_internal }} <br>Eksternal: {{ $proposal_diterima_eksternal }}</div>
+                            <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_diterima_internal }}
+                                <br>Eksternal: {{ $proposal_diterima_eksternal }}
+                            </div>
                             <div class="fw-semibold text-white">Total Proposal Diterima</div>
                         </div>
                         <!--end::Body-->
@@ -59,11 +69,13 @@
                 </div>
                 <div class="col-xl-6">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{route('proposal.index')}}" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-cheque text-white fs-2x ms-n1"></i>
-                            <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_ditolak_internal }} <br>Eskternal: {{ $proposal_ditolak_eksternal }}</div>
+                            <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_ditolak_internal }}
+                                <br>Eskternal: {{ $proposal_ditolak_eksternal }}
+                            </div>
                             <div class="fw-semibold text-white">Total Proposal Ditolak</div>
                         </div>
                         <!--end::Body-->
@@ -97,360 +109,449 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xxl-6 mb-5 mb-xl-10">
+                <div class="card card-flush h-md-100">
+                    <div class="card-header pt-7">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-900">Progres Hibah</span>
+                            <span class="text-gray-500 pt-2 fw-semibold fs-6">Pelaksana</span>
+                        </h3>
+                    </div>
+                    <div class="card-body d-flex flex-center">
+                        <div id="hibahProgressChart" class="mt-5 w-100 h-350px  grafik"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection
 @section('js')
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
-<script>
-    // Mengambil data mitra dan jml dari PHP ke dalam JavaScript
-    var mitraData = @json($mitra);
 
-    // Memformat data untuk chart
-    var categories = mitraData.map(function(item) {
-        return item.mitra;
-    });
+    <script>
+        // Mengambil data mitra dan jml dari PHP ke dalam JavaScript
+        var mitraData = @json($mitra);
 
-    var seriesData = mitraData.map(function(item) {
-        return item.jml;
-    });
+        // Memformat data untuk chart
+        var categories = mitraData.map(function(item) {
+            return item.mitra;
+        });
 
-    var initChartsWidget3 = function() {
-        var element = document.getElementById("grafik_mitra");
+        var seriesData = mitraData.map(function(item) {
+            return item.jml;
+        });
 
-        if (!element) {
-            return;
-        }
+        var initChartsWidget3 = function() {
+            var element = document.getElementById("grafik_mitra");
 
-        var chart = {
-            self: null,
-            rendered: false
-        };
+            if (!element) {
+                return;
+            }
 
-        var initChart = function() {
-            var height = parseInt(KTUtil.css(element, 'height'));
-            var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
-            var borderColor = KTUtil.getCssVariableValue('--bs-gray-200');
-            var baseColor = KTUtil.getCssVariableValue('--bs-info');
-            var lightColor = KTUtil.getCssVariableValue('--bs-info-light');
+            var chart = {
+                self: null,
+                rendered: false
+            };
 
-            var options = {
-                series: [{
-                    name: 'Total',
-                    data: seriesData // Menggunakan data jml yang dinamis
-                }],
-                chart: {
-                    fontFamily: 'inherit',
-                    type: 'area',
-                    height: 350,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                plotOptions: {},
-                legend: {
-                    show: false
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                fill: {
-                    type: 'solid',
-                    opacity: 1
-                },
-                stroke: {
-                    curve: 'smooth',
-                    show: true,
-                    width: 3,
-                    colors: [baseColor]
-                },
-                xaxis: {
-                    categories: categories, // Menggunakan data mitra yang dinamis
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false
-                    },
-                    labels: {
-                        style: {
-                            colors: labelColor,
-                            fontSize: '12px'
+            var initChart = function() {
+                var height = parseInt(KTUtil.css(element, 'height'));
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-gray-200');
+                var baseColor = KTUtil.getCssVariableValue('--bs-info');
+                var lightColor = KTUtil.getCssVariableValue('--bs-info-light');
+
+                var options = {
+                    series: [{
+                        name: 'Total',
+                        data: seriesData // Menggunakan data jml yang dinamis
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: 350,
+                        toolbar: {
+                            show: false
                         }
                     },
-                    crosshairs: {
-                        position: 'front',
-                        stroke: {
-                            color: baseColor,
-                            width: 1,
-                            dashArray: 3
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    fill: {
+                        type: 'solid',
+                        opacity: 1
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        show: true,
+                        width: 3,
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: categories, // Menggunakan data mitra yang dinamis
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false
+                        },
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: '12px'
+                            }
+                        },
+                        crosshairs: {
+                            position: 'front',
+                            stroke: {
+                                color: baseColor,
+                                width: 1,
+                                dashArray: 3
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            formatter: undefined,
+                            offsetY: 0,
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: '12px'
+                            }
+                        }
+                    },
+                    states: {
+                        normal: {
+                            filter: {
+                                type: 'none',
+                                value: 0
+                            }
+                        },
+                        hover: {
+                            filter: {
+                                type: 'none',
+                                value: 0
+                            }
+                        },
+                        active: {
+                            allowMultipleDataPointsSelection: false,
+                            filter: {
+                                type: 'none',
+                                value: 0
+                            }
                         }
                     },
                     tooltip: {
-                        enabled: true,
-                        formatter: undefined,
-                        offsetY: 0,
                         style: {
                             fontSize: '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    labels: {
-                        style: {
-                            colors: labelColor,
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                states: {
-                    normal: {
-                        filter: {
-                            type: 'none',
-                            value: 0
+                        },
+                        y: {
+                            formatter: function(val) {
+                                return val;
+                            }
                         }
                     },
-                    hover: {
-                        filter: {
-                            type: 'none',
-                            value: 0
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor,
+                        strokeDashArray: 4,
+                        yaxis: {
+                            lines: {
+                                show: true
+                            }
                         }
                     },
-                    active: {
-                        allowMultipleDataPointsSelection: false,
-                        filter: {
-                            type: 'none',
-                            value: 0
+                    markers: {
+                        shape: 'circle',
+                        size: 5,
+                        strokeColor: baseColor,
+                        strokeWidth: 3,
+                        hover: {
+                            size: 7
                         }
                     }
-                },
-                tooltip: {
-                    style: {
-                        fontSize: '12px'
-                    },
-                    y: {
-                        formatter: function (val) {
-                            return val;
-                        }
-                    }
-                },
-                colors: [lightColor],
-                grid: {
-                    borderColor: borderColor,
-                    strokeDashArray: 4,
-                    yaxis: {
-                        lines: {
-                            show: true
-                        }
-                    }
-                },
-                markers: {
-                    shape: 'circle',
-                    size: 5,
-                    strokeColor: baseColor,
-                    strokeWidth: 3,
-                    hover: {
-                        size: 7
-                    }
-                }
-            };
+                };
 
-            chart.self = new ApexCharts(element, options);
-            chart.self.render();
-            chart.rendered = true;
-        }
-
-        // Init chart
-        initChart();
-
-        // Update chart on theme mode change
-        KTThemeMode.on("kt.thememode.change", function() {
-            if (chart.rendered) {
-                chart.self.destroy();
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
             }
 
+            // Init chart
             initChart();
-        });
-    }
 
-    // Panggil fungsi untuk inisialisasi chart setelah DOM siap
-    initChartsWidget3();
-</script>
-<script>
-    // Mengambil data mitra dan jml dari PHP ke dalam JavaScript
-    var pelaksanaData = @json($pelaksana);
+            // Update chart on theme mode change
+            KTThemeMode.on("kt.thememode.change", function() {
+                if (chart.rendered) {
+                    chart.self.destroy();
+                }
 
-    // Memformat data untuk chart
-    var categories = pelaksanaData.map(function(item) {
-        return item.ketua_hibah;
-    });
-
-    var seriesData = pelaksanaData.map(function(item) {
-        return item.jml;
-    });
-
-    var initChartsWidget4 = function() {
-        var element = document.getElementById("grafik_ketua_pelaksana");
-
-        if (!element) {
-            return;
+                initChart();
+            });
         }
 
-        var chart = {
-            self: null,
-            rendered: false
-        };
+        // Panggil fungsi untuk inisialisasi chart setelah DOM siap
+        initChartsWidget3();
+    </script>
+    <script>
+        // Mengambil data mitra dan jml dari PHP ke dalam JavaScript
+        var pelaksanaData = @json($pelaksana);
 
-        var initChart = function() {
-            var height = parseInt(KTUtil.css(element, 'height'));
-            var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
-            var borderColor = KTUtil.getCssVariableValue('--bs-gray-200');
-            var baseColor = KTUtil.getCssVariableValue('--bs-primary');
-            var lightColor = KTUtil.getCssVariableValue('--bs-primary-light');
+        // Memformat data untuk chart
+        var categories = pelaksanaData.map(function(item) {
+            return item.ketua_hibah;
+        });
 
-            var options = {
-                series: [{
-                    name: 'Total',
-                    data: seriesData // Menggunakan data jml yang dinamis
-                }],
-                chart: {
-                    fontFamily: 'inherit',
-                    type: 'area',
-                    height: 350,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                plotOptions: {},
-                legend: {
-                    show: false
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                fill: {
-                    type: 'solid',
-                    opacity: 1
-                },
-                stroke: {
-                    curve: 'smooth',
-                    show: true,
-                    width: 3,
-                    colors: [baseColor]
-                },
-                xaxis: {
-                    categories: categories, // Menggunakan data mitra yang dinamis
-                    axisBorder: {
-                        show: false,
-                    },
-                    axisTicks: {
-                        show: false
-                    },
-                    labels: {
-                        style: {
-                            colors: labelColor,
-                            fontSize: '12px'
+        var seriesData = pelaksanaData.map(function(item) {
+            return item.jml;
+        });
+
+        var initChartsWidget4 = function() {
+            var element = document.getElementById("grafik_ketua_pelaksana");
+
+            if (!element) {
+                return;
+            }
+
+            var chart = {
+                self: null,
+                rendered: false
+            };
+
+            var initChart = function() {
+                var height = parseInt(KTUtil.css(element, 'height'));
+                var labelColor = KTUtil.getCssVariableValue('--bs-gray-500');
+                var borderColor = KTUtil.getCssVariableValue('--bs-gray-200');
+                var baseColor = KTUtil.getCssVariableValue('--bs-primary');
+                var lightColor = KTUtil.getCssVariableValue('--bs-primary-light');
+
+                var options = {
+                    series: [{
+                        name: 'Total',
+                        data: seriesData // Menggunakan data jml yang dinamis
+                    }],
+                    chart: {
+                        fontFamily: 'inherit',
+                        type: 'area',
+                        height: 350,
+                        toolbar: {
+                            show: false
                         }
                     },
-                    crosshairs: {
-                        position: 'front',
-                        stroke: {
-                            color: baseColor,
-                            width: 1,
-                            dashArray: 3
+                    plotOptions: {},
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    fill: {
+                        type: 'solid',
+                        opacity: 1
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        show: true,
+                        width: 3,
+                        colors: [baseColor]
+                    },
+                    xaxis: {
+                        categories: categories, // Menggunakan data mitra yang dinamis
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false
+                        },
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: '12px'
+                            }
+                        },
+                        crosshairs: {
+                            position: 'front',
+                            stroke: {
+                                color: baseColor,
+                                width: 1,
+                                dashArray: 3
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            formatter: undefined,
+                            offsetY: 0,
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    },
+                    yaxis: {
+                        labels: {
+                            style: {
+                                colors: labelColor,
+                                fontSize: '12px'
+                            }
+                        }
+                    },
+                    states: {
+                        normal: {
+                            filter: {
+                                type: 'none',
+                                value: 0
+                            }
+                        },
+                        hover: {
+                            filter: {
+                                type: 'none',
+                                value: 0
+                            }
+                        },
+                        active: {
+                            allowMultipleDataPointsSelection: false,
+                            filter: {
+                                type: 'none',
+                                value: 0
+                            }
                         }
                     },
                     tooltip: {
-                        enabled: true,
-                        formatter: undefined,
-                        offsetY: 0,
                         style: {
                             fontSize: '12px'
+                        },
+                        y: {
+                            formatter: function(val) {
+                                return val;
+                            }
                         }
+                    },
+                    colors: [lightColor],
+                    grid: {
+                        borderColor: borderColor,
+                        strokeDashArray: 4,
+                        yaxis: {
+                            lines: {
+                                show: true
+                            }
+                        }
+                    },
+                    markers: {
+                        shape: 'circle',
+                        size: 5,
+                        strokeColor: baseColor,
+                        strokeWidth: 3,
+                        hover: {
+                            size: 7
+                        }
+                    }
+                };
+
+                chart.self = new ApexCharts(element, options);
+                chart.self.render();
+                chart.rendered = true;
+            }
+
+            // Init chart
+            initChart();
+
+            // Update chart on theme mode change
+            KTThemeMode.on("kt.thememode.change", function() {
+                if (chart.rendered) {
+                    chart.self.destroy();
+                }
+
+                initChart();
+            });
+        }
+
+        // Panggil fungsi untuk inisialisasi chart setelah DOM siap
+        initChartsWidget4();
+    </script>
+    {{-- progres per hibah --}}
+    <div id="hibahProgressChart"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const chartData = @json($chartData);
+            console.log(chartData);
+
+            const options = {
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    stacked: true,
+                },
+                series: chartData.datasets.map(dataset => ({
+                    name: dataset.label,
+                    data: dataset.data,
+                })),
+                xaxis: {
+                    max: 100,
+                    title: {
+                        text: 'Progress (%)'
+                    },
+                    labels: {
+                        formatter: val => val + '%'
                     }
                 },
                 yaxis: {
-                    labels: {
-                        style: {
-                            colors: labelColor,
-                            fontSize: '12px'
+                    categories: chartData.labels, // <-- untuk horizontal
+                    title: {
+                        text: 'Nama Hibah'
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true, // <-- ubah ke horizontal
+                        barHeight: '60%',
+                        borderRadius: 4,
+                        dataLabels: {
+                            position: 'center' // label tetap muncul walau kecil
                         }
                     }
                 },
-                states: {
-                    normal: {
-                        filter: {
-                            type: 'none',
-                            value: 0
-                        }
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return (val < 1 ? '0%' : val.toFixed(0) + '%');
                     },
-                    hover: {
-                        filter: {
-                            type: 'none',
-                            value: 0
-                        }
-                    },
-                    active: {
-                        allowMultipleDataPointsSelection: false,
-                        filter: {
-                            type: 'none',
-                            value: 0
-                        }
-                    }
-                },
-                tooltip: {
                     style: {
-                        fontSize: '12px'
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        colors: ['#000']
+                    }
+                },
+                colors: chartData.datasets.map(d => d.backgroundColor),
+                tooltip: {
+                    x: {
+                        show: false
                     },
                     y: {
-                        formatter: function (val) {
-                            return val;
+                        formatter: function(val) {
+                            return (val < 1 ? '0%' : val.toFixed(0)) + '%';
                         }
                     }
                 },
-                colors: [lightColor],
-                grid: {
-                    borderColor: borderColor,
-                    strokeDashArray: 4,
-                    yaxis: {
-                        lines: {
-                            show: true
-                        }
-                    }
-                },
-                markers: {
-                    shape: 'circle',
-                    size: 5,
-                    strokeColor: baseColor,
-                    strokeWidth: 3,
-                    hover: {
-                        size: 7
-                    }
+                legend: {
+                    position: 'top',
                 }
             };
 
-            chart.self = new ApexCharts(element, options);
-            chart.self.render();
-            chart.rendered = true;
-        }
-
-        // Init chart
-        initChart();
-
-        // Update chart on theme mode change
-        KTThemeMode.on("kt.thememode.change", function() {
-            if (chart.rendered) {
-                chart.self.destroy();
-            }
-
-            initChart();
+            const chart = new ApexCharts(document.querySelector("#hibahProgressChart"), options);
+            chart.render();
         });
-    }
-
-    // Panggil fungsi untuk inisialisasi chart setelah DOM siap
-    initChartsWidget4();
-</script>
+    </script>
 @endsection
