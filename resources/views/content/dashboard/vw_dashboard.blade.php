@@ -83,7 +83,7 @@
                     <!--end::Statistics Widget 5-->
                 </div>
             </div>
-            <div class="col-xxl-6 mb-5 mb-xl-10">
+            <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">
                         <h3 class="card-title align-items-start flex-column">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-6 mb-5 mb-xl-10">
+            <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">
                         <h3 class="card-title align-items-start flex-column">
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-6 mb-5 mb-xl-10">
+            <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">
                         <h3 class="card-title align-items-start flex-column">
@@ -118,7 +118,7 @@
                         </h3>
                     </div>
                     <div class="card-body d-flex flex-center">
-                        <div id="hibahProgressChart" class="mt-5 w-100 h-350px  grafik"></div>
+                        <div id="chartProgressHibah" class="mt-5 w-100 h-350px  grafik"></div>
                     </div>
                 </div>
             </div>
@@ -481,76 +481,56 @@
         initChartsWidget4();
     </script>
     {{-- progres per hibah --}}
-    <div id="hibahProgressChart"></div>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const chartData = @json($chartData);
-            console.log(chartData);
-
+        document.addEventListener('DOMContentLoaded', function() {
             const options = {
                 chart: {
                     type: 'bar',
-                    height: 400,
                     stacked: true,
+                    height: 400
                 },
-                series: chartData.datasets.map(dataset => ({
-                    name: dataset.label,
-                    data: dataset.data,
-                })),
+                title: {
+                    text: 'Progress Hibah per Tahun'
+                },
                 xaxis: {
-                    max: 100,
+                    categories: @json($chartData['categories']),
                     title: {
-                        text: 'Progress (%)'
-                    },
-                    labels: {
-                        formatter: val => val + '%'
+                        text: 'Hibah'
                     }
                 },
                 yaxis: {
-                    categories: chartData.labels, // <-- untuk horizontal
                     title: {
-                        text: 'Nama Hibah'
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: true, // <-- ubah ke horizontal
-                        barHeight: '60%',
-                        borderRadius: 4,
-                        dataLabels: {
-                            position: 'center' // label tetap muncul walau kecil
-                        }
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function(val) {
-                        return (val < 1 ? '0%' : val.toFixed(0) + '%');
-                    },
-                    style: {
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        colors: ['#000']
-                    }
-                },
-                colors: chartData.datasets.map(d => d.backgroundColor),
-                tooltip: {
-                    x: {
-                        show: false
-                    },
-                    y: {
-                        formatter: function(val) {
-                            return (val < 1 ? '0%' : val.toFixed(0)) + '%';
-                        }
+                        text: 'Jumlah Kegiatan'
                     }
                 },
                 legend: {
-                    position: 'top',
-                }
+                    position: 'top'
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        borderRadius: 4,
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return Number.isInteger(val) ? val : val.toFixed(0);
+                        }
+                    }
+                },
+                series: @json($chartData['series']),
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return Number.isInteger(val) ? val : val.toFixed(0);
+                    }
+                },
+                colors: ['#fbc531', '#00a8ff', '#9c88ff', '#4cd137']
             };
 
-            const chart = new ApexCharts(document.querySelector("#hibahProgressChart"), options);
+
+            const chart = new ApexCharts(document.querySelector("#chartProgressHibah"), options);
             chart.render();
         });
     </script>

@@ -198,7 +198,9 @@
                             </div>
                         </div>
                     @empty
-                        <p>Belum Ada Laporan Untuk Kegiatan Ini</p>
+                        <div class="card-body p-9">
+                            <p>Belum Ada Laporan Untuk Kegiatan Ini</p>
+                        </div>
                     @endforelse
 
                 </div>
@@ -699,7 +701,7 @@
                     @endif
                 @empty
                     <div class="alert alert-danger">
-                        <strong>Data tidak ditemukan!</strong>
+                        <strong>Belum Di monev</strong>
                     </div>
                 @endforelse
             </div>

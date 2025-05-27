@@ -42,77 +42,66 @@ class DashboardController extends Controller
     {
         $hibahs = InformasiHibah::with([
             'proposal.listKegiatan.pelaporan.monev'
-        ])->get();
+        ])
+            ->where('periode_pengajuan_awal', '>=', now()->subYear())
+            ->get();
 
-        $labels = []; // Nama-nama hibah
-        $kegiatanLabels = []; // Nama-nama kegiatan unik
-        $dataPerHibah = []; // Menyimpan progres per hibah per kegiatan
 
-        // Loop semua hibah
+        $categories = [];
+        $belumAdaPelaporan = [];
+        $belumDimonev = [];
+        $monevOpen = [];
+        $monevClose = [];
+
         foreach ($hibahs as $hibah) {
-            $labels[] = $hibah->nama_hibah;
-            $hibahData = [];
+            $categories[] = $hibah->nama_hibah;
 
-            // Loop semua proposal dalam hibah
+            $countBelumAdaPelaporan = 0;
+            $countBelumDimonev = 0;
+            $countMonevOpen = 0;
+            $countMonevClose = 0;
+
             foreach ($hibah->proposal as $proposal) {
-                // Loop semua kegiatan dalam proposal
                 foreach ($proposal->listKegiatan as $kegiatan) {
-                    $namaKegiatan = $kegiatan->nama_kegiatan;
+                    $pelaporans = $kegiatan->pelaporan;
 
-                    // Kumpulkan semua nama kegiatan unik
-                    if (!in_array($namaKegiatan, $kegiatanLabels)) {
-                        $kegiatanLabels[] = $namaKegiatan;
-                    }
+                    if ($pelaporans->isEmpty()) {
+                        $countBelumAdaPelaporan++;
+                    } else {
+                        $sudahDimonev = false;
+                        foreach ($pelaporans as $pelaporan) {
+                            $monev = $pelaporan->monev;
+                            if ($monev) {
+                                $sudahDimonev = true;
+                                if ($monev->status === 'open') {
+                                    $countMonevOpen++;
+                                } elseif ($monev->status === 'close') {
+                                    $countMonevClose++;
+                                }
+                            }
+                        }
 
-                    // Hitung progress kegiatan
-                    $progress = 0;
-                    if ($kegiatan->pelaporan->isNotEmpty()) {
-                        $latestPelaporan = $kegiatan->pelaporan->sortByDesc('created_at')->first();
-                        if ($latestPelaporan && $latestPelaporan->monev) {
-                            $status = $latestPelaporan->monev->status;
-                            $progress = ($status === 'close') ? 100 : 50;
+                        if (!$sudahDimonev) {
+                            $countBelumDimonev++;
                         }
                     }
-
-                    // Ambil progres tertinggi jika kegiatan sama muncul lebih dari sekali
-                    if (!isset($hibahData[$namaKegiatan]) || $progress > $hibahData[$namaKegiatan]) {
-                        $hibahData[$namaKegiatan] = $progress;
-                    }
                 }
             }
 
-            // Pastikan semua kegiatan muncul, default 0
-            foreach ($kegiatanLabels as $namaKegiatan) {
-                if (!isset($hibahData[$namaKegiatan])) {
-                    $hibahData[$namaKegiatan] = 0;
-                }
-            }
-
-            $dataPerHibah[] = $hibahData;
-        }
-
-        // Bangun struktur datasets untuk ApexCharts
-        $datasets = [];
-        foreach ($kegiatanLabels as $namaKegiatan) {
-            $data = [];
-
-            foreach ($dataPerHibah as $hibahData) {
-                $value = $hibahData[$namaKegiatan] ?? 0;
-
-                // Ubah 0 jadi 0.001 agar bar kecil tetap tampil
-                $data[] = ($value === 0) ? 0.001 : $value;
-            }
-
-            $datasets[] = [
-                'label' => $namaKegiatan,
-                'data' => $data,
-                'backgroundColor' => '#' . substr(md5($namaKegiatan), 0, 6),
-            ];
+            $belumAdaPelaporan[] = $countBelumAdaPelaporan;
+            $belumDimonev[] = $countBelumDimonev;
+            $monevOpen[] = $countMonevOpen;
+            $monevClose[] = $countMonevClose;
         }
 
         return [
-            'labels' => $labels,       // Nama hibah
-            'datasets' => $datasets,   // Progress per kegiatan
+            'categories' => $categories,
+            'series' => [
+                ['name' => 'Belum Ada Dilaporkan', 'data' => $belumAdaPelaporan],
+                ['name' => 'Sudah Dilaporkan, Belum Dimonev', 'data' => $belumDimonev],
+                ['name' => 'Monev Open', 'data' => $monevOpen],
+                ['name' => 'Monev Close', 'data' => $monevClose],
+            ]
         ];
     }
 }

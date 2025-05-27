@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Anggota Pelaksana</label>
-                                    <input type="text" class="form-control" value="{{ $pelaporan->anggota_pelaksana }}"
+                                    <input type="text" class="form-control" value="{{ $pelaporan->list_kegiatan->panitia_pengerjaan}}"
                                         readonly />
                                 </div>
                                 <div class="mb-3">
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Tempat</label>
-                                    <input type="text" class="form-control" value="{{ $pelaporan->tempat }}" readonly />
+                                    <input type="text" class="form-control" value="{{ $pelaporan->list_kegiatan->tempat_pelaksanaan }}" readonly />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Jumlah Peserta</label>
