@@ -34,6 +34,8 @@ Route::middleware(['custom-auth'])->group(
         // Informasi Hibah
         Route::prefix('notifikasi')->group(function () {
             Route::post('/read', [NotifikasiController::class, 'notifRead'])->name('notifikasi.read');
+
+            
         });
 
         // Informasi Hibah

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListKegiatan;
+use App\Models\Notifikasi;
 use App\Models\Pelaporan;
+use App\Models\RoleUser;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -79,6 +81,15 @@ class KegiatanController extends Controller
         $validated['list_kegiatan_id'] = $list_kegiatan_id;
 
         Pelaporan::create($validated);
+        $userIds = RoleUser::whereIn('role', ['monev', 'keuangan'])->pluck('user_id');
+
+        foreach ($userIds as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Ada Laporan baru yang perlu ditinjau',
+                'status' => 1,
+                'user_id' => $userId,
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Kegiatan berhasil ditambahkan!');
     }

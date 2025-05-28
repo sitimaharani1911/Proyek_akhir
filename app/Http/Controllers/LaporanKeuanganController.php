@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListKegiatan;
+use App\Models\Notifikasi;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use App\Models\ReviewKeuangan;
+use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -66,6 +68,16 @@ class LaporanKeuanganController extends Controller
 
         $validated['pelaporan_id'] = $pelaporan_id;
         ReviewKeuangan::create($validated);
+
+        $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+
+        foreach ($pelaksanaUsers as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Ada review laporan keuangan baru dari Tim Keuangan.',
+                'status' => 1, // 1: unread
+                'user_id' => $userId,
+            ]);
+        }
 
 
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');

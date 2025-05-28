@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListKegiatan;
+use App\Models\Notifikasi;
 use App\Models\Proposal;
+use App\Models\RoleUser;
 use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -81,6 +83,16 @@ class ListKegiatanController extends Controller
 
         // Simpan data ke tabel list_kegiatan
         ListKegiatan::create($validated);
+
+        $monevUsers = RoleUser::where('role', 'monev')->pluck('user_id');
+
+        foreach ($monevUsers as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Kegiatan "' . $validated['nama_kegiatan'] . '" telah ditambahkan.',
+                'status' => 1, // 1: unread
+                'user_id' => $userId,
+            ]);
+        }
 
         return redirect()->route('list-kegiatan.data', ['proposal_id' =>  encrypt($proposal_id)])
             ->with('success', 'Kegiatan berhasil ditambahkan!');

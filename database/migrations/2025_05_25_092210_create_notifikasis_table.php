@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('notifikasi', function (Blueprint $table) {
             $table->id();
-            $table->integer('proposal_id');
             $table->string('pesan');
             $table->integer('status');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

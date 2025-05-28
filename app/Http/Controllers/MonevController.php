@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\DokumenHibah;
 use App\Models\ListKegiatan;
 use App\Models\Monev;
+use App\Models\Notifikasi;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use App\Models\ReviewKeuangan;
 use App\Models\ReviewPimpinan;
 use App\Models\ReviewPIU;
+use App\Models\RoleUser;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -101,6 +103,18 @@ class MonevController extends Controller
         $validated['pelaporan_id'] = $pelaporan_id;
         $validated['laporan_monev'] = $laporan_monev_path;
         Monev::create($validated);
+
+
+        $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+
+        foreach ($pelaksanaUsers as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Ada Monev baru yang ditambahkan Tim Monev',
+                'status' => 1, // 1: unread
+                'user_id' => $userId,
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
     }
     public function storePIU(Request $request, $pelaporan_id)
@@ -112,6 +126,15 @@ class MonevController extends Controller
         $validated['pelaporan_id'] = $pelaporan_id;
 
         ReviewPIU::create($validated);
+        $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+
+        foreach ($pelaksanaUsers as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Ada review baru dari PIU',
+                'status' => 1, // 1: unread
+                'user_id' => $userId,
+            ]);
+        }
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
     }
     public function storePimpinan(Request $request, $pelaporan_id)
@@ -123,6 +146,15 @@ class MonevController extends Controller
         $validated['pelaporan_id'] = $pelaporan_id;
 
         ReviewPimpinan::create($validated);
+         $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+
+        foreach ($pelaksanaUsers as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Ada review baru dari Pimpinan',
+                'status' => 1, // 1: unread
+                'user_id' => $userId,
+            ]);
+        }
         return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
     }
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListKegiatan;
+use App\Models\Notifikasi;
 use App\Models\Proposal;
+use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -71,6 +73,16 @@ class MonevKegiatanController extends Controller
 
         // Simpan perubahan ke DB
         $kegiatan->save();
+        // Ambil semua user dengan role "monev"
+        $Users = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+
+        foreach ($Users as $userId) {
+            Notifikasi::create([
+                'pesan' => 'Template laporan untuk kegiatan "' . $kegiatan->nama_kegiatan . '" telah diunggah.',
+                'status' => 1, // 1 = unread
+                'user_id' => $userId,
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Template laporan berhasil diunggah.');
     }

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Notifikasi;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,12 +23,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Bagikan jumlah notifikasi yang belum dibaca ke semua view
-        View::composer('*', function ($view) {
-            $unreadNotificationsCount = Notifikasi::where('status', 1)->count();
-            $notifications = Notifikasi::where('status', 1)->orderBy('id','DESC')->get();
+        view()->composer('*', function ($view) {
+            if (Auth::check()) {
+                $userId = Auth::id();
+                $notifications = Notifikasi::where('user_id', $userId)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
-            $view->with('unreadNotificationsCount', $unreadNotificationsCount);
-            $view->with('notifications', $notifications);
+                $unreadNotificationsCount = Notifikasi::where('user_id', $userId)
+                    ->where('status', 1)
+                    ->count();
+
+                $view->with(compact('notifications', 'unreadNotificationsCount'));
+            }
         });
     }
 }
