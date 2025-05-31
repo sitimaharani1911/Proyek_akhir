@@ -109,6 +109,77 @@
                     </div>
                 </div>
             </div> --}}
+            <div class="row g-5 g-xl-8">
+                <div class="col-xl-6">
+                    <div class="card mb-5 mb-xl-8">
+                        <div class="card-header border-0 pt-5">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold fs-3 mb-1">Mitra</span>
+                                <span class="text-muted mt-1 fw-semibold fs-7">Mitra Terlibat dalam Hibah</span>
+                            </h3>
+                        </div>
+                        <div class="card-body py-3">
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-0 gy-4">
+                                    <thead>
+                                        <tr class="fw-bold text-muted bg-light">
+                                            <th class="ps-4 rounded-start">Nama</th>
+                                            <th>Jumlah</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($mitra as $item)
+                                            <tr>
+                                                <td class="ps-4">
+                                                    {{ $item->mitra }}
+                                                </td>
+                                                <td>
+                                                    {{ $item->jml }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <div class="card mb-5 mb-xl-8">
+                        <div class="card-header border-0 pt-5">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold fs-3 mb-1">Ketua Pelaksana</span>
+                                <span class="text-muted mt-1 fw-semibold fs-7">Pelaksana dalam Hibah</span>
+                            </h3>
+                        </div>
+                        <div class="card-body py-3">
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-0 gy-4">
+                                    <thead>
+                                        <tr class="fw-bold text-muted bg-light">
+                                            <th class="ps-4 rounded-start">Nama</th>
+                                            <th>Jumlah</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($pelaksana as $item)
+                                            <tr>
+                                                <td class="ps-4">
+                                                    {{ $item->ketua_hibah }}
+                                                </td>
+                                                <td>
+                                                    {{ $item->jml }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">
