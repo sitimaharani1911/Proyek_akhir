@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('file_st')->nullable();
             $table->string('file_kontrak')->nullable();
             $table->string('file_berita_acara')->nullable();
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }

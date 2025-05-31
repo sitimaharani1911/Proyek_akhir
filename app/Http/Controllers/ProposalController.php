@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\InformasiHibah;
 use App\Models\Proposal;
+use App\Models\Notifikasi;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,15 @@ class ProposalController extends Controller
             'persetujuan_direktur' => 1,
             'status_internal' => 1,
             'status_eksternal' => 1,
-            'status_progres' => 1
+            'status_progres' => 1,
+            'created_by' => Auth::id()
+        ]);
+
+        $data = Notifikasi::create([
+            'id_ref' => $data->id,
+            'jenis' => 'tambah proposal',
+            'pesan' => 'Proposal Baru: ' . $request->judul_proposal,
+            'status' => 1,
         ]);
 
         if ($data) {

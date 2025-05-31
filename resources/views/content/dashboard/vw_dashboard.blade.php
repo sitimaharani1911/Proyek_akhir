@@ -83,7 +83,7 @@
                     <!--end::Statistics Widget 5-->
                 </div>
             </div>
-            <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
+            {{-- <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">
                         <h3 class="card-title align-items-start flex-column">
@@ -95,8 +95,8 @@
                         <div id="grafik_mitra" class="w-100 h-350px  grafik"></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
+            </div> --}}
+            {{-- <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">
                         <h3 class="card-title align-items-start flex-column">
@@ -108,7 +108,7 @@
                         <div id="grafik_ketua_pelaksana" class="w-100 h-350px  grafik"></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
                 <div class="card card-flush h-md-100">
                     <div class="card-header pt-7">

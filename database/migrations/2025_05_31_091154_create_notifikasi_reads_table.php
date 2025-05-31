@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifikasi', function (Blueprint $table) {
+        Schema::create('notifikasi_read', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_ref')->nullable();
-            $table->string('jenis')->nullable();
-            $table->string('pesan');
-            $table->integer('status');
-            $table->unsignedBigInteger('user_id');
+            $table->integer('notifikasi_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifikasi');
+        Schema::dropIfExists('notifikasi_read');
     }
 };

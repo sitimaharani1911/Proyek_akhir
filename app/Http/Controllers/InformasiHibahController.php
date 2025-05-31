@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InformasiHibah;
 use App\Models\SkemaHibah;
+use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -62,6 +63,13 @@ class InformasiHibahController extends Controller
             'periode_pengajuan_akhir' => $request->periode_pengajuan_akhir,
             'file_pendukung' => $file_pendukung,
             'status' => 1
+        ]);
+
+        $data = Notifikasi::create([
+            'id_ref' => $data->id,
+            'jenis' => 'tambah informasi hibah',
+            'pesan' => 'Informasi Hibah Baru: ' . $request->nama_hibah,
+            'status' => 1,
         ]);
 
         if ($data) {

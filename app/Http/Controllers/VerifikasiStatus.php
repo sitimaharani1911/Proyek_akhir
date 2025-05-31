@@ -37,7 +37,8 @@ class VerifikasiStatus extends Controller
         $pesan = ($request->status == 2) ? 'Proposal '. $proposal->judul_proposal.' Sedang Dalam Tahap Pengajuan '.$pengajuan : (($request->status == 3) ? 'Pengajuan '.$pengajuan.'Proposal '.$proposal->judul_proposal.' Diterima' : (($request->status == 0) ? 'Pengajuan '.$pengajuan.'Proposal '.$proposal->judul_proposal.' Ditolak' : 'Status tidak dikenal'));
 
         $data = Notifikasi::create([
-            'proposal_id' => $idData,
+            'id_ref' => $idData,
+            'jenis' => 'update proposal',
             'pesan' => $pesan,
             'status' => 1,
         ]);
