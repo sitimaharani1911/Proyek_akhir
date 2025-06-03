@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('jenis')->nullable();
             $table->string('pesan');
             $table->integer('status');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

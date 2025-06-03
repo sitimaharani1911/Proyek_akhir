@@ -84,7 +84,7 @@ class ListKegiatanController extends Controller
         // Simpan data ke tabel list_kegiatan
         ListKegiatan::create($validated);
 
-        $monevUsers = RoleUser::where('role', 'monev')->pluck('user_id');
+        $monevUsers = RoleUser::where('role', 'Monev')->pluck('user_id');
 
         foreach ($monevUsers as $userId) {
             Notifikasi::create([

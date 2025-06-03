@@ -74,7 +74,7 @@ class MonevKegiatanController extends Controller
         // Simpan perubahan ke DB
         $kegiatan->save();
         // Ambil semua user dengan role "monev"
-        $Users = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+        $Users = RoleUser::where('role', 'Pelaksana')->pluck('user_id');
 
         foreach ($Users as $userId) {
             Notifikasi::create([

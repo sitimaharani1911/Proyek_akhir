@@ -69,18 +69,24 @@ class LaporanKeuanganController extends Controller
         $validated['pelaporan_id'] = $pelaporan_id;
         ReviewKeuangan::create($validated);
 
-        $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+        $pelaporan = Pelaporan::findOrFail($pelaporan_id);
+        $listKegiatan = ListKegiatan::findOrFail($pelaporan->list_kegiatan_id);
+        $namaKegiatan = $listKegiatan->nama_kegiatan;
+        $proposalId = $listKegiatan->proposal_id;
+
+        $pelaksanaUsers = RoleUser::where('role', 'Pelaksana')->pluck('user_id');
 
         foreach ($pelaksanaUsers as $userId) {
             Notifikasi::create([
-                'pesan' => 'Ada review laporan keuangan baru dari Tim Keuangan.',
+                'pesan' => 'Review laporan keuangan baru dari Tim Keuangan untuk kegiatan"' . $namaKegiatan . '". telah ditambahkan.',
                 'status' => 1, // 1: unread
                 'user_id' => $userId,
             ]);
         }
 
 
-        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
+        return redirect()->route('laporan-keuangan.kegiatan', ['proposal_id' => encrypt($proposalId)])
+            ->with('success', 'Review berhasil ditambahkan!');
     }
 
     /**

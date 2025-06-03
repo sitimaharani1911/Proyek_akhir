@@ -104,18 +104,24 @@ class MonevController extends Controller
         $validated['laporan_monev'] = $laporan_monev_path;
         Monev::create($validated);
 
+        $pelaporan = Pelaporan::findOrFail($pelaporan_id);
+        $listKegiatan = ListKegiatan::findOrFail($pelaporan->list_kegiatan_id);
+        $namaKegiatan = $listKegiatan->nama_kegiatan;
+        $proposalId = $listKegiatan->proposal_id;
 
-        $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+
+        $pelaksanaUsers = RoleUser::where('role', 'Pelaksana')->pluck('user_id');
 
         foreach ($pelaksanaUsers as $userId) {
             Notifikasi::create([
-                'pesan' => 'Ada Monev baru yang ditambahkan Tim Monev',
+                'pesan' => 'Monev telah ditambahkan oleh Tim Monev untuk kegiatan "' . $namaKegiatan . '".',
                 'status' => 1, // 1: unread
                 'user_id' => $userId,
             ]);
         }
 
-        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
+        return redirect()->route('monev.kegiatan', ['proposal_id' => encrypt($proposalId)])
+            ->with('success', 'Review berhasil ditambahkan!');
     }
     public function storePIU(Request $request, $pelaporan_id)
     {
@@ -126,16 +132,21 @@ class MonevController extends Controller
         $validated['pelaporan_id'] = $pelaporan_id;
 
         ReviewPIU::create($validated);
-        $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+        $pelaporan = Pelaporan::findOrFail($pelaporan_id);
+        $listKegiatan = ListKegiatan::findOrFail($pelaporan->list_kegiatan_id);
+        $namaKegiatan = $listKegiatan->nama_kegiatan;
+        $proposalId = $listKegiatan->proposal_id;
+        $pelaksanaUsers = RoleUser::where('role', 'Pelaksana')->pluck('user_id');
 
         foreach ($pelaksanaUsers as $userId) {
             Notifikasi::create([
-                'pesan' => 'Ada review baru dari PIU',
+                'pesan' => 'Review laporan baru dari PIU untuk kegiatan"' . $namaKegiatan . '". telah ditambahkan.',
                 'status' => 1, // 1: unread
                 'user_id' => $userId,
             ]);
         }
-        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
+        return redirect()->route('piu.kegiatan', ['proposal_id' => encrypt($proposalId)])
+            ->with('success', 'Review berhasil ditambahkan!');
     }
     public function storePimpinan(Request $request, $pelaporan_id)
     {
@@ -146,16 +157,22 @@ class MonevController extends Controller
         $validated['pelaporan_id'] = $pelaporan_id;
 
         ReviewPimpinan::create($validated);
-         $pelaksanaUsers = RoleUser::where('role', 'pelaksana')->pluck('user_id');
+        $pelaporan = Pelaporan::findOrFail($pelaporan_id);
+        $listKegiatan = ListKegiatan::findOrFail($pelaporan->list_kegiatan_id);
+        $namaKegiatan = $listKegiatan->nama_kegiatan;
+        $proposalId = $listKegiatan->proposal_id;
+
+        $pelaksanaUsers = RoleUser::where('role', 'Pelaksana')->pluck('user_id');
 
         foreach ($pelaksanaUsers as $userId) {
             Notifikasi::create([
-                'pesan' => 'Ada review baru dari Pimpinan',
+                'pesan' => 'Review laporan baru dari Pimpinan untuk kegiatan"' . $namaKegiatan . '". telah ditambahkan.',
                 'status' => 1, // 1: unread
                 'user_id' => $userId,
             ]);
         }
-        return redirect()->back()->with('success', 'Review berhasil ditambahkan!');
+        return redirect()->route('pimpinan.kegiatan', ['proposal_id' => encrypt($proposalId)])
+            ->with('success', 'Review berhasil ditambahkan!');
     }
 
     /**

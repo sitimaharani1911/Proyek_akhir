@@ -40,6 +40,11 @@
                     </h3>
                 </div>
                 <div class="card-body py-3">
+                    @if ($pelaporan)
+                        <div class="alert alert-success">
+                            <strong>Perhatian!</strong> Anda sudah pernah mengisi pelaporan untuk kegiatan ini
+                        </div>
+                    @endif
                     <form class="row" action="{{ route('kegiatan.store', ['list_kegiatan_id' => $list_kegiatan_id]) }}"
                         method="POST" id="formAdd" enctype="multipart/form-data">
                         @csrf

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pelaporan_id');
             $table->string('status_pengajuan_dana');
-            $table->string('catatan_pengajuan_dana');
+            $table->string('catatan_pengajuan_dana')->nullable();
             $table->string('status_sisa_dana');
             $table->string('catatan_sisa_dana')->nullable();
             $table->string('status_surat_kerja');

@@ -35,18 +35,22 @@ class KegiatanController extends Controller
     public function create(string $list_kegiatan_id)
     {
         $kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
-        return view('content.pelaporan.kegiatan.vw_tambah_kegiatan', compact('kegiatan', 'list_kegiatan_id'));
+        $pelaporan = Pelaporan::where('list_kegiatan_id', $list_kegiatan_id)->first();
+        return view('content.pelaporan.kegiatan.vw_tambah_kegiatan', compact('kegiatan', 'list_kegiatan_id', 'pelaporan'));
     }
     public function hasilMonev(string $list_kegiatan_id)
     {
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
-        return view('content.pelaporan.kegiatan.vw_hasil_monev', compact('pelaporans'));
+        return view('content.pelaporan.kegiatan.vw_hasil_monev', compact('pelaporans', 'list_kegiatan_id'));
     }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request, $list_kegiatan_id)
     {
+        // ambil data list_kegiatan
+        $listKegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
+        $proposalId = $listKegiatan->proposal_id;
         $validated = $request->validate([
             'tanggal' => 'required|date',
             'jumlah_peserta' => 'required|numeric',
@@ -81,17 +85,18 @@ class KegiatanController extends Controller
         $validated['list_kegiatan_id'] = $list_kegiatan_id;
 
         Pelaporan::create($validated);
-        $userIds = RoleUser::whereIn('role', ['monev', 'keuangan'])->pluck('user_id');
+        $userIds = RoleUser::whereIn('role', ['Monev', 'Keuangan'])->pluck('user_id');
 
         foreach ($userIds as $userId) {
             Notifikasi::create([
-                'pesan' => 'Ada Laporan baru yang perlu ditinjau',
+                'pesan' => 'Laporan kegiatan baru telah dibuat untuk kegiatan "' . $listKegiatan->nama_kegiatan . '".',
                 'status' => 1,
                 'user_id' => $userId,
             ]);
         }
 
-        return redirect()->back()->with('success', 'Kegiatan berhasil ditambahkan!');
+        return redirect()->route('kegiatan.index', ['proposal_id' => encrypt($proposalId)])
+            ->with('success', 'Pelaporan berhasil ditambahkan!');
     }
 
     public function reviewLaporan(string $list_kegiatan_id)
