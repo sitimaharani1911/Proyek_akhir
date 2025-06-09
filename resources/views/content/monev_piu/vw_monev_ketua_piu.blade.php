@@ -70,7 +70,8 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Anggota Pelaksana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->list_kegiatan->panitia_pengerjaan }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->panitia_pengerjaan }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -84,7 +85,8 @@
                                         <label class="col-md-3 fw-bold fs-6 text-gray-800">Tempat</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-8">
-                                            <span class="fw-semibold">{{ $pelaporan->list_kegiatan->tempat_pelaksanaan }}</span>
+                                            <span
+                                                class="fw-semibold">{{ $pelaporan->list_kegiatan->tempat_pelaksanaan }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -394,37 +396,46 @@
                             </h3>
                         </div>
                         <div class="card-body py-3">
-                            @if ($pelaporan->review_piu)
-                                <div class="alert alert-info">
-                                    <strong>Sudah Di Review</strong>
-                                    <p>{{ $pelaporan->review_piu->catatan }}</p>
-                                </div>
-                            @else
-                                <form class="form"
-                                    action="{{ route('piu.store', ['pelaporan_id' => $pelaporan->id]) }}" method="POST"
-                                    id="formAdd" enctype="multipart/form-data">
-                                    @csrf
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul class="mb-0">
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
+                            @if ($monevs)
+                                @if ($pelaporan->review_piu)
+                                    <div class="alert alert-info">
+                                        <strong>Sudah Di Review</strong>
+                                        <p>{{ $pelaporan->review_piu->catatan }}</p>
+                                    </div>
+                                @else
+                                    <form class="form"
+                                        action="{{ route('piu.store', ['pelaporan_id' => $pelaporan->id]) }}"
+                                        method="POST" id="formAdd" enctype="multipart/form-data">
+                                        @csrf
+
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul class="mb-0">
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+
+                                        <input type="hidden" name="pelaporan_id" value="{{ $pelaporan->id }}">
+
+                                        <div class="d-flex flex-column mb-6 fv-row">
+                                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
+                                                <span class="required">Catatan</span>
+                                            </label>
+                                            <textarea class="form-control" name="catatan" rows="4"></textarea>
                                         </div>
-                                    @endif
-                                    <input type="hidden" name="id" value="">
-                                    <input type="hidden" name="pelaporan_id" value="{{ $pelaporan->id }}">
-                                    <div class="d-flex flex-column mb-6 fv-row">
-                                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
-                                            <span class="required">Catatan</span>
-                                        </label>
-                                        <textarea class="form-control" name="catatan" rows="4"></textarea>
-                                    </div>
-                                    <div class="text-end">
-                                        <button type="submit" class="btn btn-primary">Kirim</button>
-                                    </div>
-                                </form>
+
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                        </div>
+                                    </form>
+                                @endif
+                            @else
+                                <div class="alert alert-info">
+                                    <strong>Belum dimonev oleh tim monev</strong>
+                                </div>
                             @endif
                         </div>
                     </div>

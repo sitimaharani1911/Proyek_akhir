@@ -232,7 +232,7 @@ class MonevController extends Controller
     {
         // decrypt list_kegiatan_id
         $list_kegiatan_id = decrypt($list_kegiatan_id);
-        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        $pelaporans = Pelaporan::with('list_kegiatan', 'monev')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         $monevs = Monev::with('pelaporan')->where('pelaporan_id', $pelaporans[0]['id'])->first();
         // dd($monevs);
         return view('content.monev_piu.vw_monev_ketua_piu', compact('pelaporans', 'list_kegiatan_id', 'monevs'));
