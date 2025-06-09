@@ -66,7 +66,7 @@
                             <i class="ki-outline ki-abstract-14 fs-2"></i>
                         </div>
                         <a href="">
-                            <img alt="Logo" src="{{ asset('themes/media/logos/demo38-small.svg') }}"
+                            <img alt="Logo" src="{{ asset('themes/media/logos/LogoPCR.png') }}"
                                 class="h-30px" />
                         </a>
                     </div>
@@ -79,10 +79,10 @@
                     data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}"
                     data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start"
                     data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
-                    <div class="app-sidebar-header d-flex flex-stack d-none d-lg-flex pt-8 pb-2"
+                    <div class="app-sidebar-header d-flex flex-stack d-none d-lg-flex pt-8 pb-2 items-center gap-2"
                         id="kt_app_sidebar_header">
                         <a href="" class="app-sidebar-logo">
-                            <img alt="Logo" src="{{ asset('themes/media/logos/keenthemes.svg') }}"
+                            <img alt="Logo" src="{{ asset('themes/media/logos/LogoPCR.png') }}"
                                 class="h-25px d-none d-sm-inline app-sidebar-logo-default theme-light-show" />
                         </a>
                         <div id="kt_app_sidebar_toggle"
