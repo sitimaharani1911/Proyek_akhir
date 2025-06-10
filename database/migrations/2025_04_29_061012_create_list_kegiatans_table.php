@@ -16,17 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('proposal_id');
             $table->string('jenis_aktivitas');
             $table->string('nama_kegiatan');
-            $table->integer('jumlah_luaran');
-            $table->string('satuan_luaran');
-            $table->string('luaran_kegiatan');
-            $table->string('status_pelaksanaan_kegiatan');
-            $table->integer('total_pengajuan_anggaran');
-            $table->integer('total_penggunaan_anggaran');
             $table->date('tanggal_awal');
             $table->date('tanggal_akhir');
             $table->string('rentang_pengerjaan');
             $table->string('panitia_pengerjaan');
-            $table->string('rincian_jumlah_peserta');
             $table->string('tempat_pelaksanaan');
             $table->string('surat_keputusan');
             $table->string('surat_tugas');

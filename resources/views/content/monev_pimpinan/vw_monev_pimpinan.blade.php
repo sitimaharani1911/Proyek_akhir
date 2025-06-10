@@ -186,6 +186,24 @@
                                         </td>
                                     </tr>
                                     <tr class="text-center">
+                                        <td class="fw-bold">Penggunaan Dana</td>
+                                        <td>{{ $pelaporan->penggunaan_dana }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_penggunaan_dana }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_penggunaan_dana ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center">
                                         <td class="fw-bold">Sisa Dana</td>
                                         <td>{{ $pelaporan->sisa_dana }}</td>
                                         <td>
@@ -309,7 +327,7 @@
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Luaran</td>
-                                        <td>{{ $pelaporan->luaran }}</td>
+                                        <td>{{ $pelaporan->link_luaran }}</td>
                                         <td>
                                             @if ($monevs)
                                                 {{ $monevs->status_luaran }}

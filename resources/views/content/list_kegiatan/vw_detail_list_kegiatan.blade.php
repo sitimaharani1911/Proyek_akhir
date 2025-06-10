@@ -57,14 +57,16 @@
                                     <label class="col-md-4 fw-bold fs-6 text-gray-800">Jenis Hibah</label>
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->proposal->informasi_hibah->skema_hibah }}</span>
+                                        <span
+                                            class="fw-semibold">{{ $kegiatan->proposal->informasi_hibah->skema_hibah }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label class="col-md-4 fw-bold fs-6 text-gray-800">program_studi</label>
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->proposal->informasi_hibah->prodi_terlibat }}</span>
+                                        <span
+                                            class="fw-semibold">{{ $kegiatan->proposal->informasi_hibah->prodi_terlibat }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -72,44 +74,6 @@
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
                                         <span class="fw-semibold">{{ $kegiatan->jenis_aktivitas }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Jumlah Luaran</label>
-                                    <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->jumlah_luaran }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Satuan Luaran</label>
-                                    <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->satuan_luaran }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Status Pelaksanaan Kegiatan</label>
-                                    <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->status_pelaksanaan_kegiatan }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Total Pengajuan Anggaran</label>
-                                    <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->total_pengajuan_anggaran }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Section Kanan -->
-                            <div class="col-lg-6">
-                                <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Total Penggunaan Anggaran</label>
-                                    <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->total_penggunaan_anggaran }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -126,6 +90,10 @@
                                         <span class="fw-semibold">{{ $kegiatan->tanggal_akhir }}</span>
                                     </div>
                                 </div>
+
+                            </div>
+                            <!-- Section Kanan -->
+                            <div class="col-lg-6">
                                 <div class="row mb-4">
                                     <label class="col-md-4 fw-bold fs-6 text-gray-800">Rentang Pengerjaan</label>
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
@@ -138,13 +106,6 @@
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
                                         <span class="fw-semibold">{{ $kegiatan->panitia_pengerjaan }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Rincian Jumlah Peserta</label>
-                                    <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                    <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->rincian_jumlah_peserta }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">

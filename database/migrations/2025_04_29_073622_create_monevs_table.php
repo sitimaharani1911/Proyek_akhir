@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('pelaporan_id');
             $table->string('status_pengajuan_dana');
             $table->string('catatan_pengajuan_dana')->nullable();
+            $table->string('status_penggunaan_dana');
+            $table->string('catatan_penggunaan_dana')->nullable();
             $table->string('status_sisa_dana');
             $table->string('catatan_sisa_dana')->nullable();
             $table->string('status_surat_keputusan');
@@ -34,7 +36,6 @@ return new class extends Migration
             $table->string('catatan_dokumentasi')->nullable();
             $table->string('status_lainnya');
             $table->string('catatan_lainnya')->nullable();
-            $table->integer('nilai');
             $table->integer('persentase_capaian');
             $table->string('status');
             $table->string('laporan_monev');

@@ -74,6 +74,8 @@ class MonevController extends Controller
         $validated = $request->validate([
             'status_pengajuan_dana' => 'required|string|max:255',
             'catatan_pengajuan_dana' => 'nullable|string|max:2550',
+            'status_penggunaan_dana' => 'required|string|max:255',
+            'catatan_penggunaan_dana' => 'nullable|string|max:2550',
             'status_sisa_dana' => 'required|string|max:255',
             'catatan_sisa_dana' => 'nullable|string|max:2550',
             'status_surat_keputusan' => 'required|string|max:255',
@@ -92,7 +94,6 @@ class MonevController extends Controller
             'catatan_dokumentasi' => 'nullable|string|max:2550',
             'status_lainnya' => 'required|string|max:255',
             'catatan_lainnya' => 'nullable|string|max:2550',
-            'nilai' => 'required|numeric',
             'persentase_capaian' => 'required|numeric',
             'status' => 'required|string|max:255',
             'tim_monev' => 'required|string|max:255',

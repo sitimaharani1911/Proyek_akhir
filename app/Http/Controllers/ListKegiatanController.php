@@ -56,17 +56,10 @@ class ListKegiatanController extends Controller
         $validated = $request->validate([
             'jenis_aktivitas' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
-            'jumlah_luaran' => 'required|integer',
-            'satuan_luaran' => 'required|string|max:255',
-            'luaran_kegiatan' => 'required|string|max:255',
-            'status_pelaksanaan_kegiatan' => 'required|string|max:255',
-            'total_pengajuan_anggaran' => 'required|numeric',
-            'total_penggunaan_anggaran' => 'required|numeric',
             'tanggal_awal' => 'required|date',
             'tanggal_akhir' => 'required|date',
             'rentang_pengerjaan' => 'required|string|max:255',
             'panitia_pengerjaan' => 'required|string|max:255',
-            'rincian_jumlah_peserta' => 'required|string|max:255',
             'tempat_pelaksanaan' => 'required|string|max:255',
             'surat_keputusan' => 'required|file|mimes:pdf|max:5120',
             'surat_tugas' => 'required|file|mimes:pdf|max:5120',
@@ -129,17 +122,10 @@ class ListKegiatanController extends Controller
         $request->validate([
             'jenis_aktivitas' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
-            'jumlah_luaran' => 'required|numeric',
-            'satuan_luaran' => 'required|string|max:255',
-            'luaran_kegiatan' => 'required|string|max:255',
-            'status_pelaksanaan_kegiatan' => 'required|string|max:255',
-            'total_pengajuan_anggaran' => 'required|numeric',
-            'total_penggunaan_anggaran' => 'required|numeric',
             'tanggal_awal' => 'required|date',
             'tanggal_akhir' => 'required|date',
             'rentang_pengerjaan' => 'required|string|max:255',
             'panitia_pengerjaan' => 'required|string|max:255',
-            'rincian_jumlah_peserta' => 'required|string|max:255',
             'tempat_pelaksanaan' => 'required|string|max:255',
             'surat_keputusan' => 'nullable|file|mimes:pdf|max:512',
             'surat_tugas' => 'nullable|file|mimes:pdf|max:512',
@@ -161,17 +147,10 @@ class ListKegiatanController extends Controller
         // Update field lainnya
         $kegiatan->jenis_aktivitas = $request->jenis_aktivitas;
         $kegiatan->nama_kegiatan = $request->nama_kegiatan;
-        $kegiatan->jumlah_luaran = $request->jumlah_luaran;
-        $kegiatan->satuan_luaran = $request->satuan_luaran;
-        $kegiatan->luaran_kegiatan = $request->luaran_kegiatan;
-        $kegiatan->status_pelaksanaan_kegiatan = $request->status_pelaksanaan_kegiatan;
-        $kegiatan->total_pengajuan_anggaran = $request->total_pengajuan_anggaran;
-        $kegiatan->total_penggunaan_anggaran = $request->total_penggunaan_anggaran;
         $kegiatan->tanggal_awal = $request->tanggal_awal;
         $kegiatan->tanggal_akhir = $request->tanggal_akhir;
         $kegiatan->rentang_pengerjaan = $request->rentang_pengerjaan;
         $kegiatan->panitia_pengerjaan = $request->panitia_pengerjaan;
-        $kegiatan->rincian_jumlah_peserta = $request->rincian_jumlah_peserta;
         $kegiatan->tempat_pelaksanaan = $request->tempat_pelaksanaan;
 
         $kegiatan->save();
@@ -280,7 +259,7 @@ class ListKegiatanController extends Controller
                                <i class="ki-outline ki-trash fs-2 text-danger"></i>
                             </a>';
 
-                    $aksi = $detail . $edit ;
+                    $aksi = $detail . $edit;
                     return $aksi;
                 })
                 ->addColumn('surat_keputusan', function ($value) {

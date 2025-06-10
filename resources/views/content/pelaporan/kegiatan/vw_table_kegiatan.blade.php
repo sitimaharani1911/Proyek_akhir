@@ -47,10 +47,9 @@
                         <div>
                             <h6 class="fw-bold mb-1">Info</h6>
                             <ul class="mb-0 ps-3 text-black">
-                                <li>Tagihan yang aktif adalah tagihan yang tersedia dengan tujuan bank penerima Bank Syariah
-                                    Indonesia atau Bank Rakyat Indonesia.</li>
-                                <li>Jika menemukan kesalahan informasi tagihan yang tidak benar, silahkan menghubungi Tim
-                                    Keuangan 081378327109 (Chat Only) atau email keuangan@pcr.ac.id</li>
+                                <li><span class="fw-bold">Buat laporan</span> adalah kolom yang harus di isi jika ingin melaporkan suatu kegiatan</li>
+                                <li><span class="fw-bold">Hasil Review Keuangan</span> adalah hasil review dari keuangan yang sudah di input</li>
+                                <li><span class="fw-bold">Hasil Monev</span> adalah hasil monitoring dan evaluasi dari kegiatan yang sudah di input</li>
                             </ul>
                         </div>
                     </div>

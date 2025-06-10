@@ -81,6 +81,13 @@
                                         </div>
                                     </div>
                                     <div class="row mb-4">
+                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Penggunaan Dana</label>
+                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
+                                        <div class="col-md-7">
+                                            <span class="fw-semibold">{{ $pelaporan->penggunaan_dana }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Sisa Dana</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
@@ -109,10 +116,7 @@
                                             <span class="fw-semibold">{{ $pelaporan->jumlah_peserta }}</span>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Section Kanan -->
-                                <div class="col-lg-6">
-                                    <div class="row mb-4">
+                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Absensi Peserta</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
@@ -134,6 +138,10 @@
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                                <!-- Section Kanan -->
+                                <div class="col-lg-6">
+                                   
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Kegiatan</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
@@ -157,10 +165,31 @@
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Luaran</label>
+                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Jumlah Luaran</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <span class="fw-semibold">{{ $pelaporan->luaran }}</span>
+                                            <span class="fw-semibold">{{ $pelaporan->jumlah_luaran }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Satuan Luaran</label>
+                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
+                                        <div class="col-md-7">
+                                            <span class="fw-semibold">{{ $pelaporan->satuan_luaran }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Luaran Kegiatan</label>
+                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
+                                        <div class="col-md-7">
+                                            <span class="fw-semibold">{{ $pelaporan->luaran_kegiatan }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Link Luaran</label>
+                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
+                                        <div class="col-md-7">
+                                            <span class="fw-semibold">{{ $pelaporan->link_luaran }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -352,6 +381,24 @@
                                         </td>
                                     </tr>
                                     <tr class="text-center">
+                                        <td class="fw-bold">Penggunaan Dana</td>
+                                        <td>{{ $pelaporan->penggunaan_dana }}</td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->status_penggunaan_dana }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($monevs)
+                                                {{ $monevs->catatan_penggunaan_dana ?? '-' }}
+                                            @else
+                                                Belum dinilai
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center">
                                         <td class="fw-bold">Sisa Dana</td>
                                         <td>{{ $pelaporan->sisa_dana }}</td>
                                         <td>
@@ -475,7 +522,7 @@
                                     </tr>
                                     <tr class="text-center">
                                         <td class="fw-bold">Luaran</td>
-                                        <td>{{ $pelaporan->luaran }}</td>
+                                        <td>{{ $pelaporan->link_luaran }}</td>
                                         <td>
                                             @if ($monevs)
                                                 {{ $monevs->status_luaran }}

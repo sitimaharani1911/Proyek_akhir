@@ -57,120 +57,70 @@
                         <input type="hidden" name="id" value="">
                         <input type="hidden" name="proposal_id" value="{{ $proposal_id }}">
                         <!-- SECTION KIRI -->
-                        <div class="col-md-6">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Jenis Aktivitas<span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-select" name="jenis_aktivitas" required>
-                                        <option value="" selected disabled>Pilih Jenis Aktivitas</option>
-                                        <option value="Workshop">Workshop</option>
-                                        <option value="Training dan Sertifikasi">Training dan Sertifikasi</option>
-                                        <option value="Pengadaan">Pengadaan</option>
-                                        <option value="Benchmark">Benchmark</option>
-                                        <option value="FGD">FGD</option>
-                                        <option value="Sistem Informasi">Sistem Informasi</option>
-                                        <option value="Rancang Bangun Mesin">Rancang Bangun Mesin</option>
-                                        <option value="Pendampingan">Pendampingan</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Nama Kegiatan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="nama_kegiatan"
-                                        placeholder="Input Nama Kegiatan" />
-                                    <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Jumlah Luaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" placeholder="Input Jumlah Luaran"
-                                        name="jumlah_luaran" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Satuan Luaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="satuan_luaran"
-                                        placeholder="Input Satuan Luaran" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Luaran Kegiatan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="string" class="form-control" placeholder="Input Luaran Kegiatan"
-                                        name="luaran_kegiatan" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="status_pelaksanaan_kegiatan"
-                                        placeholder="Input Status Pelaksanaan" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Pengajuan Anggaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_pengajuan_anggaran" />
-                                    <span class="text-danger">Ket: Pastikan nominal yang diinput benar </span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Penggunaan Anggaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_penggunaan_anggaran" />
-                                </div>
-
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Jenis Aktivitas<span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select" name="jenis_aktivitas" required>
+                                    <option value="" selected disabled>Pilih Jenis Aktivitas</option>
+                                    <option value="Workshop">Workshop</option>
+                                    <option value="Training dan Sertifikasi">Training dan Sertifikasi</option>
+                                    <option value="Pengadaan">Pengadaan</option>
+                                    <option value="Benchmark">Benchmark</option>
+                                    <option value="FGD">FGD</option>
+                                    <option value="Sistem Informasi">Sistem Informasi</option>
+                                    <option value="Rancang Bangun Mesin">Rancang Bangun Mesin</option>
+                                    <option value="Pendampingan">Pendampingan</option>
+                                </select>
                             </div>
-                        </div>
-
-                        <!-- SECTION KANAN -->
-                        <div class="col-md-6">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Tanggal Awal <span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_awal" id="tanggal_awal" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Tanggal Akhir <span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_akhir"
-                                        id="tanggal_akhir" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Rentang Pengerjaan (Bulan) <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Rentang Pengerjaan"
-                                        name="rentang_pengerjaan" id="rentang_pengerjaan" readonly />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Panitia Kegiatan <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Input Panitia Kegiatan"
-                                        name="panitia_pengerjaan" />
-                                    <span class="text-danger">Ket: Inisial Dosen, Jika lebih satu orang dipisah dengan koma (Cth: MSZ, IDI)</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Rincian Jumlah Peserta <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Input Rincian Jumlah Peserta"
-                                        name="rincian_jumlah_peserta" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Tempat Pelaksanaan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Input Tempat Pelaksanaan"
-                                        name="tempat_pelaksanaan" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Surat Keputusan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="surat_keputusan" accept=".pdf" />
-                                    <span class="text-danger">Max. Size : 5 MB | Filetype : pdf</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Surat Tugas<span
-                                            class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="surat_tugas" accept=".pdf" />
-                                    <span class="text-danger">Max. Size : 5 MB | Filetype : pdf</span>
-                                </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Nama Kegiatan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_kegiatan"
+                                    placeholder="Input Nama Kegiatan" />
+                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tanggal Awal <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="tanggal_awal" id="tanggal_awal" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tanggal Akhir <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Rentang Pengerjaan (Bulan) <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Rentang Pengerjaan"
+                                    name="rentang_pengerjaan" id="rentang_pengerjaan" readonly />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Panitia Kegiatan <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Input Panitia Kegiatan"
+                                    name="panitia_pengerjaan" />
+                                <span class="text-danger">Ket: Inisial Dosen, Jika lebih satu orang dipisah dengan koma
+                                    (Cth: MSZ, IDI)</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Input Tempat Pelaksanaan"
+                                    name="tempat_pelaksanaan" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Surat Keputusan<span
+                                        class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="surat_keputusan" accept=".pdf" />
+                                <span class="text-danger">Max. Size : 5 MB | Filetype : pdf</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Surat Tugas<span
+                                        class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="surat_tugas" accept=".pdf" />
+                                <span class="text-danger">Max. Size : 5 MB | Filetype : pdf</span>
                             </div>
                         </div>
 
@@ -218,7 +168,7 @@
                     // Kalau tanggal akhir lebih kecil dari tanggal awal → kurangi 1 bulan dan hitung selisih hari dari bulan sebelumnya
                     bulanSelisih -= 1;
                     const akhirBulanSebelumnya = new Date(akhir.getFullYear(), akhir.getMonth(), 0)
-                .getDate(); // jumlah hari bulan sebelumnya
+                        .getDate(); // jumlah hari bulan sebelumnya
                     hariSelisih = akhirBulanSebelumnya - awal.getDate() + akhir.getDate();
                 }
 

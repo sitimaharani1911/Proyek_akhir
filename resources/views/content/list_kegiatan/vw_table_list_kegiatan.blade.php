@@ -61,75 +61,10 @@
                                     <th style="width: 150px;">Program Studi</th>
                                     <th style="width: 150px;">Jenis Aktivitas</th>
                                     <th style="width: 250px;">Nama Kegiatan (Sesuai dengan proposal)</th>
-                                    <th style="width: 100px;">Jumlah Luaran</th>
-                                    <th style="width: 120px;">Satuan Luaran</th>
-                                    <th style="width: 200px;">Luaran Kegiatan</th>
-                                    <th style="width: 180px;">Status Pelaksanaan Kegiatan</th>
                                     <th style="width: 150px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                {{-- @forelse ($listKegiatan as $kegiatan)
-                                    <tr class="">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->jenis_hibah }}</td>
-                                        <td>{{ $kegiatan->program_studi }}</td>
-                                        <td>{{ $kegiatan->jenis_aktivitas }}</td>
-                                        <td>{{ $kegiatan->nama_kegiatan }}</td>
-                                        <td>{{ $kegiatan->jumlah_luaran }}</td>
-                                        <td>{{ $kegiatan->satuan_luaran }}</td>
-                                        <td>{{ $kegiatan->luaran_kegiatan }}</td>
-                                        <td>{{ $kegiatan->status_pelaksanaan_kegiatan }}</td>
-                                        <td>Rp {{ number_format($kegiatan->total_anggaran_pengajuan, 0, ',', '.') }}</td>
-                                        <td>Rp {{ number_format($kegiatan->total_anggaran_penggunaan, 0, ',', '.') }}</td>
-                                        <td>{{ $kegiatan->tanggal_awal }}</td>
-                                        <td>{{ $kegiatan->tanggal_akhir }}</td>
-                                        <td>{{ $kegiatan->rentang_pengerjaan }} Bulan</td>
-                                        <td>{{ $kegiatan->panitia_pengerjaan }}</td>
-                                        <td>{{ $kegiatan->rincian_jumlah_peserta }}</td>
-                                        <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $kegiatan->surat_kerja) }}" target="_blank">
-                                                Lihat Surat Kerja
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}" target="_blank">
-                                                Lihat Surat Tugas
-                                            </a>
-                                        </td>
-
-                                        <td class="text-primary">
-                                            <!-- Tombol untuk memicu modal -->
-                                            @if ($kegiatan->template_laporan)
-                                                <a href="{{ asset('storage/' . $kegiatan->template_laporan) }}"
-                                                    target="_blank">Download</a>
-                                            @else
-                                                <span class="text-danger">Belum ada template</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('list-kegiatan.edit', ['id' => $kegiatan->id]) }}">
-                                                <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                            </a>
-                                            <form action="{{ route('list-kegiatan.destroy', ['id' => $kegiatan->id]) }}"
-                                                method="POST" style="display: inline;" class="form-delete">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="delete-btn" data-id="{{ $kegiatan->id }}"
-                                                    data-nama="{{ $kegiatan->nama_kegiatan }}"
-                                                    style="border: none; background: none; color: red; cursor: pointer;">
-                                                    <i class="fas fa-trash text-danger"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="3">Belum ada kegiatan untuk proposal ini.</td>
-                                    </tr>
-                                @endforelse --}}
-
                             </tbody>
                         </table>
                     </div>
@@ -207,26 +142,6 @@
                     {
                         data: 'nama_kegiatan',
                         name: 'nama_kegiatan',
-                        
-                    },
-                    {
-                        data: 'jumlah_luaran',
-                        name: 'jumlah_luaran',
-                        
-                    },
-                    {
-                        data: 'satuan_luaran',
-                        name: 'satuan_luaran',
-                        
-                    },
-                    {
-                        data: 'luaran_kegiatan',
-                        name: 'luaran_kegiatan',
-                        
-                    },
-                    {
-                        data: 'status_pelaksanaan_kegiatan',
-                        name: 'status_pelaksanaan_kegiatan',
                         
                     },
                     {

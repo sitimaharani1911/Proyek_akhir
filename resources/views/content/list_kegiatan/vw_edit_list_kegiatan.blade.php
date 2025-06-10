@@ -54,120 +54,69 @@
                         <input type="hidden" name="proposal_id" value="{{ $kegiatan->proposal_id }}">
 
                         <!-- SECTION KIRI -->
-                        <div class="col-md-6">
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Jenis Aktivitas<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="jenis_aktivitas"
-                                        value="{{ old('jenis_aktivitas', $kegiatan->jenis_aktivitas) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Nama Kegiatan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="nama_kegiatan"
-                                        value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}" />
-                                    <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Jumlah Luaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="jumlah_luaran"
-                                        value="{{ old('jumlah_luaran', $kegiatan->jumlah_luaran) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Satuan Luaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="satuan_luaran"
-                                        value="{{ old('satuan_luaran', $kegiatan->satuan_luaran) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Luaran Kegiatan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="luaran_kegiatan"
-                                        value="{{ old('luaran_kegiatan', $kegiatan->luaran_kegiatan) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="status_pelaksanaan_kegiatan"
-                                        value="{{ old('status_pelaksanaan_kegiatan', $kegiatan->status_pelaksanaan_kegiatan) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Pengajuan Anggaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_pengajuan_anggaran"
-                                        value="{{ old('total_pengajuan_anggaran', $kegiatan->total_pengajuan_anggaran) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Total Penggunaan Anggaran<span
-                                            class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="total_penggunaan_anggaran"
-                                        value="{{ old('total_penggunaan_anggaran', $kegiatan->total_penggunaan_anggaran) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Tanggal Awal <span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_awal"
-                                        value="{{ old('tanggal_awal', $kegiatan->tanggal_awal) }}" />
-                                </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Jenis Aktivitas<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="jenis_aktivitas"
+                                    value="{{ old('jenis_aktivitas', $kegiatan->jenis_aktivitas) }}" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Nama Kegiatan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_kegiatan"
+                                    value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}" />
+                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tanggal Awal <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="tanggal_awal" id="tanggal_awal"
+                                    value="{{ old('tanggal_awal', $kegiatan->tanggal_awal) }}" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tanggal Akhir <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir"
+                                    value="{{ old('tanggal_akhir', $kegiatan->tanggal_akhir) }}" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Rentang Pengerjaan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="rentang_pengerjaan" id="rentang_pengerjaan"
+                                    value="{{ old('rentang_pengerjaan', $kegiatan->rentang_pengerjaan) }}" readonly />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Panitia Kegiatan <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="panitia_pengerjaan"
+                                    value="{{ old('panitia_pengerjaan', $kegiatan->panitia_pengerjaan) }}" />
+                                <span class="text-danger">Ket: Inisial</span>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="tempat_pelaksanaan"
+                                    value="{{ old('tempat_pelaksanaan', $kegiatan->tempat_pelaksanaan) }}" />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Surat Keputusan</label>
+                                <input type="file" class="form-control" name="surat_keputusan" accept=".pdf" />
+                                @if ($kegiatan->surat_keputusan)
+                                    <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_keputusan) }}"
+                                            target="_blank">Lihat</a></p>
+                                @endif
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Surat Tugas</label>
+                                <input type="file" class="form-control" name="surat_tugas" accept=".pdf" />
+                                @if ($kegiatan->surat_tugas)
+                                    <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}"
+                                            target="_blank">Lihat</a></p>
+                                @endif
                             </div>
                         </div>
-
-                        <!-- SECTION KANAN -->
-                        <div class="col-md-6">
-                            <div class="row g-3">
-
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Tanggal Akhir <span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_akhir"
-                                        value="{{ old('tanggal_akhir', $kegiatan->tanggal_akhir) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Rentang Pengerjaan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="rentang_pengerjaan"
-                                        value="{{ old('rentang_pengerjaan', $kegiatan->rentang_pengerjaan) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Panitia Kegiatan <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="panitia_pengerjaan"
-                                        value="{{ old('panitia_pengerjaan', $kegiatan->panitia_pengerjaan) }}" />
-                                    <span class="text-danger">Ket: Inisial</span>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Rincian Jumlah Peserta <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="rincian_jumlah_peserta"
-                                        value="{{ old('rincian_jumlah_peserta', $kegiatan->rincian_jumlah_peserta) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Tempat Pelaksanaan<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="tempat_pelaksanaan"
-                                        value="{{ old('tempat_pelaksanaan', $kegiatan->tempat_pelaksanaan) }}" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Surat Kerja</label>
-                                    @if ($kegiatan->surat_kerja)
-                                        <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_kerja) }}"
-                                                target="_blank">Lihat</a></p>
-                                    @endif
-                                    <input type="file" class="form-control" name="surat_kerja" accept=".pdf" />
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label fw-semibold">Surat Tugas</label>
-                                    @if ($kegiatan->surat_tugas)
-                                        <p>File sebelumnya: <a href="{{ asset('storage/' . $kegiatan->surat_tugas) }}"
-                                                target="_blank">Lihat</a></p>
-                                    @endif
-                                    <input type="file" class="form-control" name="surat_tugas" accept=".pdf" />
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="col-12 text-end mt-5">
                             <button type="submit" class="btn btn-primary">Perbarui</button>
                         </div>
@@ -188,5 +137,48 @@
                 confirmButtonText: 'OK'
             });
         @endif
+    </script>
+    <script>
+        const tanggalAwal = document.getElementById('tanggal_awal');
+        const tanggalAkhir = document.getElementById('tanggal_akhir');
+        const rentangPengerjaan = document.getElementById('rentang_pengerjaan');
+
+        function hitungRentangBulanHari() {
+            const awal = new Date(tanggalAwal.value);
+            const akhir = new Date(tanggalAkhir.value);
+
+            if (!isNaN(awal) && !isNaN(akhir) && akhir >= awal) {
+                let tahunSelisih = akhir.getFullYear() - awal.getFullYear();
+                let bulanSelisih = (tahunSelisih * 12) + (akhir.getMonth() - awal.getMonth());
+
+                // Hitung tanggal awal dalam bulan
+                let hariSelisih = akhir.getDate() - awal.getDate();
+
+                if (hariSelisih < 0) {
+                    // Kalau tanggal akhir lebih kecil dari tanggal awal → kurangi 1 bulan dan hitung selisih hari dari bulan sebelumnya
+                    bulanSelisih -= 1;
+                    const akhirBulanSebelumnya = new Date(akhir.getFullYear(), akhir.getMonth(), 0)
+                        .getDate(); // jumlah hari bulan sebelumnya
+                    hariSelisih = akhirBulanSebelumnya - awal.getDate() + akhir.getDate();
+                }
+
+                // Minimal 0 bulan → kalau tanggal sama → tampilkan 0 Bulan 0 Hari
+                bulanSelisih = bulanSelisih < 0 ? 0 : bulanSelisih;
+
+                let hasil = '';
+                if (bulanSelisih > 0) hasil += `${bulanSelisih} Bulan`;
+                if (hariSelisih > 0) hasil += (hasil ? ' ' : '') + `${hariSelisih} Hari`;
+
+                // Kalau tepat sebulan (misal 2025-01-01 ke 2025-02-01) → hanya tampil "1 Bulan"
+                if (hasil === '') hasil = '0 Hari';
+
+                rentangPengerjaan.value = hasil;
+            } else {
+                rentangPengerjaan.value = '';
+            }
+        }
+
+        tanggalAwal.addEventListener('change', hitungRentangBulanHari);
+        tanggalAkhir.addEventListener('change', hitungRentangBulanHari);
     </script>
 @endsection

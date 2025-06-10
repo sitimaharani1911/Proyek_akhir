@@ -47,10 +47,6 @@
                                     <th style="width: 150px;">Program Studi</th>
                                     <th style="width: 150px;">Jenis Aktivitas</th>
                                     <th style="width: 250px;">Nama Kegiatan (Sesuai dengan proposal)</th>
-                                    <th style="width: 100px;">Jumlah Luaran</th>
-                                    <th style="width: 120px;">Satuan Luaran</th>
-                                    <th style="width: 200px;">Luaran Kegiatan</th>
-                                    <th style="width: 180px;">Status Pelaksanaan Kegiatan</th>
                                     <th style="width: 130px;">Template Laporan</th>
                                 </tr>
                             </thead>
@@ -186,26 +182,6 @@
                     {
                         data: 'nama_kegiatan',
                         name: 'nama_kegiatan',
-
-                    },
-                    {
-                        data: 'jumlah_luaran',
-                        name: 'jumlah_luaran',
-
-                    },
-                    {
-                        data: 'satuan_luaran',
-                        name: 'satuan_luaran',
-
-                    },
-                    {
-                        data: 'luaran_kegiatan',
-                        name: 'luaran_kegiatan',
-
-                    },
-                    {
-                        data: 'status_pelaksanaan_kegiatan',
-                        name: 'status_pelaksanaan_kegiatan',
 
                     },
                     {
