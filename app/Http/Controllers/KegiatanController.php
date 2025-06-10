@@ -57,7 +57,7 @@ class KegiatanController extends Controller
             'absensi_peserta' => 'required|file|mimes:pdf|max:5120',
             'pengajuan_dana' => 'required|numeric',
             'sisa_dana' => 'required|numeric',
-            'surat_kerja' => 'required|file|mimes:pdf|max:5120',
+            'surat_keputusan' => 'required|file|mimes:pdf|max:5120',
             'surat_tugas' => 'required|file|mimes:pdf|max:5120',
             'laporan_kegiatan' => 'required|file|mimes:pdf|max:5120',
             'laporan_keuangan' => 'required|file|mimes:pdf|max:5120',
@@ -70,14 +70,14 @@ class KegiatanController extends Controller
 
         //simpan file 
         $absensi_peserta_path = $request->file('absensi_peserta')->store('absensi_peserta', 'public');
-        $surat_kerja_path = $request->file('surat_kerja')->store('surat_kerja', 'public');
+        $surat_keputusan_path = $request->file('surat_keputusan')->store('surat_keputusan', 'public');
         $surat_tugas_path = $request->file('surat_tugas')->store('surat_tugas', 'public');
         $laporan_kegiatan_path = $request->file('laporan_kegiatan')->store('laporan_kegiatan', 'public');
         $laporan_keuangan_path = $request->file('laporan_keuangan')->store('laporan_keuangan', 'public');
         $lainnya_path = $request->file('lainnya')->store('lainnya', 'public');
 
         $validated['absensi_peserta'] = $absensi_peserta_path;
-        $validated['surat_kerja'] = $surat_kerja_path;
+        $validated['surat_keputusan'] = $surat_keputusan_path;
         $validated['surat_tugas'] = $surat_tugas_path;
         $validated['laporan_kegiatan'] = $laporan_kegiatan_path;
         $validated['laporan_keuangan'] = $laporan_keuangan_path;

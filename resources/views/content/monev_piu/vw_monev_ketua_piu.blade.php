@@ -203,11 +203,11 @@
                                         </td>
                                     </tr>
                                     <tr class="text-center">
-                                        <td class="fw-bold">Surat Kerja</td>
+                                        <td class="fw-bold">Surat Keputusan</td>
                                         <td>
                                             <div class="">
                                                 <i class="bi bi-file-earmark-pdf"></i>
-                                                <a href="{{ asset('storage/' . $pelaporan->surat_kerja) }}"
+                                                <a href="{{ asset('storage/' . $pelaporan->surat_keputusan) }}"
                                                     target="_blank">
                                                     <span class="fw-semibold text-primary">Open </span>
                                                 </a>
@@ -215,14 +215,14 @@
                                         </td>
                                         <td>
                                             @if ($monevs)
-                                                {{ $monevs->status_surat_kerja }}
+                                                {{ $monevs->status_surat_keputusan }}
                                             @else
                                                 Belum dinilai
                                             @endif
                                         </td>
                                         <td>
                                             @if ($monevs)
-                                                {{ $monevs->catatan_surat_kerja ?? '-' }}
+                                                {{ $monevs->catatan_surat_keputusan ?? '-' }}
                                             @else
                                                 Belum dinilai
                                             @endif

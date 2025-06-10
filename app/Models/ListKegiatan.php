@@ -27,7 +27,7 @@ class ListKegiatan extends Model
         'panitia_pengerjaan',
         'rincian_jumlah_peserta',
         'tempat_pelaksanaan',
-        'surat_kerja',
+        'surat_keputusan',
         'surat_tugas',
     ];
 

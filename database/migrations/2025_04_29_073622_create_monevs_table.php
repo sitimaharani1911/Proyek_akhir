@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('catatan_pengajuan_dana')->nullable();
             $table->string('status_sisa_dana');
             $table->string('catatan_sisa_dana')->nullable();
-            $table->string('status_surat_kerja');
-            $table->string('catatan_surat_kerja')->nullable();
+            $table->string('status_surat_keputusan');
+            $table->string('catatan_surat_keputusan')->nullable();
             $table->string('status_surat_tugas');
             $table->string('catatan_surat_tugas')->nullable();
             $table->string('status_laporan_kegiatan');

@@ -41,6 +41,21 @@
                         </select>
                     </div>
                 </div>
+                <div class="card-header border-0 pt-5 w-100">
+                    <div class="alert alert-success p-3 d-flex align-items-start w-100 gap-2" role="alert">
+                        <i class="bi bi-bell fs-2 text-primary"></i>
+                        <div>
+                            <h6 class="fw-bold mb-1">Info</h6>
+                            <ul class="mb-0 ps-3 text-black">
+                                <li>Tagihan yang aktif adalah tagihan yang tersedia dengan tujuan bank penerima Bank Syariah
+                                    Indonesia atau Bank Rakyat Indonesia.</li>
+                                <li>Jika menemukan kesalahan informasi tagihan yang tidak benar, silahkan menghubungi Tim
+                                    Keuangan 081378327109 (Chat Only) atau email keuangan@pcr.ac.id</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="card-body py-3">
                     <div class="table-responsive">
                         <input type="hidden" id="proposal_id" value="{{ $encryptedId }}">
@@ -57,29 +72,6 @@
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                {{-- @forelse ($listKegiatan as $kegiatan)
-                                    <tr class="">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->proposal->judul_proposal ?? '-' }}</td>
-                                        <td>{{ $kegiatan->proposal->ketua_hibah ?? '-' }}</td>
-                                        <td>{{ $kegiatan->jenis_aktivitas }}</td>
-                                        <td class="text-center text-primary"><a class="text-primary"
-                                                href="{{ route('kegiatan.review_keuangan', ['list_kegiatan_id' => $kegiatan->id]) }}">Cek
-                                                Hasil</a>
-                                        </td>
-                                        <td class="text-center"><a
-                                                href="{{ route('pelaporan.show', ['list_kegiatan_id' => $kegiatan->id]) }}"
-                                                class="text-primary text-center">Cek Hasil</a>
-                                        </td>
-                                        <td class="text-center"><a href="{{ route('kegiatan.tambah', $kegiatan->id) }}"
-                                                class="text-primary text-center">Buat Laporan</a>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr class="text-center">
-                                        <td colspan="21">Belum ada kegiatan untuk proposal ini.</td>
-                                    </tr>
-                                @endforelse --}}
                             </tbody>
                         </table>
                     </div>

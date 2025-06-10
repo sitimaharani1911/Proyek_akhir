@@ -98,8 +98,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Surat Kerja <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" name="surat_kerja" />
+                                <label class="form-label fw-semibold">Surat Keputusan <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="surat_keputusan" />
                                 <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
                             </div>
 
@@ -128,7 +128,8 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Luaran <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" placeholder="Luaran" name="luaran" />
+                                <input type="url" class="form-control" placeholder="https://drive.google.com/drive" name="luaran" />
+                                <span class="text-danger">Ket: Pastikan link dapat diakses</span>
                             </div>
 
                             <div class="mb-3">
@@ -139,7 +140,7 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Dokumentasi <span
                                         class="text-danger">*</span></label>
-                                <input type="url" class="form-control" placeholder="https://link.com"
+                                <input type="url" class="form-control" placeholder="https://drive.google.com/drive"
                                     name="dokumentasi" />
                                 <span class="text-danger">Ket: Pastikan link dapat diakses</span>
                             </div>

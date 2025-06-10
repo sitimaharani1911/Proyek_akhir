@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('absensi_peserta');
             $table->integer('pengajuan_dana');
             $table->integer('sisa_dana');
-            $table->string('surat_kerja');
+            $table->string('surat_keputusan');
             $table->string('surat_tugas');
             $table->string('laporan_kegiatan');
             $table->string('laporan_keuangan');

@@ -139,8 +139,8 @@ class PelaporanController extends Controller
                     $encryptedId = encrypt($value->id);
                     // $id = $value->id;
                     $detail  = '<a href="' . url("kegiatan/{$encryptedId}") . '"
-                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                class="btn btn-sm btn-primary me-1">
+                                Detail</a>';
 
                     return $detail;
                 })

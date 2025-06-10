@@ -49,8 +49,8 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Surat Kerja <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" name="surat_kerja" />
+                        <label class="form-label fw-semibold">Surat Keputusan <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="surat_keputusaan" />
                         <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
                     </div>
 

@@ -76,8 +76,8 @@ class MonevController extends Controller
             'catatan_pengajuan_dana' => 'nullable|string|max:2550',
             'status_sisa_dana' => 'required|string|max:255',
             'catatan_sisa_dana' => 'nullable|string|max:2550',
-            'status_surat_kerja' => 'required|string|max:255',
-            'catatan_surat_kerja' => 'nullable|string|max:2550',
+            'status_surat_keputusan' => 'required|string|max:255',
+            'catatan_surat_keputusan' => 'nullable|string|max:2550',
             'status_surat_tugas' => 'required|string|max:255',
             'catatan_surat_tugas' => 'nullable|string|max:2550',
             'status_laporan_kegiatan' => 'required|string|max:255',
@@ -300,8 +300,8 @@ class MonevController extends Controller
                     $encryptedId = encrypt($value->id);
                     // $id = $value->id;
                     $detail  = '<a href="' . url("monev/monev-kegiatan/{$encryptedId}") . '"
-                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                class="btn btn-sm btn-primary me-1">
+                                Detail</a>';
 
                     return $detail;
                 })
@@ -309,8 +309,8 @@ class MonevController extends Controller
                     $encryptedId = encrypt($value->id);
                     // $id = $value->id;
                     $detail  = '<a href="' . url("piu/kegiatan/{$encryptedId}") . '"
-                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                class="btn btn-sm btn-primary me-1">
+                                Detail</a>';
 
                     return $detail;
                 })
@@ -318,8 +318,8 @@ class MonevController extends Controller
                     $encryptedId = encrypt($value->id);
                     // $id = $value->id;
                     $detail  = '<a href="' . url("pimpinan/kegiatan/{$encryptedId}") . '"
-                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                class="btn btn-sm btn-primary me-1">
+                                Detail</a>';
 
                     return $detail;
                 })

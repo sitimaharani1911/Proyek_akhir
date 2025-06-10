@@ -62,8 +62,17 @@
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Jenis Aktivitas<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="jenis Aktivitas"
-                                        name="jenis_aktivitas" />
+                                    <select class="form-select" name="jenis_aktivitas" required>
+                                        <option value="" selected disabled>Pilih Jenis Aktivitas</option>
+                                        <option value="Workshop">Workshop</option>
+                                        <option value="Training dan Sertifikasi">Training dan Sertifikasi</option>
+                                        <option value="Pengadaan">Pengadaan</option>
+                                        <option value="Benchmark">Benchmark</option>
+                                        <option value="FGD">FGD</option>
+                                        <option value="Sistem Informasi">Sistem Informasi</option>
+                                        <option value="Rancang Bangun Mesin">Rancang Bangun Mesin</option>
+                                        <option value="Pendampingan">Pendampingan</option>
+                                    </select>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Nama Kegiatan<span
@@ -117,25 +126,26 @@
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Tanggal Awal <span
                                             class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_awal" />
+                                    <input type="date" class="form-control" name="tanggal_awal" id="tanggal_awal" />
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Tanggal Akhir <span
                                             class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" name="tanggal_akhir" />
+                                    <input type="date" class="form-control" name="tanggal_akhir"
+                                        id="tanggal_akhir" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Rentang Pengerjaan<span
+                                    <label class="form-label fw-semibold">Rentang Pengerjaan (Bulan) <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Input Rentang Pengerjaan"
-                                        name="rentang_pengerjaan" />
+                                    <input type="text" class="form-control" placeholder="Rentang Pengerjaan"
+                                        name="rentang_pengerjaan" id="rentang_pengerjaan" readonly />
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Panitia Kegiatan <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" placeholder="Input Panitia Kegiatan"
                                         name="panitia_pengerjaan" />
-                                    <span class="text-danger">Ket: Inisial</span>
+                                    <span class="text-danger">Ket: Inisial Dosen, Jika lebih satu orang dipisah dengan koma (Cth: MSZ, IDI)</span>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Rincian Jumlah Peserta <span
@@ -150,16 +160,16 @@
                                         name="tempat_pelaksanaan" />
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold">Surat Kerja<span
+                                    <label class="form-label fw-semibold">Surat Keputusan<span
                                             class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="surat_kerja" accept=".pdf" />
-                                    <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                                    <input type="file" class="form-control" name="surat_keputusan" accept=".pdf" />
+                                    <span class="text-danger">Max. Size : 5 MB | Filetype : pdf</span>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Surat Tugas<span
                                             class="text-danger">*</span></label>
                                     <input type="file" class="form-control" name="surat_tugas" accept=".pdf" />
-                                    <span class="text-danger">Max. Size : 500 KB | Filetype : pdf</span>
+                                    <span class="text-danger">Max. Size : 5 MB | Filetype : pdf</span>
                                 </div>
                             </div>
                         </div>
@@ -187,5 +197,48 @@
                 confirmButtonText: 'OK'
             });
         @endif
+    </script>
+    <script>
+        const tanggalAwal = document.getElementById('tanggal_awal');
+        const tanggalAkhir = document.getElementById('tanggal_akhir');
+        const rentangPengerjaan = document.getElementById('rentang_pengerjaan');
+
+        function hitungRentangBulanHari() {
+            const awal = new Date(tanggalAwal.value);
+            const akhir = new Date(tanggalAkhir.value);
+
+            if (!isNaN(awal) && !isNaN(akhir) && akhir >= awal) {
+                let tahunSelisih = akhir.getFullYear() - awal.getFullYear();
+                let bulanSelisih = (tahunSelisih * 12) + (akhir.getMonth() - awal.getMonth());
+
+                // Hitung tanggal awal dalam bulan
+                let hariSelisih = akhir.getDate() - awal.getDate();
+
+                if (hariSelisih < 0) {
+                    // Kalau tanggal akhir lebih kecil dari tanggal awal → kurangi 1 bulan dan hitung selisih hari dari bulan sebelumnya
+                    bulanSelisih -= 1;
+                    const akhirBulanSebelumnya = new Date(akhir.getFullYear(), akhir.getMonth(), 0)
+                .getDate(); // jumlah hari bulan sebelumnya
+                    hariSelisih = akhirBulanSebelumnya - awal.getDate() + akhir.getDate();
+                }
+
+                // Minimal 0 bulan → kalau tanggal sama → tampilkan 0 Bulan 0 Hari
+                bulanSelisih = bulanSelisih < 0 ? 0 : bulanSelisih;
+
+                let hasil = '';
+                if (bulanSelisih > 0) hasil += `${bulanSelisih} Bulan`;
+                if (hariSelisih > 0) hasil += (hasil ? ' ' : '') + `${hariSelisih} Hari`;
+
+                // Kalau tepat sebulan (misal 2025-01-01 ke 2025-02-01) → hanya tampil "1 Bulan"
+                if (hasil === '') hasil = '0 Hari';
+
+                rentangPengerjaan.value = hasil;
+            } else {
+                rentangPengerjaan.value = '';
+            }
+        }
+
+        tanggalAwal.addEventListener('change', hitungRentangBulanHari);
+        tanggalAkhir.addEventListener('change', hitungRentangBulanHari);
     </script>
 @endsection

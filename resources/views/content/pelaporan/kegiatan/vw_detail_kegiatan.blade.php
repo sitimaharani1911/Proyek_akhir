@@ -374,7 +374,7 @@
                                         <td>
                                             <div class="">
                                                 <i class="bi bi-file-earmark-pdf"></i>
-                                                <a href="{{ asset('storage/' . $pelaporan->surat_kerja) }}"
+                                                <a href="{{ asset('storage/' . $pelaporan->surat_keputusan) }}"
                                                     target="_blank">
                                                     <span class="fw-semibold text-primary">Open </span>
                                                 </a>
@@ -382,14 +382,14 @@
                                         </td>
                                         <td>
                                             @if ($monevs)
-                                                {{ $monevs->status_surat_kerja }}
+                                                {{ $monevs->status_surat_keputusan }}
                                             @else
                                                 Belum dinilai
                                             @endif
                                         </td>
                                         <td>
                                             @if ($monevs)
-                                                {{ $monevs->catatan_surat_kerja ?? '-' }}
+                                                {{ $monevs->catatan_surat_keputusan ?? '-' }}
                                             @else
                                                 Belum dinilai
                                             @endif
@@ -621,9 +621,9 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label fw-semibold">Surat Kerja <span
+                                            <label class="form-label fw-semibold">Surat Keputusan <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="surat_kerja" />
+                                            <input type="file" class="form-control" name="surat_keputusan" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
                                         </div>
 

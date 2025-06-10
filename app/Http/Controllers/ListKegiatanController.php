@@ -68,16 +68,16 @@ class ListKegiatanController extends Controller
             'panitia_pengerjaan' => 'required|string|max:255',
             'rincian_jumlah_peserta' => 'required|string|max:255',
             'tempat_pelaksanaan' => 'required|string|max:255',
-            'surat_kerja' => 'required|file|mimes:pdf|max:5120',
+            'surat_keputusan' => 'required|file|mimes:pdf|max:5120',
             'surat_tugas' => 'required|file|mimes:pdf|max:5120',
         ]);
 
         // Simpan file jika ada
-        $surat_kerja_path = $request->file('surat_kerja')->store('surat_kerja', 'public');
+        $surat_keputusan_path = $request->file('surat_keputusan')->store('surat_keputusan', 'public');
         $surat_tugas_path = $request->file('surat_tugas')->store('surat_tugas', 'public');
 
 
-        $validated['surat_kerja'] = $surat_kerja_path;
+        $validated['surat_keputusan'] = $surat_keputusan_path;
         $validated['surat_tugas'] = $surat_tugas_path;
         $validated['proposal_id'] = $proposal_id;
 
@@ -141,16 +141,16 @@ class ListKegiatanController extends Controller
             'panitia_pengerjaan' => 'required|string|max:255',
             'rincian_jumlah_peserta' => 'required|string|max:255',
             'tempat_pelaksanaan' => 'required|string|max:255',
-            'surat_kerja' => 'nullable|file|mimes:pdf|max:512',
+            'surat_keputusan' => 'nullable|file|mimes:pdf|max:512',
             'surat_tugas' => 'nullable|file|mimes:pdf|max:512',
         ]);
 
         $kegiatan = ListKegiatan::findOrFail($id);
 
         // Simpan file jika ada upload baru
-        if ($request->hasFile('surat_kerja')) {
-            $suratKerja = $request->file('surat_kerja')->store('surat_kerja', 'public');
-            $kegiatan->surat_kerja = $suratKerja;
+        if ($request->hasFile('surat_keputusan')) {
+            $suratKerja = $request->file('surat_keputusan')->store('surat_keputusan', 'public');
+            $kegiatan->surat_keputusan = $suratKerja;
         }
 
         if ($request->hasFile('surat_tugas')) {
@@ -229,8 +229,8 @@ class ListKegiatanController extends Controller
                     $encryptedId = encrypt($value->id);
                     // $id = $value->id;
                     $detail  = '<a href="' . url("list-kegiatan/{$encryptedId}") . '"
-                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                class="btn btn-sm btn-primary me-1">
+                                Detail</a>';
 
                     return $detail;
                 })
@@ -270,7 +270,7 @@ class ListKegiatanController extends Controller
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("list-kegiatan/show/{$encryptedId}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                <i class="bi bi-eye fs-2 text-primary"></i></a>';
                     $edit = '<a href="' . url("list-kegiatan/{$encryptedId}/edit") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-pencil fs-2 text-info"></i>
@@ -280,11 +280,11 @@ class ListKegiatanController extends Controller
                                <i class="ki-outline ki-trash fs-2 text-danger"></i>
                             </a>';
 
-                    $aksi = $detail . $edit . $hapus;
+                    $aksi = $detail . $edit ;
                     return $aksi;
                 })
-                ->addColumn('surat_kerja', function ($value) {
-                    return '<a href="' . asset('storage/' . $value->surat_kerja) . '" target="_blank">Lihat</a>';
+                ->addColumn('surat_keputusan', function ($value) {
+                    return '<a href="' . asset('storage/' . $value->surat_keputusan) . '" target="_blank">Lihat</a>';
                 })
                 ->addColumn('surat_tugas', function ($value) {
                     return '<a href="' . asset('storage/' . $value->surat_tugas) . '" target="_blank">Lihat</a>';
@@ -294,7 +294,7 @@ class ListKegiatanController extends Controller
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
                 })
-                ->rawColumns(['aksi', 'surat_kerja', 'surat_tugas', 'template_laporan', 'jenis_hibah', 'program_studi'])
+                ->rawColumns(['aksi', 'surat_keputusan', 'surat_tugas', 'template_laporan', 'jenis_hibah', 'program_studi'])
                 ->make(true);
         }
     }

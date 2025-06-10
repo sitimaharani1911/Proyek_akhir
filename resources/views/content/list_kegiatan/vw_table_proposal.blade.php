@@ -50,18 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                {{-- @foreach ($proposal as $proposals)
-                            <tr class="">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $proposals->informasi_hibah->nama_hibah ?? '-' }}</td>
-                                <td>{{ $proposals->informasi_hibah->skema_hibah ?? '-' }}</td>
-                                <td>{{ $proposals->judul_proposal}}</td>
-                                <td>{{ $proposals->ketua_hibah}}</td>
-                                <td class="text-primary text-center">
-                                    <a href="{{ route('list-kegiatan.data', ['proposal_id' => $proposals->id]) }}">Detail</a>
-                                </td>
-                            </tr>
-                            @endforeach --}}
+                            
                             </tbody>
                         </table>
                     </div>
