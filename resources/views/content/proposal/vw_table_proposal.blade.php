@@ -124,7 +124,11 @@
             let id = {{ $id }};
             if (status == 'apply') {
                 method = 'add';
-                $('[name="informasi_hibah_id"]').val(id).change();
+                $('[name="informasi_hibah_id"]').hide();
+                let selectedText = $('[name="informasi_hibah_id"] option[value="' + id + '"]').text();
+                $('[name="informasi_hibah_id"]').after('<input type="text" class="form-control" value="' +
+                    selectedText + '" readonly>');
+                $('[name="informasi_hibah_id"]').val(id);
                 $('#modalPengajuanProposal_title').html("Tambah Pengajuan Proposal");
                 $('#modalPengajuanProposal').modal('show');
             }

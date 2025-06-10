@@ -29,6 +29,13 @@
                                     </div>
                                 </div>
                                 <div class="row mb-7">
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Abstrak</label>
+                                    <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                                    <div class="col-lg-7 text-justify">
+                                        <span class="fw-semibold">{{ $data->abstrak }}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-7">
                                     <label class="col-lg-4 fw-bold fs-6 text-gray-800">Status Internal</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-lg-7">

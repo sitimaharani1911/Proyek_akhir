@@ -16,7 +16,7 @@
                     <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
-                            <i class="ki-outline ki-basket text-white fs-2x ms-n1"></i>
+                            <i class="ki-outline ki-abstract-26 text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $proposal_pengajuan }}</div>
                             <div class="fw-semibold text-white">Proposal Tahap Pengajuan Internal</div>
                         </div>
@@ -29,7 +29,7 @@
                     <a href="{{ route('proposal.index') }}" class="card bg-warning hoverable card-xl-stretch mb-5 mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
-                            <i class="ki-outline ki-chart-simple-3 text-white fs-2x ms-n1"></i>
+                            <i class="ki-outline ki-abstract-28 text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $proposal_pending }}</div>
                             <div class="fw-semibold text-white">Proposal Belum Diajukan</div>
                         </div>
@@ -42,7 +42,7 @@
                     <a href="{{ route('informasi_hibah.index') }}" class="card bg-info hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
-                            <i class="ki-outline ki-cheque text-white fs-2x ms-n1"></i>
+                            <i class="ki-outline ki-pin text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $hibah_aktif }}</div>
                             <div class="fw-semibold text-white">Hibah Aktif</div>
                         </div>
@@ -57,7 +57,7 @@
                     <a href="{{ route('proposal.index') }}" class="card bg-success hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
-                            <i class="ki-outline ki-chart-simple text-white fs-2x ms-n1"></i>
+                            <i class="ki-outline ki-home text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_diterima_internal }}
                                 <br>Eksternal: {{ $proposal_diterima_eksternal }}
                             </div>
@@ -72,7 +72,7 @@
                     <a href="{{ route('proposal.index') }}" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
-                            <i class="ki-outline ki-cheque text-white fs-2x ms-n1"></i>
+                            <i class="ki-outline ki-send text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_ditolak_internal }}
                                 <br>Eskternal: {{ $proposal_ditolak_eksternal }}
                             </div>

@@ -73,7 +73,7 @@
                     <span class="menu-icon">
                         <i class="bi bi-bar-chart fs-2"></i>
                     </span>
-                    <span class="menu-title">Progres Pengajuan</span>
+                    <span class="menu-title">Status Penerimaan Eksternal</span>
                 </a>
             </div>
             @endif
