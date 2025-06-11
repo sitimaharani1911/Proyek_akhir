@@ -36,7 +36,8 @@ class KegiatanController extends Controller
     {
         $kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
         $pelaporan = Pelaporan::where('list_kegiatan_id', $list_kegiatan_id)->first();
-        return view('content.pelaporan.kegiatan.vw_tambah_kegiatan', compact('kegiatan', 'list_kegiatan_id', 'pelaporan'));
+        $proposal_id = $kegiatan->proposal_id;
+        return view('content.pelaporan.kegiatan.vw_tambah_kegiatan', compact('kegiatan', 'list_kegiatan_id', 'pelaporan', 'proposal_id'));
     }
     public function hasilMonev(string $list_kegiatan_id)
     {
@@ -106,14 +107,15 @@ class KegiatanController extends Controller
 
     public function reviewLaporan(string $list_kegiatan_id)
     {
-
+        $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
+        $proposal_id = $list_kegiatan->proposal_id;
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
         foreach ($pelaporans as $pelaporan) {
             $pelaporan["serapan_dana"] = (($pelaporan['pengajuan_dana'] - $pelaporan["sisa_dana"]) / $pelaporan["pengajuan_dana"]) * 100;
             // dd($pelaporan->toArray());
         }
         // dd($pelaporans->toArray());
-        return view('content.pelaporan.kegiatan.vw_hasil_review_keuangan', compact('pelaporans', 'list_kegiatan_id'));
+        return view('content.pelaporan.kegiatan.vw_hasil_review_keuangan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
     }
 
     /**

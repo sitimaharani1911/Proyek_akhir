@@ -12,25 +12,21 @@
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
                         Review Laporan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
-                        <li class="breadcrumb-item text-muted">
+                         <li class="breadcrumb-item text-muted">
                             <a href="{{ route('monev.index') }}" class="text-muted text-hover-primary">Monev</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('monev.index') }}" class="text-muted text-hover-primary">Kegiatan</a>
+                            <a href="{{ route('monev.kegiatan', ['proposal_id' => encrypt($proposal_id)]) }}" class="text-muted text-hover-primary">List Kegiatan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('monev.index') }}" class="text-muted text-hover-primary">Review</a>
+                            <a class="text-muted text-hover-primary">Review Laporan</a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                        </li>
-                        <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
             </div>

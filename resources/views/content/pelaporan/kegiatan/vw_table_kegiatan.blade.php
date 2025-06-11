@@ -8,18 +8,15 @@
                         Kegiatan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Pelaporan</a>
+                            <a href="{{ route('pelaporan.index') }}" class="text-muted text-hover-primary">Pelaporan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Kegiatan</a>
+                            <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
+                                class="text-muted text-hover-primary">List Kegiatan</a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                        </li>
-                        <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
             </div>
@@ -47,9 +44,12 @@
                         <div>
                             <h6 class="fw-bold mb-1">Info</h6>
                             <ul class="mb-0 ps-3 text-black">
-                                <li><span class="fw-bold">Buat laporan</span> adalah kolom yang harus di isi jika ingin melaporkan suatu kegiatan</li>
-                                <li><span class="fw-bold">Hasil Review Keuangan</span> adalah hasil review dari keuangan yang sudah di input</li>
-                                <li><span class="fw-bold">Hasil Monev</span> adalah hasil monitoring dan evaluasi dari kegiatan yang sudah di input</li>
+                                <li><span class="fw-bold">Buat laporan</span> adalah kolom yang harus di isi jika ingin
+                                    melaporkan suatu kegiatan</li>
+                                <li><span class="fw-bold">Hasil Review Keuangan</span> adalah hasil review dari keuangan
+                                    yang sudah di input</li>
+                                <li><span class="fw-bold">Hasil Monev</span> adalah hasil monitoring dan evaluasi dari
+                                    kegiatan yang sudah di input</li>
                             </ul>
                         </div>
                     </div>

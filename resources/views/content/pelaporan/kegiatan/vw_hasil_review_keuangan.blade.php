@@ -8,24 +8,22 @@
                         Review Laporan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Pelaporan</a>
+                            <a href="{{ route('pelaporan.index') }}" class="text-muted text-hover-primary">Pelaporan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Kegiatan</a>
+                            <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
+                                class="text-muted text-hover-primary">List Kegiatan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="index.html" class="text-muted text-hover-primary">Review Keuangan</a>
+                            <a href="{{ route('kegiatan.review_keuangan', ['list_kegiatan_id' => $list_kegiatan_id]) }}"
+                                class="text-muted text-hover-primary">Hasil Review Keuangan</a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                        </li>
-                        <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
             </div>
@@ -127,7 +125,9 @@
                     </div>
                 </div>
             @empty
-                <p>Belum Ada Laporan</p>
+                <div class="alert alert-success">
+                    <p>Belum Ada Laporan Untuk Kegiatan Ini</p>
+                </div>
             @endforelse
 
         </div>

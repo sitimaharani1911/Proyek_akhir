@@ -7,25 +7,23 @@
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
                         Kegiatan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
-                        <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Pelaporan</a>
+                       <li class="breadcrumb-item text-muted">
+                            <a href="{{ route('pelaporan.index') }}" class="text-muted text-hover-primary">Pelaporan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a class="text-muted text-hover-primary">Kegiatan</a>
+                            <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
+                                class="text-muted text-hover-primary">List Kegiatan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="index.html" class="text-muted text-hover-primary">Detail</a>
+                            <a href="{{ route('pelaporan.show', ['list_kegiatan_id' => $list_kegiatan_id]) }}"
+                                class="text-muted text-hover-primary">Hasil Monev</a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <span class="bullet bg-gray-500 w-5px h-2px"></span>
-                        </li>
-                        <li class="breadcrumb-item text-muted">List</li>
                     </ul>
                 </div>
             </div>

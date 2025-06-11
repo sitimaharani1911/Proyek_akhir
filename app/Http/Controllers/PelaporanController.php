@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DokumenHibah;
+use App\Models\ListKegiatan;
 use App\Models\Pelaporan;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
@@ -82,9 +83,10 @@ class PelaporanController extends Controller
      */
     public function show(string $list_kegiatan_id)
     {
+        $list_kegiatan= ListKegiatan::findOrFail($list_kegiatan_id);
+        $proposal_id = $list_kegiatan->proposal_id;
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
-        // dd($pelaporan->toArray());
-        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id'));
+        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
     }
 
     /**

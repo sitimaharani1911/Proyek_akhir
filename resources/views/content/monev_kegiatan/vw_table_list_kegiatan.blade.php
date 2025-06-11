@@ -8,13 +8,15 @@
                         Monev Kegiatan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('monev-kegiatan.index') }}" class="text-muted text-hover-primary">Monev
-                                Kegiatan</a>
+                            <a href="{{route('monev-kegiatan.index')}}" class="text-muted text-hover-primary">Input Template</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
-                        <li class="breadcrumb-item text-muted">List</li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="{{ route('monev-kegiatan.data', ['proposal_id' => encrypt($proposal_id)]) }}"
+                                class="text-muted text-hover-primary">List Kegiatan</a>
+                        </li>
                     </ul>
                 </div>
             </div>

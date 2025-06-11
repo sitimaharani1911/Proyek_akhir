@@ -52,11 +52,14 @@ class MonevController extends Controller
     public function reviewLaporan(string $list_kegiatan_id)
     {
         // decrypt list_kegiatan_id
+        
         $list_kegiatan_id = decrypt($list_kegiatan_id);
+        $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
+        $proposal_id = $list_kegiatan->proposal_id;
         $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
 
         // dd($pelaporans->toArray());
-        return view('content.monev.vw_review_laporan', compact('pelaporans', 'list_kegiatan_id'));
+        return view('content.monev.vw_review_laporan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
     }
     public function detailDokumen($informasi_hibah_id)
     {
