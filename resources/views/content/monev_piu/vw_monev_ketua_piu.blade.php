@@ -458,8 +458,8 @@
                         </div>
                     </div>
                 @empty
-                    <div class="alert alert-danger">
-                        <strong>Data tidak ditemukan!</strong>
+                    <div class="alert alert-info">
+                        <strong>Belum dimonev oleh tim monev</strong>
                     </div>
                 @endforelse
             </div>

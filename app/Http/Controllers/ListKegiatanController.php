@@ -99,8 +99,9 @@ class ListKegiatanController extends Controller
     {
         $id = decrypt($id);
         $kegiatan = ListKegiatan::with('proposal')->findOrFail($id);
+        $proposal_id = $kegiatan->proposal_id;
         // dd($kegiatan->toArray());
-        return view('content.list_kegiatan.vw_detail_list_kegiatan', compact('kegiatan'));
+        return view('content.list_kegiatan.vw_detail_list_kegiatan', compact('kegiatan', 'proposal_id'));
     }
 
     /**
@@ -111,7 +112,8 @@ class ListKegiatanController extends Controller
         // Decrypt the ID
         $id = decrypt($id);
         $kegiatan = ListKegiatan::findOrFail($id);
-        return view('content.list_kegiatan.vw_edit_list_kegiatan', compact('kegiatan'));
+        $proposal_id = $kegiatan->proposal_id;
+        return view('content.list_kegiatan.vw_edit_list_kegiatan', compact('kegiatan', 'proposal_id'));
     }
 
     /**

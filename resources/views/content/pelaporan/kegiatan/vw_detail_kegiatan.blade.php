@@ -116,12 +116,13 @@
                                             <span class="fw-semibold">{{ $pelaporan->jumlah_peserta }}</span>
                                         </div>
                                     </div>
-                                     <div class="row mb-4">
+                                    <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Absensi Peserta</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
                                             <i class="bi bi-file-earmark-pdf"></i>
-                                            <a href="{{ asset('storage/' . $pelaporan->absensi_peserta) }}" target="_blank">
+                                            <a href="{{ asset('storage/' . $pelaporan->absensi_peserta) }}"
+                                                target="_blank">
                                                 <span class="fw-semibold">Open </span>
 
                                             </a>
@@ -141,7 +142,7 @@
                                 </div>
                                 <!-- Section Kanan -->
                                 <div class="col-lg-6">
-                                   
+
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Kegiatan</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
@@ -607,7 +608,7 @@
                         <div class="card mb-5 mb-xl-8">
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bold fs-3 mb-1">Revisi Pelaporan</span>
+                                    <span class="card-label fw-bold fs-3 mb-1">Kirim Ulang Pelaporan</span>
                                 </h3>
                             </div>
                             <div class="card-body py-3">
@@ -640,14 +641,15 @@
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Jumlah Peserta <span
                                                     class="text-danger">*</span></label>
-                                            <input type="number" class="form-control" placeholder="Jumlah Peserta"
+                                            <input type="string" class="form-control" placeholder="Jumlah Peserta"
                                                 name="jumlah_peserta" />
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Absensi Peserta <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="absensi_peserta" />
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="absensi_peserta" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
                                         </div>
 
@@ -657,6 +659,12 @@
                                             <input type="number" class="form-control" placeholder="Pengajuan Dana"
                                                 name="pengajuan_dana" />
                                             <span class="text-danger">Ket: Pastikan nominal yang diinput benar</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Penggunaan Dana<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" name="penggunaan_dana"
+                                                placeholder="Penggunaan Dana" />
                                         </div>
 
                                         <div class="mb-3">
@@ -670,39 +678,67 @@
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Surat Keputusan <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="surat_keputusan" />
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="surat_keputusan" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Surat Tugas <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="surat_tugas" />
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="surat_tugas" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Jumlah Luaran<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Input Jumlah Luaran"
+                                                name="jumlah_luaran" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Satuan Luaran<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="satuan_luaran"
+                                                placeholder="Input Satuan Luaran" />
                                         </div>
                                     </div>
 
                                     {{-- Kanan --}}
                                     <div class="col-md-6">
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Luaran Kegiatan<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="string" class="form-control"
+                                                placeholder="Input Luaran Kegiatan" name="luaran_kegiatan" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Link Luaran<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="url" class="form-control" name="link_luaran"
+                                                placeholder="Input Link Luaran" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="status_pelaksanaan"
+                                                placeholder="Input Status Pelaksanaan" />
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Laporan Kegiatan <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="laporan_kegiatan" />
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="laporan_kegiatan" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Laporan Keuangan <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="laporan_keuangan" />
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="laporan_keuangan" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label fw-semibold">Luaran <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="Luaran"
-                                                name="luaran" />
                                         </div>
 
                                         <div class="mb-3">
@@ -715,15 +751,15 @@
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Dokumentasi <span
                                                     class="text-danger">*</span></label>
-                                            <input type="url" class="form-control" placeholder="https://link.com"
-                                                name="dokumentasi" />
+                                            <input type="url" class="form-control"
+                                                placeholder="https://drive.google.com/drive" name="dokumentasi" />
                                             <span class="text-danger">Ket: Pastikan link dapat diakses</span>
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label fw-semibold">Lainnya <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" class="form-control" name="lainnya" />
+                                            <input type="file" accept=".pdf" class="form-control" name="lainnya" />
                                             <span class="text-danger">Max. Size: 500 KB | Filetype: PDF</span>
                                         </div>
 
@@ -737,13 +773,11 @@
                                     </div>
 
                                     {{-- Tombol Submit --}}
-                                    <div class="col-12 text-end mt-4">
+                                    <div class="mb-3 text-end mt-4">
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
                             </div>
-
-
                         </div>
                     @endif
                 @empty

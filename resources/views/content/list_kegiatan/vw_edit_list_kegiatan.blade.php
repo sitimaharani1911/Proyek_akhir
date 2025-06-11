@@ -7,20 +7,23 @@
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
                         Edit List Kegiatan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
-                        <li class="breadcrumb-item text-muted">
+                       <li class="breadcrumb-item text-muted">
                             <a href="{{ route('list-kegiatan.index') }}" class="text-muted text-hover-primary">Data Hibah</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ route('list-kegiatan.data', ['proposal_id' => $kegiatan->proposal_id]) }}"
+                            <a href="{{ route('list-kegiatan.data', ['proposal_id' => encrypt($proposal_id)]) }}"
                                 class="text-muted text-hover-primary">List Kegiatan</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
                         </li>
-                        <li class="breadcrumb-item text-muted">Edit Kegiatan</li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="{{ route('list-kegiatan.edit', ['id' => encrypt($kegiatan->id)]) }}"
+                                class="text-muted text-hover-primary">Edit</a>
+                        </li>
                     </ul>
                 </div>
             </div>
