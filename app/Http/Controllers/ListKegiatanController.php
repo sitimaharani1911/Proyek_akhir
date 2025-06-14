@@ -56,6 +56,7 @@ class ListKegiatanController extends Controller
         $validated = $request->validate([
             'jenis_aktivitas' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
+            'ketua_pelaksana_kegiatan' => 'required|string|max:255',
             'tanggal_awal' => 'required|date',
             'tanggal_akhir' => 'required|date',
             'rentang_pengerjaan' => 'required|string|max:255',
@@ -125,6 +126,7 @@ class ListKegiatanController extends Controller
             'jenis_aktivitas' => 'required|string|max:255',
             'nama_kegiatan' => 'required|string|max:255',
             'tanggal_awal' => 'required|date',
+            'ketua_pelaksana_kegiatan' => 'required|string|max:255',
             'tanggal_akhir' => 'required|date',
             'rentang_pengerjaan' => 'required|string|max:255',
             'panitia_pengerjaan' => 'required|string|max:255',
@@ -151,6 +153,7 @@ class ListKegiatanController extends Controller
         $kegiatan->nama_kegiatan = $request->nama_kegiatan;
         $kegiatan->tanggal_awal = $request->tanggal_awal;
         $kegiatan->tanggal_akhir = $request->tanggal_akhir;
+        $kegiatan->ketua_pelaksana_kegiatan = $request->ketua_pelaksana_kegiatan;
         $kegiatan->rentang_pengerjaan = $request->rentang_pengerjaan;
         $kegiatan->panitia_pengerjaan = $request->panitia_pengerjaan;
         $kegiatan->tempat_pelaksanaan = $request->tempat_pelaksanaan;
@@ -240,13 +243,6 @@ class ListKegiatanController extends Controller
                     }
                 })
                 ->addIndexColumn()
-                ->addColumn('jenis_hibah', function ($value) {
-                    return $value->proposal->informasi_hibah->skema_hibah;
-                })
-                // kolom program studi
-                ->addColumn('program_studi', function ($value) {
-                    return $value->proposal->informasi_hibah->prodi_terlibat;
-                })
                 ->addColumn('aksi', function ($value) {
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("list-kegiatan/show/{$encryptedId}") . '"
@@ -275,7 +271,7 @@ class ListKegiatanController extends Controller
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
                 })
-                ->rawColumns(['aksi', 'surat_keputusan', 'surat_tugas', 'template_laporan', 'jenis_hibah', 'program_studi'])
+                ->rawColumns(['aksi', 'surat_keputusan', 'surat_tugas', 'template_laporan'])
                 ->make(true);
         }
     }

@@ -37,7 +37,8 @@
                         <div class="card-title m-0">
                             <h3 class="fw-bold m-0">Detail Kegiatan Pelaksanaan Hibah</h3>
                         </div>
-                        <a class="btn btn-sm btn-primary align-self-center">Kembali</a>
+                        <a href="{{ route('list-kegiatan.data', ['proposal_id' => encrypt($proposal_id)]) }}"
+                            class="btn btn-sm btn-primary align-self-center">Kembali</a>
                     </div>
                     <div class="card-body p-9">
                         <div class="row">
@@ -51,10 +52,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Ketua Pelaksana</label>
+                                    <label class="col-md-4 fw-bold fs-6 text-gray-800">Ketua Pelaksana Kegiatan</label>
                                     <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-md-7">
-                                        <span class="fw-semibold">{{ $kegiatan->proposal->ketua_hibah }}</span>
+                                        <span class="fw-semibold">{{ $kegiatan->ketua_pelaksana_kegiatan }}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-4">

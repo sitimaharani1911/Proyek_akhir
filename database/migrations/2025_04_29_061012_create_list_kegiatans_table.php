@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('proposal_id');
             $table->string('jenis_aktivitas');
             $table->string('nama_kegiatan');
+            $table->string('ketua_pelaksana_kegiatan');
             $table->date('tanggal_awal');
             $table->date('tanggal_akhir');
             $table->string('rentang_pengerjaan');

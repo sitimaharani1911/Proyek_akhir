@@ -37,7 +37,7 @@
                         <div class="card-title m-0">
                             <h3 class="fw-bold m-0">Detail Pelaporan Kegiatan Pelaksanaan Hibah</h3>
                         </div>
-                        <a href="{{ route('informasi_hibah.index') }}"
+                        <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
                             class="btn btn-sm btn-primary align-self-center">Kembali</a>
                     </div>
                     @forelse ($pelaporans as $pelaporan)

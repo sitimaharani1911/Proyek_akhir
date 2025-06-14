@@ -99,35 +99,35 @@
                                     <span class="required">Kontrak</span>
                                 </label>
                                 <input type="file" accept=".pdf" class="form-control" name="kontrak" />
-                                <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                                <span class="text-danger  mt-2">Max. Size : 5 MB | Filetype : pdf</span>
                             </div>
                             <div class="d-flex flex-column mb-6 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                                     <span class="required">Berita Acara</span>
                                 </label>
                                 <input type="file" accept=".pdf" class="form-control" name="berita_acara" />
-                                <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                                <span class="text-danger  mt-2">Max. Size : 5 MB | Filetype : pdf</span>
                             </div>
                             <div class="d-flex flex-column mb-6 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                                     <span class="required">Verifikasi Kelayakan</span>
                                 </label>
                                 <input type="file" accept=".pdf" class="form-control" name="verifikasi_kelayakan" />
-                                <span class="text-danger mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                                <span class="text-danger mt-2">Max. Size : 5 MB | Filetype : pdf</span>
                             </div>
                             <div class="d-flex flex-column mb-6 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                                     <span class="required">Kerangka Acuan Kerja</span>
                                 </label>
                                 <input type="file" accept=".pdf" class="form-control" name="kerangka_acuan_kerja" />
-                                <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                                <span class="text-danger  mt-2">Max. Size : 5 MB | Filetype : pdf</span>
                             </div>
                             <div class="d-flex flex-column mb-6 fv-row">
                                 <label class="d-flex align-items-center fs-6 fw-semibold mb-2 w-25">
                                     <span class="required">SK Tim Hibah</span>
                                 </label>
                                 <input type="file" accept=".pdf" class="form-control" name="sk_tim_hibah" />
-                                <span class="text-danger  mt-2">Max. Size : 500 KB | Filetype : pdf</span>
+                                <span class="text-danger  mt-2">Max. Size : 5 MB | Filetype : pdf</span>
                             </div>
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary">Simpan</button>

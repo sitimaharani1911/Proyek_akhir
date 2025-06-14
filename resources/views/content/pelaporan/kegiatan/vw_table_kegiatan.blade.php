@@ -62,9 +62,10 @@
                             <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                     <th style="width: 40px;">No</th>
-                                    <th style="width: 400px;">Nama Kegiatan</th>
-                                    <th style="width: 150px;">Ketua Pelaksana</th>
-                                    <th style="width: 200px;">Jenis Aktivitas</th>
+                                    <th style="width: 250px;">Nama Kegiatan</th>
+                                    <th style="width: 150px;">Ketua Pelaksana Kegiatan</th>
+                                    <th style="width: 150px;">Jenis Aktivitas</th>
+                                    <th style="width: 150px;">Tempat Pelaksanaan</th>
                                     <th>Hasil Review Keuangan</th>
                                     <th>Hasil Monev</th>
                                     <th>Buat Laporan</th>
@@ -137,13 +138,18 @@
 
                     },
                     {
-                        data: 'ketua_hibah',
-                        name: 'ketua_hibah',
+                        data: 'ketua_pelaksana_kegiatan',
+                        name: 'ketua_pelaksana_kegiatan',
 
                     },
                     {
                         data: 'jenis_aktivitas',
                         name: 'jenis_aktivitas',
+
+                    },
+                    {
+                        data: 'tempat_pelaksanaan',
+                        name: 'tempat_pelaksanaan',
 
                     },
                     {

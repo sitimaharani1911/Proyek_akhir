@@ -56,6 +56,20 @@
                         <!-- SECTION KIRI -->
                         <div class="row g-3">
                             <div class="col-12">
+                                <label class="form-label fw-semibold">Nama Kegiatan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_kegiatan"
+                                    placeholder="Input Nama Kegiatan" />
+                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Ketua Pelaksana Kegiatan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="ketua_pelaksana_kegiatan"
+                                    placeholder="Input Nama Ketua Pelaksana Kegiatan" />
+                                <span class="text-danger">Ket: Inputkan nama lengkap, bukan inisial</span>
+                            </div>
+                            <div class="col-12">
                                 <label class="form-label fw-semibold">Jenis Aktivitas<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" name="jenis_aktivitas" required>
@@ -71,11 +85,10 @@
                                 </select>
                             </div>
                             <div class="col-12">
-                                <label class="form-label fw-semibold">Nama Kegiatan<span
+                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_kegiatan"
-                                    placeholder="Input Nama Kegiatan" />
-                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                                <input type="text" class="form-control" placeholder="Input Tempat Pelaksanaan"
+                                    name="tempat_pelaksanaan" />
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Tanggal Awal <span
@@ -88,7 +101,7 @@
                                 <input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" />
                             </div>
                             <div class="col-12">
-                                <label class="form-label fw-semibold">Rentang Pengerjaan (Bulan) <span
+                                <label class="form-label fw-semibold">Rentang Pengerjaan<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" placeholder="Rentang Pengerjaan"
                                     name="rentang_pengerjaan" id="rentang_pengerjaan" readonly />
@@ -101,12 +114,7 @@
                                 <span class="text-danger">Ket: Inisial Dosen, Jika lebih satu orang dipisah dengan koma
                                     (Cth: MSZ, IDI)</span>
                             </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" placeholder="Input Tempat Pelaksanaan"
-                                    name="tempat_pelaksanaan" />
-                            </div>
+
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Surat Keputusan<span
                                         class="text-danger">*</span></label>

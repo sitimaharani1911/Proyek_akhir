@@ -7,7 +7,7 @@
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
                         Edit List Kegiatan</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
-                       <li class="breadcrumb-item text-muted">
+                        <li class="breadcrumb-item text-muted">
                             <a href="{{ route('list-kegiatan.index') }}" class="text-muted text-hover-primary">Data Hibah</a>
                         </li>
                         <li class="breadcrumb-item">
@@ -59,17 +59,30 @@
                         <!-- SECTION KIRI -->
                         <div class="row g-3">
                             <div class="col-12">
+                                <label class="form-label fw-semibold">Nama Kegiatan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_kegiatan"
+                                    value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}" />
+                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Ketua Pelaksana Kegiatan<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="ketua_pelaksana_kegiatan"
+                                    value="{{ old('ketua_pelaksana_kegiatan', $kegiatan->ketua_pelaksana_kegiatan) }}" />
+                                <span class="text-danger">Ket: Inputkan nama lengkap, bukan inisial</span>
+                            </div>
+                            <div class="col-12">
                                 <label class="form-label fw-semibold">Jenis Aktivitas<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="jenis_aktivitas"
                                     value="{{ old('jenis_aktivitas', $kegiatan->jenis_aktivitas) }}" />
                             </div>
                             <div class="col-12">
-                                <label class="form-label fw-semibold">Nama Kegiatan<span
+                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_kegiatan"
-                                    value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}" />
-                                <span class="text-danger">Ket: Samakan dengan judul yang tertera di proposal</span>
+                                <input type="text" class="form-control" name="tempat_pelaksanaan"
+                                    value="{{ old('tempat_pelaksanaan', $kegiatan->tempat_pelaksanaan) }}" />
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Tanggal Awal <span
@@ -97,12 +110,6 @@
                                 <span class="text-danger">Ket: Inisial</span>
                             </div>
 
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Tempat Pelaksanaan<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="tempat_pelaksanaan"
-                                    value="{{ old('tempat_pelaksanaan', $kegiatan->tempat_pelaksanaan) }}" />
-                            </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Surat Keputusan</label>
                                 <input type="file" class="form-control" name="surat_keputusan" accept=".pdf" />

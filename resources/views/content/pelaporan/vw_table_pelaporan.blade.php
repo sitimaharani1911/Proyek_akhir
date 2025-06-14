@@ -40,7 +40,7 @@
                                     <th>No</th>
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
-                                    <th>Ketua</th>
+                                    <th>Ketua Hibah</th>
                                     <th>Kegiatan</th>
                                     <th>Dokumen</th>
                                 </tr>

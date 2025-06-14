@@ -41,6 +41,8 @@
                         <h3 class="card-title align-items-start flex-column">
                             <span class="card-label fw-bold fs-3 mb-1">Review Laporan</span>
                         </h3>
+                        <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
+                            class="btn btn-sm btn-primary align-self-center">Kembali</a>
                     </div>
                     <div class="card-body py-3">
                         <form class="row"
@@ -115,16 +117,14 @@
                                     <input type="text" class="form-control" placeholder="Auditor" name="auditor" />
                                 @endif
                             </div>
-
-                            @unless ($review)
-                                <div class="col-12 text-end mt-4">
-                                    <button type="submit" class="btn btn-primary">Kirim</button>
-                                </div>
-                            @endunless
                         </form>
                     </div>
                 </div>
             @empty
+                <div class="card-header cursor-pointer mb-2 d-flex align-items-center justify-content-end">
+                    <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
+                        class="btn btn-sm btn-primary align-self-center">Kembali</a>
+                </div>
                 <div class="alert alert-success">
                     <p>Belum Ada Laporan Untuk Kegiatan Ini</p>
                 </div>

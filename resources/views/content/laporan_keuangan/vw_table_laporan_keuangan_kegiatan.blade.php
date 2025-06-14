@@ -50,30 +50,13 @@
                                 <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                     <th>No</th>
                                     <th>Nama Kegiatan</th>
-                                    <th>Ketua Pelaksana</th>
-                                    <th>Tempat</th>
+                                    <th>Ketua Pelaksana Kegiatan</th>
+                                    <th>Jenis Aktivitas</th>
+                                    <th>Tempat Pelaksanaan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="border">
-                                {{-- @forelse ($kegiatans as $kegiatan)
-                                    <tr class="text-center">
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $kegiatan->proposal->informasi_hibah->nama_hibah }}</td>
-                                        <td>{{ $kegiatan->proposal->ketua_hibah }}</td>
-                                        <td>{{ $kegiatan->tempat_pelaksanaan }}</td>
-                                        <td>
-                                            <a
-                                                href="{{ route('laporan-keuangan.review', ['list_kegiatan_id' => $kegiatan->id]) }}">
-                                                <i class="fa fa-edit text-success" style="margin-right: 10px;"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td>Data Tidak Ada</td>
-                                    </tr>
-                                @endforelse --}}
                             </tbody>
                         </table>
                     </div>
@@ -139,8 +122,13 @@
 
                     },
                     {
-                        data: 'ketua_hibah',
-                        name: 'ketua_hibah',
+                        data: 'ketua_pelaksana_kegiatan',
+                        name: 'ketua_pelaksana_kegiatan',
+
+                    },
+                    {
+                        data: 'jenis_aktivitas',
+                        name: 'jenis_aktivitas',
 
                     },
                     {

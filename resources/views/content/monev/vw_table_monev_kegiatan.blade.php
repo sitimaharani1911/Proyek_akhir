@@ -45,8 +45,9 @@
                                 <tr class="fw-bold fs-6 text-gray-800 px-7 text-center">
                                     <th>No</th>
                                     <th>Nama Kegiatan</th>
-                                    <th>Ketua Pelaksana</th>
-                                    <th>Tempat</th>
+                                    <th>Ketua Pelaksana Kegiatan</th>
+                                    <th>Jenis Aktivitas</th>
+                                    <th>Tempat Pelaksanaan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -133,8 +134,13 @@
 
                     },
                     {
-                        data: 'ketua_hibah',
-                        name: 'ketua_hibah',
+                        data: 'ketua_pelaksana_kegiatan',
+                        name: 'ketua_pelaksana_kegiatan',
+
+                    },
+                    {
+                        data: 'jenis_aktivitas',
+                        name: 'jenis_aktivitas',
 
                     },
                     {

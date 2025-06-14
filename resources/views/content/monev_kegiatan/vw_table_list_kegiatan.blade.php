@@ -5,10 +5,10 @@
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                        Monev Kegiatan</h1>
+                        Data Kegiatan Pelaksanaan Hibah</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{route('monev-kegiatan.index')}}" class="text-muted text-hover-primary">Input Template</a>
+                            <a href="{{route('monev-kegiatan.index')}}" class="text-muted text-hover-primary">Data Pelaksanaan Hibah</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -45,10 +45,10 @@
                             <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 text-center align-middle">
                                     <th style="width: 40px;">No</th>
-                                    <th style="width: 150px;">Jenis Hibah</th>
-                                    <th style="width: 150px;">Program Studi</th>
+                                    <th style="width: 250px;">Nama Kegiatan</th>
+                                    <th style="width: 150px;">Ketua Pelaksana Kegiatan</th>
                                     <th style="width: 150px;">Jenis Aktivitas</th>
-                                    <th style="width: 250px;">Nama Kegiatan (Sesuai dengan proposal)</th>
+                                    <th style="width: 150px;">Tempat Pelaksanaan</th>
                                     <th style="width: 130px;">Template Laporan</th>
                                 </tr>
                             </thead>
@@ -86,7 +86,7 @@
                             @endif
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Unggah</button>
+                            <button type="submit" class="btn btn-primary">Kirim</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         </div>
                     </div>
@@ -167,13 +167,13 @@
                         width: '20px',
                     },
                     {
-                        data: 'jenis_hibah',
-                        name: 'jenis_hibah',
+                        data: 'nama_kegiatan',
+                        name: 'nama_kegiatan',
 
                     },
                     {
-                        data: 'program_studi',
-                        name: 'program_studi',
+                        data: 'ketua_pelaksana_kegiatan',
+                        name: 'ketua_pelaksana_kegiatan',
 
                     },
                     {
@@ -182,8 +182,8 @@
 
                     },
                     {
-                        data: 'nama_kegiatan',
-                        name: 'nama_kegiatan',
+                        data: 'tempat_pelaksanaan',
+                        name: 'tempat_pelaksanaan',
 
                     },
                     {

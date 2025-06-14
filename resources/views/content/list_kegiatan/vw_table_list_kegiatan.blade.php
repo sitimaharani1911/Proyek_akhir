@@ -53,10 +53,10 @@
                             <thead class="border">
                                 <tr class="fw-bold fs-6 text-gray-800 text-center align-middle">
                                     <th style="width: 40px;">No</th>
-                                    <th style="width: 150px;">Jenis Hibah</th>
-                                    <th style="width: 150px;">Program Studi</th>
+                                    <th style="width: 250px;">Nama Kegiatan</th>
+                                    <th style="width: 150px;">Ketua Pelaksana Kegiatan</th>
                                     <th style="width: 150px;">Jenis Aktivitas</th>
-                                    <th style="width: 250px;">Nama Kegiatan (Sesuai dengan proposal)</th>
+                                    <th style="width: 150px;">Tempat Pelaksanaan</th>
                                     <th style="width: 150px;">Aksi</th>
                                 </tr>
                             </thead>
@@ -121,24 +121,24 @@
                         width: '20px',
                     },
                     {
-                        data: 'jenis_hibah',
-                        name: 'jenis_hibah',
-                        
-                    },
-                    {
-                        data: 'program_studi',
-                        name: 'program_studi',
-                        
-                    },
-                    {
-                        data: 'jenis_aktivitas',
-                        name: 'jenis_aktivitas',
-                        
-                    },
-                    {
                         data: 'nama_kegiatan',
                         name: 'nama_kegiatan',
-                        
+
+                    },
+                    {
+                        data: 'ketua_pelaksana_kegiatan',
+                        name: 'ketua_pelaksana_kegiatan',
+
+                    },
+                     {
+                        data: 'jenis_aktivitas',
+                        name: 'jenis_aktivitas',
+
+                    },
+                    {
+                        data: 'tempat_pelaksanaan',
+                        name: 'tempat_pelaksanaan',
+
                     },
                     {
                         orderable: false,

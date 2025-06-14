@@ -5,10 +5,10 @@
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-gray-900 fw-bold fs-3 m-0">
-                        Input Template</h1>
+                        Data Pelaksanaan Hibah</h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{route('monev-kegiatan.index')}}" class="text-muted text-hover-primary">Input Template</a>
+                            <a href="{{route('monev-kegiatan.index')}}" class="text-muted text-hover-primary">Data Kegiatan Pelaksanaan Hibah</a>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +40,7 @@
                                     <th>No</th>
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
-                                    <th>Nama Pengaju</th>
+                                    <th>Ketua Hibah</th>
                                     <th>Kegiatan</th>
                                 </tr>
                             </thead>

@@ -44,7 +44,7 @@
                                     <th>No</th>
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
-                                    <th>Nama Pengaju</th>
+                                    <th>Ketua Hibah</th>
                                     <th>Kegiatan</th>
                                 </tr>
                             </thead>
