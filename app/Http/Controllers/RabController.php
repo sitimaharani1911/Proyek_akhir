@@ -17,7 +17,8 @@ class RabController extends Controller
      */
     public function index()
     {
-        $proposal = Proposal::all();
+        $id = Auth::user()->id;
+        $proposal = Proposal::where('created_by', $id)->get();
         return view('content.rab.vw_table_rab', compact('proposal'));
     }
 

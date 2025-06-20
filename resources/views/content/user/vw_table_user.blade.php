@@ -86,7 +86,13 @@
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Password</span>
                             </label>
-                            <input type="password" class="form-control" placeholder="Password" name="password" />
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder="Password" name="password"
+                                    id="passwordField" />
+                                <span class="input-group-text" onclick="togglePassword()" style="cursor: pointer;">
+                                    <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                                </span>
+                            </div>
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
@@ -456,6 +462,21 @@
                     swal("Oops", "Data gagal disimpan!", "error");
                 }
             });
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordField');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
+            }
         }
     </script>
 @endsection

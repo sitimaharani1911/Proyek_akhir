@@ -95,8 +95,14 @@
                                         class="form-control" />
                                 </div>
                                 <div class="fv-row mb-8">
-                                    <input type="password" placeholder="Password" name="password" autocomplete="off"
-                                        class="form-control bg-transparent" id="password-input" />
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" placeholder="Password"
+                                            name="password" id="passwordField" />
+                                        <span class="input-group-text" onclick="togglePassword()"
+                                            style="cursor: pointer;">
+                                            <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="d-grid mb-10">
                                     <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
@@ -114,17 +120,18 @@
     <script>
         var hostUrl = "themes/";
 
-        function togglePasswordVisibility() {
-            const passwordInput = document.getElementById('password-input');
-            const passwordIcon = document.getElementById('password-icon');
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordField');
+            const toggleIcon = document.getElementById('toggleIcon');
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                passwordIcon.classList.remove('fa-eye');
-                passwordIcon.classList.add('fa-eye-slash');
+                toggleIcon.classList.remove('bi-eye-slash');
+                toggleIcon.classList.add('bi-eye');
             } else {
                 passwordInput.type = 'password';
-                passwordIcon.classList.remove('fa-eye-slash');
-                passwordIcon.classList.add('fa-eye');
+                toggleIcon.classList.remove('bi-eye');
+                toggleIcon.classList.add('bi-eye-slash');
             }
         }
     </script>
