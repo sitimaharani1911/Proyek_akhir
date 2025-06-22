@@ -145,7 +145,7 @@ class PengesahanBerkasController extends Controller
                     if (Auth::user()->role == 'Kesekretariatan' || Auth::user()->role == 'superadmin') {
                         $aksi = '<a href="' . url("pengesahan_berkas/show/{$encryptedId}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>
+                                <i class="ki-outline ki-eye fs-2 text-primary"></i></a>
                                 <a href="javascript:void(0)" onclick="upload_berkas(\'' . $value->id . '\')"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                <i class="ki-outline ki-file-up fs-2 text-danger"></i>

@@ -162,6 +162,10 @@ class InformasiHibahController extends Controller
     {
         $data = InformasiHibah::find($id);
 
+        Notifikasi::where('id_ref', $data->id)
+            ->where('jenis', 'tambah informasi hibah')
+            ->delete();
+
         if (empty($data)) {
             return response()->json([
                 'status' => false,
@@ -206,7 +210,7 @@ class InformasiHibahController extends Controller
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("informasi_hibah/show/{$encryptedId}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                <i class="ki-outline ki-eye fs-2 text-primary"></i></a>';
                     $edit = '<a href="javascript:void(0)" onclick="edit(\'' . $value->id . '\')"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-pencil fs-2 text-info"></i>

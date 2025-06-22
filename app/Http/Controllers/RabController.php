@@ -187,7 +187,7 @@ class RabController extends Controller
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("rab/show/{$encryptedId}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                <i class="ki-outline ki-information fs-2 text-primary"></i></a>';
+                                <i class="ki-outline ki-eye fs-2 text-primary"></i></a>';
                     $edit = '<a href="javascript:void(0)" onclick="edit(\'' . $value->id . '\')"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-pencil fs-2 text-info"></i>
