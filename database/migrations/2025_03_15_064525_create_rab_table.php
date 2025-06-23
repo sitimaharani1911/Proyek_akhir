@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('proposal_id')->nullable();
             $table->string('tujuan')->nullable();
             $table->string('file_rab')->nullable();
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }

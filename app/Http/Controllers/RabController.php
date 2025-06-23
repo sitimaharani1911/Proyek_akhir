@@ -50,7 +50,8 @@ class RabController extends Controller
         $data = Rab::create([
             'proposal_id' => $request->proposal_id,
             'tujuan' => $request->tujuan,
-            'file_rab' => $file_rab
+            'file_rab' => $file_rab,
+            'created_by' => Auth::user()->id
         ]);
 
         if ($data) {
@@ -184,6 +185,7 @@ class RabController extends Controller
                     return convertStatus($value->proposal->status_internal)['badge'];
                 })
                 ->addColumn('action', function ($value) {
+                    $id = Auth::user()->id;
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("rab/show/{$encryptedId}") . '"
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
@@ -198,7 +200,7 @@ class RabController extends Controller
                             </a>';
 
                     if (Auth::user()->role == 'Adhoc' || Auth::user()->role == 'superadmin') {
-                        $aksi = $detail . $edit . $hapus;
+                        $aksi = ($id == $value->created_by) ? $detail . $edit . $hapus : $detail;
                     } else {
                         $aksi = $detail;
                     }
