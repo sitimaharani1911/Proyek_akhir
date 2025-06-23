@@ -239,26 +239,24 @@ class ProposalController extends Controller
                 ->addColumn('status_internal', function ($value) {
                     return convertStatus($value->status_internal)['badge'];
                 })
-                ->addColumn('verifikasi', function ($value) {
-                    if ($value->persetujuan_direktur === 3) {
-                        return '<span class="badge badge-light-pill badge-success">Diterima Direktur</span>';
-                    }
-
-                    if ($value->persetujuan_direktur === 0) {
-                        return '<span class="badge badge-light-pill badge-danger">Ditolak Direktur</span>';
-                    }
-
+                ->addColumn('persetujuan_piu', function ($value) {
                     if ($value->persetujuan_piu === 3) {
-                        return '<span class="badge badge-light-pill badge-success">Diterima PIU</span>';
+                        return '<span class="badge badge-pill badge-success">Diterima</span>';
                     }
-
                     if ($value->persetujuan_piu === 0) {
-                        return '<span class="badge badge-light-pill badge-danger">Ditolak PIU</span>';
+                        return '<span class="badge badge-pill badge-danger">Ditolak</span>';
                     }
-
                     return '<span class="badge badge-light-pill badge-secondary">Belum Diverifikasi</span>';
                 })
-
+                ->addColumn('persetujuan_direktur', function ($value) {
+                    if ($value->persetujuan_direktur === 3) {
+                        return '<span class="badge badge-pill badge-success">Diterima</span>';
+                    }
+                    if ($value->persetujuan_direktur === 0) {
+                        return '<span class="badge badge-pill badge-danger">Ditolak</span>';
+                    }
+                    return '<span class="badge badge-light-pill badge-secondary">Belum Diverifikasi</span>';
+                })
                 ->addColumn('action', function ($value) {
                     $encryptedId = encrypt($value->id);
                     $detail  = '<a href="' . url("proposal/show/{$encryptedId}") . '"
@@ -284,7 +282,7 @@ class ProposalController extends Controller
                     }
                     return $aksi;
                 })
-                ->rawColumns(['action', 'skema_hibah', 'status_internal', 'nama_hibah', 'verifikasi'])
+                ->rawColumns(['action', 'skema_hibah', 'status_internal', 'nama_hibah', 'persetujuan_piu', 'persetujuan_direktur'])
                 ->make(true);
         }
     }

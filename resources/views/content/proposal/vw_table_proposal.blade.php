@@ -46,7 +46,8 @@
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
                                     <th>Ketua Hibah</th>
-                                    <th>Verifikasi</th>
+                                    <th>Persetujuan PIU</th>
+                                    <th>Persetujuan Direktur</th>
                                     <th>In Review</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -195,8 +196,12 @@
                         name: 'ketua_hibah',
                     },
                     {
-                        data: 'verifikasi',
-                        name: 'verifikasi',
+                        data: 'persetujuan_piu',
+                        name: 'persetujuan_piu',
+                    },
+                    {
+                        data: 'persetujuan_direktur',
+                        name: 'persetujuan_direktur',
                     },
                     {
                         data: 'status_internal',
