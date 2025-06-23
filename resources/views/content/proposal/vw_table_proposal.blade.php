@@ -46,6 +46,7 @@
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
                                     <th>Ketua Hibah</th>
+                                    <th>Verifikasi</th>
                                     <th>In Review</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -192,6 +193,10 @@
                     {
                         data: 'ketua_hibah',
                         name: 'ketua_hibah',
+                    },
+                    {
+                        data: 'verifikasi',
+                        name: 'verifikasi',
                     },
                     {
                         data: 'status_internal',
