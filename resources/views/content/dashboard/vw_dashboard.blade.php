@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <i class="ki-outline ki-chart-simple-3 text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $proposal_pending }}</div>
-                            <div class="fw-semibold text-white">Proposal Belum Diajukan</div>
+                            <div class="fw-semibold text-white">Proposal Belum Diajukan - gatau</div>
                         </div>
                         <!--end::Body-->
                     </a>
