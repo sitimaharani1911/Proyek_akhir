@@ -14,6 +14,7 @@ use App\Models\ReviewPIU;
 use App\Models\RoleUser;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Facades\DataTables;
 
 class MonevController extends Controller
@@ -51,14 +52,24 @@ class MonevController extends Controller
     }
     public function reviewLaporan(string $list_kegiatan_id)
     {
-        // decrypt list_kegiatan_id
-        
-        $list_kegiatan_id = decrypt($list_kegiatan_id);
+        try {
+            // decrypt list_kegiatan_id
+            $list_kegiatan_id = Crypt::decrypt($list_kegiatan_id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            // Handle invalid encrypted value, e.g., redirect or show an error
+            return redirect()->route('monev.index')->with('error', 'Invalid activity ID.');
+        }
+
         $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
         $proposal_id = $list_kegiatan->proposal_id;
-        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
 
-        // dd($pelaporans->toArray());
+        // Ambil semua pelaporan untuk kegiatan ini, urutkan dari yang terbaru (opsional, tapi bagus untuk riwayat)
+        // Eager load 'monev' relation for each pelaporan
+        $pelaporans = Pelaporan::with(['list_kegiatan.proposal', 'monev'])
+            ->where('list_kegiatan_id', $list_kegiatan_id)
+            ->orderBy('created_at', 'desc') // Urutkan dari laporan terbaru
+            ->get();
+
         return view('content.monev.vw_review_laporan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
     }
     public function detailDokumen($informasi_hibah_id)

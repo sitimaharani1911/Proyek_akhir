@@ -390,7 +390,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 text-end mt-4">
+                            <div class="col-12 text-end mt-4 mb-3">
                                 <button type="submit" class="btn btn-primary">Kirim</button>
                             </div>
                         </form>

@@ -83,10 +83,25 @@ class PelaporanController extends Controller
      */
     public function show(string $list_kegiatan_id)
     {
-        $list_kegiatan= ListKegiatan::findOrFail($list_kegiatan_id);
+        $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
         $proposal_id = $list_kegiatan->proposal_id;
-        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
-        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
+
+        // Ambil semua pelaporan untuk kegiatan ini, diurutkan dari yang terbaru
+        $pelaporans = Pelaporan::with(['list_kegiatan.proposal', 'monev'])
+            ->where('list_kegiatan_id', $list_kegiatan_id)
+            ->orderBy('created_at', 'desc') // Urutkan berdasarkan tanggal pembuatan terbaru
+            ->get();
+
+        // Inisialisasi variabel untuk monev pelaporan terakhir
+        $latestMonev = null;
+
+        // Cek apakah ada pelaporan dan ambil monev dari pelaporan terakhir
+        if ($pelaporans->isNotEmpty()) {
+            $latestPelaporan = $pelaporans->first(); // Ambil pelaporan paling baru
+            $latestMonev = $latestPelaporan->monev; // Ambil monev dari pelaporan paling baru ini
+        }
+
+        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id', 'latestMonev'));
     }
 
     /**
