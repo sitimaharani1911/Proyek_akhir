@@ -266,7 +266,7 @@
                                                 <i class="bi bi-file-earmark-pdf"></i>
                                                 <a href="{{ asset('storage/' . $pelaporan->monev->laporan_monev) }}"
                                                     target="_blank">
-                                                    <span class="fw-semibold text-primary">Open </span>
+                                                    <span class="fw-semibold">Open </span>
                                                 </a>
                                             @else
                                                 <span class="fw-semibold">Belum Dimonev</span>
