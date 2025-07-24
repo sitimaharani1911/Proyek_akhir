@@ -86,19 +86,16 @@ class PelaporanController extends Controller
         $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
         $proposal_id = $list_kegiatan->proposal_id;
 
-        // Ambil semua pelaporan untuk kegiatan ini, diurutkan dari yang terbaru
         $pelaporans = Pelaporan::with(['list_kegiatan.proposal', 'monev'])
             ->where('list_kegiatan_id', $list_kegiatan_id)
-            ->orderBy('created_at', 'desc') // Urutkan berdasarkan tanggal pembuatan terbaru
+            ->orderBy('created_at', 'desc') 
             ->get();
 
-        // Inisialisasi variabel untuk monev pelaporan terakhir
         $latestMonev = null;
 
-        // Cek apakah ada pelaporan dan ambil monev dari pelaporan terakhir
         if ($pelaporans->isNotEmpty()) {
-            $latestPelaporan = $pelaporans->first(); // Ambil pelaporan paling baru
-            $latestMonev = $latestPelaporan->monev; // Ambil monev dari pelaporan paling baru ini
+            $latestPelaporan = $pelaporans->first(); 
+            $latestMonev = $latestPelaporan->monev; 
         }
 
         return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id', 'latestMonev'));

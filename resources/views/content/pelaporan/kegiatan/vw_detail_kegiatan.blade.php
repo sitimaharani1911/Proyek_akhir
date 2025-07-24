@@ -33,25 +33,20 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card-body py-3">
-
-                {{-- Bagian Detail Pelaporan dan Hasil Monev (loop setiap pelaporan) --}}
                 @forelse ($pelaporans as $index => $pelaporan)
-                    {{-- Judul untuk setiap entri pelaporan --}}
                     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                         <div class="card-header cursor-pointer">
                             <div class="card-title m-0">
                                 <h3 class="fw-bold m-0">Detail Pelaporan Kegiatan #{{ $loop->count - $index }} </h3>
-                                {{-- Menampilkan nomor urut dari yang terbaru --}}
                             </div>
                             @if ($loop->first)
-                                {{-- Tombol kembali hanya untuk pelaporan paling atas (terbaru) --}}
                                 <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
                                     class="btn btn-sm btn-primary align-self-center">Kembali</a>
                             @endif
                         </div>
                         <div class="card-body p-9">
                             <div class="row">
-                                {{-- Section kiri (Data Pelaporan) --}}
+                                {{-- Section kiri  --}}
                                 <div class="col-lg-6">
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Nama Kegiatan</label>
@@ -141,7 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- Section Kanan (Data Pelaporan Lanjutan) --}}
+                                {{-- Section Kanan --}}
                                 <div class="col-lg-6">
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Kegiatan</label>
@@ -229,7 +224,7 @@
                         </div>
                     </div>
 
-                    {{-- Bagian Hasil Monev (selalu ditampilkan, dengan nilai default jika belum dimonev) --}}
+                    {{-- Bagian Hasil Monev --}}
                     <div class="card mb-5 mb-xl-10">
                         <div class="card-header cursor-pointer">
                             <div class="card-title m-0">
@@ -263,7 +258,6 @@
                                                 class="fw-semibold">{{ $pelaporan->monev->tim_monev ?? 'Belum Dimonev' }}</span>
                                         </div>
                                     </div>
-                                    {{-- BARIS BARU UNTUK LAPORAN MONEV --}}
                                     <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Laporan Monev</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
@@ -279,10 +273,9 @@
                                             @endif
                                         </div>
                                     </div>
-                                    {{-- AKHIR BARIS BARU --}}
                                 </div>
                                 <div class="col-lg-6">
-                                    {{-- Kosongkan atau tambahkan info lain jika perlu di sisi kanan --}}
+                                    
                                 </div>
                             </div>
                             <table class="table table-striped table-row-bordered gy-2 gs-7 border rounded mt-5">
@@ -359,7 +352,7 @@
                     </div>
                 @endforelse
 
-                {{-- Form Kirim Ulang Pelaporan (Muncul di bagian paling bawah dan hanya jika latestMonev statusnya 'open') --}}
+                {{-- Form Kirim Ulang Pelaporan  --}}
                 @if ($latestMonev && $latestMonev->status === 'open')
                     <div class="card mb-5 mb-xl-8">
                         <div class="card-header border-0 pt-5">
@@ -386,7 +379,6 @@
                                 @endif
 
                                 <input type="hidden" name="id" value="{{ $pelaporan->id ?? '' }}">
-                                {{-- Jika ada pelaporan sebelumnya, isi id-nya --}}
                                 <input type="hidden" name="list_kegiatan_id" value="{{ $list_kegiatan_id }}">
 
                                 {{-- Kiri --}}
@@ -535,11 +527,11 @@
                             </form>
                         </div>
                     </div>
-                @endif {{-- Akhir dari if untuk form Kirim Ulang --}}
+                @endif
 
-            </div> {{-- Akhir dari card-body py-3 --}}
-        </div> {{-- Akhir dari app-container --}}
-    </div> {{-- Akhir dari app-content --}}
+            </div> 
+        </div> 
+    </div> 
 @endsection
 
 @section('js')
