@@ -111,17 +111,6 @@
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label class="col-md-4 fw-bold fs-6 text-gray-800">Nilai</label>
-                                        <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
-                                        <div class="col-md-7">
-                                            @if ($monevs)
-                                                <span class="fw-semibold">{{ $monevs->nilai }}</span>
-                                            @else
-                                                <span class="fw-semibold">Belum dinilai</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Persentase Capaian</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
