@@ -7,6 +7,7 @@ use App\Models\Proposal;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PengesahanBerkasController extends Controller
 {
@@ -37,6 +38,37 @@ class PengesahanBerkasController extends Controller
             ]);
         }
 
+        $fileFields = [
+            'file_sk',
+            'file_st',
+            'file_kontrak',
+            'file_berita_acara',
+            'file_pendukung'
+        ];
+
+        // Aturan validasi
+        $rules = [];
+        foreach ($fileFields as $field) {
+            $rules[$field] = 'nullable|mimes:pdf,doc,docx|max:10240';
+        }
+
+        // Pesan error kustom
+        $messages = [];
+        foreach ($fileFields as $field) {
+            $messages["$field.mimes"] = "Format $field tidak didukung. Format yang diperbolehkan: pdf, doc, docx.";
+            $messages["$field.max"] = "Ukuran $field terlalu besar. Maksimal 10 MB.";
+        }
+
+        // Validasi
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            // Ambil hanya error pertama
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first()
+            ]);
+        }
 
         if ($request->hasFile('file_sk')) {
             // Hapus file lama jika ada

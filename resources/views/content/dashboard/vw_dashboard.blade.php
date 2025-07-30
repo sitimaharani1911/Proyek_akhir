@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-warning hoverable card-xl-stretch mb-5 mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-abstract-28 text-white fs-2x ms-n1"></i>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('informasi_hibah.index') }}" class="card bg-info hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('informasi_hibah.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-pin text-white fs-2x ms-n1"></i>
@@ -54,7 +54,7 @@
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-6">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-success hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-home text-white fs-2x ms-n1"></i>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-xl-6">
                     <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
+                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-send text-white fs-2x ms-n1"></i>

@@ -79,7 +79,7 @@
                 </div>
             @endif
 
-            <div class="menu-item">
+            {{-- <div class="menu-item">
                 <a class="menu-link {{ request()->routeIs('rab.*') ? 'active' : '' }}"
                     href="{{ route('rab.index') }}">
                     <span class="menu-icon">
@@ -87,7 +87,7 @@
                     </span>
                     <span class="menu-title">RAB</span>
                 </a>
-            </div>
+            </div> --}}
             @if (Auth::user()->role == 'Kesekretariatan' || Auth::user()->role == 'superadmin')
                 <div class="menu-item">
                     <a class="menu-link {{ request()->routeIs('pengesahan_berkas.*') ? 'active' : '' }}"

@@ -46,6 +46,7 @@
                                     <th>Nama Hibah</th>
                                     <th>Skema Hibah</th>
                                     <th>Ketua Hibah</th>
+                                    <th>Pengajuan Dana</th>
                                     <th>Persetujuan PIU</th>
                                     <th>Persetujuan Direktur</th>
                                     <th>In Review</th>
@@ -103,9 +104,30 @@
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Pengajuan Dana</span>
+                            </label>
+                            <input type="text" class="form-control" placeholder="Rp" name="pengajuan_dana"
+                                oninput="formatRupiah(this)" />
+                        </div>
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">File Proposal</span>
                             </label>
                             <input type="file" class="form-control" name="file_proposal" />
+                            <div class="text-muted fs-7 mt-2">
+                                File yang didukung: pdf, doc, docx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span>File RAB</span>
+                            </label>
+                            <input type="file" class="form-control" name="file_rab" />
+                             <div class="text-muted fs-7 mt-2">
+                                File yang didukung: xls, xlsx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
@@ -194,6 +216,10 @@
                     {
                         data: 'ketua_hibah',
                         name: 'ketua_hibah',
+                    },
+                    {
+                        data: 'pengajuan_dana',
+                        name: 'pengajuan_dana',
                     },
                     {
                         data: 'persetujuan_piu',
@@ -291,6 +317,7 @@
                         $('[name="judul_proposal"]').val(data.data.judul_proposal);
                         $('[name="ketua_hibah"]').val(data.data.ketua_hibah);
                         $('[name="abstrak"]').val(data.data.abstrak);
+                        $('[name="pengajuan_dana"]').val(formatRupiahValue(data.data.pengajuan_dana));
                         $('[name="informasi_hibah_id"]').val(data.data.informasi_hibah_id).change();
                         $('#modalPengajuanProposal').modal('show');
                     } else {
@@ -351,6 +378,20 @@
                     });
                 }
             });
+        }
+
+        function formatRupiah(element) {
+            let value = element.value;
+            value = value.replace(/[^0-9]/g, '');
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            element.value = value ? value : '';
+        }
+
+        function formatRupiahValue(value) {
+            if (typeof value !== 'number' && typeof value !== 'string') return "0";
+            value = String(value).replace(/[^0-9]/g, '');
+            if (value === "") return "0";
+            return value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     </script>
 @endsection

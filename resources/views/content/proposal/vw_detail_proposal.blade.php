@@ -36,51 +36,18 @@
                                     </div>
                                 </div>
                                 <div class="row mb-7">
+                                    <label class="col-lg-4 fw-bold fs-6 text-gray-800">Pengajuan Dana</label>
+                                    <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
+                                    <div class="col-lg-7 text-justify">
+                                        <span
+                                            class="fw-semibold">{{ isset($data->pengajuan_dana) ? 'Rp ' . number_format($data->pengajuan_dana, 0, ',', '.') : 'Rp 0' }}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-7">
                                     <label class="col-lg-4 fw-bold fs-6 text-gray-800">Status Internal</label>
                                     <label class="col-lg-1 fw-bold fs-6 text-gray-800">:</label>
                                     <div class="col-lg-7">
-                                        @if (Auth::user()->role == 'Sentra' || Auth::user()->role == 'superadmin')
-                                            @php
-                                                switch ($data->status_internal) {
-                                                    case 1:
-                                                        $text = 'Pending';
-                                                        $class = 'btn-warning';
-                                                        break;
-                                                    case 2:
-                                                        $text = 'Pengajuan';
-                                                        $class = 'btn-primary';
-                                                        break;
-                                                    case 3:
-                                                        $text = 'Diterima';
-                                                        $class = 'btn-success';
-                                                        break;
-                                                    case 0:
-                                                    default:
-                                                        $text = 'Ditolak';
-                                                        $class = 'btn-danger';
-                                                        break;
-                                                }
-                                            @endphp
-
-                                            <button type="button"
-                                                class="btn {{ $class }} btn-sm dropdown-toggle waves-effect"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {{ $text }}
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
-                                                    data-id="{{ $data->id }}" data-status="2"
-                                                    data-verifikasi="status_internal" data-model="Proposal">Pengajuan</a>
-                                                <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
-                                                    data-id="{{ $data->id }}" data-status="3"
-                                                    data-verifikasi="status_internal" data-model="Proposal">Diterima</a>
-                                                <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
-                                                    data-id="{{ $data->id }}" data-status="0"
-                                                    data-verifikasi="status_internal" data-model="Proposal">Ditolak</a>
-                                            </div>
-                                        @else
-                                            {!! convertStatus($data->status_internal)['badge'] !!}
-                                        @endif
+                                        {!! convertStatus($data->status_internal)['badge'] !!}
                                     </div>
                                 </div>
                                 <div class="row mb-7">
@@ -119,11 +86,57 @@
                                             </div>
                                         </div>
                                         <div class="row mb-7">
-                                            <div class="col-lg-3"></div>
-                                            <div class="col-lg-9">
+                                            <div class="col-lg-2"></div>
+                                            <div class="col-lg-8"></div>
+                                            <div class="col-lg-2">
                                                 <a href="#" onclick="save()" class="btn btn-primary btn-sm">
                                                     Simpan
                                                 </a>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-5">
+                                            <label class="col-lg-3 fw-bold fs-6 text-gray-800">Status Internal</label>
+                                            <div class="col-lg-3">
+                                                @php
+                                                    switch ($data->status_internal) {
+                                                        case 1:
+                                                            $text = 'Pending';
+                                                            $class = 'btn-warning';
+                                                            break;
+                                                        case 2:
+                                                            $text = 'Pengajuan';
+                                                            $class = 'btn-primary';
+                                                            break;
+                                                        case 3:
+                                                            $text = 'Diterima';
+                                                            $class = 'btn-success';
+                                                            break;
+                                                        case 0:
+                                                        default:
+                                                            $text = 'Ditolak';
+                                                            $class = 'btn-danger';
+                                                            break;
+                                                    }
+                                                @endphp
+
+                                                <button type="button"
+                                                    class="btn {{ $class }} btn-sm dropdown-toggle waves-effect"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    {{ $text }}
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
+                                                        data-id="{{ $data->id }}" data-status="2"
+                                                        data-verifikasi="status_internal"
+                                                        data-model="Proposal">Pengajuan</a>
+                                                    <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
+                                                        data-id="{{ $data->id }}" data-status="3"
+                                                        data-verifikasi="status_internal" data-model="Proposal">Diterima</a>
+                                                    <a class="dropdown-item btn-verifikasi" href="javascript:void(0);"
+                                                        data-id="{{ $data->id }}" data-status="0"
+                                                        data-verifikasi="status_internal"
+                                                        data-model="Proposal">Ditolak</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

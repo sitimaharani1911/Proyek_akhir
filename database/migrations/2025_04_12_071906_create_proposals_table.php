@@ -24,7 +24,9 @@ return new class extends Migration
             $table->integer('status_internal')->nullable();
             $table->integer('status_eksternal')->nullable();
             $table->integer('status_progres')->nullable();
+            $table->integer('pengajuan_dana')->nullable();
             $table->string('file_proposal')->nullable();
+            $table->string('file_rab')->nullable();
             $table->string('file_pendukung')->nullable();
             $table->string('bukti_ss')->nullable();
             $table->string('file_sk')->nullable();

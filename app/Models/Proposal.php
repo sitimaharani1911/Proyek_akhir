@@ -11,7 +11,7 @@ class Proposal extends Model
 
     public function informasi_hibah()
     {
-        return $this->belongsTo(InformasiHibah::class, 'informasi_hibah_id', 'id');
+        return $this->belongsTo(InformasiHibah::class, 'informasi_hibah_id', 'id')->withDefault();
     }
     public function listKegiatan()
 {

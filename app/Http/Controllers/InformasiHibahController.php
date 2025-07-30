@@ -46,7 +46,28 @@ class InformasiHibahController extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
+
         if ($request->hasFile('file_pendukung')) {
+            $rules = [
+                'file_pendukung' => 'mimes:jpeg,png,jpg,pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240'
+            ];
+
+            $messages = [
+                'file_pendukung.mimes' => 'Format file tidak didukung. Format yang diperbolehkan: jpeg, png, jpg, pdf, doc, docx, xls, xlsx, ppt, pptx.',
+                'file_pendukung.max' => 'Ukuran file terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_pendukung');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
             $filePath = $request->file('file_pendukung')->store('file_pendukung', 'public');
             $file_pendukung = $filePath;
         } else {
@@ -130,6 +151,27 @@ class InformasiHibahController extends Controller
         ]);
 
         if ($request->hasFile('file_pendukung')) {
+
+            $rules = [
+                'file_pendukung' => 'mimes:jpeg,png,jpg,pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240'
+            ];
+
+            $messages = [
+                'file_pendukung.mimes' => 'Format file tidak didukung. Format yang diperbolehkan: jpeg, png, jpg, pdf, doc, docx, xls, xlsx, ppt, pptx.',
+                'file_pendukung.max' => 'Ukuran file terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_pendukung');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
             // Hapus file lama jika ada
             if ($data->file_pendukung && Storage::disk('public')->exists($data->file_pendukung)) {
                 Storage::disk('public')->delete($data->file_pendukung);

@@ -90,6 +90,10 @@
                                 <span>File RAB</span>
                             </label>
                             <input type="file" class="form-control" name="file_rab" />
+                             <div class="text-muted fs-7 mt-2">
+                                File yang didukung: xls, xlsx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>

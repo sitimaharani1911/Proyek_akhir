@@ -34,7 +34,8 @@ class ProposalController extends Controller
             'informasi_hibah_id' => 'required',
             'judul_proposal' => 'required',
             'ketua_hibah' => 'required',
-            'abstrak' => 'required'
+            'abstrak' => 'required',
+            'pengajuan_dana' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -44,10 +45,59 @@ class ProposalController extends Controller
             ]);
         }
         if ($request->hasFile('file_proposal')) {
+
+            $rules = [
+                'file_proposal' => 'mimes:pdf,doc,docx|max:10240'
+            ];
+
+            $messages = [
+                'file_proposal.mimes' => 'Format file proposal tidak didukung. Format yang diperbolehkan: pdf, doc, docx.',
+                'file_proposal.max' => 'Ukuran file proposal terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_proposal');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
             $filePath = $request->file('file_proposal')->store('pengajuan_proposal/file_proposal', 'public');
             $file_proposal = $filePath;
         } else {
             $file_proposal = null;
+        }
+
+        if ($request->hasFile('file_rab')) {
+
+            $rules = [
+                'file_rab' => 'mimes:xls,xlsx|max:10240'
+            ];
+
+            $messages = [
+                'file_rab.mimes' => 'Format file rab tidak didukung. Format yang diperbolehkan: xls, xlsx.',
+                'file_rab.max' => 'Ukuran file rab terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_rab');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
+            $filePath = $request->file('file_rab')->store('pengajuan_proposal/file_rab', 'public');
+            $file_rab = $filePath;
+        } else {
+            $file_rab = null;
         }
 
         $data = Proposal::create([
@@ -55,7 +105,9 @@ class ProposalController extends Controller
             'judul_proposal' => $request->judul_proposal,
             'ketua_hibah' => $request->ketua_hibah,
             'abstrak' => $request->abstrak,
+            'pengajuan_dana' => preg_replace('/[^0-9]/', '', $request->pengajuan_dana),
             'file_proposal' => $file_proposal,
+            'file_rab' => $file_rab,
             'persetujuan_piu' => 1,
             'persetujuan_direktur' => 1,
             'status_internal' => 1,
@@ -130,10 +182,31 @@ class ProposalController extends Controller
             'informasi_hibah_id' => $request->informasi_hibah_id,
             'judul_proposal' => $request->judul_proposal,
             'ketua_hibah' => $request->ketua_hibah,
-            'abstrak' => $request->abstrak
+            'abstrak' => $request->abstrak,
+            'pengajuan_dana' => preg_replace('/[^0-9]/', '', $request->pengajuan_dana),
         ]);
 
         if ($request->hasFile('file_proposal')) {
+            $rules = [
+                'file_proposal' => 'mimes:pdf,doc,docx|max:10240'
+            ];
+
+            $messages = [
+                'file_proposal.mimes' => 'Format file proposal tidak didukung. Format yang diperbolehkan: pdf, doc, docx.',
+                'file_proposal.max' => 'Ukuran file proposal terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_proposal');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
             // Hapus file lama jika ada
             if ($data->file_proposal && Storage::disk('public')->exists($data->file_proposal)) {
                 Storage::disk('public')->delete($data->file_proposal);
@@ -146,6 +219,39 @@ class ProposalController extends Controller
             ]);
         }
 
+        if ($request->hasFile('file_rab')) {
+
+            $rules = [
+                'file_rab' => 'mimes:xls,xlsx|max:10240'
+            ];
+
+            $messages = [
+                'file_rab.mimes' => 'Format file rab tidak didukung. Format yang diperbolehkan: xls, xlsx.',
+                'file_rab.max' => 'Ukuran file rab terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_rab');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
+            // Hapus file lama jika ada
+            if ($data->file_rab && Storage::disk('public')->exists($data->file_rab)) {
+                Storage::disk('public')->delete($data->file_rab);
+            }
+
+            // Upload file baru
+            $filePath = $request->file('file_rab')->store('pengajuan_proposal/file_rab', 'public');
+            $data->update([
+                'file_rab' => $filePath
+            ]);
+        }
 
         if ($data) {
             return response()->json([
@@ -236,6 +342,9 @@ class ProposalController extends Controller
                 ->addColumn('nama_hibah', function ($value) {
                     return $value->informasi_hibah->nama_hibah;
                 })
+                 ->addColumn('pengajuan_dana', function ($value) {
+                    return $value->pengajuan_dana ? 'Rp ' . number_format($value->pengajuan_dana, 0, ',', '.') : 'Rp 0';
+                })
                 ->addColumn('status_internal', function ($value) {
                     return convertStatus($value->status_internal)['badge'];
                 })
@@ -282,7 +391,7 @@ class ProposalController extends Controller
                     }
                     return $aksi;
                 })
-                ->rawColumns(['action', 'skema_hibah', 'status_internal', 'nama_hibah', 'persetujuan_piu', 'persetujuan_direktur'])
+                ->rawColumns(['action', 'skema_hibah', 'status_internal', 'nama_hibah', 'persetujuan_piu', 'persetujuan_direktur','pengajuan_dana'])
                 ->make(true);
         }
     }

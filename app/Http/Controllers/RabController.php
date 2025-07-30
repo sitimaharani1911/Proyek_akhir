@@ -41,6 +41,27 @@ class RabController extends Controller
         }
 
         if ($request->hasFile('file_rab')) {
+
+            $rules = [
+                'file_rab' => 'mimes:xls,xlsx|max:10240'
+            ];
+
+            $messages = [
+                'file_rab.mimes' => 'Format file tidak didukung. Format yang diperbolehkan: xls, xlsx.',
+                'file_rab.max' => 'Ukuran file terlalu besar. Maksimal 10 MB.'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                $errorMessage = $validator->errors()->first('file_rab');
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $errorMessage
+                ]);
+            }
+
             $filePath = $request->file('file_rab')->store('file_rab', 'public');
             $file_rab = $filePath;
         } else {

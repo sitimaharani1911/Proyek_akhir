@@ -68,30 +68,50 @@
                                 <span class="required">Surat Keputusan</span>
                             </label>
                             <input type="file" class="form-control" name="file_sk" />
+                            <div class="text-muted fs-7 mt-2">
+                                File yang didukung: pdf, doc, docx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Surat Tugas</span>
                             </label>
                             <input type="file" class="form-control" name="file_st" />
+                            <div class="text-muted fs-7 mt-2">
+                                File yang didukung: pdf, doc, docx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Kontrak</span>
                             </label>
                             <input type="file" class="form-control" name="file_kontrak" />
+                            <div class="text-muted fs-7 mt-2">
+                                File yang didukung: pdf, doc, docx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span class="required">Berita Acara</span>
                             </label>
                             <input type="file" class="form-control" name="file_berita_acara" />
+                            <div class="text-muted fs-7 mt-2">
+                                File yang didukung: pdf, doc, docx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="d-flex flex-column mb-8 fv-row">
                             <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                                 <span>File Pendukung</span>
                             </label>
                             <input type="file" class="form-control" name="file_pendukung" />
+                            <div class="text-muted fs-7 mt-2">
+                                File yang didukung: jpeg, png, jpg, pdf, doc, docx, xls, xlsx, ppt, pptx |
+                                <span class="text-danger">Max: 10 MB</span>
+                            </div>
                         </div>
                         <div class="text-center">
                             <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
