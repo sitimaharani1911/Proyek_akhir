@@ -46,14 +46,17 @@
                             <ul class="mb-0 ps-3 text-black">
                                 <li><span class="fw-bold">Buat laporan</span> adalah kolom yang harus di isi jika ingin
                                     melaporkan suatu kegiatan</li>
-                                <li><span class="fw-bold">Hasil Review Keuangan</span> adalah hasil review dari keuangan
-                                    yang sudah di input</li>
                                 <li><span class="fw-bold">Hasil Monev</span> adalah hasil monitoring dan evaluasi dari
                                     kegiatan yang sudah di input</li>
+                                <li><span class="fw-bold">Hasil Review Keuangan</span> adalah hasil review dari keuangan
+                                    yang sudah di input</li>
+                                <li><span class="fw-bold">Hasil Review PIU</span> adalah hasil review dari ketua PIU
+                                    yang sudah di input</li>
+                                <li><span class="fw-bold">Hasil Review Pimpinan</span> adalah hasil review dari Pimpinan
+                                    yang sudah di input</li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
                 <div class="card-body py-3">
                     <div class="table-responsive">
@@ -66,9 +69,11 @@
                                     <th style="width: 150px;">Ketua Pelaksana Kegiatan</th>
                                     <th style="width: 150px;">Jenis Aktivitas</th>
                                     <th style="width: 150px;">Tempat Pelaksanaan</th>
-                                    <th>Hasil Review Keuangan</th>
-                                    <th>Hasil Monev</th>
-                                    <th>Buat Laporan</th>
+                                    <th style="width: 150px;">Buat Laporan</th>
+                                    <th style="width: 150px;">Hasil Monev</th>
+                                    <th style="width: 150px;">Hasil Review Keuangan</th>
+                                    <th style="width: 150px;">Hasil Review PIU</th>
+                                    <th style="width: 150px;">Hasil Review Pimpinan</th>
                                 </tr>
                             </thead>
                             <tbody class="border">
@@ -153,10 +158,9 @@
 
                     },
                     {
-                        data: 'hasil_review_keuangan',
-                        name: 'hasil_review_keuangan',
+                        data: "buat_laporan",
+                        name: "buat_laporan",
                         className: 'text-center',
-
                     },
                     {
                         data: 'hasil_monev',
@@ -165,10 +169,24 @@
 
                     },
                     {
-                        data: "buat_laporan",
-                        name: "buat_laporan",
+                        data: 'hasil_review_keuangan',
+                        name: 'hasil_review_keuangan',
                         className: 'text-center',
-                    }
+
+                    },
+                    {
+                        data: 'hasil_review_piu',
+                        name: 'hasil_review_piu',
+                        className: 'text-center',
+
+                    },
+                    {
+                        data: 'hasil_review_pimpinan',
+                        name: 'hasil_review_pimpinan',
+                        className: 'text-center',
+
+                    },
+
                 ]
             });
             //filter

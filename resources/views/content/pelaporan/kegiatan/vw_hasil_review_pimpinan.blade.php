@@ -33,7 +33,7 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             @forelse ($pelaporans as $pelaporan)
                 @php
-                    $review = $pelaporan->review_keuangan;
+                    $review = $pelaporan->review_pimpinan;
                 @endphp
 
                 <div class="card mb-5 mb-xl-8">
@@ -86,7 +86,7 @@
                                 <label class="form-label fw-semibold">Serapan Dana</label>
                                 <p class="form-control">{{ number_format($pelaporan->serapan_dana, 2) }} %</p>
                             </div>
-                            <h3 class="mb-5">Hasil Review Dari Keuangan</h3>
+                            <h3 class="mb-5">Hasil Review Dari PIU</h3>
 
                             <!-- Kolom Catatan -->
                             <div class="mb-3">
@@ -95,26 +95,6 @@
                                     <p class="form-control">{{ $review->catatan }}</p>
                                 @else
                                      <p class="form-control">Belum Direview</p>
-                                @endif
-                            </div>
-
-                            <!-- Kolom Status -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Status</label>
-                                @if ($review)
-                                    <p class="form-control">{{ $review->status }}</p>
-                                @else
-                                    <p class="form-control">Belum Direview</p>
-                                @endif
-                            </div>
-
-                            <!-- Kolom Auditor -->
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Auditor</label>
-                                @if ($review)
-                                    <p class="form-control">{{ $review->auditor }}</p>
-                                @else
-                                    <p class="form-control">Belum Direview</p>
                                 @endif
                             </div>
                         </form>

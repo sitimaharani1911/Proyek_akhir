@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('status_pelaksanaan');
             $table->string('dampak');
             $table->string('dokumentasi');
-            $table->string('lainnya');
+            $table->string('lainnya')->nullable();
             $table->string('bukti_pembayaran');
             $table->softDeletes();
             $table->timestamps();

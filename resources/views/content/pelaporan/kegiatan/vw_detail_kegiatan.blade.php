@@ -37,7 +37,7 @@
                     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                         <div class="card-header cursor-pointer">
                             <div class="card-title m-0">
-                                <h3 class="fw-bold m-0">Detail Pelaporan Kegiatan #{{ $loop->count - $index }} </h3>
+                                <h3 class="fw-bold m-0">Detail Pelaporan Kegiatan </h3>
                             </div>
                             @if ($loop->first)
                                 <a href="{{ route('kegiatan.index', ['proposal_id' => encrypt($proposal_id)]) }}"
@@ -228,7 +228,7 @@
                     <div class="card mb-5 mb-xl-10">
                         <div class="card-header cursor-pointer">
                             <div class="card-title m-0">
-                                <h3 class="fw-bold m-0">Hasil Monev untuk Pelaporan #{{ $loop->count - $index }}</h3>
+                                <h3 class="fw-bold m-0">Hasil Monev untuk Pelaporan</h3>
                             </div>
                         </div>
                         <div class="card-body p-9">
@@ -275,7 +275,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    
+
                                 </div>
                             </div>
                             <table class="table table-striped table-row-bordered gy-2 gs-7 border rounded mt-5">
@@ -352,21 +352,22 @@
                     </div>
                 @endforelse
 
-                {{-- Form Kirim Ulang Pelaporan  --}}
-                @if ($latestMonev && $latestMonev->status === 'open')
+                {{-- Form Kirim Ulang Pelaporan (Revisi) --}}
+                @if ($latestMonev && $latestMonev->status === 'open' && $latestPelaporan)
                     <div class="card mb-5 mb-xl-8">
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold fs-3 mb-1">Kirim Ulang Pelaporan</span>
-                                <span class="text-muted mt-1 fw-semibold fs-7">Form ini hanya muncul jika pelaporan
-                                    terakhir masih dalam status 'Open' oleh tim Monev.</span>
+                                <span class="card-label fw-bold fs-3 mb-1">Perbaikan Pelaporan</span>
+                                <span class="text-muted mt-1 fw-semibold fs-7">
+                                    Harap perbaiki item yang ditolak berdasarkan catatan dari tim Monev.
+                                </span>
                             </h3>
                         </div>
                         <div class="card-body py-3">
-                            <form class="row"
-                                action="{{ route('kegiatan.store', ['list_kegiatan_id' => $list_kegiatan_id]) }}"
-                                method="POST" id="formAdd" enctype="multipart/form-data">
+                            <form action="{{ route('pelaporan.updateRevisi', ['pelaporan' => $latestPelaporan->id]) }}"
+                                method="POST" id="formRevisi" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
 
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -378,160 +379,195 @@
                                     </div>
                                 @endif
 
-                                <input type="hidden" name="id" value="{{ $pelaporan->id ?? '' }}">
-                                <input type="hidden" name="list_kegiatan_id" value="{{ $list_kegiatan_id }}">
+                                <div class="col-md-12">
 
-                                {{-- Kiri --}}
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Tanggal Pelaporan <span
-                                                class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="tanggal" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Status Pelaksanaan Kegiatan<span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="status_pelaksanaan"
-                                            placeholder="Input Status Pelaksanaan" />
+                                    {{-- Pengajuan Dana --}}
+                                    @if ($latestMonev->status_pengajuan_dana === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Pengajuan Dana <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Pengajuan Dana"
+                                                name="pengajuan_dana" value="{{ old('pengajuan_dana') }}" />
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_pengajuan_dana }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Penggunaan Dana --}}
+                                    @if ($latestMonev->status_penggunaan_dana === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Penggunaan Dana <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" name="penggunaan_dana"
+                                                placeholder="Penggunaan Dana" value="{{ old('penggunaan_dana') }}" />
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_penggunaan_dana }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Sisa Dana --}}
+                                    @if ($latestMonev->status_sisa_dana === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Sisa Dana <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Sisa Dana"
+                                                name="sisa_dana" value="{{ old('sisa_dana') }}" />
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_sisa_dana }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Jumlah Luaran --}}
+                                    @if ($latestMonev->status_jumlah_luaran === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Jumlah Luaran <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" name="jumlah_luaran"
+                                                placeholder="Input Jumlah Luaran" value="{{ old('jumlah_luaran') }}" />
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_jumlah_luaran }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Satuan Luaran --}}
+                                    @if ($latestMonev->status_satuan_luaran === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Satuan Luaran <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="satuan_luaran"
+                                                placeholder="Contoh: Publikasi Jurnal, Video, Artikel"
+                                                value="{{ old('satuan_luaran') }}" />
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_satuan_luaran }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Luaran Kegiatan (Dipisah) --}}
+                                    @if ($latestMonev->status_luaran_kegiatan === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Luaran Kegiatan <span
+                                                    class="text-danger">*</span></label>
+                                            <textarea class="form-control" placeholder="Jelaskan luaran yang dihasilkan" name="luaran_kegiatan" rows="3">{{ old('luaran_kegiatan') }}</textarea>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_luaran_kegiatan }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Link Luaran (Dipisah) --}}
+                                    @if ($latestMonev->status_link_luaran === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Link Luaran <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="url" class="form-control" name="link_luaran"
+                                                placeholder="https://..." value="{{ old('link_luaran') }}" />
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_link_luaran }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Dampak --}}
+                                    @if ($latestMonev->status_dampak === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Dampak <span
+                                                    class="text-danger">*</span></label>
+                                            <textarea class="form-control" placeholder="Jelaskan dampak kegiatan" name="dampak" rows="3">{{ old('dampak') }}</textarea>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_dampak }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Dokumentasi --}}
+                                    @if ($latestMonev->status_dokumentasi === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Perbarui Link Dokumentasi <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="url" class="form-control"
+                                                placeholder="https://drive.google.com/drive/..." name="dokumentasi"
+                                                value="{{ old('dokumentasi') }}" />
+                                            <span class="form-text text-muted">Ket: Pastikan link dapat diakses
+                                                publik.</span>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_dokumentasi }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Surat Keputusan --}}
+                                    @if ($latestMonev->status_surat_keputusan === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Upload Ulang Surat Keputusan <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="surat_keputusan" />
+                                            <div class="form-text text-muted">Max. Size: 5 MB | Filetype: PDF</div>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_surat_keputusan }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Surat Tugas --}}
+                                    @if ($latestMonev->status_surat_tugas === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Upload Ulang Surat Tugas <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="surat_tugas" />
+                                            <div class="form-text text-muted">Max. Size: 5 MB | Filetype: PDF</div>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_surat_tugas }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Laporan Kegiatan --}}
+                                    @if ($latestMonev->status_laporan_kegiatan === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Upload Ulang Laporan Kegiatan <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="laporan_kegiatan" />
+                                            <div class="form-text text-muted">Max. Size: 5 MB | Filetype: PDF</div>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_laporan_kegiatan }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Laporan Keuangan --}}
+                                    @if ($latestMonev->status_laporan_keuangan === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Upload Ulang Laporan Keuangan <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" accept=".pdf" class="form-control"
+                                                name="laporan_keuangan" />
+                                            <div class="form-text text-muted">Max. Size: 5 MB | Filetype: PDF</div>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_laporan_keuangan }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Lainnya --}}
+                                    @if ($latestMonev->status_lainnya === 'Ditolak')
+                                        <div class="mb-5 p-4 border rounded">
+                                            <label class="form-label fw-semibold">Upload Ulang File Lainnya <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" accept=".pdf" class="form-control" name="lainnya" />
+                                            <div class="form-text text-muted">Max. Size: 5 MB | Filetype: PDF</div>
+                                            <div class="form-text text-black mt-2">Catatan Monev:
+                                                {{ $latestMonev->catatan_lainnya }}</div>
+                                        </div>
+                                    @endif
+
+                                    {{-- Tombol Submit --}}
+                                    <div class="mb-3 text-end mt-4">
+                                        <button type="submit" class="btn btn-primary">Kirim Perbaikan</button>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Jumlah Peserta <span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Jumlah Peserta"
-                                            name="jumlah_peserta" />
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Absensi Peserta <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" accept=".pdf" class="form-control"
-                                            name="absensi_peserta" />
-                                        <span class="text-danger">Max. Size: 5 MB | Filetype: PDF</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Pengajuan Dana <span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Pengajuan Dana"
-                                            name="pengajuan_dana" />
-                                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Penggunaan Dana<span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" name="penggunaan_dana"
-                                            placeholder="Penggunaan Dana" />
-                                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Sisa Dana <span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Sisa Dana"
-                                            name="sisa_dana" />
-                                        <span class="text-danger">Ket: Pastikan nominal yang diinput benar</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Jumlah Luaran<span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" placeholder="Input Jumlah Luaran"
-                                            name="jumlah_luaran" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Satuan Luaran<span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="satuan_luaran"
-                                            placeholder="Input Satuan Luaran" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Luaran Kegiatan<span
-                                                class="text-danger">*</span></label>
-                                        <input type="string" class="form-control" placeholder="Input Luaran Kegiatan"
-                                            name="luaran_kegiatan" />
-                                    </div>
-                                </div>
-
-                                {{-- Kanan --}}
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Link Luaran<span
-                                                class="text-danger">*</span></label>
-                                        <input type="url" class="form-control" name="link_luaran"
-                                            placeholder="Input Link Luaran" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Surat Keputusan <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" accept=".pdf" class="form-control"
-                                            name="surat_keputusan" />
-                                        <span class="text-danger">Max. Size: 5 MB | Filetype: PDF</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Surat Tugas <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" accept=".pdf" class="form-control" name="surat_tugas" />
-                                        <span class="text-danger">Max. Size: 5 MB | Filetype: PDF</span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Laporan Kegiatan <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" accept=".pdf" class="form-control"
-                                            name="laporan_kegiatan" />
-                                        <span class="text-danger">Max. Size: 5 MB | Filetype: PDF</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Laporan Keuangan <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" accept=".pdf" class="form-control"
-                                            name="laporan_keuangan" />
-                                        <span class="text-danger">Max. Size: 5 MB | Filetype: PDF</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Dampak <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Dampak" name="dampak" />
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Dokumentasi <span
-                                                class="text-danger">*</span></label>
-                                        <input type="url" class="form-control"
-                                            placeholder="https://drive.google.com/drive" name="dokumentasi" />
-                                        <span class="text-danger">Ket: Pastikan link dapat diakses</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Lainnya <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" accept=".pdf" class="form-control" name="lainnya" />
-                                        <span class="text-danger">Max. Size: 5 MB | Filetype: PDF</span>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label fw-semibold">Bukti Pembayaran <span
-                                                class="text-danger">*</span></label>
-                                        <input type="url" class="form-control" placeholder="https://gdrive.com"
-                                            name="bukti_pembayaran" />
-                                        <span class="text-danger">Ket: Lampirkan seluruh bukti pembayaran</span>
-                                    </div>
-                                </div>
-
-                                {{-- Tombol Submit --}}
-                                <div class="mb-3 text-end mt-4">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 @endif
-
-            </div> 
-        </div> 
-    </div> 
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')

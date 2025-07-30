@@ -70,7 +70,7 @@ class KegiatanController extends Controller
             'laporan_keuangan' => 'required|file|mimes:pdf|max:5120',
             'dampak' => 'required|string|max:255',
             'dokumentasi' => 'required|string|max:255',
-            'lainnya' => 'required|file|mimes:pdf|max:5120',
+            'lainnya' => 'nullable|url|max:255',
             'bukti_pembayaran' => 'required|string|max:255',
         ]);
 
@@ -80,14 +80,12 @@ class KegiatanController extends Controller
         $surat_tugas_path = $request->file('surat_tugas')->store('surat_tugas', 'public');
         $laporan_kegiatan_path = $request->file('laporan_kegiatan')->store('laporan_kegiatan', 'public');
         $laporan_keuangan_path = $request->file('laporan_keuangan')->store('laporan_keuangan', 'public');
-        $lainnya_path = $request->file('lainnya')->store('lainnya', 'public');
 
         $validated['absensi_peserta'] = $absensi_peserta_path;
         $validated['surat_keputusan'] = $surat_keputusan_path;
         $validated['surat_tugas'] = $surat_tugas_path;
         $validated['laporan_kegiatan'] = $laporan_kegiatan_path;
         $validated['laporan_keuangan'] = $laporan_keuangan_path;
-        $validated['lainnya'] = $lainnya_path;
         $validated['list_kegiatan_id'] = $list_kegiatan_id;
 
         Pelaporan::create($validated);
@@ -116,6 +114,30 @@ class KegiatanController extends Controller
         }
         // dd($pelaporans->toArray());
         return view('content.pelaporan.kegiatan.vw_hasil_review_keuangan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
+    }
+    public function reviewLaporanPiu(string $list_kegiatan_id)
+    {
+        $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
+        $proposal_id = $list_kegiatan->proposal_id;
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        foreach ($pelaporans as $pelaporan) {
+            $pelaporan["serapan_dana"] = (($pelaporan['pengajuan_dana'] - $pelaporan["sisa_dana"]) / $pelaporan["pengajuan_dana"]) * 100;
+            // dd($pelaporan->toArray());
+        }
+        // dd($pelaporans->toArray());
+        return view('content.pelaporan.kegiatan.vw_hasil_review_piu', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
+    }
+    public function reviewLaporanPimpinan(string $list_kegiatan_id)
+    {
+        $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
+        $proposal_id = $list_kegiatan->proposal_id;
+        $pelaporans = Pelaporan::with('list_kegiatan')->where('list_kegiatan_id', $list_kegiatan_id)->get();
+        foreach ($pelaporans as $pelaporan) {
+            $pelaporan["serapan_dana"] = (($pelaporan['pengajuan_dana'] - $pelaporan["sisa_dana"]) / $pelaporan["pengajuan_dana"]) * 100;
+            // dd($pelaporan->toArray());
+        }
+        // dd($pelaporans->toArray());
+        return view('content.pelaporan.kegiatan.vw_hasil_review_pimpinan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
     }
 
     /**
@@ -180,6 +202,18 @@ class KegiatanController extends Controller
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
                 })
+                // hasil review piu
+                ->addColumn('hasil_review_piu', function ($value) {
+                    return '<a href="' . url("kegiatan/review-piu/{$value->id}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                })
+                // hasil review pimpinan
+                ->addColumn('hasil_review_pimpinan', function ($value) {
+                    return '<a href="' . url("kegiatan/review-pimpinan/{$value->id}") . '"
+                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                <i class="ki-outline ki-file fs-2 text-primary"></i></a>';
+                })
                 // hasil monev
                 ->addColumn('hasil_monev', function ($value) {
                     return '<a href="' . url("pelaporan/show/{$value->id}") . '"
@@ -192,7 +226,7 @@ class KegiatanController extends Controller
                                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                 <i class="bi bi-file-earmark-plus fs-2 text-primary"></i></a>';
                 })
-                ->rawColumns(['hasil_review_keuangan', 'hasil_monev', 'buat_laporan', 'ketua_hibah', 'nama_kegiatan'])
+                ->rawColumns(['hasil_review_keuangan', 'hasil_review_piu', 'hasil_review_pimpinan', 'hasil_monev', 'buat_laporan', 'ketua_hibah', 'nama_kegiatan'])
                 ->make(true);
         }
     }

@@ -8,6 +8,8 @@ use App\Models\Pelaporan;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage; // Untuk menghapus file lama
+use Illuminate\Support\Facades\Validator; // Untuk validasi
 
 class PelaporanController extends Controller
 {
@@ -88,17 +90,13 @@ class PelaporanController extends Controller
 
         $pelaporans = Pelaporan::with(['list_kegiatan.proposal', 'monev'])
             ->where('list_kegiatan_id', $list_kegiatan_id)
-            ->orderBy('created_at', 'desc') 
+            ->orderBy('created_at', 'desc')
             ->get();
 
-        $latestMonev = null;
+        $latestPelaporan = $pelaporans->first(); // Dapatkan laporan terakhir
+        $latestMonev = $latestPelaporan ? $latestPelaporan->monev : null;
 
-        if ($pelaporans->isNotEmpty()) {
-            $latestPelaporan = $pelaporans->first(); 
-            $latestMonev = $latestPelaporan->monev; 
-        }
-
-        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id', 'latestMonev'));
+        return view('content.pelaporan.kegiatan.vw_detail_kegiatan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id', 'latestMonev', 'latestPelaporan'));
     }
 
     /**
@@ -112,9 +110,84 @@ class PelaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateRevisi(Request $request, Pelaporan $pelaporan)
     {
-        //
+        $monev = $pelaporan->monev;
+
+        // Jika tidak ada monev atau statusnya bukan 'open', tolak request.
+        if (!$monev || $monev->status !== 'open') {
+            return redirect()->back()->withErrors('Tidak ada revisi yang bisa dikirim saat ini.');
+        }
+
+        // Definisikan semua field yang bisa direvisi dan validasinya
+        $revisableFields = [
+            'pengajuan_dana' => 'sometimes|required|numeric',
+            'penggunaan_dana' => 'sometimes|required|numeric',
+            'sisa_dana' => 'sometimes|required|numeric',
+            'jumlah_peserta' => 'sometimes|required|numeric',
+            'absensi_peserta' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'surat_keputusan' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'surat_tugas' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'laporan_kegiatan' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'laporan_keuangan' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'jumlah_luaran' => 'sometimes|required|numeric',
+            'satuan_luaran' => 'sometimes|required|string|max:255',
+            'luaran_kegiatan' => 'sometimes|required|string|max:255',
+            'link_luaran' => 'sometimes|required|url',
+            'dampak' => 'sometimes|required|string|max:255',
+            'dokumentasi' => 'sometimes|required|url',
+            'lainnya' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'bukti_pembayaran' => 'sometimes|required|url',
+        ];
+
+        // Filter validasi hanya untuk field yang ditolak
+        $rules = [];
+        foreach ($revisableFields as $field => $rule) {
+            // Cek jika status monev untuk field ini adalah 'Ditolak'
+            $statusField = 'status_' . $field;
+            if (isset($monev->$statusField) && $monev->$statusField === 'Ditolak') {
+                $rules[$field] = $rule;
+            }
+        }
+
+        // Validasi data yang masuk
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $dataToUpdate = [];
+        $monevDataToUpdate = [];
+
+        // Proses update untuk setiap field yang divalidasi
+        foreach (array_keys($rules) as $field) {
+            if ($request->hasFile($field)) {
+                // Hapus file lama jika ada
+                if ($pelaporan->$field) {
+                    Storage::disk('public')->delete($pelaporan->$field);
+                }
+                // Simpan file baru
+                $dataToUpdate[$field] = $request->file($field)->store('pelaporan-files', 'public');
+            } elseif ($request->filled($field)) {
+                $dataToUpdate[$field] = $request->$field;
+            }
+
+            // Setelah diupdate, reset status monev untuk item tersebut
+            $monevDataToUpdate['status_' . $field] = 'Direvisi';
+            $monevDataToUpdate['catatan_' . $field] = 'Telah direvisi oleh pengguna.';
+        }
+
+        // Update data di tabel pelaporan
+        if (!empty($dataToUpdate)) {
+            $pelaporan->update($dataToUpdate);
+        }
+
+        // Update status monev menjadi 'Revisi Dikirim' agar tidak bisa direvisi lagi sebelum dicek ulang
+        $monevDataToUpdate['status'] = 'Revisi Dikirim';
+        $monev->update($monevDataToUpdate);
+
+        return redirect()->route('pelaporan.show', ['list_kegiatan_id' => $pelaporan->list_kegiatan_id])
+            ->with('success', 'Revisi pelaporan berhasil dikirim dan sedang menunggu pengecekan ulang.');
     }
 
     /**
