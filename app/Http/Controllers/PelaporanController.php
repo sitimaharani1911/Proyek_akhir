@@ -136,7 +136,7 @@ class PelaporanController extends Controller
             'link_luaran' => 'sometimes|required|url',
             'dampak' => 'sometimes|required|string|max:255',
             'dokumentasi' => 'sometimes|required|url',
-            'lainnya' => 'sometimes|required|file|mimes:pdf|max:5120',
+            'lainnya' => 'sometimes|required|url',
             'bukti_pembayaran' => 'sometimes|required|url',
         ];
 
@@ -174,7 +174,7 @@ class PelaporanController extends Controller
 
             // Setelah diupdate, reset status monev untuk item tersebut
             $monevDataToUpdate['status_' . $field] = 'Direvisi';
-            $monevDataToUpdate['catatan_' . $field] = 'Telah direvisi oleh pengguna.';
+            $monevDataToUpdate['catatan_' . $field] = 'Menunggu monev ulang';
         }
 
         // Update data di tabel pelaporan

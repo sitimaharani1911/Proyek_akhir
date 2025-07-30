@@ -206,10 +206,7 @@
                                         <label class="col-md-4 fw-bold fs-6 text-gray-800">Lainnya</label>
                                         <label class="col-md-1 fw-bold fs-6 text-gray-800">:</label>
                                         <div class="col-md-7">
-                                            <i class="bi bi-file-earmark-pdf"></i>
-                                            <a href="{{ asset('storage/' . $pelaporan->lainnya) }}" target="_blank">
-                                                <span class="fw-semibold">Open </span>
-                                            </a>
+                                           <span class="fw-semibold">{{ $pelaporan->lainnya }}</span>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -546,9 +543,9 @@
                                     {{-- Lainnya --}}
                                     @if ($latestMonev->status_lainnya === 'Ditolak')
                                         <div class="mb-5 p-4 border rounded">
-                                            <label class="form-label fw-semibold">Upload Ulang File Lainnya <span
+                                            <label class="form-label fw-semibold">Upload Ulang Link Lainnya <span
                                                     class="text-danger">*</span></label>
-                                            <input type="file" accept=".pdf" class="form-control" name="lainnya" />
+                                            <input type="url" class="form-control" name="lainnya" />
                                             <div class="form-text text-muted">Max. Size: 5 MB | Filetype: PDF</div>
                                             <div class="form-text text-black mt-2">Catatan Monev:
                                                 {{ $latestMonev->catatan_lainnya }}</div>

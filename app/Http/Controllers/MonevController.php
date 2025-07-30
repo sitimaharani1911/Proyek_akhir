@@ -15,6 +15,8 @@ use App\Models\RoleUser;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class MonevController extends Controller
@@ -56,21 +58,23 @@ class MonevController extends Controller
             // decrypt list_kegiatan_id
             $list_kegiatan_id = Crypt::decrypt($list_kegiatan_id);
         } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
-            // Handle invalid encrypted value, e.g., redirect or show an error
-            return redirect()->route('monev.index')->with('error', 'Invalid activity ID.');
+            // Handle invalid encrypted value
+            return redirect()->route('monev.index')->with('error', 'ID Kegiatan tidak valid.');
         }
 
         $list_kegiatan = ListKegiatan::findOrFail($list_kegiatan_id);
         $proposal_id = $list_kegiatan->proposal_id;
 
-        // Ambil semua pelaporan untuk kegiatan ini, urutkan dari yang terbaru (opsional, tapi bagus untuk riwayat)
-        // Eager load 'monev' relation for each pelaporan
-        $pelaporans = Pelaporan::with(['list_kegiatan.proposal', 'monev'])
+        // --- INI BAGIAN YANG DIPERBAIKI ---
+        // Mengambil HANYA SATU laporan (yang paling baru) untuk kegiatan ini.
+        // Bukan lagi mengambil semua laporan.
+        $pelaporan = Pelaporan::with(['list_kegiatan.proposal', 'monev'])
             ->where('list_kegiatan_id', $list_kegiatan_id)
             ->orderBy('created_at', 'desc') // Urutkan dari laporan terbaru
-            ->get();
+            ->first(); // <--- Mengubah .get() menjadi .first()
 
-        return view('content.monev.vw_review_laporan', compact('pelaporans', 'list_kegiatan_id', 'proposal_id'));
+        // Jangan lupa ganti nama view sesuai dengan yang Anda gunakan
+        return view('content.monev.vw_review_laporan', compact('pelaporan', 'list_kegiatan_id', 'proposal_id'));
     }
     public function detailDokumen($informasi_hibah_id)
     {
@@ -83,9 +87,10 @@ class MonevController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $pelaporan_id)
+    public function store(Request $request) // 1. Hapus $pelaporan_id dari sini
     {
         $validated = $request->validate([
+            'pelaporan_id' => 'required|exists:pelaporan,id', // 2. Tambahkan validasi untuk pelaporan_id
             'status_pengajuan_dana' => 'required|string|max:255',
             'catatan_pengajuan_dana' => 'nullable|string|max:2550',
             'status_penggunaan_dana' => 'required|string|max:255',
@@ -115,15 +120,20 @@ class MonevController extends Controller
         ]);
 
         $laporan_monev_path = $request->file('laporan_monev')->store('laporan_monev', 'public');
-        $validated['pelaporan_id'] = $pelaporan_id;
-        $validated['laporan_monev'] = $laporan_monev_path;
-        Monev::create($validated);
+
+        // Data yang sudah divalidasi sekarang sudah mencakup pelaporan_id
+        $dataToCreate = $validated;
+        $dataToCreate['laporan_monev'] = $laporan_monev_path;
+
+        Monev::create($dataToCreate);
+
+        // 3. Ambil pelaporan_id dari data yang sudah divalidasi
+        $pelaporan_id = $validated['pelaporan_id'];
 
         $pelaporan = Pelaporan::findOrFail($pelaporan_id);
         $listKegiatan = ListKegiatan::findOrFail($pelaporan->list_kegiatan_id);
         $namaKegiatan = $listKegiatan->nama_kegiatan;
         $proposalId = $listKegiatan->proposal_id;
-
 
         $pelaksanaUsers = RoleUser::where('role', 'Pelaksana')->pluck('user_id');
 
@@ -209,9 +219,62 @@ class MonevController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Monev $monev)
     {
-        //
+        $this->validateMonev($request, $isUpdate = true)->validate();
+
+        $data = $request->except(['_token', '_method']);
+
+        if ($request->hasFile('laporan_monev')) {
+            // Hapus file lama jika ada
+            if ($monev->laporan_monev && Storage::disk('public')->exists($monev->laporan_monev)) {
+                Storage::disk('public')->delete($monev->laporan_monev);
+            }
+            // Simpan file baru
+            $data['laporan_monev'] = $request->file('laporan_monev')->store('laporan-monev', 'public');
+        }
+
+        $monev->update($data);
+
+        return redirect()->back()->with('success', 'Review Laporan berhasil diperbarui!');
+    }
+
+    /**
+     * Helper untuk validasi data monev.
+     */
+    private function validateMonev(Request $request, $isUpdate = false)
+    {
+        $rules = [
+            'pelaporan_id' => 'required|exists:pelaporan,id',
+            'status_luaran' => 'required|in:Diterima,Ditolak',
+            'catatan_luaran' => 'nullable|string|max:255',
+            'status_pengajuan_dana' => 'required|in:Diterima,Ditolak',
+            'catatan_pengajuan_dana' => 'nullable|string|max:255',
+            'status_penggunaan_dana' => 'required|in:Diterima,Ditolak',
+            'catatan_penggunaan_dana' => 'nullable|string|max:255',
+            'status_sisa_dana' => 'required|in:Diterima,Ditolak',
+            'catatan_sisa_dana' => 'nullable|string|max:255',
+            'status_surat_keputusan' => 'required|in:Diterima,Ditolak',
+            'catatan_surat_keputusan' => 'nullable|string|max:255',
+            'status_surat_tugas' => 'required|in:Diterima,Ditolak',
+            'catatan_surat_tugas' => 'nullable|string|max:255',
+            'status_laporan_kegiatan' => 'required|in:Diterima,Ditolak',
+            'catatan_laporan_kegiatan' => 'nullable|string|max:255',
+            'status_laporan_keuangan' => 'required|in:Diterima,Ditolak',
+            'catatan_laporan_keuangan' => 'nullable|string|max:255',
+            'status_dampak' => 'required|in:Diterima,Ditolak',
+            'catatan_dampak' => 'nullable|string|max:255',
+            'status_dokumentasi' => 'required|in:Diterima,Ditolak',
+            'catatan_dokumentasi' => 'nullable|string|max:255',
+            'status_lainnya' => 'required|in:Diterima,Ditolak',
+            'catatan_lainnya' => 'nullable|string|max:255',
+            'persentase_capaian' => 'required|numeric|min:0|max:100',
+            'status' => 'required|in:open,close',
+            'laporan_monev' => ($isUpdate ? 'nullable' : 'required') . '|file|mimes:pdf|max:2048',
+            'tim_monev' => 'required|string|max:255',
+        ];
+
+        return Validator::make($request->all(), $rules);
     }
 
     /**

@@ -126,7 +126,8 @@ Route::middleware(['custom-auth'])->group(
             Route::get('/tambah-pengajuan-dana', [MonevController::class, 'create'])->name('monev.tambah');
             Route::get('/monev-kegiatan/{proposal_id}', [MonevController::class, 'dataKegiatan'])->name('monev.kegiatan');
             Route::get('/review-laporan/{list_kegiatan_id}', [MonevController::class, 'reviewLaporan'])->name('monev.review');
-            Route::post('/review/store', [MonevController::class, 'storeOrUpdate'])->name('monev.review.store');
+            Route::post('/review/store', [MonevController::class, 'store'])->name('monev.review.store');
+            Route::put('/review/update/{monev}', [MonevController::class, 'update'])->name('monev.review.update');
             Route::get('/detail-dokumen/{informasi_hibah_id}', [MonevController::class, 'detailDokumen'])->name('monev.dokumen');
         });
         // Verifikasi Monev Ketua PIU
