@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('status_internal')->nullable();
             $table->integer('status_eksternal')->nullable();
             $table->integer('status_progres')->nullable();
+            $table->integer('pengajuan_dana')->nullable();
             $table->string('file_proposal')->nullable();
             $table->string('file_pendukung')->nullable();
             $table->string('bukti_ss')->nullable();
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->string('file_st')->nullable();
             $table->string('file_kontrak')->nullable();
             $table->string('file_berita_acara')->nullable();
+            $table->string('file_rab')->nullable();
             $table->timestamps();
         });
     }
