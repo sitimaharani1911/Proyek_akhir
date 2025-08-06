@@ -12,50 +12,44 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-4">
-                    <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
-                        <!--begin::Body-->
+                    {{-- Warna Biru Gelap - Dark Slate Blue --}}
+                    <a href="{{ route('proposal.index') }}" class="card hoverable card-xl-stretch mb-xl-8"
+                        style="background-color: #0C359E">
                         <div class="card-body">
                             <i class="ki-outline ki-abstract-26 text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $proposal_pengajuan }}</div>
                             <div class="fw-semibold text-white">Proposal Tahap Pengajuan Internal</div>
                         </div>
-                        <!--end::Body-->
                     </a>
-                    <!--end::Statistics Widget 5-->
                 </div>
                 <div class="col-xl-4">
-                    <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-5 mb-xl-8">
-                        <!--begin::Body-->
+                    {{-- Warna Biru Keabuan - Queen Blue --}}
+                    <a href="{{ route('proposal.index') }}" class="card hoverable card-xl-stretch mb-5 mb-xl-8"
+                        style="background-color: #3572EF">
                         <div class="card-body">
                             <i class="ki-outline ki-abstract-28 text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $proposal_pending }}</div>
                             <div class="fw-semibold text-white">Proposal Belum Diajukan </div>
                         </div>
-                        <!--end::Body-->
                     </a>
-                    <!--end::Statistics Widget 5-->
                 </div>
                 <div class="col-xl-4">
-                    <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('informasi_hibah.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
-                        <!--begin::Body-->
+                    {{-- Warna Teal/Mint - Verdigris --}}
+                    <a href="{{ route('informasi_hibah.index') }}" class="card hoverable card-xl-stretch mb-xl-8"
+                        style="background-color: #40A2E3">
                         <div class="card-body">
                             <i class="ki-outline ki-pin text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Total: {{ $hibah_aktif }}</div>
                             <div class="fw-semibold text-white">Hibah Aktif</div>
                         </div>
-                        <!--end::Body-->
                     </a>
-                    <!--end::Statistics Widget 5-->
                 </div>
             </div>
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-6">
-                    <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
-                        <!--begin::Body-->
+                    {{-- Warna Biru Terang - Tuft Blue --}}
+                    <a href="{{ route('proposal.index') }}" class="card hoverable card-xl-stretch mb-xl-8"
+                        style="background-color: #3ABEF9">
                         <div class="card-body">
                             <i class="ki-outline ki-home text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_diterima_internal }}
@@ -63,14 +57,12 @@
                             </div>
                             <div class="fw-semibold text-white">Total Proposal Diterima</div>
                         </div>
-                        <!--end::Body-->
                     </a>
-                    <!--end::Statistics Widget 5-->
                 </div>
                 <div class="col-xl-6">
-                    <!--begin::Statistics Widget 5-->
-                    <a href="{{ route('proposal.index') }}" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
-                        <!--begin::Body-->
+                    {{-- Warna Ungu Lembut - Wisteria --}}
+                    <a href="{{ route('proposal.index') }}" class="card hoverable card-xl-stretch mb-xl-8"
+                        style="background-color: #279EFF">
                         <div class="card-body">
                             <i class="ki-outline ki-send text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">Internal: {{ $proposal_ditolak_internal }}
@@ -78,37 +70,10 @@
                             </div>
                             <div class="fw-semibold text-white">Total Proposal Ditolak</div>
                         </div>
-                        <!--end::Body-->
                     </a>
-                    <!--end::Statistics Widget 5-->
                 </div>
             </div>
-            {{-- <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
-                <div class="card card-flush h-md-100">
-                    <div class="card-header pt-7">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bold text-gray-900">Mitra Dalam Hibah</span>
-                            <span class="text-gray-500 pt-2 fw-semibold fs-6">Mitra Hibah</span>
-                        </h3>
-                    </div>
-                    <div class="card-body d-flex flex-center">
-                        <div id="grafik_mitra" class="w-100 h-350px  grafik"></div>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- <div class="col-xxl-6 mb-5 mb-xl-10 w-100">
-                <div class="card card-flush h-md-100">
-                    <div class="card-header pt-7">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bold text-gray-900">Ketua Pelaksana Dalam Hibah</span>
-                            <span class="text-gray-500 pt-2 fw-semibold fs-6">Pelaksana</span>
-                        </h3>
-                    </div>
-                    <div class="card-body d-flex flex-center">
-                        <div id="grafik_ketua_pelaksana" class="w-100 h-350px  grafik"></div>
-                    </div>
-                </div>
-            </div> --}}
+            {{-- Bagian Tabel dan Grafik (Tidak diubah) --}}
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-6">
                     <div class="card mb-5 mb-xl-8">
@@ -198,6 +163,7 @@
     </div>
 @endsection
 @section('js')
+    {{-- Kode JavaScript (Tidak diubah) --}}
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
@@ -597,7 +563,7 @@
                         return Number.isInteger(val) ? val : val.toFixed(0);
                     }
                 },
-                colors: ['#fbc531', '#00a8ff', '#9c88ff', '#4cd137']
+                colors: ['#FBEEAC', '#F4D160', '#75C2F6', '#1D5D9B']
             };
 
 
